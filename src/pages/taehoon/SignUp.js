@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import AxiosApi from "./Api/AxiosApi";
+import logo from "./images/logo.png";
 
 const SignUpBlock = styled.div`
   position: relative;
@@ -9,7 +11,7 @@ const SignUpBlock = styled.div`
   align-items: center;
   width: 1500px;
   height: 800px;
-  background-color: #f5f5f5;
+  background-color: white;
 
   .agreeContents {
     width: 600px;
@@ -28,7 +30,80 @@ const SignUpBlock = styled.div`
     font-size: 12px;
   }
 
+  .hint {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    color: #999;
+  }
+  
+  .item3 button{
+    border-radius: 5px;
+    border: 1px solid black;
+    border: none;
+    font-size: 15px;
+    color : black;
+    background-color: #FFCFDA;
+    width: 80px;
+    height: 30px;
+  }
+  
+  .signBtn button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    border: none;
+    border-radius: 5px;
+    width: 120px;
+    height: 30px;
+    background-color: #FFCFDA;
+  }
+  
+  input[type="checkbox"] {
+    height: 12px;
+  }
 
+  img {
+    width: 150px;
+    height: 130px;
+    display: flex;
+  }
+
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: auto;
+    padding: 20px;
+
+    .agreeContents {
+      width: 450px;
+      height: auto;
+      font-size: 14px;
+    }
+
+    .Info,
+    .hint {
+      font-size: 10px;
+    }
+
+    .item3 button {
+        margin-top: 10px;
+        width: 100px;
+        margin : 30px;
+        height: 25px;
+    }
+
+    img {
+      width: 100px;
+      height: 90px;
+    }
+
+    .signBtn {
+        margin: 30px;
+    }
+  }
 `;
 
 const SignUpContainer = styled.div`
@@ -59,9 +134,9 @@ const Input = styled.input`
   border: 1px solid #999;
   border-radius: 18px; /* iSO 둥근모서리 제거 */
   outline-style: none; /* 포커스시 발생하는 효과 제거를 원한다면 */
-
-  
 `;
+
+
 
 
 
@@ -114,7 +189,7 @@ const SignUp = () => {
       setPwMsg("숫자+영문자+특수문자 조합으로 7자리 이상 입력해주세요.");
       setIsPw(false);
     } else {
-      setIdMsg("안전한 비밀번호에요!");
+      setPwMsg("안전한 비밀번호에요!");
       setIsPw(true);
     }
   };
@@ -132,6 +207,20 @@ const SignUp = () => {
   };
 
   // 이메일(아이디) 중복확인
+  const onClickIdCheck = async() => {
+        const mailCheck = await AxiosApi.memberRegCheck(userID);
+        if(mailCheck.data === true) {
+            setIdMsg("사용 가능한 아이디입니다.");
+            setIsID(true);
+        }else{
+            setIdMsg("이미 사용중인 아이디입니다.");
+            setIdMsg(false);
+        }
+  }
+
+  const LogoClick = () => {
+        navigate('/');
+  }
   
 
   const handleSubmit = (e) => {
@@ -143,6 +232,7 @@ const SignUp = () => {
   return (
     <SignUpBlock>
     <SignUpContainer>
+       <img src={logo} alt="logo" className="logo" onClick={LogoClick}/>
       <SignTitle>회원가입</SignTitle>
         <br/>
           <SignAgree>약관동의</SignAgree>
@@ -334,10 +424,12 @@ const SignUp = () => {
                             (시행일) 이 약관은 2023년 08월부터 시행합니다.<br />
                             
                     </div>
-                
-                <label for="myCheckbox">Sweet Kingdom 회원 약관에 동의합니다.</label>
-                <input type="checkbox" id="myCheckbox" checked={isChecked} onChange={handleCheckBox}/>
-                
+                <div className="myCheck">
+                    <label for="myCheckbox">Sweet Kingdom 회원 약관에 동의합니다.</label>
+                    <input type="checkbox" id="myCheckbox" checked={isChecked} onChange={handleCheckBox}/>
+                </div>
+
+
                 <br/>
                 <br/>
 
@@ -345,9 +437,14 @@ const SignUp = () => {
                     <h3>회원정보 입력</h3>
                 </div>
 
-                <div className="item2">
+
+                <div className="item3">
                     <Input type="email" placeholder="아이디(이메일)" value={userID} onChange={onChangeId}/>
-                        <button classname="checkID">중복확인</button>
+                        <button classname="checkID" onClick={onClickIdCheck}>중복확인</button>
+                </div>
+
+                <div className="hint">
+                    {userID.length > 0 && (<span className={`message ${isID ? 'success' : 'error'}`}>{idMsg}</span>)}
                 </div>
 
                 <br/>            
@@ -356,13 +453,24 @@ const SignUp = () => {
                     <Input type="password" placeholder="비밀번호" value={passWord} onChange={onChangePw}/>
                 </div>
 
+                <div className="hint">
+                    {passWord.length > 0 && (<span className={`message ${isPw ? 'success' : 'error'}`}>{pwMsg}</span>)}
+                </div>
+
                 <br/>
 
                 <div className="item2">
-                    <Input type="password" placeholder="비밀번호 확인" value ={conPw} onChange={onChangeConPw}/>
+                    <Input type="password" placeholder="비밀번호 확인" value ={passWord} onChange={onChangeConPw}/>
+                </div>
+
+                <div className="hint">
+                    {conPw.length > 0 && (<span className={`message ${conPwMsg ? 'success' : 'error'}`}>{conPwMsg}</span>)}
                 </div>
 
                 
+                <div className="signBtn">
+                    <button onClick={handleSubmit}>회원가입</button>
+                </div>
     </SignUpContainer>
   </SignUpBlock>
   );
