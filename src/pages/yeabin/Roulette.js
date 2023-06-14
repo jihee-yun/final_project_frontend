@@ -2,7 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 
-const Event = () => {
+
+const Roulette = () => {
   return(
     <>
 
@@ -10,4 +11,4 @@ const Event = () => {
   );
 };
 
-export default Event;
+export default Roulette;
