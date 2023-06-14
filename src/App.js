@@ -4,7 +4,7 @@ import Login from './pages/taehoon/Login';
 import Cafe from './pages/jihee/Cafe';
 import Guild from './pages/jihee/Guild';
 import Event from './pages/yeabin/Event';
-import Roulette from './pages/yeabin/roulette';
+import Roulette from './pages/yeabin/Roulette';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 function App() {
