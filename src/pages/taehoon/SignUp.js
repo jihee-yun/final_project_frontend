@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import AxiosApi from "./Api/AxiosApi";
-import logo from "./images/logo.png";
+import logo from "../../images/logo.png";
 
 const SignUpBlock = styled.div`
   position: relative;
