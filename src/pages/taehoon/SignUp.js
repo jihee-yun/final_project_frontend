@@ -54,6 +54,7 @@ const SignUpBlock = styled.div`
     justify-content: center;
     align-items: center;
     margin-top: 30px;
+    margin-left: 250px;
     border: none;
     border-radius: 5px;
     width: 120px;
@@ -85,13 +86,13 @@ const SignUpBlock = styled.div`
 
     .Info,
     .hint {
-      font-size: 10px;
+      font-size: 13px;
     }
 
     .item3 button {
-        margin-top: 10px;
         width: 100px;
-        margin : 30px;
+        margin-top : 10px;
+        margin-left: 30px;
         height: 25px;
     }
 
@@ -99,10 +100,10 @@ const SignUpBlock = styled.div`
       width: 100px;
       height: 90px;
     }
+  }
 
-    .signBtn {
-        margin: 30px;
-    }
+  .signBtn {
+    margin-left: -70px;
   }
 `;
 

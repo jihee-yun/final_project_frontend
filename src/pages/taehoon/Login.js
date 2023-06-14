@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import {Link, useNavigate} from "react-router-dom";
 import logo from "../../images/logo.png";
+import kakao from "../../images/kakao.png";
+import naver from "../../images/naver.png";
 
 const LoginBlock = styled.div`
     position: relative;
@@ -53,7 +55,7 @@ const LoginBlock = styled.div`
         padding: 10px 20px;
         font-size: 16px;
         background-color: #FFCFDA;
-        margin-left: 150px;
+        margin-left: 140px;
         margin-bottom: 20px;
         color: #fff;
         border: none;
@@ -65,12 +67,85 @@ const LoginBlock = styled.div`
         color: gray; /* 파이프 색상 설정 */
     }
 
-    h5 {
+    h4 {
         text-align: center;
         margin-top: 5px;
         color: #FFCFDA;
+        font-size: 15px;
     }
 
+    .socialLogin {
+        display: flex;
+        justify-content: space-between;
+        margin-left: 140px;
+        margin-right: 140px;
+    }
+
+    .socialLogin img{
+        width: 50px;
+        height: 50px;
+    }
+
+    @media (max-width: 768px) {
+        width: 100%;
+        height: auto;
+        padding: 20px;
+
+        .elseLink1 {
+            margin-left: 60px;
+        }
+        .elseLink2 {
+            margin-left: 30px;
+        }
+        .elseLink3 {
+            margin-left: 40px;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin-left: 90px;
+            margin-bottom: 20px;
+        }
+
+        .item2 {
+            margin-top: 10px;
+        }
+
+        .log_btn {
+            width: 150px;
+            padding: 10px 10px;
+            font-size: 1px;
+            background-color: #FFCFDA;
+            margin-left: 160px;
+            margin-bottom: 20px;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .pipe {
+            margin: 10px;
+        }
+
+        h4 {
+            font-size: 13px;
+        }
+
+        .socialLogin {
+            align-items: center;
+            margin-left: 140px;
+            margin-right: 140px;
+            margin-top: 20px;
+        }
+
+        .socialLogin img {
+            width: 40px;
+            height: 40px;
+            margin-top: 10px;
+        }
+    }
 `;
 
 const LoginContainer = styled.div`
@@ -152,7 +227,12 @@ const Login = () => {
                         <Link to="/signup" className="elseLink3">회원가입</Link>
                     </div>
                     <hr/>
-                    <h5>OR</h5>
+                    <h4>OR</h4>
+
+                    <div className="socialLogin">
+                        <img src={kakao} alt="kakao" className="kakao"/>
+                        <img src={naver} alt="naver" className="naver"/>
+                    </div>
                     
             </LoginContainer>
         </LoginBlock>
