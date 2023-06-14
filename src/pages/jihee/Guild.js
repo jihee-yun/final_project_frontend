@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
-const CafeMain = () => {
+const Guild = () => {
   return(
     <>
     </>
   );
 };
 
-export default CafeMain;
+export default Guild;

@@ -1,8 +1,8 @@
 import './App.css';
 import SignUp from './pages/taehoon/SignUp';
 import Login from './pages/taehoon/Login';
-import CafeMain from './pages/jihee/CafeMain';
-import GuildMain from './pages/jihee/GuildMain';
+import Cafe from './pages/jihee/Cafe';
+import Guild from './pages/jihee/Guild';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 function App() {
@@ -11,8 +11,8 @@ function App() {
       <Routes>
         <Route path="/signup" element={<SignUp/>}/>
         <Route path="/login" element={<Login/>}/>
-        <Route path="/cafe" element={<CafeMain/>}/>
-        <Route path="/guild" element={<GuildMain/>}/>
+        <Route path="/cafe" element={<Cafe/>}/>
+        <Route path="/guild" element={<Guild/>}/>
       </Routes>
     </BrowserRouter>
   );
