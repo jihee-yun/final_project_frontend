@@ -1,4 +1,5 @@
 import './App.css';
+import UserStore from './context/UserStore';
 import SignUp from './pages/taehoon/SignUp';
 import Login from './pages/taehoon/Login';
 import Cafe from './pages/jihee/Cafe';
@@ -16,6 +17,7 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 function App() {
   return (
+    <UserStore>
     <BrowserRouter>
       <Routes>
         <Route path="/signup" element={<SignUp/>}/>
@@ -33,6 +35,7 @@ function App() {
         <Route path='/findId' element={<FindID/>}/>
       </Routes>
     </BrowserRouter>
+    </UserStore>
   );
 }
 
