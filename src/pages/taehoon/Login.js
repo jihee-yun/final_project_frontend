@@ -62,6 +62,7 @@ const LoginBlock = styled.div`
         border-radius: 4px;
         cursor: pointer;
     }
+    
     .pipe {
         margin: 10px; /* 파이프 양쪽에 여백 추가 */
         color: gray; /* 파이프 색상 설정 */
@@ -91,6 +92,7 @@ const LoginBlock = styled.div`
         height: auto;
         padding: 20px;
 
+
         .elseLink1 {
             margin-left: 60px;
         }
@@ -115,7 +117,7 @@ const LoginBlock = styled.div`
         .log_btn {
             width: 150px;
             padding: 10px 10px;
-            font-size: 1px;
+            font-size: 16px;
             background-color: #FFCFDA;
             margin-left: 160px;
             margin-bottom: 20px;
@@ -151,8 +153,9 @@ const LoginBlock = styled.div`
 const LoginContainer = styled.div`
     padding: 50px;
     background-color: #ffffff;
+    border: 1px solid #F5F5F5;
     border-radius: 4px;
-    box-shadow: 2px 4px 4px 2px rgba(0.1, 0.5, 0.5, 0.1);
+    box-shadow: 1px 2px 2px 1px rgba(0, 0, 0, 0);
 `;
 
 
@@ -222,11 +225,12 @@ const Login = () => {
                     <div className="else">
                         <Link to="/findpw" className="elseLink1">비밀번호 찾기</Link>
                         <span className="pipe">|</span>
-                        <Link to="/findid" className="elseLink2">아이디 찾기</Link>
+                        <Link to="/findId" className="elseLink2">아이디 찾기</Link>
                         <span className="pipe">|</span>
                         <Link to="/signup" className="elseLink3">회원가입</Link>
                     </div>
-                    <hr/>
+
+                    <br/>
                     <h4>OR</h4>
 
                     <div className="socialLogin">

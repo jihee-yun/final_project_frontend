@@ -13,6 +13,7 @@ const SignUpBlock = styled.div`
   height: 800px;
   background-color: white;
 
+
   .agreeContents {
     width: 600px;
     height: 250px;
@@ -48,13 +49,17 @@ const SignUpBlock = styled.div`
     width: 80px;
     height: 30px;
   }
+
+  .signBtn {
+    margin-left: 130px;
+  }
   
   .signBtn button {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 30px;
-    margin-left: 250px;
+    margin-right: 150px;
     border: none;
     border-radius: 5px;
     width: 120px;
@@ -103,7 +108,11 @@ const SignUpBlock = styled.div`
   }
 
   .signBtn {
-    margin-left: -70px;
+    margin-right: 10px;
+  }
+
+  .signBtn button {
+    margin-left: 120px;
   }
 `;
 
@@ -111,7 +120,7 @@ const SignUpContainer = styled.div`
   padding: 50px;
   background-color: #ffffff;
   border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0);
 `;
 
 const SignTitle = styled.div`
