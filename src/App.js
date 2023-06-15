@@ -8,6 +8,8 @@ import Roulette from './pages/yeabin/Roulette';
 import FindPw from './pages/taehoon/FindPw';
 import Admin from './pages/taehoon/Admin';
 import AdminInfo from './pages/taehoon/AdminInfo';
+import CouponStore from './pages/yeabin/CouponStore';
+import PointStore from './pages/yeabin/PointStore';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 function App() {
@@ -23,6 +25,8 @@ function App() {
         <Route path='/findpw' element={<FindPw/>}/>
         <Route path='/admin' element={<Admin/>}/>
         <Route path='/adminInfo' element={<AdminInfo/>}/>
+        <Route path='/couponStore' element={<CouponStore/>}/>
+        <Route path='/pointStore' element={<PointStore/>}/>
       </Routes>
     </BrowserRouter>
   );
