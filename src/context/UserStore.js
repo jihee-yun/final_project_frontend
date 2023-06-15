@@ -6,13 +6,10 @@ const UserStore = ({children}) => {
   const [isLogin, setIsLogin] = useState(false);
   // 로그인시 쿼리문에 쓰일 회원번호
   const [userNum, setUserNum] = useState(0);
-
+  // 지역별 카페메인으로 이동
+  const [category, setCategory] = useState("");
   const contextValue = {
-    isLogin,
-    userNum,
-    setUserNum,
-    setIsLogin
-
+    isLogin, setIsLogin, userNum, setUserNum, category, setCategory
   };
 
   return(
