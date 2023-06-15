@@ -62,7 +62,7 @@ const LoginBlock = styled.div`
         border-radius: 4px;
         cursor: pointer;
     }
-    
+
     .pipe {
         margin: 10px; /* 파이프 양쪽에 여백 추가 */
         color: gray; /* 파이프 색상 설정 */

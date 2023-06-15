@@ -81,7 +81,7 @@ const SignUpBlock = styled.div`
   @media (max-width: 768px) {
     width: 100%;
     height: auto;
-    padding: 20px;
+    padding: 30px;
 
     .agreeContents {
       width: 450px;

@@ -10,6 +10,7 @@ import Admin from './pages/taehoon/Admin';
 import AdminInfo from './pages/taehoon/AdminInfo';
 import CouponStore from './pages/yeabin/CouponStore';
 import PointStore from './pages/yeabin/PointStore';
+import FindID from './pages/taehoon/FindID';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route path='/adminInfo' element={<AdminInfo/>}/>
         <Route path='/couponStore' element={<CouponStore/>}/>
         <Route path='/pointStore' element={<PointStore/>}/>
+        <Route path='/findId' element={<FindID/>}/>
       </Routes>
     </BrowserRouter>
   );
