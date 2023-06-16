@@ -19,22 +19,25 @@ const LoginBlock = styled.div`
         color: #FFCFDA;
         margin-left: 90px;
         font-size: 15px;
+        font-weight: bold;
     }
 
     .elseLink2 {
         text-decoration: none;
         color: #FFCFDA;
-        margin-left: 20px;
+        margin-left: 10px;
         transform: skew(-10deg);
         font-size: 15px;
+        font-weight: bold;
     }
 
     .elseLink3 {
         text-decoration: none;
         color: #FFCFDA;
-        margin-left: 20px;
+        margin-left: 10px;
         transform: skew(-10deg);
         font-size: 15px;
+        font-weight: bold;
     }
 
     .logo {
@@ -94,24 +97,28 @@ const LoginBlock = styled.div`
 
 
         .elseLink1 {
-            margin-left: 60px;
+            margin-left: 50px;
+            font-weight: bold;
         }
         .elseLink2 {
-            margin-left: 30px;
+            margin-left: 20px;
+            font-weight: bold;
         }
         .elseLink3 {
-            margin-left: 40px;
+            margin-left: 20px;
+            font-weight: bold;
         }
 
         .logo {
-            width: 120px;
-            height: 120px;
-            margin-left: 90px;
+            width: 150px;
+            height: 150px;
+            margin-left: 65px;
             margin-bottom: 20px;
         }
 
         .item2 {
             margin-top: 10px;
+            margin-left: -30px;
         }
 
         .log_btn {
@@ -133,12 +140,13 @@ const LoginBlock = styled.div`
 
         h4 {
             font-size: 13px;
+            margin-left: -30px;
         }
 
         .socialLogin {
             align-items: center;
-            margin-left: 140px;
-            margin-right: 140px;
+            margin-left: 120px;
+            margin-right: 160px;
             margin-top: 20px;
         }
 
@@ -167,7 +175,6 @@ const Input = styled.input`
   height: auto; /* 높이값 초기화 */
   line-height : normal; /* line-height 초기화 */
   padding: .8em .5em; /* 원하는 여백 설정, 상하단 여백으로 높이를 조절 */
-  font-family: inherit; /* 폰트 상속 */
   border: 1px solid #999;
   border-radius: 18px; /* iSO 둥근모서리 제거 */
   outline-style: none; /* 포커스시 발생하는 효과 제거를 원한다면 */

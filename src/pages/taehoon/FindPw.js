@@ -16,9 +16,6 @@ const FindPwBlock = styled.div`
         margin-right: 250px;
         margin-top: 50px;
         margin-bottom: 200px;
-    }
-
-    .logo {
         display: flex;
         align-items: center;
         margin-left: 320px;
@@ -35,10 +32,11 @@ const FindPwBlock = styled.div`
         margin-left: 300px;
         font-size: 25px;
         color: #FFCFDA;
+        font-weight: bold;
     }
 
     .pwBtn button {
-        margin-left: 680px;
+        margin-left: 670px;
         font-size: 15px;
         margin-top: 50px;
         width: 150px;
@@ -47,6 +45,59 @@ const FindPwBlock = styled.div`
         border-radius: 4px;
         background-color: #FFCFDA;
     }
+
+    .hint {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 13px;
+        color: #999;
+        margin-top: 10px;
+        margin-left: 45px;
+    }
+
+    @media (max-width: 768px) {
+        width: 100%;
+        height: auto;
+        padding: 20px;
+
+        .logo {
+            margin-left: 75px;
+            margin-bottom: 20px;
+            margin-top: 40px;
+        }
+
+        .logo img {
+            width: 200px;
+            height: 180px;
+        }
+
+        .findpw p {
+            font-size: 20px;
+            margin-left: -30px;
+            margin-top: -30px;
+        }
+
+        .inputId {
+            margin-left: -510px;
+        }
+
+        .pwBtn button {
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+            font-size: 15px;
+            margin-top: 30px;
+            width: 150px;
+            height: 30px;
+        }
+
+        .hint {
+            margin-left: 0;
+            margin-top: 10px;
+        }
+    }
+    
 `;
 
 
@@ -56,7 +107,6 @@ const Input = styled.input`
     height: auto; /* 높이값 초기화 */
     line-height : normal; /* line-height 초기화 */
     padding: .8em .5em; /* 원하는 여백 설정, 상하단 여백으로 높이를 조절 */
-    font-family: inherit; /* 폰트 상속 */
     border: 1px solid #999;
     border-radius: 18px; /* iSO 둥근모서리 제거 */
     outline-style: none; /* 포커스시 발생하는 효과 제거를 원한다면 */
@@ -71,6 +121,8 @@ const FindPw = () => {
 
       // 유효성 검사
     const [idMsg, setIdMsg] = useState("");
+
+    const [isID, setIsID] = useState("");
 
 
     const onClickLogo = () => {
@@ -107,7 +159,10 @@ const FindPw = () => {
                 <Input type="email" placeholder="아이디(이메일)" value={userID} onChange={onChangeId}/>
             </div>
 
-            <br/>
+            <div className="hint">
+                    {userID.length > 0 && (<span className={`message ${isID ? 'success' : 'error'}`}>{idMsg}</span>)}
+            </div>
+
 
             <div className="pwBtn">
                 <button>임시 비밀번호 발급</button>

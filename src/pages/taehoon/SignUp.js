@@ -50,20 +50,16 @@ const SignUpBlock = styled.div`
     height: 30px;
   }
 
-  .signBtn {
-    margin-left: 130px;
-  }
   
   .signBtn button {
-    display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 30px;
-    margin-right: 150px;
     border: none;
     border-radius: 5px;
-    width: 120px;
+    width: 180px;
     height: 30px;
+    font-size: 20px;
     background-color: #FFCFDA;
   }
   
@@ -108,7 +104,8 @@ const SignUpBlock = styled.div`
   }
 
   .signBtn {
-    margin-right: 10px;
+    margin-left: 50px;
+    margin-right: auto;
   }
 
   .signBtn button {
@@ -127,10 +124,11 @@ const SignTitle = styled.div`
     font-size: 20px;
     text-align: center;
     margin-bottom: 10px;
+    margin-left: -80px;
 `;
 
 const SignAgree = styled.div`
-    font-size: 20px;
+    font-size: 18px;
 `;
 
 const Input = styled.input`
@@ -140,7 +138,6 @@ const Input = styled.input`
   height: auto; /* 높이값 초기화 */
   line-height : normal; /* line-height 초기화 */
   padding: .8em .5em; /* 원하는 여백 설정, 상하단 여백으로 높이를 조절 */
-  font-family: inherit; /* 폰트 상속 */
   border: 1px solid #999;
   border-radius: 18px; /* iSO 둥근모서리 제거 */
   outline-style: none; /* 포커스시 발생하는 효과 제거를 원한다면 */
