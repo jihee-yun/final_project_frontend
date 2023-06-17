@@ -5,99 +5,41 @@ import { useState } from "react";
 import logo from "../../images/logo.png";
 
 const FindPwBlock = styled.div`
-    position: relative;
     justify-content: center;
     align-items: center;
-    width: 1200px;
-    height: 800px;
-    background-color: white;
-
+    text-align: center;
+    
     .logo {
-        margin-right: 250px;
-        margin-top: 50px;
-        margin-bottom: 200px;
-        display: flex;
-        align-items: center;
-        margin-left: 320px;
+        margin-top: 80px;
     }
 
-    .logo img {
-        width: 200px;
-        height: 190px;
-    }
-
-    .findpw p{
-        text-align: center;
-        margin-top: -400px;
-        margin-left: 300px;
-        font-size: 25px;
+    .findpw p {
+        font-size: 20px;
         color: #FFCFDA;
         font-weight: bold;
+        margin-top: 10px;
     }
 
-    .pwBtn button {
-        margin-left: 670px;
-        font-size: 15px;
-        margin-top: 50px;
-        width: 150px;
-        height: 30px;
-        border: none;
-        border-radius: 4px;
-        background-color: #FFCFDA;
+    .inputId {
+        margin-left: -540px;
     }
 
     .hint {
-        display: flex;
-        justify-content: center;
-        align-items: center;
         font-size: 13px;
-        color: #999;
+        margin-right: 240px;
         margin-top: 10px;
-        margin-left: 45px;
+        color: #999;
     }
 
-    @media (max-width: 768px) {
-        width: 100%;
-        height: auto;
-        padding: 20px;
-
-        .logo {
-            margin-left: 75px;
-            margin-bottom: 20px;
-            margin-top: 40px;
-        }
-
-        .logo img {
-            width: 200px;
-            height: 180px;
-        }
-
-        .findpw p {
-            font-size: 20px;
-            margin-left: -30px;
-            margin-top: -30px;
-        }
-
-        .inputId {
-            margin-left: -510px;
-        }
-
-        .pwBtn button {
-            margin-left: auto;
-            margin-right: auto;
-            display: block;
-            font-size: 15px;
-            margin-top: 30px;
-            width: 150px;
-            height: 30px;
-        }
-
-        .hint {
-            margin-left: 0;
-            margin-top: 10px;
-        }
+    .pwBtn button {
+        margin-top: 30px;
+        width: 150px;
+        height: 30px;
+        background-color: #FFCFDA;
+        color: black;
+        border: none;
+        font-size: 15px;
     }
-    
 `;
 
 

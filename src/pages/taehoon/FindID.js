@@ -5,61 +5,43 @@ import { useState } from "react";
 import logo from "../../images/logo.png";
 
 const FindIdBlock = styled.div`
-    position: relative;
-    display: flex;
     justify-content: center;
     align-items: center;
-    width: 1200px;
-    height: 800px;
-    background-color: white;
+    text-align: center;
+    margin-top: -30px;
 
     .logo {
-        margin-right: 500px;
-        margin-top: 50px;
-        margin-bottom: 200px;
-        display: flex;
-        align-items: center;
-        margin-left: 180px;
+        margin-top: 80px;
     }
 
-    .logo img {
-        width: 200px;
-        height: 190px;
-    }
-
-    .findId p{
-        text-align: center;
-        margin-top: -20px;
-        margin-right: 350px;
-        margin-left: -1820px;
-        font-size: 25px;
+    .findId p {
+        font-size: 20px;
+        margin-top: 10px;
         color: #FFCFDA;
         font-weight: bold;
     }
 
+    .inputId {
+        margin-bottom: 20px;
+    }
+
     .hint {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 12px;
+        margin-top : -70px;
+        font-size: 15px;
+        margin-right: 220px;
         color: #999;
     }
 
-    .inputId {
-        margin-top: 80px;
-        margin-left: -1320px;
-    }
-
     .check button {
-        margin-left: -330px;
-        margin-top: 250px;
+        margin-top: 30px;
         width: 150px;
         height: 30px;
         background-color: #FFCFDA;
-        border: none;
         color: black;
+        border: none;
         font-size: 15px;
     }
+
 `;
 
 const Input = styled.input`
