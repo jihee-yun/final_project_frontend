@@ -4,7 +4,10 @@ import SignUp from './pages/taehoon/SignUp';
 import Login from './pages/taehoon/Login';
 import Cafe from './pages/jihee/Cafe';
 import CafeMain from './pages/jihee/CafeMain';
+import CafeDetail from './pages/jihee/CafeDetail';
 import Guild from './pages/jihee/Guild';
+import GuildDetail from './pages/jihee/GulidDetail';
+import NewGuild from './pages/jihee/NewGuild';
 import Event from './pages/yeabin/Event';
 import Roulette from './pages/yeabin/Roulette';
 import FindPw from './pages/taehoon/FindPw';
@@ -24,7 +27,10 @@ function App() {
         <Route path="/login" element={<Login/>}/>
         <Route path="/cafe" element={<Cafe/>}/>
         <Route path="/cafemain" element={<CafeMain/>}/>
+        <Route path="/cafedetail" element={<CafeDetail/>}/>
         <Route path="/guild" element={<Guild/>}/>
+        <Route path="/guilddetail" element={<GuildDetail/>}/>
+        <Route path="/createguild" element={<NewGuild/>}/>
         <Route path='/event' element={<Event/>} />
         <Route path='/roulette' element={<Roulette/>} />
         <Route path='/findpw' element={<FindPw/>}/>
