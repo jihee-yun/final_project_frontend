@@ -9,10 +9,7 @@ const SignUpBlock = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 1500px;
-  height: 800px;
   background-color: white;
-
 
   .agreeContents {
     width: 600px;
@@ -38,8 +35,9 @@ const SignUpBlock = styled.div`
     font-size: 12px;
     color: #999;
   }
+
   
-  .item3 button{
+  .item1 button{
     border-radius: 5px;
     border: 1px solid black;
     border: none;
@@ -50,17 +48,22 @@ const SignUpBlock = styled.div`
     height: 30px;
   }
 
-  
+  .signBtn {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 220px;
+  }
+
   .signBtn button {
-    justify-content: center;
-    align-items: center;
-    margin-top: 30px;
-    border: none;
-    border-radius: 5px;
-    width: 180px;
-    height: 30px;
-    font-size: 20px;
-    background-color: #FFCFDA;
+      justify-content: center;
+      align-items: center;
+      margin-top: 30px;
+      border: none;
+      border-radius: 5px;
+      width: 180px;
+      height: 30px;
+      font-size: 20px;
+      background-color: #FFCFDA;
   }
   
   input[type="checkbox"] {
@@ -77,41 +80,39 @@ const SignUpBlock = styled.div`
   @media (max-width: 768px) {
     width: 100%;
     height: auto;
-    padding: 30px;
+    padding: 5px;
 
     .agreeContents {
-      width: 450px;
-      height: auto;
-      font-size: 14px;
+      width: 100%;
+      margin-bottom: 20px;
     }
 
-    .Info,
+    .signBtn {
+      justify-content: center;
+      margin-right: 0;
+    }
+
+    .item1 {
+      margin-top: -40px;
+    }
+
+    .item1 button {
+      margin-top: 20px;
+      margin-left: 30px;
+    }
+
     .hint {
-      font-size: 13px;
+      margin-top: -50px;
     }
 
-    .item3 button {
-        width: 100px;
-        margin-top : 10px;
-        margin-left: 30px;
-        height: 25px;
+    .signBtn {
+      margin-bottom: 20px;
+      margin-top: 60px;
     }
-
-    img {
-      width: 100px;
-      height: 90px;
-    }
-  }
-
-  .signBtn {
-    margin-left: 50px;
-    margin-right: auto;
-  }
-
-  .signBtn button {
-    margin-left: 120px;
   }
 `;
+    
+
 
 const SignUpContainer = styled.div`
   padding: 50px;
@@ -121,10 +122,12 @@ const SignUpContainer = styled.div`
 `;
 
 const SignTitle = styled.div`
-    font-size: 20px;
+    font-size: 25px;
     text-align: center;
     margin-bottom: 10px;
-    margin-left: -80px;
+    margin-left: -60px;
+    color: #FFCFDA;
+    font-weight: bolder;
 `;
 
 const SignAgree = styled.div`
@@ -133,6 +136,7 @@ const SignAgree = styled.div`
 
 const Input = styled.input`
   margin-left: 30px;
+  margin-top: 10px;
   margin-right: 30px;
   width: 400px; /* 원하는 너비 설정 */
   height: auto; /* 높이값 초기화 */
@@ -141,6 +145,10 @@ const Input = styled.input`
   border: 1px solid #999;
   border-radius: 18px; /* iSO 둥근모서리 제거 */
   outline-style: none; /* 포커스시 발생하는 효과 제거를 원한다면 */
+
+  @media (max-width:768px) {
+    margin-top: 60px;
+  }
 `;
 
 
@@ -445,7 +453,7 @@ const SignUp = () => {
                 </div>
 
 
-                <div className="item3">
+                <div className="item1">
                     <Input type="email" placeholder="아이디(이메일)" value={userID} onChange={onChangeId}/>
                         <button classname="checkID" onClick={onClickIdCheck}>중복확인</button>
                 </div>
@@ -466,7 +474,7 @@ const SignUp = () => {
 
                 <br/>
 
-                <div className="item2">
+                <div className="item3">
                     <Input type="password" placeholder="비밀번호 확인" value ={passWord} onChange={onChangeConPw}/>
                 </div>
 

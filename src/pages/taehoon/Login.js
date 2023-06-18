@@ -10,9 +10,8 @@ const LoginBlock = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 1500px;
-    height: 800px;
     background-color: white;
+    margin-top: 50px;
 
     .elseLink1 {
         text-decoration: none;
@@ -42,7 +41,7 @@ const LoginBlock = styled.div`
 
     .logo {
         width : 200px;
-        height: 150px;
+        height: 180px;
         align-items: center;
         margin-left: 70px;
     }
