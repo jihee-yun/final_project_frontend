@@ -201,9 +201,6 @@ const Login = () => {
         navigate('/');
     }
     
-    const LogClick = () => {
-        navigate('/');
-    }
 
     return(
         <LoginBlock>

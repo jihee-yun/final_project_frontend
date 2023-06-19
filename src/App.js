@@ -16,6 +16,10 @@ import AdminInfo from './pages/taehoon/AdminInfo';
 import CouponStore from './pages/yeabin/CouponStore';
 import PointStore from './pages/yeabin/PointStore';
 import FindID from './pages/taehoon/FindID';
+import AdminReg from './pages/taehoon/AdminReg';
+import AdminDelete from './pages/taehoon/AdminDelete';
+import AdminDeclaration from './pages/taehoon/ AdminDeclaration';
+import UserManage from './pages/taehoon/UserManage';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 function App() {
@@ -39,6 +43,10 @@ function App() {
         <Route path='/couponStore' element={<CouponStore/>}/>
         <Route path='/pointStore' element={<PointStore/>}/>
         <Route path='/findId' element={<FindID/>}/>
+        <Route path='/AdminReg' element={<AdminReg/>}/>
+        <Route path='/AdminDelete' element={<AdminDelete/>}/>
+        <Route path='/AdminDeclaration' element={<AdminDeclaration/>}/>
+        <Route path='/UserManage' element={<UserManage/>}/>
       </Routes>
     </BrowserRouter>
     </UserStore>
