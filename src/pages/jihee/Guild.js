@@ -9,8 +9,6 @@ const Container = styled.div`
   width: 80%;
   margin: 0 auto;
   padding: 50px;
-  border: 1px solid lightgray;
-
 
   .middle-bar{
     width: 100%;
@@ -23,7 +21,7 @@ const Container = styled.div`
 const RegBox = styled.div`
   width: 100%;
   text-align: center;
-  background-color: #F2F2F2;
+  background-color: #FAFAFA;
 
   .context{
     padding: 50px;
@@ -70,7 +68,7 @@ const GuildSection = styled.div`
   height: 200px;
   transition: all 0.3s;
   border-radius: 10px;
-  box-shadow: 0 3px 3px #A4A4A4;
+  box-shadow: 0 1px 3px #A4A4A4;
   cursor: pointer;
 
   &:hover{

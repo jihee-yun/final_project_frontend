@@ -6,7 +6,7 @@ import Cafe from './pages/jihee/Cafe';
 import CafeMain from './pages/jihee/CafeMain';
 import CafeDetail from './pages/jihee/CafeDetail';
 import Guild from './pages/jihee/Guild';
-import GuildDetail from './pages/jihee/GulidDetail';
+import GuildDetail from './pages/jihee/GuildDetail';
 import NewGuild from './pages/jihee/NewGuild';
 import Event from './pages/yeabin/Event';
 import Roulette from './pages/yeabin/Roulette';
