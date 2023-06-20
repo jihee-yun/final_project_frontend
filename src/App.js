@@ -45,10 +45,10 @@ function App() {
         <Route path='/couponStore' element={<CouponStore/>}/>
         <Route path='/pointStore' element={<PointStore/>}/>
         <Route path='/findId' element={<FindID/>}/>
-        <Route path='/AdminReg' element={<AdminReg/>}/>
-        <Route path='/AdminDelete' element={<AdminDelete/>}/>
-        <Route path='/AdminDeclaration' element={<AdminDeclaration/>}/>
-        <Route path='/UserManage' element={<UserManage/>}/>
+        <Route path='/adminReg' element={<AdminReg/>}/>
+        <Route path='/adminDelete' element={<AdminDelete/>}/>
+        <Route path='/adminDeclaration' element={<AdminDeclaration/>}/>
+        <Route path='/userManage' element={<UserManage/>}/>
         <Route path='/mypage' element={<MyPage/>}/>
         <Route path='/myreview' element={<MyReview/>}/>
         

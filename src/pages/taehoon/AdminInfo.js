@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import 관리자등록 from "./images/관리자등록.png";
-import 사용자관리 from "./images/사용자관리.png";
-import 삭제 from "./images/삭제.png";
-import 신고버튼 from "./images/신고버튼.png";
-import 바로가기 from "./images/바로가기.png";
-import x버튼 from "./images/x버튼.png";
-import 더보기 from "./images/더보기.png";
+import adminReg from "./images/adminReg.png";
+import userManage from "./images/userManage.png";
+import declaration from "./images/declaration.png";
+import plus from "./images/plus.png";
+import Xbtn from "./images/Xbtn.png";
+import adminDelete from "./images/adminDelete.png";
+import menubar from "./images/menubar.png";
+
 
 
 
@@ -79,15 +80,15 @@ const InfoBlock = styled.div`
         margin-left: -70px;
     }
 
-    .관리자등록 {
+    .adminReg {
         margin-left: -5px;
     }
 
-    .신고버튼 {
+    .declaration {
         margin-left: -40px;
     }
 
-    .삭제 {
+    .adminDelete {
         margin-left: -40px;
     }
 
@@ -198,35 +199,35 @@ const AdminInfo = () => {
       <InfoBlock>
         <div className="left_btn">
           <img
-            src={바로가기}
-            alt="바로가기"
-            className={`바로가기 ${menuOpen ? 'open' : ''}`}
+            src={menubar}
+            alt="menubar"
+            className={`menubar ${menuOpen ? 'open' : ''}`}
             onClick={handleMenuItemClick}
             />
         </div>
 
         <div className={`category ${menuOpen ? 'active' : ''}`}>
             <div className="menu-x">
-                <img src={x버튼} alt="x버튼" className="x버튼" onClick={handleMenuClose}/>
+                <img src={Xbtn} alt="Xbtn" className="Xbtn" onClick={handleMenuClose}/>
             </div>
 
             <div className="menu-item">
-                <img src={관리자등록} alt="관리자등록" className="관리자등록" onClick={handleAdminReg}/>
-                <span>관리자등록</span>
+                <img src={adminReg} alt="adminReg" className="adminReg" onClick={handleAdminReg}/>
+                <span>관리자 등록</span>
             </div>
 
             <div className="menu-item">
-                <img src={사용자관리} alt="사용자관리" className="사용자관리" onClick={handleUserManage}/>
+                <img src={userManage} alt="userManage" className="userManage" onClick={handleUserManage}/>
                 <span>사용자 관리</span>
             </div>
 
             <div className="menu-item">
-                <img src={신고버튼} alt="신고버튼" className="신고버튼" onClick={handleDeclaration} />
+                <img src={declaration} alt="declaration" className="declaration" onClick={handleDeclaration} />
                 <span>신고</span>
             </div>
 
             <div className="menu-item">
-                <img src={삭제} alt="삭제" className="삭제" onClick={handleDelete}/>
+                <img src={adminDelete} alt="adminDelete" className="adminDelete" onClick={handleDelete}/>
                 <span>삭제</span>
             </div>
         </div>
@@ -236,7 +237,7 @@ const AdminInfo = () => {
                 <p>통계관리</p>
             <div className="inner-box"></div>
             <div class="more-wrapper">
-                <img src={더보기} alt="더보기" className="더보기"/>
+                <img src={plus} alt="plus" className="plus"/>
             </div>
             
         </div>
@@ -245,7 +246,7 @@ const AdminInfo = () => {
             <p>이벤트 관리</p>
         <div className="inner-box"></div>
         <div class="more-wrapper">
-            <img src={더보기} alt="더보기" className="더보기"/> 
+            <img src={plus} alt="plus" className="plus"/> 
             </div>
         </div>
 
@@ -253,7 +254,7 @@ const AdminInfo = () => {
             <p>리뷰 관리</p>
         <div className="inner-box"></div>
         <div class="more-wrapper">
-            <img src={더보기} alt="더보기" className="더보기"/>
+            <img src={plus} alt="plus" className="plus"/>
         </div>
         </div>
 
@@ -261,7 +262,7 @@ const AdminInfo = () => {
             <p>켈린더</p>
         <div className="inner-box"></div>    
         <div class="more-wrapper">
-            <img src={더보기} alt="더보기" className="더보기"/>
+            <img src={plus} alt="plus" className="plus"/>
         </div>
         </div>
         </div>

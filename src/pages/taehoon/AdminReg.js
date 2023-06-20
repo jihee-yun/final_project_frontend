@@ -3,16 +3,18 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import admin from "../../images/admin.png";
+import logo from "../../images/logo.png";
 
 const AdminRegBlock = styled.div`
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 100px;
+    margin-top: 50px;
     color: #FFCFDA;
     font-weight: bolder;
     font-size: 30px;
+    
 
     .inputContainer {
         margin-top: 20px;
@@ -24,7 +26,7 @@ const AdminRegBlock = styled.div`
     .regBtn button{
         width: 150px;
         height: 30px;
-        margin-top: 80px;
+        margin-top: 50px;
         border: none;
         background-color: #FFCFDA;
     }
@@ -40,9 +42,15 @@ const AdminRegBlock = styled.div`
         margin-bottom: -70px;
     }
 
+    .logo {
+        width: 200px;
+        height: 150px;
+        margin-bottom: -20px;
+    }
+
     @media (max-width: 768px) {
         /* 모바일 화면에 대한 스타일 조정 */
-        margin-top: 80px;
+        margin-top: 40px;
         font-size: 20px;
 
         .inputContainer {
@@ -57,6 +65,12 @@ const AdminRegBlock = styled.div`
 
         .admin img {
             margin-bottom: -10px;
+        }
+
+        .logo {
+            width: 150px;
+            height: 120px;
+            margin-bottom: 10px;
         }
     }
 `;
@@ -128,6 +142,9 @@ const AdminReg = () => {
   
     return (
       <AdminRegBlock>
+        <div className="logo">
+            <img src={logo} alt="logo" className="logo"/>
+        </div>
         <h2>관리자 등록</h2>
 
         <div className="admin">
