@@ -20,6 +20,8 @@ import AdminReg from './pages/taehoon/AdminReg';
 import AdminDelete from './pages/taehoon/AdminDelete';
 import AdminDeclaration from './pages/taehoon/ AdminDeclaration';
 import UserManage from './pages/taehoon/UserManage';
+import MyPage from './pages/jaehyung/MyPages';
+import MyReview from './pages/jaehyung/components/MyReview'
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 function App() {
@@ -47,6 +49,10 @@ function App() {
         <Route path='/AdminDelete' element={<AdminDelete/>}/>
         <Route path='/AdminDeclaration' element={<AdminDeclaration/>}/>
         <Route path='/UserManage' element={<UserManage/>}/>
+        <Route path='/mypage' element={<MyPage/>}/>
+        <Route path='/myreview' element={<MyReview/>}/>
+        
+        
       </Routes>
     </BrowserRouter>
     </UserStore>
