@@ -8,10 +8,12 @@ const UserStore = ({children}) => {
   const [userNum, setUserNum] = useState(0);
   // 지역별 카페메인으로 이동
   const [category, setCategory] = useState("");
-   // 카페번호
-   const [cafeNum, setCafeNum] = useState("");
+  // 카페번호
+  const [cafeNum, setCafeNum] = useState("");
+  // 길드번호
+  const [guildNum, setGuildNum] = useState("");
   const contextValue = {
-    isLogin, setIsLogin, userNum, setUserNum, category, setCategory, cafeNum, setCafeNum
+    isLogin, setIsLogin, userNum, setUserNum, category, setCategory, cafeNum, setCafeNum, guildNum, setGuildNum 
   };
 
   return(
