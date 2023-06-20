@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Navigate } from "react-router-dom";
 
-const Head = styled.div`
+const Foot = styled.div`
   width: 100%;
   height: 200px;
   border: 2px solid black;
@@ -12,13 +12,13 @@ const Head = styled.div`
   align-items: center;
 `;
 
-const Header = () => {
+const Footer = () => {
   const navigate = Navigate();
 
   return (
     <>
-      <Head onClick={()=> navigate("/mypage")}></Head>
+      <Foot onClick={()=> navigate("/mypage")}></Foot>
     </>
   );
 };
-export default Header;
+export default Footer;
