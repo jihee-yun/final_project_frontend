@@ -129,7 +129,7 @@ const InfoBlock = styled.div`
         margin-left: 120px;
     }
 
-    .더보기 {
+    .plus {
         width: 20px;
         height: 20px;
         margin-bottom: 120px;
