@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import logo from "./images/logo.png";
 import warning from "./images/warning.png";
@@ -73,6 +73,7 @@ const Input = styled.input`
   outline: none;
   width: 100%;
   height: 30px;
+  padding-left: 15px;
   background-color: rgba(255, 207, 218, 0.5);
 `;
 
@@ -88,6 +89,12 @@ const Detail = styled.textarea`
 `;
 
 const NewGuild = () => {
+  const navigate = useNavigate();
+
+  const nextPage = () => {
+    navigate('/createguild/second');
+  };
+
   return(
     <>
     <Container>
@@ -117,7 +124,7 @@ const NewGuild = () => {
     </div>
     <br /><br /><br />
     <div className="button-box">
-    <button>다음</button>
+    <button onClick={nextPage}>다음</button>
     </div>
     </div>
     </Container>

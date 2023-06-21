@@ -10,12 +10,12 @@ const Container = styled.div`
   margin: 0 auto;
   padding: 50px;
 
-  .middle-bar{
+  /* .middle-bar{
     width: 100%;
     height: 20px;
     background-color: #FAFAFA;
     margin-top: 50px;
-  }
+  } */
 `;
 
 const RegBox = styled.div`
@@ -143,7 +143,7 @@ const Guild = () => {
   const moveToNewGuild = () => {
     navigate('/createguild');
   }
-  
+
   return(
     <>
     <Container>
@@ -156,7 +156,7 @@ const Guild = () => {
         </div>
         <button onClick={moveToNewGuild}>길드 만들기</button>
       </RegBox>
-      <div className="middle-bar"></div>
+      {/* <div className="middle-bar"></div> */}
       <GuildBox>
       <GuildSection onClick={() => selectGuild("길드번호")}>
       <div className="section1">
