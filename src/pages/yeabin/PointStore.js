@@ -50,21 +50,28 @@ const PointStore = () => {
       </Titlebox>
       <Container>
         <table>
-          <tr>
-            <th>충전 포인트</th> <th>결제 금액</th>
-          </tr>
-          <tr>
-            <td>50,000 포인트</td> <td><button className="payBtn">50,000원</button></td>
-          </tr>
-          <tr>
-            <td>30,000 포인트</td> <td><button className="payBtn">30,000원</button></td>
-          </tr>
-          <tr>
-            <td>10,000 포인트</td> <td><button className="payBtn">10,000원</button></td>
-          </tr>
-          <tr>
-            <td>5,000 포인트</td> <td><button className="payBtn">5,000원</button></td>
-          </tr>
+          <tbody>
+            <tr>
+              <th>충전 포인트</th>
+              <th>결제 금액</th>
+            </tr>
+            <tr>
+              <td>50,000 포인트</td>
+              <td><button className="payBtn">50,000원</button></td>
+            </tr>
+            <tr>
+              <td>30,000 포인트</td>
+              <td><button className="payBtn">30,000원</button></td>
+            </tr>
+            <tr>
+              <td>10,000 포인트</td>
+              <td><button className="payBtn">10,000원</button></td>
+            </tr>
+            <tr>
+              <td>5,000 포인트</td>
+              <td><button className="payBtn">5,000원</button></td>
+            </tr>
+          </tbody>
         </table>
       </Container>
     </ContainerBox>

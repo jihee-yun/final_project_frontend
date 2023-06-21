@@ -41,7 +41,7 @@ const OuterBox = styled.div`
   }
 
   animation: ${rotateAnimation} 2s infinite linear;
-  animation-play-state: ${({ isSpinning }) => (isSpinning ? "running" : "paused")};
+  animation-play-state: ${({ isspinning }) => (isspinning ? "running" : "paused")};
 `;
 
 
@@ -143,7 +143,7 @@ const Roulette = () => {
       <Pin>
         <div><img src={pin} alt="룰렛핀" /></div>
       </Pin>
-      <OuterBox isSpinning={isSpinning}>
+      <OuterBox isspinning={isSpinning}>
         <div className="roulette">
           <Start onClick={handleStartClick}>
             <div><img src={start} alt="시작버튼" /></div>

@@ -7,7 +7,7 @@ const ContainerBox = styled.div`
   margin: 0 auto;
 `;
 
-const Box = styled.h3`
+const Box = styled.div`
   width: 80%;
   margin: 0 auto;
 `;

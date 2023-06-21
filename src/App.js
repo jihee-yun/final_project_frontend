@@ -23,6 +23,7 @@ import UserManage from './pages/taehoon/UserManage';
 import MyPage from './pages/jaehyung/MyPages';
 import MyReview from './pages/jaehyung/components/MyReview'
 import Report from './pages/taehoon/Report';
+import ChallengeMain from './pages/yeabin/ChallengeMain';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 function App() {
@@ -53,7 +54,7 @@ function App() {
         <Route path='/mypage' element={<MyPage/>}/>
         <Route path='/myreview' element={<MyReview/>}/>
         <Route path='/report' element={<Report/>}/>
-        
+        <Route path='/challengeMain' element={<ChallengeMain/>}/>
       </Routes>
     </BrowserRouter>
     </UserStore>
