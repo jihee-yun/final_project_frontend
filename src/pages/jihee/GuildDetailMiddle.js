@@ -73,7 +73,7 @@ const Middle = styled.div`
 
     button{
       border: none;
-      border-radius: 5px;
+      border-radius: 50px;
       width: 150px;
       height: 35px;
       font-size: .9rem;

@@ -8,6 +8,7 @@ import CafeDetail from './pages/jihee/CafeDetail';
 import Guild from './pages/jihee/Guild';
 import GuildDetail from './pages/jihee/GuildDetail';
 import NewGuild from './pages/jihee/NewGuild';
+import NewGuildSecond from './pages/jihee/NewGuildSecond';
 import Event from './pages/yeabin/Event';
 import Roulette from './pages/yeabin/Roulette';
 import FindPw from './pages/taehoon/FindPw';
@@ -47,6 +48,7 @@ function App() {
         <Route path="/guild" element={<Guild/>}/>
         <Route path="/guilddetail" element={<GuildDetail/>}/>
         <Route path="/createguild" element={<NewGuild/>}/>
+        <Route path="/createguild/second" element={<NewGuildSecond/>}/>
         <Route path='/event' element={<Event/>} />
         <Route path='/roulette' element={<Roulette/>} />
         <Route path='/findpw' element={<FindPw/>}/>
