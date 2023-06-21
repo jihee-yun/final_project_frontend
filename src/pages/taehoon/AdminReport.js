@@ -48,7 +48,7 @@ const AdminReportBlock = styled.div`
 
     .board th {
         background-color: #f2f2f2;
-        text-align: left;
+        text-align: center;
     }
 
     .board tr:nth-child(even) {
@@ -59,10 +59,18 @@ const AdminReportBlock = styled.div`
         background-color: #ddd;
     }
 
-    .number,
-    .title,
+    .number {
+        width: 60px;
+        height: 30px;
+    }
+
+    .title {
+        width: 100px;
+        height: 30px;
+    }
+
     .date {
-        width: 20%;
+        width: 80px;
         height: 30px;
     }
 `;
@@ -93,7 +101,7 @@ const AdminReport = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    
+
                 </tbody>
             </table>
        
