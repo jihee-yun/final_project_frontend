@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Roulette from "./Roulette";
 
 const ContainerBox = styled.div`
   max-width: 1440px;
@@ -12,10 +13,19 @@ const Box = styled.h3`
 `;
 
 const ChallengeBox = styled.div`
-  border: 1px solid black; // 나중에 지우기
+  /* background-color: #FFCFDA; */
+  border: 1px solid #FFCFDA;
   margin-top: 50px;
   width: 200px;
   height: 300px;
+  display: inline-block;
+  margin-right: 50px; 
+`;
+
+const QuizBox = styled.div`
+  h3{
+    
+  }
 `;
 
 const Event = () => {
@@ -26,9 +36,24 @@ const Event = () => {
           <h3>이 달의 챌린지</h3>
           <ChallengeBox>
             <div>
-              <p>챌린지 소개</p>
             </div>
           </ChallengeBox>
+          <ChallengeBox>
+            <div>
+            </div>
+          </ChallengeBox>
+          <ChallengeBox>
+            <div>
+            </div>
+          </ChallengeBox>
+          <ChallengeBox>
+            <div>
+            </div>
+          </ChallengeBox>
+          <Roulette />
+          <QuizBox>
+            <h3>퀴즈</h3>
+          </QuizBox>
         </Box>
       </ContainerBox>
     </>

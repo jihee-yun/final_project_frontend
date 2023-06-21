@@ -1,8 +1,25 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+import start from "./images/start.png"
+import pin from "./images/pin.png"
 
-const Container = styled.div`
+const Container = styled.h3`
+  /* width: 80%;
+  margin: 0 auto; */
+  position: relative;
+  margin-top: 80px;
+
 `;
+
+const rotateAnimation = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+`;
+;
 
 const OuterBox = styled.div`
   position: relative;
@@ -12,18 +29,38 @@ const OuterBox = styled.div`
   margin-left: auto;
   margin-right: auto;
   border-radius: 50%;
-  background-color: pink;
 
   .roulette {
     position: absolute;
-
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-
     border-radius: 50%;
-    border: 1px solid black;
+    border: 3px solid black;
+  }
+
+  animation: ${rotateAnimation} 2s infinite linear;
+  animation-play-state: ${({ isSpinning }) => (isSpinning ? "running" : "paused")};
+`;
+
+
+const Pin = styled.div`
+  position: absolute;
+  top: -10px;
+  left: 48%;
+  z-index: 1;
+`;
+
+const Start = styled.div`
+  position: relative;
+  top: 49%;
+  left: 90%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  img {
+    width: 100px;
+    height: 100px;
   }
 `;
 
@@ -34,11 +71,13 @@ const ItemBox = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-
     padding-top: 10%;
     display: flex;
     text-align: center;
     justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bolder;
+
   }
   .item:nth-child(1) {
     transform: rotate(0deg);
@@ -60,7 +99,7 @@ const LineBox = styled.div`
     top: 0;
     bottom: 50%;
     left: 50%;
-    width: 1px;
+    width: 3px;
     background-color: black;
     transform-origin: bottom;
   }
@@ -80,20 +119,35 @@ const LineBox = styled.div`
 `;
 
 const Roulette = () => {
-  const [selectItem, setSelectItem] = useState(null);
-  const itmes = ['1', '2', '3', '4', '5'];
+  const [isSpinning, setIsSpinning] = useState(false); // 회전 상태를 저장하는 상태 변수
 
-  const spinRoulette = () => {
-    const random = Math.floor(Math.random() * itmes.length);
-    setSelectItem(itmes[random]); 
+  const handleStartClick = () => {
+    setIsSpinning(true); // 회전 시작
+
+    setTimeout(() => {
+      setIsSpinning(false);
+    }, 3000); // 3초 뒤 멈춤
   };
+
+  // const [selectItem, setSelectItem] = useState(null);
+  // const itmes = ['1', '2', '3', '4', '5'];
+
+  // const spinRoulette = () => {
+  //   const random = Math.floor(Math.random() * itmes.length);
+  //   setSelectItem(itmes[random]); 
+  // };
 
   return(
     <>
     <Container>
-      <h3>룰렛</h3>
-      <OuterBox>
+      <Pin>
+        <div><img src={pin} alt="룰렛핀" /></div>
+      </Pin>
+      <OuterBox isSpinning={isSpinning}>
         <div className="roulette">
+          <Start onClick={handleStartClick}>
+            <div><img src={start} alt="시작버튼" /></div>
+          </Start>
           <ItemBox>
             <div className="item">500원</div>
             <div className="item">100원</div>
@@ -110,7 +164,7 @@ const Roulette = () => {
 
       </OuterBox>
 
-      {selectItem && <p>당첨 : {selectItem}</p>}
+      {/* {selectItem && <p>당첨 : {selectItem}</p>} */}
       {/* <ul>
         {itmes.map()}
       </ul> */}
