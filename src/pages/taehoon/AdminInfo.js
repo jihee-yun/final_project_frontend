@@ -6,7 +6,7 @@ import userManage from "./images/userManage.png";
 import declaration from "./images/declaration.png";
 import plus from "./images/plus.png";
 import Xbtn from "./images/Xbtn.png";
-import adminDelete from "./images/adminDelete.png";
+import Delete from "./images/Delete.png";
 import menubar from "./images/menubar.png";
 
 
@@ -146,6 +146,14 @@ const InfoBlock = styled.div`
         background-color: #EFEFEF;
         border: 1px solid black;
     }
+
+    .adminReg {
+        margin-left: 5px;
+    }
+
+    .Delete {
+        margin-left: -30px;
+    }
 `;
 
 
@@ -187,7 +195,7 @@ const AdminInfo = () => {
 
     // 신고
     const handleDeclaration = () => {
-        navigate('/adminDeclaration');
+        navigate('/adminReport');
     }
 
     // 삭제
@@ -227,7 +235,7 @@ const AdminInfo = () => {
             </div>
 
             <div className="menu-item">
-                <img src={adminDelete} alt="adminDelete" className="adminDelete" onClick={handleDelete}/>
+                <img src={Delete} alt="Delete" className="Delete" onClick={handleDelete}/>
                 <span>삭제</span>
             </div>
         </div>

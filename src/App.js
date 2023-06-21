@@ -18,10 +18,11 @@ import PointStore from './pages/yeabin/PointStore';
 import FindID from './pages/taehoon/FindID';
 import AdminReg from './pages/taehoon/AdminReg';
 import AdminDelete from './pages/taehoon/AdminDelete';
-import AdminDeclaration from './pages/taehoon/ AdminDeclaration';
+import AdminReport from './pages/taehoon/AdminReport';
 import UserManage from './pages/taehoon/UserManage';
 import MyPage from './pages/jaehyung/MyPages';
 import MyReview from './pages/jaehyung/components/MyReview'
+import Report from './pages/taehoon/Report';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 function App() {
@@ -47,11 +48,11 @@ function App() {
         <Route path='/findId' element={<FindID/>}/>
         <Route path='/adminReg' element={<AdminReg/>}/>
         <Route path='/adminDelete' element={<AdminDelete/>}/>
-        <Route path='/adminDeclaration' element={<AdminDeclaration/>}/>
+        <Route path='/adminReport' elment={<AdminReport/>}/>
         <Route path='/userManage' element={<UserManage/>}/>
         <Route path='/mypage' element={<MyPage/>}/>
         <Route path='/myreview' element={<MyReview/>}/>
-        
+        <Route path='/report' element={<Report/>}/>
         
       </Routes>
     </BrowserRouter>

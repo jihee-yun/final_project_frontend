@@ -6,12 +6,18 @@ const AdminDeleteBlock = styled.div`
     display: flex;
     background-color: white;
     justify-content: center;
+
+    h2 {
+        color: #FFCFDA;
+        font-weight: bolder;
+        margin-top: 50px;
+    }
 `;
 
 const AdminDelete = () => {
     return(
         <AdminDeleteBlock>
-            
+            <h2>삭제</h2>
         </AdminDeleteBlock>
     );
 }

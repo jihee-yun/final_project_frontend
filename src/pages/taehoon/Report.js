@@ -125,7 +125,7 @@ const AdminDeclarationBlock = styled.div`
     }
 `;
 
-const AdminDeclaration = () => {
+const Report = () => {
     const [reportText, setReportText] = useState("");
     const [reportTypes, setReportTypes] = useState([]);
 
@@ -179,7 +179,7 @@ const AdminDeclaration = () => {
                     <label>
                         <input
                             type="checkbox"
-                            value="유해 콘텐츠"
+                            value="포인트 누락"
                             onChange={(e) => handleReportTypeChange(e.target.value, e.target.checked)}
                         />
                         <span>포인트 누락</span>
@@ -187,7 +187,7 @@ const AdminDeclaration = () => {
                     <label>
                         <input
                             type="checkbox"
-                            value="스팸"
+                            value="쿠폰 도용"
                             onChange={(e) => handleReportTypeChange(e.target.value, e.target.checked)}
                         />
                         <span>쿠폰 도용</span>
@@ -195,7 +195,7 @@ const AdminDeclaration = () => {
                     <label>
                         <input
                             type="checkbox"
-                            value="스팸"
+                            value="욕설 및 폭언"
                             onChange={(e) => handleReportTypeChange(e.target.value, e.target.checked)}
                         />
                         <span>욕설 및 폭언</span>
@@ -203,7 +203,7 @@ const AdminDeclaration = () => {
                     <label>
                         <input
                             type="checkbox"
-                            value="스팸"
+                            value="리뷰 테러"
                             onChange={(e) => handleReportTypeChange(e.target.value, e.target.checked)}
                         />
                         <span>리뷰 테러</span>
@@ -213,7 +213,7 @@ const AdminDeclaration = () => {
                 <textarea
                     value={reportText}
                     onChange={(e) => setReportText(e.target.value)}
-                    placeholder="신고 내용을 입력하세요."
+                    placeholder="신고 유형의 체크박스를 선택하시고, 신고 내용을 기입해주세요."
                     className="textarea"/>
 
                 <div className="reportBtn">
@@ -224,4 +224,4 @@ const AdminDeclaration = () => {
     );
 }
 
-export default AdminDeclaration;
+export default Report;
