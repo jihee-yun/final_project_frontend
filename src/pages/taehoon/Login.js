@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import {Link, useNavigate} from "react-router-dom";
 import logo from "../../images/logo.png";
 import kakao from "../../images/kakao.png";
 import naver from "../../images/naver.png";
+import google from "../../images/google.png";
+// import GoogleLogin from 'react-google-login';
+// import {gapi} from 'gapi-script';
 
 const LoginBlock = styled.div`
     position: relative;
@@ -182,6 +185,7 @@ const Input = styled.input`
 
 const Login = () => {
 
+
     const navigate = useNavigate("");
     
     // 키보드 입력
@@ -239,6 +243,7 @@ const Login = () => {
                     <div className="socialLogin">
                         <img src={kakao} alt="kakao" className="kakao"/>
                         <img src={naver} alt="naver" className="naver"/>
+                        <img src={google} alt="google" className="google"/>
                     </div>
                     
             </LoginContainer>

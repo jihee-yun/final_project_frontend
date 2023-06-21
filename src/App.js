@@ -49,7 +49,7 @@ function App() {
         <Route path='/findId' element={<FindID/>}/>
         <Route path='/adminReg' element={<AdminReg/>}/>
         <Route path='/adminDelete' element={<AdminDelete/>}/>
-        <Route path='/adminReport' elment={<AdminReport/>}/>
+        <Route path='/adminReport' element={<AdminReport/>}/>
         <Route path='/userManage' element={<UserManage/>}/>
         <Route path='/mypage' element={<MyPage/>}/>
         <Route path='/myreview' element={<MyReview/>}/>
