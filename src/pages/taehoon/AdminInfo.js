@@ -85,7 +85,7 @@ const InfoBlock = styled.div`
     }
 
     .declaration {
-        margin-left: -40px;
+        margin-left: -10px;
     }
 
     .adminDelete {
@@ -231,7 +231,7 @@ const AdminInfo = () => {
 
             <div className="menu-item">
                 <img src={declaration} alt="declaration" className="declaration" onClick={handleDeclaration} />
-                <span>신고</span>
+                <span>신고 내역</span>
             </div>
 
             <div className="menu-item">
