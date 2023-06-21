@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useContext} from "react";
 import styled from "styled-components";
 import { Navigate, useNavigate } from "react-router-dom";
-import AxiosApi from ".././api/AxiosApi";
+import AxiosApi from "../api/AxiosApi";
 import { UserContext } from "../../../context/UserStore";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -23,7 +23,7 @@ const Detail = styled.div`
   justify-content: right;
 `;
 
-const MyChallenge = () => {
+const MyCalendar = () => {
 
   return (
     <>
@@ -42,4 +42,4 @@ const MyChallenge = () => {
     
   );
 };
-export default MyChallenge;
+export default MyCalendar;

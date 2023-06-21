@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Head = styled.div`
   width: 100%;
   height: 200px;
-  border: 2px solid black;
+  background-color: beige;
+  cursor: pointer;
   
   display: flex;
   justify-content: center;
@@ -13,7 +14,7 @@ const Head = styled.div`
 `;
 
 const Header = () => {
-  const navigate = Navigate();
+  const navigate = useNavigate();
 
   return (
     <>

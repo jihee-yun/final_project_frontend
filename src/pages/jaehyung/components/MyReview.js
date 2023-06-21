@@ -5,23 +5,39 @@ import AxiosApi from ".././api/AxiosApi";
 import { UserContext } from "../../../context/UserStore";
 import Header from "./Header";
 import Footer from "./Footer";
+import SideMenu from "./SideMenu";
 
-const Review = styled.div`
+const Container = styled.div`
+  width: 100%;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Detail = styled.div`
   width: 100%;
   height: 800px;
+  display: flex;
+  border: 2px solid yellow;
+  justify-content: right;
 `;
 
 const MyReview = () => {
 
   return (
-    <div>
+    <>
       <Header />
-      <Review>
+      <Container>
+        <SideMenu />
+        <Detail>
 
 
-      </Review>
+
+        </Detail>
+      </Container>
       <Footer />    
-    </div>
+    </>
 
     
   );

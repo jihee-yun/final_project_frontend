@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Foot = styled.div`
   width: 100%;
   height: 200px;
-  border: 2px solid black;
+  background-color: lightgray;
+  cursor: pointer;
   
   display: flex;
   justify-content: center;
@@ -13,7 +14,7 @@ const Foot = styled.div`
 `;
 
 const Footer = () => {
-  const navigate = Navigate();
+  const navigate = useNavigate();
 
   return (
     <>

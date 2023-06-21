@@ -21,7 +21,15 @@ import AdminDelete from './pages/taehoon/AdminDelete';
 import AdminReport from './pages/taehoon/AdminReport';
 import UserManage from './pages/taehoon/UserManage';
 import MyPage from './pages/jaehyung/MyPages';
-import MyReview from './pages/jaehyung/components/MyReview'
+import MyReview from './pages/jaehyung/components/MyReview';
+import MyChallenge from './pages/jaehyung/components/MyChallenge';
+import MySomoim from './pages/jaehyung/components/MySomoim';
+import MyEvent from './pages/jaehyung/components/MyEvent';
+import MyCalendar from './pages/jaehyung/components/MyCalendar';
+import MyPoint from './pages/jaehyung/components/MyPoint';
+import MyRanking from './pages/jaehyung/components/MyRanking';
+import MyInformation from './pages/jaehyung/components/MyInformation';
+import MyReport from './pages/jaehyung/components/MyReport';
 import Report from './pages/taehoon/Report';
 import ChallengeMain from './pages/yeabin/ChallengeMain';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
@@ -52,7 +60,15 @@ function App() {
         <Route path='/adminReport' element={<AdminReport/>}/>
         <Route path='/userManage' element={<UserManage/>}/>
         <Route path='/mypage' element={<MyPage/>}/>
-        <Route path='/myreview' element={<MyReview/>}/>
+        <Route path='/mypage/review' element={<MyReview/>}/>
+        <Route path='/mypage/challenge' element={<MyChallenge/>}/>
+        <Route path='/mypage/somoim' element={<MySomoim/>}/>
+        <Route path='/mypage/event' element={<MyEvent/>}/>
+        <Route path='/mypage/calendar' element={<MyCalendar/>}/>
+        <Route path='/mypage/point' element={<MyPoint/>}/>
+        <Route path='/mypage/ranking' element={<MyRanking/>}/>
+        <Route path='/mypage/information' element={<MyInformation/>}/>
+        <Route path='/mypage/report' element={<MyReport/>}/>
         <Route path='/report' element={<Report/>}/>
         <Route path='/challengeMain' element={<ChallengeMain/>}/>
       </Routes>
