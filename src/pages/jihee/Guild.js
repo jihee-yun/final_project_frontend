@@ -13,7 +13,7 @@ const Container = styled.div`
   .middle-bar{
     width: 100%;
     height: 20px;
-    background-color: #F2F2F2;
+    background-color: #FAFAFA;
     margin-top: 50px;
   }
 `;
@@ -68,7 +68,7 @@ const GuildSection = styled.div`
   height: 200px;
   transition: all 0.3s;
   border-radius: 10px;
-  box-shadow: 0 1px 3px #A4A4A4;
+  box-shadow: 0 1px 2px #A4A4A4;
   cursor: pointer;
 
   &:hover{
@@ -139,6 +139,11 @@ const Guild = () => {
     setGuildNum(guildNum);
     navigate('/guilddetail');
   }
+
+  const moveToNewGuild = () => {
+    navigate('/createguild');
+  }
+  
   return(
     <>
     <Container>
@@ -149,7 +154,7 @@ const Guild = () => {
           <h3 className="context2">나와 같은 목적을 가진 <br />
               친구들을 직접 모집해보세요</h3>
         </div>
-        <button>길드 만들기</button>
+        <button onClick={moveToNewGuild}>길드 만들기</button>
       </RegBox>
       <div className="middle-bar"></div>
       <GuildBox>

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { UserContext } from "../../context/UserStore";
 import cafeimg1 from "./images/카페임시이미지.jpeg";
+import GuildDetailMiddle from "./GuildDetailMiddle";
 
 const Container = styled.div`
   width: 50%;
@@ -37,7 +38,7 @@ const Box = styled.div`
     width: 95%;
     margin: 0 auto;
     height: 170px;
-    border-radius: 5px;
+    border-radius: 10px;
     background-color: white;
     margin-top: -30px;
     z-index: 1;
@@ -56,7 +57,7 @@ const Box = styled.div`
       }
     }
   }
-  .member-profile{
+  .host-profile{
     position: absolute;
     width: 100px;
     height: 100px;
@@ -69,26 +70,6 @@ const Box = styled.div`
     background-size: cover;
     background-position: center;
   }
-`;
-
-const Middle = styled.div`
-  position: absolute;
-  width: 100%;
-  background-color: #FAFAFA;
-  z-index: 0;
-
-  p{
-    width: 80%;
-    margin: 0 auto;
-
-    &:first-child {
-      padding-top: 180px;
-    }
-    .member-box{
-    }
-   
-  }
-
 `;
 
 const GuildDetail = () => {
@@ -111,14 +92,9 @@ const GuildDetail = () => {
           <h2>길드 제목</h2>
           </div>
         </div>
-        <div style={{ backgroundImage: `url(${cafeimg1})`}} className="member-profile"></div>
+        <div style={{ backgroundImage: `url(${cafeimg1})`}} className="host-profile"></div>
       </Box>
-      <Middle>
-        <p className="guild ">카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명</p>
-        <div className="member-box">
-          <p>멤버 소개</p>
-        </div>
-      </Middle>
+      <GuildDetailMiddle></GuildDetailMiddle>
     </Container>
     </>
   );
