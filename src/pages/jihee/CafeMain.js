@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { UserContext } from "../../context/UserStore";
 import cafeimg1 from "./images/카페임시이미지.jpeg";
+import AxiosApi from "./api/AxiosApi";
 
 const Container = styled.div`
   width: 80%;
@@ -78,10 +79,20 @@ const CafeBox = styled.div`
 const CafeMain = () => {
   const navigate = useNavigate();
   const context = useContext(UserContext);
-  const { category, setCafeNum } = context; // cafeNum 유저스토어에 저장하기
+  const { region, setCafeNum } = context; // cafeNum 유저스토어에 저장하기
 
+    // 카페 정보 받아오기
+    const [cafeInfo, setCafeInfo] = useState("");
 
-  console.log(category);
+    // useEffect(() => {
+    //   const cafeInfo = async() => {
+    //     const response = await AxiosApi.cafeInfoGet(region);
+    //     if(response.status === 200) setCafeInfo(response.data);
+    //   };
+    //   cafeInfo();
+    // }, [region]);
+
+  console.log(region);
 
   const selectCafe = (cafeNum) => {
     setCafeNum(cafeNum);

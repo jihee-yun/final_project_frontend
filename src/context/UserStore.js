@@ -7,13 +7,13 @@ const UserStore = ({children}) => {
   // 로그인시 쿼리문에 쓰일 회원번호
   const [userNum, setUserNum] = useState(0);
   // 지역별 카페메인으로 이동
-  const [category, setCategory] = useState("");
+  const [region, setRegion] = useState("");
   // 카페번호
   const [cafeNum, setCafeNum] = useState("");
   // 길드번호
   const [guildNum, setGuildNum] = useState("");
   const contextValue = {
-    isLogin, setIsLogin, userNum, setUserNum, category, setCategory, cafeNum, setCafeNum, guildNum, setGuildNum 
+    isLogin, setIsLogin, userNum, setUserNum, region, setRegion, cafeNum, setCafeNum, guildNum, setGuildNum 
   };
 
   return(

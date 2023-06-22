@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/UserStore";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import seoul from "./images/서울.jpeg";
+
 
 const Container = styled.div`
   width: 80%;
@@ -38,10 +39,10 @@ const CategoryBox = styled.div`
 const Cafe = () => {
   const navigate = useNavigate();
   const context = useContext(UserContext);
-  const { setCategory } = context;
+  const { setRegion } = context;
 
   const selectCategory = (category) => {
-    setCategory(category);
+    setRegion(category);
     navigate('/cafemain')
   }
   return(

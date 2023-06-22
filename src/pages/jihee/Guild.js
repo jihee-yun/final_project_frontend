@@ -65,7 +65,7 @@ const GuildSection = styled.div`
   }
   margin-top: 50px;
   width: 45%;
-  height: 200px;
+  height: 210px;
   transition: all 0.3s;
   border-radius: 10px;
   box-shadow: 0 1px 2px #A4A4A4;
