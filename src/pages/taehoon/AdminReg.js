@@ -29,6 +29,7 @@ const AdminRegBlock = styled.div`
         margin-top: 50px;
         border: none;
         background-color: #FFCFDA;
+        cursor: pointer;
     }
 
     .admin img {

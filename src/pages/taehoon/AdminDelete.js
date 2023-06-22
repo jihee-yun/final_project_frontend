@@ -6,233 +6,130 @@ import logo from "../../images/logo.png";
 const AdminDeleteBlock = styled.div`
     justify-content: center;
     align-items: center;
-
-    h2 {
-        color: #FFCFDA;
-        font-weight: bolder;
-        margin-top: -20px;
-        margin-right: 10px;
-    }
-
-    .admin-delete {
-        max-width: 600px;
-        margin: 0 auto;
-        padding: 20px;
-
-        border-radius: 5px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
+    
     .logo {
         text-align: center;
-        margin-bottom: 20px;
     }
 
     .logo img {
-        width: 100px;
+        width: 150px;
+        height: 150px;
+        margin-top: 10px;
     }
 
-    .title {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    .container {
-        margin-bottom: 20px;
-    }
-
-    .box {
+    .form-container {
         display: flex;
-        flex-direction: column;
-        gap: 10px;
-        background-color: #ffffff;
-        border: 1px solid #e0e0e0;
-        border-radius: 5px;
+        flex-wrap: wrap;
+        margin-left: 200px;
+    }
+
+    .form-container form {
+        box-sizing: border-box;
         padding: 10px;
+        color: #FFCFDA;
+        width: 500px;
+        height: 200px;
+        margin: 20px;
+        margin-top: 30px;
+        font-weight: bolder;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0 , 0, 0.1);
     }
 
-    .box-item {
-        display: flex;
-        align-items: center;
+    ul {
+        padding : 10px;
+        margin : 5px;
     }
 
-    .box-item input[type='radio'] {
-        margin-right: 10px;
+    ul li {
+        margin-bottom: 10px;
     }
 
     .delBtn {
-        text-align: center;
+        justify-content: center;
+        margin-top: 20px;
     }
 
     .delBtn button {
+        width: 150px;
+        height: 30px;
         padding: 10px 20px;
-        background-color: #ff4d4f;
-        color: #ffffff;
+        background-color: #FFCFDA;
+        font-weight: bolder;
         border: none;
         border-radius: 5px;
         cursor: pointer;
+        margin-left: 450px;
     }
-
-    .delBtn button:not(:last-child) {
-        margin-right: 10px;
-    }
-
-    form {
-        margin-left: 400px;
-        display: flex;
-        align-items: center;
-        margin-bottom: 20px;
-        margin-top: 30px;
-    fieldset {
-      margin-bottom: 20px;
-      width: 600px;
-      padding: 10px;
-      
-
-      legend {
-        color: #FFCFDA;
-        font-weight: bolder;
-        margin-bottom: 10px;
-      }
-
-      ul {
-        padding: 10px;
-        margin: 10px;
-        
-
-        li {
-          margin-bottom: 10px;
-        }
-      }
-    }
-  } 
 `;
 
 
 
 const AdminDelete = () => {
-    const [selectedItem, setSelectedItem] = useState(null);
+    
   
-    // 리뷰 삭제 함수
-    const deleteReview = () => {
-      if (selectedItem === 'review') {
-        // 리뷰 삭제 로직을 구현합니다.
-        console.log('리뷰를 삭제합니다.');
-      }
-    };
-  
-    // 이벤트 삭제 함수
-    const deleteEvent = () => {
-      if (selectedItem === 'event') {
-        // 이벤트 삭제 로직을 구현합니다.
-        console.log('이벤트를 삭제합니다.');
-      }
-    };
-  
-    // 회원 탈퇴 함수
-    const deleteUser = () => {
-      if (selectedItem === 'user') {
-        // 회원 탈퇴 로직을 구현합니다.
-        console.log('회원을 탈퇴 처리합니다.');
-      }
-    };
-  
+    
     return (
       <AdminDeleteBlock>
-        <div className="admin-delete"> {/* 최상위 컨테이너에 admin-delete 클래스를 추가합니다. */}
-      <div className="logo">
-        <img src={logo} alt="logo" className="logo" />
-      </div>
-
-      <div className="container">
-        <div className="box">
-          <div className="box-item">
-            <input
-              type="radio"
-              value="review"
-              checked={selectedItem === 'review'}
-              onChange={() => setSelectedItem('review')}
-            />
-            <label>리뷰 삭제</label>
-          </div>
-          <div className="box-item">
-            <input
-              type="radio"
-              value="event"
-              checked={selectedItem === 'event'}
-              onChange={() => setSelectedItem('event')}
-            />
-            <label>이벤트 삭제</label>
-          </div>
-          <div className="box-item">
-            <input
-              type="radio"
-              value="user"
-              checked={selectedItem === 'user'}
-              onChange={() => setSelectedItem('user')}
-            />
-            <label>회원 탈퇴</label>
-          </div>
+        <div className="logo">
+            <img src={logo} alt="logo" className="logo" />
         </div>
-      </div>
 
-      <div className="delBtn">
-        {selectedItem === 'review' && (
-          <button onClick={deleteReview}>리뷰 삭제</button>
-        )}
-        {selectedItem === 'event' && (
-          <button onClick={deleteEvent}>이벤트 삭제</button>
-        )}
-        {selectedItem === 'user' && (
-          <button onClick={deleteUser}>회원 탈퇴</button>
-        )}
-      </div>
-    </div>
 
-    <form action="#" method="text">
-        <fieldset>
-            <legend>리뷰</legend>
+        <div class="form-container">
+            <form action="#" method="text">
+                <fieldset>
+                    <legend>리뷰</legend>
                     <ul>
                         <li></li>
                         <li></li>
                         <li></li>
                         <li></li>
-                        <li></li>
-                        <li></li>
                     </ul>
-            </fieldset>
-        </form>
+                </fieldset>
+            </form>
 
-        <form action="#" method="text">
-        <fieldset>
-            <legend>이벤트</legend>
+            <form action="#" method="text">
+                <fieldset>
+                    <legend>이벤트</legend>
                     <ul>
                         <li></li>
                         <li></li>
                         <li></li>
                         <li></li>
-                        <li></li>
-                        <li></li>
                     </ul>
-            </fieldset>
-        </form>
+                </fieldset>
+            </form>
 
-        <form action="#" method="text">
-        <fieldset>
-            <legend>회원탈퇴</legend>
+            <form action="#" method="text">
+                <fieldset>
+                    <legend>회원탈퇴</legend>
                     <ul>
                         <li></li>
                         <li></li>
                         <li></li>
                         <li></li>
+                    </ul>
+                </fieldset>
+            </form>
+
+            <form action="#" method="text">
+                <fieldset>
+                    <legend>소모임</legend>
+                    <ul>
+                        <li></li>
+                        <li></li>
                         <li></li>
                         <li></li>
                     </ul>
-            </fieldset>
-        </form>
+                </fieldset>
+            </form>
 
-    
-      </AdminDeleteBlock>
+            <div className="delBtn">
+                <button>삭제</button>
+            </div>
+        </div>
+        </AdminDeleteBlock>
     );
   };
   

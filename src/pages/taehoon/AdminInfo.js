@@ -8,7 +8,7 @@ import plus from "./images/plus.png";
 import Xbtn from "./images/Xbtn.png";
 import Delete from "./images/Delete.png";
 import menubar from "./images/menubar.png";
-
+import logo from "../../images/logo.png";
 
 
 
@@ -27,6 +27,16 @@ const InfoBlock = styled.div`
         width: 100px;
         height: 80px;
         padding: 10px;
+    }
+
+    .logo {
+        width: 150px;
+        height: 150px;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-top: 10px;
     }
 
     .category {
@@ -92,59 +102,13 @@ const InfoBlock = styled.div`
         margin-left: -40px;
     }
 
-    .container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        margin-top: 120px;
-        margin-left: 220px;
-    }
-
-    .box {
-        background-color: #D9D9D9;
-        padding: 10px;
-        border: 1px solid black;
-        margin: 20px;
-        width: 330px;
-        height: 250px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .box p:last-child {
-        margin-left: auto;
-    }
-
-    p {
-        font-size: 15px;
-        margin-top: -210px;
-        color: green;
-        font-weight: bold;
-    }
-
-    .box:nth-child(2),
-    .box:nth-child(4) {
-        margin-left: 120px;
-    }
-
     .plus {
         width: 20px;
         height: 20px;
-        margin-bottom: 120px;
-        margin-top: -100px;
+        margin-left: 155px;
+        margin-bottom: 100px;
+        margin-top: -75px;
         cursor: pointer;
-    }
-
-    .inner-box {
-        width: 200px;
-        height: 150px;
-        margin-right: 30px;
-        margin-top: 30px;
-        margin-bottom: -10px;
-        background-color: #EFEFEF;
-        border: 1px solid black;
     }
 
     .adminReg {
@@ -154,7 +118,57 @@ const InfoBlock = styled.div`
     .Delete {
         margin-left: -30px;
     }
+
+    form {
+        margin-left: 200px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        margin-top: 40px;
+        
+    fieldset {
+      margin-bottom: 20px;
+      width: 350px;
+      height: 200px;
+      padding: 10px;
+      background-color : #D9D9D9;
+
+      legend {
+        color: green;
+        font-weight: bolder;
+        margin-bottom: 10px;
+      }
+
+      ul {
+        padding: 10px;
+        margin: 10px;
+        
+
+        li {
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+  
+    .form-container {
+        margin-top: 150px;
+        margin-left: 120px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .form-column {
+        width: 50%;
+    }
+
+    .form-column:nth-child(2n) {
+        margin-left: -50px;
+    }
 `;
+
+
 
 
 const AdminInfo = () => {
@@ -240,40 +254,73 @@ const AdminInfo = () => {
             </div>
         </div>
 
-        <div className="container">
-            <div class="box">
-                <p>통계관리</p>
-            <div className="inner-box"></div>
-            <div class="more-wrapper">
+        <div className="logo">
+            <img src={logo} alt="logo" className="logo"/>
+        </div>
+
+        <div className="form-container">
+        <div className="form-column">
+          <form action="#" method="text">
+            <fieldset>
+              <legend>통계관리</legend>
+             <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+              </ul>
+              <div className="plus">
                 <img src={plus} alt="plus" className="plus"/>
-            </div>
+              </div>
+             
+            </fieldset>
             
+          </form>
+
+          <form action="#" method="text">
+            <fieldset>
+              <legend>이벤트 관리</legend>
+              <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+              </ul>
+              <div className="plus">
+                <img src={plus} alt="plus" className="plus"/>
+              </div>
+            </fieldset>
+          </form>
         </div>
 
-        <div className="box">
-            <p>이벤트 관리</p>
-        <div className="inner-box"></div>
-        <div class="more-wrapper">
-            <img src={plus} alt="plus" className="plus"/> 
-            </div>
-        </div>
+        <div className="form-column">
+          <form action="#" method="text">
+            <fieldset>
+              <legend>리뷰관리</legend>
+              <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+              </ul>
+              <div className="plus">
+                <img src={plus} alt="plus" className="plus"/>
+              </div>
+            </fieldset>
+          </form>
 
-        <div className="box">
-            <p>리뷰 관리</p>
-        <div className="inner-box"></div>
-        <div class="more-wrapper">
-            <img src={plus} alt="plus" className="plus"/>
+          <form action="#" method="text">
+            <fieldset>
+              <legend>켈린더</legend>
+              <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+              </ul>
+              <div className="plus">
+                <img src={plus} alt="plus" className="plus"/>
+              </div>
+            </fieldset>
+          </form>
         </div>
-        </div>
-
-        <div className="box">
-            <p>켈린더</p>
-        <div className="inner-box"></div>    
-        <div class="more-wrapper">
-            <img src={plus} alt="plus" className="plus"/>
-        </div>
-        </div>
-        </div>
+      </div>
       </InfoBlock>
     );
   };
