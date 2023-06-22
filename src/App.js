@@ -1,5 +1,6 @@
 import './App.css';
 import UserStore from './context/UserStore';
+import Main from './pages/now/Main';
 import SignUp from './pages/taehoon/SignUp';
 import Login from './pages/taehoon/Login';
 import Cafe from './pages/jihee/Cafe';
@@ -40,6 +41,7 @@ function App() {
     <UserStore>
     <BrowserRouter>
       <Routes>
+        <Route path="/main" element={<Main/>}/>
         <Route path="/signup" element={<SignUp/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/cafe" element={<Cafe/>}/>
