@@ -28,7 +28,6 @@ const MyPoint = styled.div`
 `;
 
 const CouponBox = styled.div`
-  /* float: left; */
   margin-bottom: 80px;
   display: flex;
   flex-direction: row;
@@ -43,7 +42,6 @@ const CouponBox = styled.div`
     display: flex;
     flex-direction: row;
   }
-
 
   .coupon {
     /* background-color: #FFCFDA; */

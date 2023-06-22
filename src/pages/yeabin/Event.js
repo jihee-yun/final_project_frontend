@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Roulette from "./Roulette";
 import quiz from "./images/quiz.png";
 import shopping from "./images/shopping.png";
+import { useNavigate } from "react-router-dom";
 
 const ContainerBox = styled.div`
   max-width: 1440px;
@@ -72,6 +73,7 @@ const QuizBox = styled.div`
     background-color: #7D5A5A;
     font-size: 1.1rem;
     font-weight: bolder;
+    cursor: pointer;
   }
 `;
 
@@ -121,10 +123,17 @@ const LuckyBox = styled.div`
     background-color: #7D5A5A;
     font-size: 1.1rem;
     font-weight: bolder;
+    cursor: pointer;
   }
 `;
 
 const Event = () => {
+  const navigate = useNavigate();
+
+  const navigatePoint = () => {
+    navigate('/couponStore');
+  }
+
   return(
     <>
       <ContainerBox>
@@ -168,7 +177,7 @@ const Event = () => {
                   <h3 className="shoppingTitle">포인트샵</h3>
                   <p>쌓인 포인트로 구매하세요!</p>
                   <div className="shoppingButton">
-                  <button>바로 가기</button>
+                  <button onClick={navigatePoint}>바로 가기</button>
                   </div>
                 </div>
             </LuckyBox>
