@@ -102,17 +102,6 @@ const InfoBlock = styled.div`
         margin-left: -40px;
     }
 
-    .plus {
-        position: absolute;
-        top: 48%;
-        width: 20px;
-        height: 20px;
-        margin-left: 155px;
-        margin-bottom: 100px;
-        margin-top: -75px;
-        cursor: pointer;
-    }
-
     .adminReg {
         margin-left: 5px;
     }
@@ -122,6 +111,7 @@ const InfoBlock = styled.div`
     }
 
     form {
+        width: 400px;
         margin-left: 240px;
         display: flex;
         align-items: center;
@@ -169,7 +159,7 @@ const InfoBlock = styled.div`
     }
 
     .form-column:nth-child(2n) {
-        margin-left: -50px;
+        margin-left: -200px;
     }
 
     fieldset {
@@ -186,6 +176,46 @@ const InfoBlock = styled.div`
       font-weight: bolder;
       color : #46AA46;
     }
+
+    @media (max-width:768px) {
+      .category {
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+      .left_btn {
+        width: 100px;
+      }
+
+    .form-container {
+        width: 150%;
+        gap: 250px;
+        display: flex;
+        margin-left: -450px;
+        justify-content: center;
+    }
+
+    .form-column {
+      margin-top: 20px;
+      
+    }
+
+
+    .form-column:nth-child(2n) {
+      margin-left: 5px;
+      margin-top: -240px;
+    }
+    
+    .menubar {
+      display: none; /* 초기에는 menubar가 숨겨져 있음 */
+    }
+  
+    .left_btn:focus + .menubar {
+      display: block; /* left_btn이 focus되면 menubar가 나타남 */
+    }
+  }
 `;
 
 
