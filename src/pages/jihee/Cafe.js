@@ -12,10 +12,15 @@ const Container = styled.div`
 `;
 
 const Box = styled.div`
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+    gap: 30px;
+  }
   width: 80%;
   margin: 0 auto;
   display: flex;
   justify-content: space-around;
+  gap: 30px;
 `;
 
 const CategoryBox = styled.div`
@@ -49,10 +54,10 @@ const Cafe = () => {
     <>
     <Container>
       <Box>
+      <CategoryBox imageurl={seoul} onClick={() => selectCategory("전체")}><p>전체</p></CategoryBox>
       <CategoryBox imageurl={seoul} onClick={() => selectCategory("서울특별시")}><p>서울특별시</p></CategoryBox>
       <CategoryBox imageurl={seoul} onClick={() => selectCategory("경기도")}><p>경기도</p></CategoryBox>
       <CategoryBox imageurl={seoul} onClick={() => selectCategory("부산광역시")}><p>부산광역시</p></CategoryBox>
-      <CategoryBox imageurl={seoul} onClick={() => selectCategory("제주도")}><p>제주도</p></CategoryBox>
       </Box>
     </Container>
     </>
