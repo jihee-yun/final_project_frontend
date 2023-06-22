@@ -23,6 +23,7 @@ const Container = styled.div`
 
   th, td {
     padding: 25px;
+    font-weight: bolder;
   }
 
   .payBtn {
@@ -31,6 +32,8 @@ const Container = styled.div`
     height: 33px;
     background-color: #FFCFDA;
     border-radius: 30px;
+    font-weight: bolder;
+    font-size: 1rem;
   }
 `;
 

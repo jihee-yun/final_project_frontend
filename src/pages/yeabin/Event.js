@@ -24,6 +24,14 @@ const ChallengeBox = styled.div`
   margin-right: 50px; 
   border-radius: 20px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+
+  .name {
+    margin-left: 10px;
+    font-size: 1.1rem;
+    margin-top: 240px;
+  }
+
 `;
 
 const EventFooter = styled.div`
@@ -130,6 +138,10 @@ const LuckyBox = styled.div`
 const Event = () => {
   const navigate = useNavigate();
 
+  const navigateCh = () => {
+    navigate('/challengeMain');
+  }
+
   const navigatePoint = () => {
     navigate('/couponStore');
   }
@@ -139,20 +151,24 @@ const Event = () => {
       <ContainerBox>
         <Box>
           <h3>이 달의 챌린지</h3>
-          <ChallengeBox>
-            <div>
+          <ChallengeBox onClick={navigateCh}>
+            <div className="chal">
+              <p className="name">전국 카페 5곳 방문하기</p>
             </div>
           </ChallengeBox>
           <ChallengeBox>
             <div>
+              <p className="name">서울 카페 5곳 방문하기</p>
             </div>
           </ChallengeBox>
           <ChallengeBox>
             <div>
+              <p className="name">경기 카페 5곳 방문하기</p>
             </div>
           </ChallengeBox>
           <ChallengeBox>
             <div>
+              <p className="name">부산 카페 5곳 방문하기</p>
             </div>
           </ChallengeBox>
           <Roulette />

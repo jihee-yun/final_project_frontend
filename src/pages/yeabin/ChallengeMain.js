@@ -1,33 +1,41 @@
 import React from "react";
 import styled from "styled-components";
-// import challengePin from "./images/challengePin.png"
+import challengePin from "./images/challengePin.png"
 
 const Container = styled.div`
   width: 80%;
   margin: 0 auto;
-
-  /* img {
-    width: 100%;
-    height: 500px;
-    background-size: cover;
-  } */
 `;
 
 const Box = styled.div`
   width: 80%;
   margin: 0 auto;
 
-  h3 {
+  h2 {
     font-weight: bolder;
-    width: 300px;
+    
   }
 
+`;
+
+const ChHeader = styled.div`
+  margin-top: 40px;
+
+  .ch-header{
+    display: flex;
+    flex-direction: row;
+  }
+
+  img {
+    width: 50px;
+    height: 50px;
+  }
 `;
 
 const ChBox = styled.div`
   margin-top: 40px;
   margin-bottom: 40px;
-  .ch_box1 {
+  .ch-box1 {
     width: auto;
     height: 550px;
     margin: 30px;
@@ -78,7 +86,7 @@ const Btn = styled.div`
     border-radius: 20px;
     background-color: #FFCFDA;
     margin-top: 100px;
-    margin-bottom: 60px;
+    margin-bottom: 10px;
     font-size: 1.2rem;
     font-weight: bolder;
     color: white;
@@ -115,6 +123,14 @@ const Confirm = styled.div`
   }
 `;
 
+const CafeIntro = styled.div`
+  font-size: .9rem;
+  color: gray;
+  text-align: center;
+  margin-bottom: 60px;
+  cursor: pointer;
+`;
+
 const ChallengeMain = () => {
   return(
     <>
@@ -122,25 +138,28 @@ const ChallengeMain = () => {
       {/* <div><img src={chImg1} alt="전체" /></div> */}
       <Box>
         <div>
-          
-          {/* <img src={challengePin} alt="핀" /> */}
-          <h3>제휴 카페 5개 방문하기 챌린지</h3>
+          <ChHeader>
+            <div className="ch-header">
+              <img src={challengePin} alt="핀" />
+              <h2>제휴 카페 "5곳" 방문하기 챌린지</h2>
+            </div>
+          </ChHeader>        
           <ChBox>
-          <div className="ch_box1">
+          <div className="ch-box1">
             <p className="title">참여 방법</p>
             <p className="step">STEP 1</p>
-            <p className="content">챌린지를 신청한다.</p>
+            <p className="content">챌린지를 신청하세요.</p>
             <p className="step">STEP 2</p>
-            <p className="content">스위트킹덤 제휴 카페를 확인한다.</p>
+            <p className="content">스위트킹덤 제휴 카페를 확인하세요.</p>
             <p className="step">STEP 3</p>
-            <p className="content">해당하는 카페에 방문한다.</p>
+            <p className="content">해당하는 카페에 방문하세요.</p>
             <p className="step">STEP 4</p>
-            <p className="content">인증 방법에 따라 인증한다.</p>
+            <p className="content">인증 방법에 따라 인증하세요.</p>
           </div>
           </ChBox>
           <Confirm>
-            <div className="ch_box2">
-              <p className="title">챌린지 인증</p>
+            <div className="ch-box2">
+              <p className="title">챌린지 인증 방법</p>
               <div className="content">
                 <p>카페 직원에게 고유 바코드를 보여주세요.</p>
                 <p>직원이 바코드를 찍으면 완료!</p>
@@ -153,6 +172,9 @@ const ChallengeMain = () => {
             </div>
           </Btn>
         </div>
+        <CafeIntro>
+          <div>제휴 카페 알아보기</div>
+        </CafeIntro>
       </Box>
       
     </Container>

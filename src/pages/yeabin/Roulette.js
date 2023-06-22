@@ -62,6 +62,7 @@ const Start = styled.div`
     width: 100px;
     height: 100px;
   }
+  cursor: pointer;
 `;
 
 const ItemBox = styled.div`
