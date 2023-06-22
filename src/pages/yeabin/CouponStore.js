@@ -16,7 +16,7 @@ const Box = styled.div`
 const MyPoint = styled.div`
 
  .goEvent {
-    color: lightgrey;
+    color: gray;
     font-size : 0.8rem;
     margin-bottom: 50px;
 
@@ -28,12 +28,22 @@ const MyPoint = styled.div`
 `;
 
 const CouponBox = styled.div`
-  float: left;
+  /* float: left; */
   margin-bottom: 80px;
-
-  /* display: flex;
+  display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
-  flex-direction: row; */
+
+  /* .cafe-box {
+    display: flex;
+    flex-direction: row;
+  } */
+
+  .coupon-box {
+    display: flex;
+    flex-direction: row;
+  }
+
 
   .coupon {
     /* background-color: #FFCFDA; */
@@ -118,30 +128,33 @@ const CouponStore = () => {
             <Link to='/event' className="link_style">받을 수 있는 포인트 확인하기</Link>
           </div>
         </MyPoint>
+        <h3>포인트로 카페 할인 받기</h3>
         <CouponBox>
-          <h3>포인트로 카페 할인 받기</h3>
-          <div className="coupon">
-            <table>
-              <tbody>
-                <tr className="couponMenu">
-                  <td><p>아메리카노 1000원 할인</p></td>
-                  <td>
-                    <button>800 Point</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            </div>
+          <div className="coupon-box">
             <div className="coupon">
-            </div>
-            <div className="coupon"></div>
-            <div className="coupon"></div>
+              <table>
+                <tbody>
+                  <tr className="couponMenu">
+                    <td><p>아메리카노 1000원 할인</p></td>
+                    <td>
+                      <button>800 Point</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              </div>
+              <div className="coupon"></div>
+              {/* <div className="coupon"></div>
+              <div className="coupon"></div> */}
+          </div>
         </CouponBox>
         <h3>포인트 사용 가능 매장 확인하기</h3>
         <CafeBox>
-          <img src={cafeThum} alt="카페썸네일" />
-          <div className="cafeName">
-            <p>미뉴트 빠삐용</p>
+          <div className="cafe-box">
+            <img src={cafeThum} alt="카페썸네일" />
+            <div className="cafeName">
+              <p>미뉴트 빠삐용</p>
+            </div>
           </div>
         </CafeBox>
         <CafeBox></CafeBox>

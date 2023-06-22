@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import Roulette from "./Roulette";
-import quiz from "./images/quiz.png"
+import quiz from "./images/quiz.png";
+import shopping from "./images/shopping.png";
 
 const ContainerBox = styled.div`
   max-width: 1440px;
@@ -22,6 +23,14 @@ const ChallengeBox = styled.div`
   margin-right: 50px; 
   border-radius: 20px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+`;
+
+const EventFooter = styled.div`
+ 
+ .event-box{
+  display: flex;
+  flex-direction: row;
+ }
 `;
 
 const QuizBox = styled.div`
@@ -79,6 +88,40 @@ const LuckyBox = styled.div`
   border-radius: 20px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
   margin: 50px;
+
+  img {
+    width: 80px;
+    height: 80px;
+    margin: 20px 0 10px 20px;
+  }
+  
+  h3 {
+    margin-left: 20px;
+    line-height: 10%;
+  }
+
+  p {
+    margin-left: 20px;
+    color: gray;
+    font-size: 1rem;
+  }
+
+  .shoppingButton{
+    width: 50%;
+    height: 50px;
+    margin: 0 auto;
+  }
+  button {
+    margin-top: 25px;
+    width: 100%;
+    height: 35px;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    background-color: #7D5A5A;
+    font-size: 1.1rem;
+    font-weight: bolder;
+  }
 `;
 
 const Event = () => {
@@ -104,24 +147,33 @@ const Event = () => {
             </div>
           </ChallengeBox>
           <Roulette />
-          <QuizBox>
-            <div>
-              <img src={quiz} alt="퀴즈" />
-              <h3 className="quizTitle">깜짝 퀴즈</h3>
-              <p>퀴즈 풀고 포인트 받기</p>
-              <div className="quizButton">
-              <button>퀴즈 풀기</button>
-              </div>
+          <EventFooter>
+            <div className="event-box">
+              <QuizBox>
+                <div>
+                  <img src={quiz} alt="퀴즈" />
+                  <h3 className="quizTitle">깜짝 퀴즈</h3>
+                  <p>퀴즈 풀고 포인트 받기</p>
+                  <div className="quizButton">
+                  <button>퀴즈 풀기</button>
+                  </div>
+                </div>
+              </QuizBox>
+              <AdBox>
+                <div><p>광고 이미지</p></div>
+              </AdBox>
+              <LuckyBox>
+                <div>
+                <img src={shopping} alt="퀴즈" />
+                  <h3 className="shoppingTitle">포인트샵</h3>
+                  <p>쌓인 포인트로 구매하세요!</p>
+                  <div className="shoppingButton">
+                  <button>바로 가기</button>
+                  </div>
+                </div>
+            </LuckyBox>
             </div>
-          </QuizBox>
-          <AdBox>
-            <div><p>광고 이미지</p></div>
-          </AdBox>
-          <LuckyBox>
-            <div>
-              
-            </div>
-          </LuckyBox>
+          </EventFooter>
         </Box>
       </ContainerBox>
     </>
