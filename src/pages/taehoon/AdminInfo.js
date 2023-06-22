@@ -4,7 +4,6 @@ import styled from "styled-components";
 import adminReg from "./images/adminReg.png";
 import userManage from "./images/userManage.png";
 import declaration from "./images/declaration.png";
-import plus from "./images/plus.png";
 import Xbtn from "./images/Xbtn.png";
 import Delete from "./images/Delete.png";
 import menubar from "./images/menubar.png";
@@ -37,6 +36,7 @@ const InfoBlock = styled.div`
         left: 50%;
         transform: translateX(-50%);
         margin-top: 10px;
+        cursor: pointer;
     }
 
     .category {
@@ -103,6 +103,8 @@ const InfoBlock = styled.div`
     }
 
     .plus {
+        position: absolute;
+        top: 48%;
         width: 20px;
         height: 20px;
         margin-left: 155px;
@@ -120,11 +122,12 @@ const InfoBlock = styled.div`
     }
 
     form {
-        margin-left: 200px;
+        margin-left: 240px;
         display: flex;
         align-items: center;
         margin-bottom: 20px;
         margin-top: 40px;
+    }    
         
     fieldset {
       margin-bottom: 20px;
@@ -133,8 +136,10 @@ const InfoBlock = styled.div`
       padding: 10px;
       background-color : #D9D9D9;
 
+    }
+
       legend {
-        color: green;
+        color: #46AA46;
         font-weight: bolder;
         margin-bottom: 10px;
       }
@@ -142,15 +147,13 @@ const InfoBlock = styled.div`
       ul {
         padding: 10px;
         margin: 10px;
-        
+      }  
 
-        li {
-          margin-bottom: 10px;
-        }
+      li {
+        margin-bottom: 10px;
       }
-    }
-  }
-  
+      
+    
     .form-container {
         margin-top: 150px;
         margin-left: 120px;
@@ -161,10 +164,27 @@ const InfoBlock = styled.div`
 
     .form-column {
         width: 50%;
+        display: flex;
+        flex-direction: column;
     }
 
     .form-column:nth-child(2n) {
         margin-left: -50px;
+    }
+
+    fieldset {
+      position: relative;
+    }
+
+    fieldset p {
+      position: absolute;
+      top: -20px;
+      right: 0;
+      margin: 0;
+      padding: 10px;
+      cursor: pointer;
+      font-weight: bolder;
+      color : #46AA46;
     }
 `;
 
@@ -196,6 +216,10 @@ const AdminInfo = () => {
     const handleMenuClose = () => {
         closeMenu();
     };
+
+    const LogoClick = () => {
+      navigate('/');
+    }
 
     // 관리자 등록
     const handleAdminReg = () => {
@@ -255,38 +279,34 @@ const AdminInfo = () => {
         </div>
 
         <div className="logo">
-            <img src={logo} alt="logo" className="logo"/>
+            <img src={logo} alt="logo" className="logo" onClick={LogoClick}/>
         </div>
 
         <div className="form-container">
-        <div className="form-column">
-          <form action="#" method="text">
-            <fieldset>
-              <legend>통계관리</legend>
-             <ul>
-                <li></li>
-                <li></li>
-                <li></li>
-              </ul>
-              <div className="plus">
-                <img src={plus} alt="plus" className="plus"/>
-              </div>
-             
-            </fieldset>
-            
-          </form>
+            <div className="form-column">
+                <form action="#" method="text">
+                  <fieldset>
+                      <p>더보기</p>
+                    <legend>통계관리</legend>
+                    
+                    <ul>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                    </fieldset>
+                </form>
 
           <form action="#" method="text">
             <fieldset>
+              <p>더보기</p>
               <legend>이벤트 관리</legend>
-              <ul>
-                <li></li>
-                <li></li>
-                <li></li>
-              </ul>
-              <div className="plus">
-                <img src={plus} alt="plus" className="plus"/>
-              </div>
+                <ul>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                </ul>
+
             </fieldset>
           </form>
         </div>
@@ -294,29 +314,22 @@ const AdminInfo = () => {
         <div className="form-column">
           <form action="#" method="text">
             <fieldset>
+              <p>더보기</p>
               <legend>리뷰관리</legend>
               <ul>
                 <li></li>
                 <li></li>
                 <li></li>
               </ul>
-              <div className="plus">
-                <img src={plus} alt="plus" className="plus"/>
-              </div>
+
             </fieldset>
           </form>
 
           <form action="#" method="text">
             <fieldset>
-              <legend>켈린더</legend>
-              <ul>
-                <li></li>
-                <li></li>
-                <li></li>
-              </ul>
-              <div className="plus">
-                <img src={plus} alt="plus" className="plus"/>
-              </div>
+              <p>더보기</p>
+              <legend>캘린더</legend>
+
             </fieldset>
           </form>
         </div>

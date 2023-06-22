@@ -11,6 +11,10 @@ const SignUpBlock = styled.div`
   align-items: center;
   background-color: white;
 
+  .logo {
+    cursor: pointer;
+  }
+
   .agreeContents {
     width: 600px;
     height: 250px;

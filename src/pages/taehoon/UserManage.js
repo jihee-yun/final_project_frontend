@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import logo from "../../images/logo.png";
+import { useNavigate } from "react-router-dom";
 
 const UserManageBlock = styled.div`
     position: relative;
@@ -32,6 +33,7 @@ const UserManageBlock = styled.div`
         width: 200px;
         height: 150px;
         margin-top: 20px;
+        cursor: pointer;
     }
 
     p {
@@ -42,10 +44,16 @@ const UserManageBlock = styled.div`
 `;
 
 const UserManage = () => {
+    const navigate = useNavigate("");
+
+    const LogoClick = () => {
+        navigate('/');
+    }
+    
     return(
         <UserManageBlock>
             <div className="logo">
-                <img src={logo} alt="logo" className="logo"/>
+                <img src={logo} alt="logo" className="logo" onClick={LogoClick}/>
             </div>
             <div className="container">
                 <div className="box">

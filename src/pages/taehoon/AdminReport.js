@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useState } from "react";
 import logo from "../../images/logo.png";
+import { useNavigate } from "react-router-dom";
 
 
 const AdminReportBlock = styled.div`
@@ -23,7 +24,8 @@ const AdminReportBlock = styled.div`
         display: flex;
         justify-content: center;
         margin-bottom: 20px;
-        margin-top: -10px
+        margin-top: -10px;
+        cursor: pointer;
     }
 
     .logo img {
@@ -73,18 +75,40 @@ const AdminReportBlock = styled.div`
         width: 80px;
         height: 30px;
     }
+
+    @media (max-width: 768px) {
+        .board {
+            width: 100%;
+            margin-left: 0;
+        }
+
+        .title,
+        .date {
+            width: auto;
+        }
+
+        .logo img {
+            width: 120px;
+            height: 100px;
+        }
+    }
 `;
 
 
 
 const AdminReport = () => {
+    const navigate = useNavigate("");
+
+    const LogoClick = () => {
+        navigate('/');
+    }
     
     
     return(
         <AdminReportBlock>
             
             <div className="logo">
-                <img src={logo} alt="logo" className="logo"/>
+                <img src={logo} alt="logo" className="logo" onClick={LogoClick}/>
             </div>
 
             

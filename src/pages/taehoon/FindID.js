@@ -12,6 +12,7 @@ const FindIdBlock = styled.div`
 
     .logo {
         margin-top: 80px;
+        cursor: pointer;
     }
 
     .findId p {

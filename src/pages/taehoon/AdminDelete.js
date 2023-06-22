@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useState } from "react";
 import logo from "../../images/logo.png";
+import { useNavigate } from "react-router-dom";
 
 const AdminDeleteBlock = styled.div`
     justify-content: center;
@@ -9,6 +10,7 @@ const AdminDeleteBlock = styled.div`
     
     .logo {
         text-align: center;
+        cursor: pointer;
     }
 
     .logo img {
@@ -61,25 +63,46 @@ const AdminDeleteBlock = styled.div`
         cursor: pointer;
         margin-left: 450px;
     }
+
+    @media (max-width : 768px) {
+        .form-container {
+            margin-left: 0;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form-container form {
+            width: 90%;
+        }
+
+        .delBtn button {
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 20px;
+        }
+    }
 `;
 
 
 
 const AdminDelete = () => {
-    
-  
+    const navigate = useNavigate("");
+
+    const LogoClick = () => {
+        navigate('/');
+    }
     
     return (
       <AdminDeleteBlock>
         <div className="logo">
-            <img src={logo} alt="logo" className="logo" />
+            <img src={logo} alt="logo" className="logo"  onClick={LogoClick}/>
         </div>
 
 
         <div class="form-container">
             <form action="#" method="text">
                 <fieldset>
-                    <legend>리뷰</legend>
+                    <legend>작성 리뷰</legend>
                     <ul>
                         <li></li>
                         <li></li>
@@ -103,7 +126,7 @@ const AdminDelete = () => {
 
             <form action="#" method="text">
                 <fieldset>
-                    <legend>회원탈퇴</legend>
+                    <legend>챌린지</legend>
                     <ul>
                         <li></li>
                         <li></li>

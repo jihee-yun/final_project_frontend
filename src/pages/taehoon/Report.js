@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useState } from "react";
 import logo from "../../images/logo.png";
+import { useNavigate } from "react-router-dom";
 
 const AdminDeclarationBlock = styled.div`
     position: relative;
@@ -106,7 +107,7 @@ const AdminDeclarationBlock = styled.div`
         align-items: center;
         margin-top: 10px;
         margin-left: 120px;
-
+        cursor: pointer;
     }
 
     .reportTypes {
@@ -123,9 +124,71 @@ const AdminDeclarationBlock = styled.div`
         height: 10px;
         transform: scale(1.5);
     }
+
+
+    @media (max-width: 768px) {
+
+        .report {
+            width: 30%;
+            margin-left: 0;
+            margin-right: -80px;
+        }
+
+        .report-content {
+            max-height: none;
+        }
+
+        .textarea {
+            width: 450px;
+        }
+
+        legend {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        p {
+            font-size: 14px;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            font-size: 14px;
+        }
+
+        .reportBtn button {
+            width: 100px;
+            height: 20px;
+            margin-top: 20px;
+            font-size: 12px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin-top: 10px;
+            margin-left: 80px;
+            cursor: pointer;
+        }
+
+        .reportTypes span {
+            font-size: 12px;
+        }
+
+        input[type="checkbox"] {
+            width: 12px;
+            height: 12px;
+            transform: scale(1.2);
+        }
+    }    
 `;
 
 const Report = () => {
+    const navigate = useNavigate("");
+
     const [reportText, setReportText] = useState("");
     const [reportTypes, setReportTypes] = useState([]);
 
@@ -142,6 +205,10 @@ const Report = () => {
             setReportTypes(reportTypes.filter(type => type !== value));
         }
     };
+
+    const LogoClick = () => {
+        navigate('/');
+    }
 
     return (
         <AdminDeclarationBlock>
@@ -167,7 +234,7 @@ const Report = () => {
             </div>
             
             <div className="logo">
-                <img src={logo} alt="logo" className="logo"/>
+                <img src={logo} alt="logo" className="logo" onClick={LogoClick}/>
             </div>
 
             <div className="container">
