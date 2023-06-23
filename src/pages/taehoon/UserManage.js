@@ -41,6 +41,23 @@ const UserManageBlock = styled.div`
         font-weight: bolder;
     }
 
+    @media (max-width: 768px) {
+        .container {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .box {
+            margin: 20px 0;
+        }
+
+        .logo img {
+            margin-top: 10px;
+            width: 150px;
+            height: 100px;
+        }
+    }
+
 `;
 
 const UserManage = () => {

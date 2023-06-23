@@ -169,12 +169,15 @@ const SignUp = () => {
   const [conPw, setConPw] = useState("");
   
 
-  // 유효성 검사
+  // 오류 메세지
   const [idMsg, setIdMsg] = useState("");
   const [pwMsg, setPwMsg] = useState("");
   const [conPwMsg, setConPwMsg] = useState("");
-  const [isID, setIsID] = useState("");
-  const [isPw, setIsPw] = useState("");
+
+  // 유효성 검사
+  const [isID, setIsID] = useState(false);
+  const [isPw, setIsPw] = useState(false);
+  const [isConPw, setIsConPw] = useState(false);
 
 
   const [isCheckedPw, setIsCheckedPw] = useState("");
@@ -187,6 +190,7 @@ const SignUp = () => {
     console.log(isChecked);
   };
 
+  // 아이디(이메일) 정규식 확인
   const onChangeId = (e) => {
     const validateEmail = (email) => {
       const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -200,6 +204,7 @@ const SignUp = () => {
     }
   };
 
+  // 비밀번호 정규식 확인
   const onChangePw = (e) => {
     const passwordRex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{7,15}$/;
     const currentPw = e.target.value;
@@ -213,15 +218,16 @@ const SignUp = () => {
     }
   };
 
+  // 비밀번화 확인 일치 여부
   const onChangeConPw = (e) => {
     const passwordCurrent = e.target.value;
-    setIsCheckedPw(passwordCurrent);
+    setConPw(passwordCurrent);
     if (passwordCurrent !== passWord) {
       setConPwMsg("비밀번호가 일치하지 않습니다.");
-      setIsCheckedPw(false);
+      setIsConPw(false);
     } else {
       setConPwMsg("비밀번호가 일치 합니다.");
-      setIsCheckedPw(true);
+      setIsConPw(true);
     }
   };
 
@@ -479,11 +485,11 @@ const SignUp = () => {
                 <br/>
 
                 <div className="item3">
-                    <Input type="password" placeholder="비밀번호 확인" value ={passWord} onChange={onChangeConPw}/>
+                    <Input type="password" placeholder="비밀번호 확인" value ={conPw} onChange={onChangeConPw}/>
                 </div>
 
                 <div className="hint">
-                    {conPw.length > 0 && (<span className={`message ${conPwMsg ? 'success' : 'error'}`}>{conPwMsg}</span>)}
+                    {passWord.length > 0 && (<span className={`message ${isConPw ? 'success' : 'error'}`}>{conPwMsg}</span>)}
                 </div>
 
                 
