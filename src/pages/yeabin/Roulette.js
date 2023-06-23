@@ -120,7 +120,7 @@ const LineBox = styled.div`
 `;
 
 const Roulette = () => {
-  const [isSpinning, setIsSpinning] = useState(false); // 회전 상태를 저장하는 상태 변수
+  const [isSpinning, setIsSpinning] = useState(false);
 
   const handleStartClick = () => {
     setIsSpinning(true); // 회전 시작
@@ -129,14 +129,6 @@ const Roulette = () => {
       setIsSpinning(false);
     }, 3000); // 3초 뒤 멈춤
   };
-
-  // const [selectItem, setSelectItem] = useState(null);
-  // const itmes = ['1', '2', '3', '4', '5'];
-
-  // const spinRoulette = () => {
-  //   const random = Math.floor(Math.random() * itmes.length);
-  //   setSelectItem(itmes[random]); 
-  // };
 
   return(
     <>
@@ -164,11 +156,6 @@ const Roulette = () => {
         </div>
 
       </OuterBox>
-
-      {/* {selectItem && <p>당첨 : {selectItem}</p>} */}
-      {/* <ul>
-        {itmes.map()}
-      </ul> */}
     </Container>
     </>
   );

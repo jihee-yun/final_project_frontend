@@ -156,17 +156,17 @@ const Event = () => {
               <p className="name">전국 카페 5곳 방문하기</p>
             </div>
           </ChallengeBox>
-          <ChallengeBox>
+          <ChallengeBox onClick={navigateCh}>
             <div>
               <p className="name">서울 카페 5곳 방문하기</p>
             </div>
           </ChallengeBox>
-          <ChallengeBox>
+          <ChallengeBox onClick={navigateCh}>
             <div>
               <p className="name">경기 카페 5곳 방문하기</p>
             </div>
           </ChallengeBox>
-          <ChallengeBox>
+          <ChallengeBox onClick={navigateCh}>
             <div>
               <p className="name">부산 카페 5곳 방문하기</p>
             </div>

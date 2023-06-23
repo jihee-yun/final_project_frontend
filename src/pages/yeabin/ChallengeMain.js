@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import challengePin from "./images/challengePin.png"
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   width: 80%;
@@ -129,6 +130,11 @@ const CafeIntro = styled.div`
   text-align: center;
   margin-bottom: 60px;
   cursor: pointer;
+
+  .link_style {
+    color: inherit;
+    text-decoration: none;
+  }
 `;
 
 const ChallengeMain = () => {
@@ -173,7 +179,8 @@ const ChallengeMain = () => {
           </Btn>
         </div>
         <CafeIntro>
-          <div>제휴 카페 알아보기</div>
+          <div>
+            <Link to='/cafe' className="link_style">제휴 카페 알아보기</Link></div>
         </CafeIntro>
       </Box>
       
