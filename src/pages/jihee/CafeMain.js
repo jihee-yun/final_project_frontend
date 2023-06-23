@@ -84,19 +84,19 @@ const CafeMain = () => {
     // 카페 정보 받아오기
     const [cafeInfo, setCafeInfo] = useState("");
 
-    // useEffect(() => {
-    //   const cafeInfo = async() => {
-    //     const response = await AxiosApi.cafeInfoGet(region);
-    //     if(response.status === 200) setCafeInfo(response.data);
-    //   };
-    //   cafeInfo();
-    // }, [region]);
+    useEffect(() => {
+      const cafeInfo = async() => {
+        const response = await AxiosApi.cafeInfoGet(region);
+        if(response.status === 200) setCafeInfo(response.data);
+      };
+      cafeInfo();
+    }, [region]);
 
   console.log(region);
 
   const selectCafe = (cafeNum) => {
     setCafeNum(cafeNum);
-    navigate('/cafedetail');
+    navigate('/cafe/detail');
   }
 
   return(

@@ -48,7 +48,7 @@ const Cafe = () => {
 
   const selectCategory = (category) => {
     setRegion(category);
-    navigate('/cafemain')
+    navigate('/cafe/main')
   }
   return(
     <>

@@ -112,7 +112,7 @@ const CafeDetail = () => {
   return(
     <>
     <Container>
-    <Link to="/cafemain" style={{ textDecoration: "none", color: "inherit"}}><img src={logo} alt="스위트킹덤로고" /></Link>
+    <Link to="/cafe/main" style={{ textDecoration: "none", color: "inherit"}}><img src={logo} alt="스위트킹덤로고" /></Link>
     <div className="top">
     <h1>카페 이름</h1>
     <h3>카페 주소</h3>

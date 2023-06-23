@@ -137,7 +137,7 @@ const Guild = () => {
 
   const selectGuild = (guildNum) => {
     setGuildNum(guildNum);
-    navigate('/guilddetail');
+    navigate('/guild/detail');
   }
 
   const moveToNewGuild = () => {

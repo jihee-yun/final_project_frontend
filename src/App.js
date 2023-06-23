@@ -45,10 +45,10 @@ function App() {
         <Route path="/signup" element={<SignUp/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/cafe" element={<Cafe/>}/>
-        <Route path="/cafemain" element={<CafeMain/>}/>
-        <Route path="/cafedetail" element={<CafeDetail/>}/>
+        <Route path="/cafe/main" element={<CafeMain/>}/>
+        <Route path="/cafe/detail" element={<CafeDetail/>}/>
         <Route path="/guild" element={<Guild/>}/>
-        <Route path="/guilddetail" element={<GuildDetail/>}/>
+        <Route path="/guild/detail" element={<GuildDetail/>}/>
         <Route path="/createguild" element={<NewGuild/>}/>
         <Route path="/createguild/second" element={<NewGuildSecond/>}/>
         <Route path='/event' element={<Event/>} />
