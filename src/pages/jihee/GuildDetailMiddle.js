@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import cafeimg1 from "./images/카페임시이미지.jpeg";
 import location from "./images/location.png";
 import member from "./images/member.png";
+import Modal from "./Modal";
 
 const Middle = styled.div`
   position: absolute;
@@ -135,6 +136,17 @@ const Middle = styled.div`
 `;
 
 const GuildDetailMiddle = () => {
+
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const memberModal = () => {
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
   return(
     <>
     <Middle>
@@ -155,7 +167,7 @@ const GuildDetailMiddle = () => {
             <div style={{ backgroundImage: `url(${cafeimg1})`}} className="member-profile"></div>
             <br />
             <h4>함께 할 멤버들을 확인하고 길드에 가입해 보세요!</h4>
-            <button>전체 멤버 확인하기</button>
+            <button onClick={memberModal}>전체 멤버 확인하기</button>
           </div>
         </div>
         <br /><br /><br />
@@ -166,6 +178,9 @@ const GuildDetailMiddle = () => {
         </div>
         </div>
         <button className="join">가입하기</button>
+        <Modal open={modalOpen} type={false} close={closeModal} header="전체 멤버">
+    
+        </Modal>
       </Middle>
     </>
   );

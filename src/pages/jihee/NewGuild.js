@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState }from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import logo from "./images/logo.png";
@@ -73,7 +73,7 @@ const Input = styled.input`
   outline: none;
   width: 100%;
   height: 30px;
-  padding-left: 15px;
+  text-indent: 10px;
   background-color: rgba(255, 207, 218, 0.5);
 `;
 
@@ -86,13 +86,32 @@ const Detail = styled.textarea`
   height: 300px;
   background-color: rgba(255, 207, 218, 0.5);
   margin-top: 30px;
+  text-indent: 10px;
+  padding-top: 10px;
 `;
 
 const NewGuild = () => {
   const navigate = useNavigate();
 
+  // 인풋으로 값 입력 받기
+  const [region, setRegion] = useState("");
+  const [guildName, setGuildName] = useState("");
+  const [guildIntro, setGuildIntro] = useState("");
+
+  const onChangeRegion = (e) => {
+    setRegion(e.target.value);
+  }
+
+  const onChangeName = (e) => {
+    setGuildName(e.target.value);
+  }
+
+  const onChangeIntro = (e) => {
+    setGuildIntro(e.target.value);
+  }
+
   const nextPage = () => {
-    navigate('/createguild/second');
+    navigate('/createguild/second', {state : {region, guildName, guildIntro}});
   };
 
   return(
@@ -104,12 +123,12 @@ const NewGuild = () => {
     <br /><br /><br /><br /><br />
     <div className="item">
       <h4>지역을 입력해볼까요?</h4>
-      <Input></Input>
+      <Input onChange={onChangeRegion}></Input>
     </div>
     <br /><br /><br />
     <div className="item">
       <h4>길드 이름을 정해볼까요?</h4>
-      <Input></Input>
+      <Input onChange={onChangeName}></Input>
     </div>
     <br /><br /><br />
     <div className="item">
@@ -120,7 +139,7 @@ const NewGuild = () => {
       </div>
       <li>주로 어떤 활동을 하게 될지 알려주세요</li>
       <li>이런 사람과 잘 맞아요! 길드 성향을 알려주세요</li>
-      <Detail></Detail>
+      <Detail onChange={onChangeIntro}></Detail>
     </div>
     <br /><br /><br />
     <div className="button-box">

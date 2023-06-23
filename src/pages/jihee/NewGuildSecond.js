@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import logo from "./images/logo.png";
 
@@ -41,6 +41,28 @@ const Container = styled.div`
   #guild-thum {
     display: none;
   }
+
+  .button-box {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    width: 100%;
+
+    button{
+    width: 130px;
+    height: 40px;
+    border: none;
+    border-radius: 30px;
+    background-color: #FFCFDA;
+    margin-bottom: 50px;
+    font-size: .9rem;
+    font-weight: bold;
+    color: #585858;
+    &:hover{
+      color: white;
+    }
+    }
+  }
 `;
 
 const Input = styled.input`
@@ -54,6 +76,18 @@ const Input = styled.input`
 `;
 
 const NewGuildSecond = () => {
+  const location = useLocation();
+  const {region, guildName, guildIntro} = location.state;
+
+  console.log(region, guildName, guildIntro);
+
+  const createGuild = () => {
+
+  };
+
+  const prevPage = () => {
+    
+  };
   return(
     <>
     <Container>
@@ -70,13 +104,23 @@ const NewGuildSecond = () => {
       </div>
       <br /><br /><br />
       <div className="item">
-      <h4>날짜를 입력해볼까요?</h4>
+      <h4>만날 날짜를 입력해볼까요?</h4>
       <Input placeholder="달력 넣어볼까..."></Input>
       </div>
       <br /><br /><br />
       <div className="item">
-      <h4>시간을 입력해볼까요?</h4>
+      <h4>만날 시간을 입력해볼까요?</h4>
       <Input></Input>
+      </div>
+      <br /><br /><br />
+      <div className="item">
+      <h4>길드 인원을 정해볼까요?</h4>
+      <Input></Input>
+      </div>
+      <br /><br /><br />
+      <div className="button-box">
+      <button onClick={prevPage}>이전</button>
+      <button onClick={createGuild}>개설</button>
       </div>
       </div>
     </Container>
