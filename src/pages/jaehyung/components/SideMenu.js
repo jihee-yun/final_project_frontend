@@ -11,13 +11,16 @@ const Side = styled.div`
   height: 1000px;
   display: flex;
   flex-direction: column;
+  align-items: center;
   border: 1px solid black;
 
 
 `;
 
 const ProfileBox = styled.div`
-  width: 100%;
+  width: 95%;
+  height: 200px;
+  margin: 2%;
   border: 1px solid blue;
   display: flex;
   flex-direction: column;
@@ -47,11 +50,25 @@ const MyPoint = styled.p`
 
 const NaviButton = styled.button`
   width: 200px;
-  height: 50px;
+  height: 60px;
   margin-left: auto;
   background-color: white;
   cursor: pointer;
-
+  border: 1px solid white;
+  border-radius: 5px;
+  color: black;
+  transition: background-color 0.3s, color 0.3s;
+  
+  &:hover {
+    background-color: #F1D1D1;
+    color: white;
+  }
+  
+  &:active {
+    background-color: #F3E1E1;
+    color: white;
+    border-color: #F1D1D1;
+  }
 `;
 
 const SideMenu = () => {
@@ -85,7 +102,7 @@ const SideMenu = () => {
     <Side>
       <ProfileBox>
         <img className="profileImg" src={imageUrls[0]} alt="프로필 이미지" onClick={()=>navigate("/mypage")}/>
-        <MyName onClick={()=>navigate("/mypage/bolg")}>~~~님</MyName>
+        <MyName onClick={()=>navigate("/mypage/blog")}>~~~님 블로그</MyName>
         <MyPoint onClick={()=>navigate("/mypage/point")}>~~~ point</MyPoint>
       </ProfileBox>
       <NaviButton onClick={()=>navigate("/mypage/review")}>작성 리뷰</NaviButton>

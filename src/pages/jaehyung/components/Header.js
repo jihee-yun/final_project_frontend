@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const Head = styled.div`
   width: 100%;
   height: 200px;
-  background-color: beige;
+  background-color: #F3E1E1;
   cursor: pointer;
   
   display: flex;
@@ -18,7 +18,7 @@ const Header = () => {
 
   return (
     <>
-      <Head onClick={()=> navigate("/mypage")}></Head>
+      <Head onClick={()=> navigate("/mypage")}>공사중</Head>
     </>
   );
 };
