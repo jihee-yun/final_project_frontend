@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "./Header";
+import Header from "./component/Header";
 import Map from "./component/Map";
 import Ranking from "./component/Ranking";
 import Recommend from "./component/Recommend"

@@ -1,16 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import Logo from "../now/images/logo.png";
+import Logo from "../images/logo.png";
 import { Link } from "react-router-dom";
 import PersonIcon from '@mui/icons-material/Person';
 import SearchIcon from '@mui/icons-material/Search';
 
 const HeaderContainer = styled.header`
     padding: 1.8rem 0;
-    border-bottom: 0.1rem solid #FFD0E4;
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: flex-start;
     width: 100%;
     margin: 0 auto;
     height: 150px;
@@ -28,13 +27,47 @@ const HeaderContainer = styled.header`
         color: #000;
     }
 
-    .rightbox {
-        display: flex;
-        flex-direction: column;
+    .logo {
+      padding-left: 60px;
     }
-    .member {
-        margin-bottom: 10px;
+    `;
 
+const Rightbox = styled.div`
+
+  display: flex;
+  
+
+.member {
+  align-self: flex-start;
+  padding-right: 60px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 13px;
+
+  a {
+        text-decoration: none;
+        color: #6e6e6e;
+    }
+}
+`;
+
+    const NavContainer = styled.nav `
+        width: 100%;
+    
+    a {
+        text-decoration: none;
+        color: white;
+    }
+    .Nav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        text-align: center;
+        padding-right: 20px;
+        width: 100%;
+        height: 60px;
+        background-color: #FFD0E4;
     }
     .search {
     display: flex;
@@ -47,50 +80,26 @@ const HeaderContainer = styled.header`
     width: 100%;
     height: 30px;
     border-radius: 40px;
-    border: 3px solid #FFD0E4;
+    border: solid white;
     padding: 0 15px;
   }
-    `;
-
-    const NavContainer = styled.nav `
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 30px;
-    
-    a {
-        text-decoration: none;
-        color: #000;
-    }
-    .Nav {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        text-align: center;
-        padding-right: 20px;
-    }
 `;
-
-
 const Navlink = styled(Link) `
     width: 150px;
     height: 40px;
     line-height: 40px;
     font-size: 1rem;
+    font-weight: bold;
 
     &:hover {
-        font-weight: bold;
+      color: #000;
+        
     }
-
   .MyPage {
     font-size: 2.5rem;
   }
 
 `;
-
-
-
 const Header = () => {
     
     return(
@@ -101,12 +110,20 @@ const Header = () => {
             <img src={Logo} alt="로고" style={{width: "150px", height: "150px"}} />
           </Link>
         </div>
-        <div className="rightbox">
+        <Rightbox>
         <div className="member">
                 <Link to="/login" style={{marginRight: "10px"}}>로그인</Link>
-                <Link to="/signup">가입</Link>
+                <Link to="/signup">회원가입</Link>
         </div>
-        <div className="search">
+        </Rightbox>
+        </HeaderContainer>
+        <NavContainer>
+                <ul className="Nav">
+                    <Navlink to="/cafe/main">카페 찾기</Navlink>
+                    <Navlink to="/guild">길드</Navlink>
+                    <Navlink to="/event">퀘스트</Navlink>
+                    <Navlink to="/couponStore">상점</Navlink>
+                     <div className="search">
         <input
           type="search"
           className="search-bar"
@@ -115,20 +132,13 @@ const Header = () => {
         //   onKeyDown={handleKeyDown}
         />
         <SearchIcon
-          style={{fontSize: 30, marginRight: 10}}
+          style={{fontSize: 30, marginRight: 10, fill: "white"}}
         //   onClick={handleSearchInconClick}
         />
       </div>
-      </div>
-        </HeaderContainer>
-        <NavContainer>
-                <ul className="Nav">
-                    <Navlink to="/cafemain">카페 찾기</Navlink>
-                    <Navlink to="/guild">길드</Navlink>
-                    <Navlink to="/event">퀘스트</Navlink>
-                    <Navlink to="/couponStore">상점</Navlink>
-                    <Navlink><PersonIcon style={{color: "#FFD0E4"}} className="MyPage"/></Navlink>
+                    {/* <Navlink><PersonIcon style={{color: "white"}} className="MyPage"/></Navlink> */}
                 </ul>
+                
         </NavContainer>
         </>
     );

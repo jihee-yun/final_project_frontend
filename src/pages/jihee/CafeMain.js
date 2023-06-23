@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { UserContext } from "../../context/UserStore";
 import cafeimg1 from "./images/카페임시이미지.jpeg";
 import AxiosApi from "./api/AxiosApi";
-import Header from "../now/Header";
+import Header from "../now/component/Header";
 
 const Container = styled.div`
   width: 80%;
