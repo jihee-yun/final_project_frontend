@@ -89,7 +89,7 @@ const AdminDelete = () => {
     const navigate = useNavigate("");
 
     const LogoClick = () => {
-        navigate('/');
+        navigate('/main');
     }
     
     return (

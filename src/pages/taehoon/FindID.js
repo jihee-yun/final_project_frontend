@@ -81,7 +81,7 @@ const FindID = () => {
       };
 
     const LogoClick = () => {
-        navigate('/');
+        navigate('/main');
     }
 
     return(

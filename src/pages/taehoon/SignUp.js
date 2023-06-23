@@ -244,7 +244,7 @@ const SignUp = () => {
   }
 
   const LogoClick = () => {
-        navigate('/');
+        navigate('/main');
   }
   
 

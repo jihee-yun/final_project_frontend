@@ -248,7 +248,7 @@ const AdminInfo = () => {
     };
 
     const LogoClick = () => {
-      navigate('/');
+      navigate('/main');
     }
 
     // 관리자 등록

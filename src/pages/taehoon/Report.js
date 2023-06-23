@@ -207,7 +207,7 @@ const Report = () => {
     };
 
     const LogoClick = () => {
-        navigate('/');
+        navigate('/main');
     }
 
     return (

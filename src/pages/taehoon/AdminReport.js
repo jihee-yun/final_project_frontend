@@ -100,7 +100,7 @@ const AdminReport = () => {
     const navigate = useNavigate("");
 
     const LogoClick = () => {
-        navigate('/');
+        navigate('/main');
     }
     
     

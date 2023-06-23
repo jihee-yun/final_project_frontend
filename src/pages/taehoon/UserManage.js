@@ -64,7 +64,7 @@ const UserManage = () => {
     const navigate = useNavigate("");
 
     const LogoClick = () => {
-        navigate('/');
+        navigate('/main');
     }
     
     return(

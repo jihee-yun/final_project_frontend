@@ -202,7 +202,7 @@ const Login = () => {
     }
 
     const LogoClick = () => {
-        navigate('/');
+        navigate('/main');
     }
     
 

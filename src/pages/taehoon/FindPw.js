@@ -69,7 +69,7 @@ const FindPw = () => {
 
 
     const onClickLogo = () => {
-        navigate('/');
+        navigate('/main');
     }
 
     const onChangeId = (e) => {

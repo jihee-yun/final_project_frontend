@@ -133,7 +133,7 @@ const Admin = () => {
     }
 
     const LogoClick = () => {
-        navigate('/');
+        navigate('/main');
     }
     
     const adminClick = () => {
