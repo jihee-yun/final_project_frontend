@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { UserContext } from "../../context/UserStore";
 import cafeimg1 from "./images/카페임시이미지.jpeg";
 import AxiosApi from "./api/AxiosApi";
+import Header from "../now/Header";
 
 const Container = styled.div`
   width: 80%;
@@ -84,13 +85,13 @@ const CafeMain = () => {
     // 카페 정보 받아오기
     const [cafeInfo, setCafeInfo] = useState("");
 
-    useEffect(() => {
-      const cafeInfo = async() => {
-        const response = await AxiosApi.cafeInfoGet(region);
-        if(response.status === 200) setCafeInfo(response.data);
-      };
-      cafeInfo();
-    }, [region]);
+    // useEffect(() => {
+    //   const cafeInfo = async() => {
+    //     const response = await AxiosApi.cafeInfoGet(region);
+    //     if(response.status === 200) setCafeInfo(response.data);
+    //   };
+    //   cafeInfo();
+    // }, [region]);
 
   console.log(region);
 
@@ -101,7 +102,8 @@ const CafeMain = () => {
 
   return(
     <>
-    <Container>
+    <Header />
+    <Container> 
     <Box>
     <CafeBox onClick={() => selectCafe("카페번호")}>
       <img className="img" src={cafeimg1} alt="이미지"/>

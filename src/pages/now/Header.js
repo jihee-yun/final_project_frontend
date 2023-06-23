@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Logo from "../now/images/Logo.jpeg";
+import Logo from "../now/images/logo.png";
 import { Link } from "react-router-dom";
 import PersonIcon from '@mui/icons-material/Person';
 import SearchIcon from '@mui/icons-material/Search';
@@ -98,7 +98,7 @@ const Header = () => {
         <HeaderContainer>
         <div className="logo">
           <Link to="/">
-            <img src={Logo} alt="로고" style={{width: "200px", height: "150px"}} />
+            <img src={Logo} alt="로고" style={{width: "150px", height: "150px"}} />
           </Link>
         </div>
         <div className="rightbox">
