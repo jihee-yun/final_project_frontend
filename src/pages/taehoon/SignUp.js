@@ -40,6 +40,10 @@ const SignUpBlock = styled.div`
     color: #999;
   }
 
+  .name {
+    margin-bottom: 20px;
+  }
+
   
   .item1 button{
     border-radius: 5px;
@@ -167,6 +171,7 @@ const SignUp = () => {
   const [userID, setUserID] = useState("");
   const [passWord, setPassWord] = useState("");
   const [conPw, setConPw] = useState("");
+  const [name, setName] = useState("");
   
 
   // 오류 메세지
@@ -189,6 +194,11 @@ const SignUp = () => {
     setIsChecked(e.target.checked);
     console.log(isChecked);
   };
+
+  // 이름
+  const onChangeName = (e) => {
+    setName(e.target.value);
+  }
 
   // 아이디(이메일) 정규식 확인
   const onChangeId = (e) => {
@@ -233,7 +243,8 @@ const SignUp = () => {
 
   // 이메일(아이디) 중복확인
   const onClickIdCheck = async() => {
-        const mailCheck = await AxiosApi.memberRegCheck(userID);
+        const mailCheck = await AxiosApi.checkId(userID);
+        console.log(mailCheck);
         if(mailCheck.data === true) {
             setIdMsg("사용 가능한 아이디입니다.");
             setIsID(true);
@@ -460,6 +471,10 @@ const SignUp = () => {
 
                 <div className="Info">
                     <h3>회원정보 입력</h3>
+                </div>
+
+                <div className="name">
+                  <Input type="name" placeholder="이름" value={name} onChange={onChangeName}/>
                 </div>
 
 

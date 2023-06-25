@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import {Link, useNavigate} from "react-router-dom";
 import logo from "../../images/logo.png";
 import kakao from "../../images/kakao.png";
 import naver from "../../images/naver.png";
 import google from "../../images/google.png";
-// import GoogleLogin from 'react-google-login';
-// import {gapi} from 'gapi-script';
+import { UserContext } from "../../context/UserStore";
+import TokenAxiosApi from "./Api/TokenAxiosApi";
+import AxiosApi from "./Api/AxiosApi";
+
 
 const LoginBlock = styled.div`
     position: relative;
@@ -90,6 +92,7 @@ const LoginBlock = styled.div`
     .socialLogin img{
         width: 50px;
         height: 50px;
+        cursor: pointer;
     }
 
     @media (max-width: 768px) {
@@ -184,13 +187,25 @@ const Input = styled.input`
 
 
 const Login = () => {
+    // 카카오
+    const REST_API_KEY = process.env.REACT_APP_REST_API_KEY;
+    const REDIRECT_URI = "http://localhost:8111/login/oauth/kakao";
+    const KAKAO_AUTH_URI = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code&prompt=login`;
 
+    const context = useContext(UserContext);
+    const {setUserID, setPassWord, handleLogin} = context;
 
     const navigate = useNavigate("");
     
     // 키보드 입력
     const [inputId, setInputId] = useState("");
     const [inputPw, setInputPw] = useState("");
+
+    //팝업 처리
+    const [modalOpen, setModalopen] = useState(false);
+    const closeModal = () => {
+        setModalopen(false);
+    }
 
     const onChangeId = (e) => {
         setInputId(e.target.value);
@@ -200,6 +215,36 @@ const Login = () => {
         const passwordCurrent = e.target.value;
         setInputPw(passwordCurrent);
     }
+
+    const onClickLogin = async() => {
+        try {
+            const rsp = await TokenAxiosApi.getToken(inputId, inputPw);
+            console.log(inputId);
+            console.log(inputPw);
+
+            if(rsp.status === 200) {
+                localStorage.setItem('token', rsp.data);
+                const token = localStorage.getItem('token');
+                console.log(token);
+
+                const userInfoResponse = await TokenAxiosApi.userInfo(token);
+                const userData = JSON.stringify(userInfoResponse, null, 2);
+                const userDataObject = JSON.parse(userData);
+
+                setUserID(inputId);
+                setPassWord(inputPw);
+                handleLogin();
+
+                navigate("/main");
+            }else{
+                setModalopen(true);
+            }
+        }catch(error) {
+            setModalopen(true);
+        }
+    }
+
+
 
     const LogoClick = () => {
         navigate('/main');
@@ -226,7 +271,7 @@ const Login = () => {
                     </div>
 
                     <div className="item2">
-                        <button className="log_btn" onClick={LogoClick}>로그인</button>
+                        <button className="log_btn" onClick={onClickLogin}>로그인</button>
                     </div>
 
                     <div className="else">
@@ -241,7 +286,10 @@ const Login = () => {
                     <h4>OR</h4>
 
                     <div className="socialLogin">
-                        <img src={kakao} alt="kakao" className="kakao"/>
+                        <a href={KAKAO_AUTH_URI}>
+                            <img src={kakao} alt="kakao" className="kakao"/>
+                        </a>
+                        
                         <img src={naver} alt="naver" className="naver"/>
                         <img src={google} alt="google" className="google"/>
                     </div>
