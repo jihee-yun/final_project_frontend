@@ -35,18 +35,21 @@ const ModalStyle = styled.div`
         overflow: hidden;
     }
     section > header {
+        display: flex;
+        width: 85%;
+        margin: 0 auto;
+        padding-left: 10px;
         position: relative;
-        padding: 16px 64px 16px 16px;
+        /* padding: 16px 64px 16px 35px; */
         /* background-color: #FFCFDA; */
-        color: #585858;
-        font-size: .9rem;
+        font-size: 1rem;
         font-weight: bold;
     }
 
     section > header button {
         position: absolute;
         top: 15px;
-        right: 15px;
+        right: 3px;
         width: 30px;
         font-size: 21px;
         font-weight: 700;
@@ -71,6 +74,12 @@ const ModalStyle = styled.div`
         font-size: 13px;
         font-weight: bold;
     }
+
+    section > hr{
+        border: .5px solid lightgray;
+        background-color: lightgray;
+    }
+
     @keyframes modal-show {
         from {
             opacity: 0;
@@ -101,11 +110,12 @@ const Modal = (props) => {
                 {open && 
                     <section>
                         <header>
-                            {header}
+                            <p>{header}</p>
                             <button onClick={close}>
                                 &times;  
                             </button>
                         </header>
+                        <hr />
                         <main>{children}</main>
                         <footer>
                             {type && <button onClick={confirm}>확인</button>}

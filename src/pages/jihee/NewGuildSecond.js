@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import logo from "./images/logo.png";
 
@@ -76,6 +76,7 @@ const Input = styled.input`
 `;
 
 const NewGuildSecond = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const {region, guildName, guildIntro} = location.state;
 
@@ -86,7 +87,7 @@ const NewGuildSecond = () => {
   };
 
   const prevPage = () => {
-    
+    navigate(-1);
   };
   return(
     <>

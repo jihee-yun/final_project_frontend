@@ -136,7 +136,6 @@ const Middle = styled.div`
 `;
 
 const GuildDetailMiddle = () => {
-
   const [modalOpen, setModalOpen] = useState(false);
 
   const memberModal = () => {

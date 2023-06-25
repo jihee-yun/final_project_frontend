@@ -3,21 +3,56 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { UserContext } from "../../context/UserStore";
 import cafeimg1 from "./images/카페임시이미지.jpeg";
+import filterimg from "./images/filter.png";
 import AxiosApi from "./api/AxiosApi";
 import Header from "../now/component/Header";
+import Modal from "./Modal";
+import CafeFilterModal from "./CafeFilterModal";
 
 const Container = styled.div`
   width: 80%;
   margin: 0 auto;
   /* padding: 50px; */
+
+  button{
+    position: absolute;
+    left: 35px;
+    top: -50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 70px;
+    height: 35px;
+    margin: 50px 0 30px 0;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    background-color: white;
+    font-weight: 600;
+    color: black;
+    cursor: pointer;
+
+    /* &:hover{
+      border: none;
+      color: white;
+      background-color: #FFCFDA;
+    } */
+  }
+
+  img{
+    width: 15px;
+    height: 15px;
+  }
 `;
 
 const Box = styled.div`
+  position: relative;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  padding-top: 50px;
+  margin-top: 100px;
 `;
 
 const CafeBox = styled.div`
@@ -76,7 +111,6 @@ const CafeBox = styled.div`
   }
 `;
 
-
 const CafeMain = () => {
   const navigate = useNavigate();
   const context = useContext(UserContext);
@@ -95,6 +129,25 @@ const CafeMain = () => {
 
   console.log(region);
 
+  // 모달창
+  const [modalOpen, setModalOpen] = useState(false);
+  // 필터 값 저장
+  const [selectOption, setSelectOption] = useState("");
+  
+  const filterModal = () => {
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
+  // 필터 값으로 결과 조회
+  const confirm = () => {
+    console.log(selectOption);
+    setModalOpen(false);
+  }
+
   const selectCafe = (cafeNum) => {
     setCafeNum(cafeNum);
     navigate('/cafe/detail');
@@ -102,9 +155,9 @@ const CafeMain = () => {
 
   return(
     <>
-    <Header />
     <Container> 
     <Box>
+    <button className="filter" onClick={filterModal}><img src={filterimg} alt="필터이미지" /><p>필터</p></button>
     <CafeBox onClick={() => selectCafe("카페번호")}>
       <img className="img" src={cafeimg1} alt="이미지"/>
       <div className="background"></div>
@@ -119,6 +172,9 @@ const CafeMain = () => {
     <CafeBox></CafeBox>
     </Box>
     </Container>
+    <Modal open={modalOpen} type={true} close={closeModal} confirm={() => confirm(selectOption)} header="필터">
+    <CafeFilterModal selectOption={selectOption} setSelectOption={setSelectOption}/>
+    </Modal>
     </>
   );
 };

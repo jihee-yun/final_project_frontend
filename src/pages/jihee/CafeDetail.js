@@ -7,7 +7,7 @@ import address from "./images/location.png";
 import time from "./images/clock.png";
 import phone from "./images/mobile-phone.png";
 import menu from "./images/restaurant-menu.png";
-import cafeimg1 from "./images/카페임시이미지.jpeg";
+import Slider from "./Slider";
 
 const Container = styled.div`
   width: 50%;
@@ -87,21 +87,6 @@ const Container = styled.div`
   }
 `;
 
-const ImgContainer = styled.div`
-  width: 100%;
-  height: 500px;
-
-  .thum{
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    object-fit: cover;
-    background-image: url(${props => props.imageurl});
-    background-size: cover;
-    background-position: center;
-  }
-`;
-
 const CafeDetail = () => {
   const navigate = useNavigate();
   const context = useContext(UserContext);
@@ -117,7 +102,7 @@ const CafeDetail = () => {
     <h1>카페 이름</h1>
     <h3>카페 주소</h3>
     </div>
-    <ImgContainer><img className="thum" src={cafeimg1} alt="임시" /></ImgContainer>
+    <Slider />
     <div className="middle">
     <div className="content">
     <h2>인트로로로로로로로로로로로로로</h2>
