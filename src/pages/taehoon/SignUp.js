@@ -108,6 +108,7 @@ const SignUpBlock = styled.div`
     background-color: #FFCFDA;
     width: 80px;
     height: 30px;
+    cursor: pointer;
   }
 
   .signBtn {

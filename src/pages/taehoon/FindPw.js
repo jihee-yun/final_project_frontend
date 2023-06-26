@@ -40,6 +40,7 @@ const FindPwBlock = styled.div`
         color: black;
         border: none;
         font-size: 15px;
+        cursor: pointer;
     }
 `;
 

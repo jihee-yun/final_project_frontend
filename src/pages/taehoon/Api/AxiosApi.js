@@ -8,10 +8,11 @@ const AxiosApi = {
   },
   
     // 회원가입
-    memberReg : async(id, pw) => {
+    memberReg : async(id, pw, name) => {
         const member ={
             id : id,
-            pw: pw
+            pw: pw,
+            name : name
     };
         return await axios.post(KH_DOMAIN + "/new", member);
     },
@@ -38,7 +39,19 @@ const AxiosApi = {
             // 로그인 실패 처리
             throw new Error('로그인에 실패했습니다.');
           }
-        }
+        },
+
+        // 관리자 등록
+        adminReg : async(name, gender, age, adminId, adminPw) => {
+          const admin = {
+            name : name,
+            gender : gender,
+            age : age,
+            adminId : adminId,
+            adminPw : adminPw
+          };
+          return await axios.post(KH_DOMAIN + "/admin", admin);
+        } 
     };
 
 export default AxiosApi;

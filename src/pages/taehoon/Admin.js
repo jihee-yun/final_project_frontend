@@ -4,6 +4,7 @@ import logo from "../../images/logo.png";
 import admin from "../../images/admin.png";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import Modal from "../jihee/Modal";
 
 
 const AdminBlock = styled.div`
@@ -126,6 +127,12 @@ const Admin = () => {
     const onChangeId = (e) => {
         setInputId(e.target.value);
     }
+
+    //팝업 처리
+    const [modalOpen, setModalopen] = useState(false);
+    const closeModal = () => {
+        setModalopen(false);
+    }
     
     const onChangePw = (e) => {
         const passwordCurrent = e.target.value;
@@ -136,9 +143,9 @@ const Admin = () => {
         navigate('/main');
     }
     
-    const adminClick = () => {
-        navigate('/adminInfo');
-    }
+    // const adminClick = () => {
+    //     navigate('/adminInfo');
+    // }
 
     return(
         <AdminBlock>
@@ -163,8 +170,12 @@ const Admin = () => {
                     </div>
 
                     <div className="item2">
-                        <button className="log_btn" onClick={adminClick}>로그인</button>
+                        <button className="log_btn">로그인</button>
                     </div>
+
+                    <Modal open={modalOpen} close={closeModal} header="Sweet Kingdom">
+                        아이디 및 패스워드를 확인하세요.
+                    </Modal>
             </AdminContainer>
         </AdminBlock>
     );
