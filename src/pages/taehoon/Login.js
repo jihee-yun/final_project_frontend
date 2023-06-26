@@ -7,7 +7,7 @@ import naver from "../../images/naver.png";
 import google from "../../images/google.png";
 import { UserContext } from "../../context/UserStore";
 import TokenAxiosApi from "./Api/TokenAxiosApi";
-import AxiosApi from "./Api/AxiosApi";
+import Modal from "../jihee/Modal";
 
 
 const LoginBlock = styled.div`
@@ -293,6 +293,10 @@ const Login = () => {
                         <img src={naver} alt="naver" className="naver"/>
                         <img src={google} alt="google" className="google"/>
                     </div>
+
+                    <Modal open={modalOpen} close={closeModal} header="Sweet Kingdom">
+                        아이디 및 패스워드를 확인하세요.
+                    </Modal>
                     
             </LoginContainer>
         </LoginBlock>

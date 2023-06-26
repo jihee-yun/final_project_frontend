@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import AxiosApi from "./Api/AxiosApi";
 import logo from "../../images/logo.png";
+import Modal from "../jihee/Modal";
 
 const SignUpBlock = styled.div`
   position: relative;
@@ -44,6 +45,59 @@ const SignUpBlock = styled.div`
     margin-bottom: 20px;
   }
 
+  .enable-button {
+    margin-top: 50px;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 50px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 26px;
+    font-weight: bold;
+    width: 400px; /* 원하는 너비 설정 */
+    height: 50px;
+    color: white;
+    background-color: #395144;
+    font-size: 15px;
+    font-weight: 400;
+    border-radius: 18px;
+    border: #395144;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .enable-button:active {
+    margin-top: 50px;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 50px;
+    font-size: 26px;
+    font-weight: bold;
+    width: 400px; /* 원하는 너비 설정 */
+    height: 50px;
+    color: white;
+    background-color: #999;
+    font-size: 15px;
+    font-weight: 400;
+    border-radius: 18px;
+    border: #999;
+    font-weight: 700;
+  }
+  .disable-button {
+    margin-top: 50px;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 50px;
+    font-size: 26px;
+    font-weight: bold;
+    width: 400px; /* 원하는 너비 설정 */
+    height: 50px;
+    color: white;
+    background-color: #999;
+    font-size: 13px;
+    font-weight: 400;
+    border-radius: 18px;
+    border: #999;
+  }
+
   
   .item1 button{
     border-radius: 5px;
@@ -72,6 +126,7 @@ const SignUpBlock = styled.div`
       height: 30px;
       font-size: 20px;
       background-color: #FFCFDA;
+      cursor: pointer;
   }
   
   input[type="checkbox"] {
@@ -159,11 +214,6 @@ const Input = styled.input`
   }
 `;
 
-
-
-
-
-
 const SignUp = () => {
   const navigate = useNavigate();
 
@@ -184,8 +234,9 @@ const SignUp = () => {
   const [isPw, setIsPw] = useState(false);
   const [isConPw, setIsConPw] = useState(false);
 
-
-  const [isCheckedPw, setIsCheckedPw] = useState("");
+  // 팝업
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalText, setModalText] = useState("중복된 아이디 입니다.");
 
   // 약관 동의
   const [isChecked, setIsChecked] = useState(false);
@@ -198,6 +249,11 @@ const SignUp = () => {
   // 이름
   const onChangeName = (e) => {
     setName(e.target.value);
+  }
+
+  const closeModal = () => {
+    setModalOpen(false);
+    navigate('/main');
   }
 
   // 아이디(이메일) 정규식 확인
@@ -259,10 +315,11 @@ const SignUp = () => {
   }
   
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // 회원가입 로직 구현
-    navigate('/'); // 회원가입 완료 후 이동할 페이지로 변경
+  const handleSubmit = async() => {
+      const signUp = await AxiosApi.memberReg(userID, passWord);
+      console.log(signUp);
+      setModalText("인증 이메일이 발송되었습니다.");
+      setModalOpen(true);
   };
 
   return (
@@ -509,7 +566,10 @@ const SignUp = () => {
 
                 
                 <div className="signBtn">
-                    <button onClick={handleSubmit}>회원가입</button>
+                  {(isChecked && isID && isPw && isConPw) ?
+                    <button className="enable-button" onClick={handleSubmit}>회원가입</button> :
+                    <button className="disable-button">회원가입</button>}
+                    <Modal open={modalOpen} close={closeModal} header="Sweet Kingdom">{modalText}</Modal>
                 </div>
     </SignUpContainer>
   </SignUpBlock>
