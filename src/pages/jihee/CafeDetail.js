@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserStore";
@@ -8,6 +8,7 @@ import time from "./images/clock.png";
 import phone from "./images/mobile-phone.png";
 import menu from "./images/restaurant-menu.png";
 import Slider from "./Slider";
+import AxiosApi from "./api/AxiosApi";
 
 const Container = styled.div`
   width: 50%;
@@ -92,7 +93,19 @@ const CafeDetail = () => {
   const context = useContext(UserContext);
   const { cafeNum } = context; 
 
+  // 카페 디테일 정보 받아오기
+  const [detailInfo, setDetailInfo] = useState("");
+
+  useEffect(() => {
+    const detailInfo = async() => {
+      const response = await AxiosApi.detailInfoGet(cafeNum);
+      if(response.status === 200) setDetailInfo(response.data);
+    };
+    detailInfo();
+  }, [cafeNum]);
+
   console.log(cafeNum);
+  console.log(detailInfo);
 
   return(
     <>

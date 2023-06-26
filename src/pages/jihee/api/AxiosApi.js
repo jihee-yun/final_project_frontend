@@ -6,6 +6,10 @@ const AxiosApi = {
   cafeInfoGet: async(region) => {
     return await axios.get(KH_DOMAIN + `/cafe/region?region=${region}`);
   },
+  // 카페 디테일 정보 조회
+  detailInfoGet: async(cafeNum) => {
+    return await axios.get(KH_DOMAIN + `/cafe/detail?cafeNum=${cafeNum}`);
+  },
 
 };
 

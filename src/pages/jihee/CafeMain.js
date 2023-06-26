@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { UserContext } from "../../context/UserStore";
-import cafeimg1 from "./images/카페임시이미지.jpeg";
 import filterimg from "./images/filter.png";
 import AxiosApi from "./api/AxiosApi";
 import Header from "../now/component/Header";
@@ -16,7 +15,7 @@ const Container = styled.div`
 
   button{
     position: absolute;
-    left: 35px;
+    left: 20px;
     top: -50px;
     display: flex;
     align-items: center;
@@ -49,10 +48,11 @@ const Box = styled.div`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
   padding-top: 50px;
   margin-top: 100px;
+  gap: 10px;
 `;
 
 const CafeBox = styled.div`
@@ -68,15 +68,6 @@ const CafeBox = styled.div`
 
   &:hover{
     transform: scale(1.02);
-  }
-
-  .img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    background-image: url(${props => props.imageurl});
-    background-size: cover;
-    background-position: center;
   }
 
   .background {
@@ -111,6 +102,15 @@ const CafeBox = styled.div`
   }
 `;
 
+const Thumb = styled.div`
+  width: 100%;
+  height: 100%;
+  object-fit: fit;
+  background-image: url(${props => props.imageurl});
+  background-size: cover;
+  background-position: center;
+`;
+
 const CafeMain = () => {
   const navigate = useNavigate();
   const context = useContext(UserContext);
@@ -119,14 +119,15 @@ const CafeMain = () => {
     // 카페 정보 받아오기
     const [cafeInfo, setCafeInfo] = useState("");
 
-    // useEffect(() => {
-    //   const cafeInfo = async() => {
-    //     const response = await AxiosApi.cafeInfoGet(region);
-    //     if(response.status === 200) setCafeInfo(response.data);
-    //   };
-    //   cafeInfo();
-    // }, [region]);
+    useEffect(() => {
+      const cafeInfo = async() => {
+        const response = await AxiosApi.cafeInfoGet(region);
+        if(response.status === 200) setCafeInfo(response.data);
+      };
+      cafeInfo();
+    }, [region]);
 
+  console.log(cafeInfo);
   console.log(region);
 
   // 모달창
@@ -158,18 +159,17 @@ const CafeMain = () => {
     <Container> 
     <Box>
     <button className="filter" onClick={filterModal}><img src={filterimg} alt="필터이미지" /><p>필터</p></button>
-    <CafeBox onClick={() => selectCafe("카페번호")}>
-      <img className="img" src={cafeimg1} alt="이미지"/>
+    {cafeInfo && cafeInfo.map(cafe => (
+    <CafeBox key={cafe.id} onClick={() => selectCafe(cafe.id)}>
+      <Thumb className="img" imageurl={cafe.thumbnail}/>
       <div className="background"></div>
       <div className="content">
-        <p>지역</p>
-        <p>카페 이름</p>
-        <p>카페 한줄 소개하는 부분입니다아아아아아아</p> 
+        <p>{cafe.region}</p>
+        <p>{cafe.cafeName}</p>
+        <p>{cafe.intro}</p> 
       </div>
     </CafeBox>
-    <CafeBox></CafeBox>
-    <CafeBox></CafeBox>
-    <CafeBox></CafeBox>
+    ))}
     </Box>
     </Container>
     <Modal open={modalOpen} type={true} close={closeModal} confirm={() => confirm(selectOption)} header="필터">
