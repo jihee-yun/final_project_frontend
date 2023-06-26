@@ -19,6 +19,8 @@ const FloatingButton = styled.div`
   align-items: center;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+  box-shadow: ${({ isHovered }) => 
+    (isHovered ? "3px 3px 10px rgba(0, 0, 0, 0.5)" : "2px 2px 5px rgba(0, 0, 0, 0.7)")};
 `;
 
 const NewDiv = styled.div`
@@ -33,6 +35,7 @@ const NewDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 5px 8px 20px rgba(0, 0, 0, 0.5);
 `;
 
 const CloseButton = styled.button`

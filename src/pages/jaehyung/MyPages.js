@@ -8,11 +8,14 @@ import { ref, getDownloadURL } from "firebase/storage";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import SideMenu from "./components/SideMenu";
+import ChatBot from "./components/ChatBot";
 
 const OutBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: opacity 1.8s ease-in-out;
+  opacity: ${({ loaded }) => (loaded ? 1 : 0)};
 `;
 
 const Container = styled.div`
@@ -32,9 +35,9 @@ const Detail = styled.div`
 
 const LineBox = styled.div`
   width: 90%;
-  height: 260px;
+  height: 300px;
   border: 1px solid black;
-  display: flex;1
+  display: flex;
   flex-direction: row;
   justify-content: center;
   margin-top: 3%;
@@ -43,8 +46,7 @@ const LineBox = styled.div`
 
 const SquareBox = styled.div`
   width: 25%;
-  height: 0;
-  padding-bottom: 25%;
+  height: 98%;
   border: 2px solid #F3E1E1;
   border-radius: 15px;
   margin-right: 5%;
@@ -54,8 +56,7 @@ const SquareBox = styled.div`
 `;
 const LongBox = styled.div`
   width: 55%;
-  height: 0;
-  padding-bottom: 25%;
+  height: 98%;
   border: 2px solid #F3E1E1;
   margin-right: 5%;
   border-radius: 15px;
@@ -70,9 +71,13 @@ const BoxTitle = styled.div`
   flex-direction: row;
 `;
 const Title = styled.p`
+  height: 20px;
+  letter-spacing: -1px;
   margin-left: 2%;
 `;
 const More = styled.p`
+  height: 20px;
+  letter-spacing: -1px;
   margin-left: auto;
   margin-right: 2%;
   cursor: pointer;
@@ -80,14 +85,12 @@ const More = styled.p`
 
 const BoxContent = styled.div`
   width: 90%;
-  height: 0;
-  padding-bottom: 75%;
+  height: 75%;
   border: 1px solid blue;
 `;
 const BoxContentLong = styled.div`
   width: 90%;
-  height: 0;
-  padding-bottom: 34%;
+  height: 75%;
   border: 1px solid blue;
 `;
 
@@ -98,6 +101,7 @@ const MyPage = () => {
 
   const [userInfo, setUserInfo] = useState([]);
   const [imageUrls, setImageUrls] = useState([]);
+  const [loaded, setLoaded] = useState(false);
 
   // 로그인시 회원 번호
   const { userNum } = useContext(UserContext);
@@ -118,9 +122,37 @@ const MyPage = () => {
   //     });
   // }, []);
 
+  // 화면 전환 효과
+  useEffect(() => {
+    const styleTags = Array.from(
+      document.querySelectorAll('style[data-styled="true"]')
+    );
+
+    const showStyleTags = () => {
+      let currentIndex = 0;
+      const interval = setInterval(() => {
+        const currentTag = styleTags[currentIndex];
+
+        if (currentTag) {
+          currentTag.setAttribute("data-loaded", "true");
+          currentIndex++;
+        
+          if (currentIndex >= styleTags.length) {
+            clearInterval(interval);
+            setLoaded(true);
+          }
+        } else {
+          clearInterval(interval);
+          setLoaded(true);
+        }
+        
+      }, 200);
+    };
+    showStyleTags();
+  }, []);
 
   return(
-    <OutBox>
+    <OutBox  loaded={loaded}>
     <Header />
     <Container>
       <SideMenu />
@@ -190,7 +222,8 @@ const MyPage = () => {
       </Detail>
     </Container>
     <Footer />
+    <ChatBot />
     </OutBox>
   );
-}
+};
 export default MyPage;
