@@ -18,6 +18,7 @@ const Box = styled.div`
 const ChallengeBox = styled.div`
   /* background-color: #FFCFDA; */
   margin-top: 50px;
+  margin-bottom: 50px;
   width: 200px;
   height: 300px;
   display: inline-block;
