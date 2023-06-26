@@ -138,14 +138,15 @@ const LuckyBox = styled.div`
 
 const Event = () => {
   const navigate = useNavigate();
+  // const [challengeInfo, setChallengeInfo] = useState("");
 
   const navigateCh = () => {
     navigate('/challengeMain');
-  }
+  };
 
   const navigatePoint = () => {
     navigate('/couponStore');
-  }
+  };
 
   return(
     <>
