@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Roulette from "./Roulette";
 import quiz from "./images/quiz.png";
 import shopping from "./images/shopping.png";
 import { useNavigate } from "react-router-dom";
+import AxiosApi from "./Api/AxiosApi";
 
 const ContainerBox = styled.div`
-  max-width: 1440px;
-  margin: 0 auto;
+  /* max-width: 1440px;
+  margin: 0 auto; */
 `;
 
 const Box = styled.div`
@@ -16,7 +17,6 @@ const Box = styled.div`
 `;
 
 const ChallengeBox = styled.div`
-  /* background-color: #FFCFDA; */
   margin-top: 50px;
   margin-bottom: 50px;
   width: 200px;
@@ -26,13 +26,6 @@ const ChallengeBox = styled.div`
   border-radius: 20px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
   cursor: pointer;
-
-  .name {
-    margin-left: 10px;
-    font-size: 1.1rem;
-    margin-top: 240px;
-  }
-
 `;
 
 const EventFooter = styled.div`
@@ -136,9 +129,37 @@ const LuckyBox = styled.div`
   }
 `;
 
+const ChallengeTitle = styled.div`
+`;
+
+const Title = styled.div`
+  margin-left: 10px;
+  font-size: 1.1rem;
+  margin-top: 240px;
+`;
+
+const Thumb = styled.div`
+  width: 100%;
+  height: 100%;
+  object-fit: fit;
+  background-image: url(${props => props.imageurl});
+  background-size: cover;
+  background-position: center;
+`;
+
 const Event = () => {
   const navigate = useNavigate();
-  // const [challengeInfo, setChallengeInfo] = useState("");
+  const [challengeInfo, setChallengeInfo] = useState("");
+
+  useEffect(() => {
+    const challengeInfo = async() => {
+      const rsp = await AxiosApi.challengeGet("ALL");
+      if(rsp.status === 200) setChallengeInfo(rsp.data);
+    };
+    challengeInfo();
+  }, []);
+
+  console.log(challengeInfo);
 
   const navigateCh = () => {
     navigate('/challengeMain');
@@ -154,25 +175,19 @@ const Event = () => {
         <Box>
           <h3>이 달의 챌린지</h3>
           <ChallengeBox onClick={navigateCh}>
-            <div className="chal">
-              <p className="name">전국 카페 5곳 방문하기</p>
-            </div>
+            {challengeInfo && challengeInfo.map(item => (
+              <ChallengeTitle key={item.challengeName} onClick={() => setChallengeInfo(item.challengeName)}>
+                <Title>{item.challengeName}</Title>
+                <Thumb className="img" imageurl={item.thumbnail}></Thumb>
+              </ChallengeTitle>
+            ))}
+          </ChallengeBox>
+          {/* <ChallengeBox onClick={navigateCh}>
           </ChallengeBox>
           <ChallengeBox onClick={navigateCh}>
-            <div>
-              <p className="name">서울 카페 5곳 방문하기</p>
-            </div>
           </ChallengeBox>
           <ChallengeBox onClick={navigateCh}>
-            <div>
-              <p className="name">경기 카페 5곳 방문하기</p>
-            </div>
-          </ChallengeBox>
-          <ChallengeBox onClick={navigateCh}>
-            <div>
-              <p className="name">부산 카페 5곳 방문하기</p>
-            </div>
-          </ChallengeBox>
+          </ChallengeBox> */}
           <Roulette />
           <EventFooter>
             <div className="event-box">
