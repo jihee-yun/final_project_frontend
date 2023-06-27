@@ -8,7 +8,6 @@ const Container = styled.h3`
   position: relative;
   margin-top: 100px;
   margin-bottom: 80px;
-
 `;
 
 const rotateAnimation = keyframes`
@@ -73,18 +72,19 @@ const Pan = styled.div`
 `;
 
 
-
-
 const Roulette = () => {
   const [isSpinning, setIsSpinning] = useState(false); 
 
   const handleStartClick = () => {
     setIsSpinning(true); // 회전 시작
-
+  
+    const stopTime = Math.floor(Math.random() * 4000) + 3000; // 3~6초 사이 랜덤으로
+  
     setTimeout(() => {
       setIsSpinning(false);
-    }, 3000); // 3초 뒤 멈춤
+    }, stopTime); // 랜덤 멈추기
   };
+  
 
   return(
     <>
