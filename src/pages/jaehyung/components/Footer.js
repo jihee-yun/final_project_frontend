@@ -50,7 +50,7 @@ const Footer = () => {
 
   return (
     <>
-      <Foot onClick={()=> navigate("/mypage")} loaded={loaded}>방치중</Foot>
+      <Foot onClick={()=> navigate("/mypage")} loaded={loaded}>하단</Foot>
     </>
   );
 };

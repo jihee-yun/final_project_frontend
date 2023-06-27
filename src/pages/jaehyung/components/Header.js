@@ -50,7 +50,7 @@ const Header = () => {
 
   return (
     <>
-      <Head onClick={()=> navigate("/mypage")} loaded={loaded}>공사중</Head>
+      <Head onClick={()=> navigate("/mypage")} loaded={loaded}>상단</Head>
     </>
   );
 };
