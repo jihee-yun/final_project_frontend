@@ -4,6 +4,7 @@ import styled from "styled-components";
 import cafeimg1 from "./images/카페임시이미지.jpeg";
 import { StyleSheetManager } from 'styled-components';
 import DotPageNation from "./DotPageNation";
+import AxiosApi from "./api/AxiosApi";
 
 const CarouselWrapper = styled.div`
   width: 100%;
@@ -55,26 +56,23 @@ const Arrow = styled.div`
   z-index: 1;
 `;
 
-const Slider = () => {
+const Slider = ({cafeNum}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const imgList = [
-    {
-      id: 1,
-      image: cafeimg1,
-      alt: "Image 1"
-    },
-    {
-      id: 2,
-      image: cafeimg1,
-      alt: "Image 2"
-    },
-    {
-      id: 3,
-      image: cafeimg1,
-      alt: "Image 3"
-    },
-  ];
+  // 이미지 리스트 받아오기
+  const [imgList, setImgList] = useState([]);
+
+  useEffect(() => {
+    const imgList = async() => {
+      const response = await AxiosApi.imgListGet(cafeNum);
+      if(response.status === 200) setImgList(response.data);
+    };
+    imgList();
+  }, [cafeNum])
+
+  console.log(imgList);
+  console.log("슬라이더 : " + cafeNum);
+
 
   // 버튼으로 직접 슬라이드 이동 구현
   const moveToPrevSlide = () => {
@@ -85,16 +83,16 @@ const Slider = () => {
     setCurrentIndex((prev) => (prev === imgList.length - 1 ? 0 : prev + 1));
   };
 
-  // 자동 슬라이드 구현
-  useEffect(() => {
-    const slideInterval = setInterval(() => {
-      moveToNextSlide();
-    }, 5000);
+  // // 자동 슬라이드 구현
+  // useEffect(() => {
+  //   const slideInterval = setInterval(() => {
+  //     moveToNextSlide();
+  //   }, 5000);
 
-    return () => {
-      clearInterval(slideInterval);
-    };
-  }, []);
+  //   return () => {
+  //     clearInterval(slideInterval);
+  //   };
+  // }, []);
 
   return(
     <>
@@ -104,7 +102,7 @@ const Slider = () => {
     <ImgSlider currentindex={currentIndex}>
     {imgList && imgList.map(img => (
     <ImgContainer key={img.id}>
-      <Thumb className="thumbnail" imageurl={img.image} />  
+      <Thumb className="thumbnail" imageurl={img.url} />  
     </ImgContainer>
     ))}
     </ImgSlider>

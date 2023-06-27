@@ -10,6 +10,10 @@ const AxiosApi = {
   detailInfoGet: async(cafeNum) => {
     return await axios.get(KH_DOMAIN + `/cafe/detail?cafeNum=${cafeNum}`);
   },
+  // 카페 이미지 리스트 조회
+  imgListGet: async(cafeNum) => {
+    return await axios.get(KH_DOMAIN + `/cafe/img?cafeNum=${cafeNum}`);
+  }
 
 };
 
