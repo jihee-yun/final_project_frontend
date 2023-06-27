@@ -300,6 +300,7 @@ const SignUp = () => {
 
   // 이메일(아이디) 중복확인
   const onClickIdCheck = async() => {
+        console.log(userID);
         const mailCheck = await AxiosApi.checkId(userID);
         console.log(mailCheck);
         if(mailCheck.data === true) {

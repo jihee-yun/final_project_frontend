@@ -47,6 +47,7 @@ const AdminRegBlock = styled.div`
         width: 200px;
         height: 150px;
         margin-bottom: -20px;
+        cursor: pointer;
     }
 
     @media (max-width: 768px) {
@@ -138,13 +139,17 @@ const AdminReg = () => {
     const handleClick = () => {
         navigate('/admin');
     }
+
+    const LogoClick = () => {
+        navigate('/admininfo');
+    }
   
 
   
     return (
       <AdminRegBlock>
         <div className="logo">
-            <img src={logo} alt="logo" className="logo"/>
+            <img src={logo} alt="logo" className="logo" onClick={LogoClick}/>
         </div>
         <h2>관리자 등록</h2>
 

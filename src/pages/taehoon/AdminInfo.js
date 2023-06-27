@@ -271,6 +271,8 @@ const AdminInfo = () => {
         navigate('/adminDelete');
     }
 
+    
+
     return (
       <InfoBlock>
         <div className="left_btn">

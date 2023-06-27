@@ -39,7 +39,7 @@ const AxiosApi = {
             // 로그인 실패 처리
             throw new Error('로그인에 실패했습니다.');
           }
-        },
+        },    
 
         // 관리자 등록
         adminReg : async(name, gender, age, adminId, adminPw) => {
