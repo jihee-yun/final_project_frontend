@@ -27,8 +27,8 @@ const ModalStyle = styled.div`
   section {
     width: 90%;
     max-width: 450px;
-    height: 600px;
     margin: 0 auto;
+    height: 120px;
     border-radius: 10px;
     background-color: #fff;
     /* 팝업이 열릴때 스르륵 열리는 효과 */
@@ -45,13 +45,12 @@ const ModalStyle = styled.div`
     /* background-color: #FFCFDA; */
     font-size: 1rem;
     font-weight: bold;
-    margin-bottom: 30px;
   }
 
   section > header button {
     position: absolute;
-    top: -10px;
-    right: -10px;
+    top: -102px;
+    right: -25px;
     width: 30px;
     font-size: 21px;
     font-weight: 700;
@@ -65,20 +64,15 @@ const ModalStyle = styled.div`
     border-top: 1px solid #dee2e6; */
   }
   section > footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     padding: 12px 16px;
     text-align: right;
-    margin-top: 300px;
   }
   section > footer button {
-    height: 80px;
     padding: 6px 12px;
     color: #585858;
     background-color: #FFCFDA;
     border-radius: 5px;
-    font-size: 2rem;
+    font-size: 13px;
     font-weight: bold;
   }
 
@@ -96,18 +90,18 @@ const ModalStyle = styled.div`
       opacity: 1;
       margin-top: 0;
     }
-  }
-  @keyframes modal-bg-show {
-    from {
+}
+@keyframes modal-bg-show {
+  from {
       opacity: 0;
-    }
-    to {
+  }
+  to {
       opacity: 1;
-    }
+  }
   }
 `;
 
-const QuizModal = (props) => {
+const ChallnegeModal = (props) => {
   const {open, confirm, close, type, header, children} = props;
 
   // &times; 는 X표 문자를 의미
@@ -125,8 +119,10 @@ const QuizModal = (props) => {
             <hr />
             <main>{children}</main>
             <footer>
-              {type && <button onClick={confirm}>O</button>}
-              {type && <button onClick={close}>X</button>}
+              {/* {type && <button onClick={confirm}>확인</button>}
+              {type && <button onClick={close}>취소</button>} */}
+              {type && <button onClick={confirm}>확인</button>}
+             <button onClick={close}>취소</button>
             </footer>
           </section>
         }
@@ -135,4 +131,4 @@ const QuizModal = (props) => {
   );
 };
 
-export default QuizModal;
+export default ChallnegeModal;

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import challengePin from "./images/challengePin.png"
 import { Link } from "react-router-dom";
+import ChallnegeModal from "./ChallengeModal";
 
 const Container = styled.div`
   width: 80%;
@@ -14,7 +15,6 @@ const Box = styled.div`
 
   h2 {
     font-weight: bolder;
-    
   }
 
 `;
@@ -138,6 +138,16 @@ const CafeIntro = styled.div`
 `;
 
 const ChallengeMain = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
   return(
     <>
     <Container>
@@ -174,7 +184,8 @@ const ChallengeMain = () => {
           </Confirm>
           <Btn>
             <div>
-              <button>오늘부터 시작하기</button>
+              <button onClick={openModal}>오늘부터 시작하기</button>
+              <ChallnegeModal type={true} open={modalOpen} close={closeModal}>챌린지 신청이 완료되었습니다.</ChallnegeModal>
             </div>
           </Btn>
         </div>

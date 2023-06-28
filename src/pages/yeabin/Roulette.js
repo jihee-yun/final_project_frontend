@@ -4,6 +4,7 @@ import start from "./images/start.png"
 import pin from "./images/pin.png"
 import roulettePan from "./images/roulettePan.png";
 
+
 const Container = styled.h3`
   position: relative;
   margin-top: 100px;
@@ -71,19 +72,51 @@ const Pan = styled.div`
   position: absolute;
 `;
 
+const WinBox = styled.div`
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+
+  margin-top: 40px;
+  font-size: 1.4rem;
+  border: 4px solid #FFCFDA;
+  border-radius: 40px;
+  width: 400px;
+  display: ${({ show }) => (show ? "block" : "none")};
+
+  .win-p {
+    text-align: center;
+  }
+  
+`;
+
 
 const Roulette = () => {
   const [isSpinning, setIsSpinning] = useState(false); 
+  const [winning, setWinning] = useState(null);
 
   const handleStartClick = () => {
     setIsSpinning(true); // 회전 시작
   
-    const stopTime = Math.floor(Math.random() * 4000) + 3000; // 3~6초 사이 랜덤으로
+    const stopTime = Math.floor(Math.random() * 4) + 3; // 3 ~ 6초 사이 정수값 랜덤으로 멈춤
   
     setTimeout(() => {
       setIsSpinning(false);
-    }, stopTime); // 랜덤 멈추기
+      showWinning(stopTime); // 당첨 금액 보여줌
+    }, stopTime * 1000); // 랜덤 멈추기
   };
+
+  const showWinning = (stopTime) => {
+    let amount = null;
+    if (stopTime === 3 || stopTime === 5) {
+      amount = 50;
+    } else if (stopTime === 4 || stopTime === 6) {
+      amount = 500;
+    }
+
+    setWinning(amount);
+  };
+   
   
 
   return(
@@ -102,11 +135,13 @@ const Roulette = () => {
           </Pan>
         </div>
       </OuterBox>
-
-      {/* {selectItem && <p>당첨 : {selectItem}</p>} */}
-      {/* <ul>
-        {itmes.map()}
-      </ul> */}
+      <WinBox show={winning !== null}>
+        <div>
+          {winning !== null && (
+            <p className="win-p">당첨 금액 : {winning}원</p>
+          )}
+        </div>
+      </WinBox>
     </Container>
     </>
   );

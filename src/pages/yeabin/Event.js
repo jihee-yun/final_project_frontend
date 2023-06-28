@@ -140,12 +140,15 @@ const Title = styled.div`
 `;
 
 const Thumb = styled.div`
+
+  border: 1px solid black;
   width: 100%;
   height: 100%;
   object-fit: fit;
   background-image: url(${props => props.imageurl});
   background-size: cover;
   background-position: center;
+ 
 `;
 
 const Event = () => {
@@ -208,8 +211,8 @@ const Event = () => {
                   <h3 className="quizTitle">깜짝 퀴즈</h3>
                   <p>퀴즈 풀고 포인트 받기</p>
                   <div className="quizButton">
-                  <button onClick={openModal}>퀴즈 풀기</button>
-                  <QuizModal open={modalOpen} close={closeModal}>퀴즈</QuizModal>
+                    <button onClick={openModal}>퀴즈 풀기</button>
+                    <QuizModal type={true} open={modalOpen} close={closeModal}>커피 퀴즈 어쩌구 저쩌구</QuizModal>
                   </div>
                 </div>
               </QuizBox>
