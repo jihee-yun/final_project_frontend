@@ -35,6 +35,8 @@ import MyInformation from './pages/jaehyung/components/MyInformation';
 import MyReport from './pages/jaehyung/components/MyReport';
 import Report from './pages/taehoon/Report';
 import ChallengeMain from './pages/yeabin/ChallengeMain';
+import ManageEvent from './pages/taehoon/ManageEvent';
+import ManageReview from './pages/taehoon/ManageReview';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 function App() {
@@ -77,6 +79,8 @@ function App() {
         <Route path='/mypage/report' element={<MyReport/>}/>
         <Route path='/report' element={<Report/>}/>
         <Route path='/challengeMain' element={<ChallengeMain/>}/>
+        <Route path='/manageEvent' element={<ManageEvent/>}/>
+        <Route path='/manageReview' element={<ManageReview/>}/>
       </Routes>
     </BrowserRouter>
     </UserStore>
