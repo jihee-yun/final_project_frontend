@@ -183,6 +183,37 @@ const PageNumber = styled.p`
     font-size: 20px;
     font-weight: bold;
   `}
+  ${({ disabled }) =>
+    disabled &&
+    `
+  pointer-events: none;
+  color: gray;
+  `}
+`;
+
+const SuperLeftButton = styled.button`
+  width: 30px;
+  height: 30px;
+  letter-spacing: -2px;
+  font-size: large;
+  color: #7d5a5a;
+  border: 0;
+  background-color: #f1d1d1;
+  border-radius: 50%;
+  margin-right: 1%;
+  cursor: pointer;
+`;
+const SuperRightButton = styled.button`
+  width: 30px;
+  height: 30px;
+  letter-spacing: -2px;
+  font-size: large;
+  color: #7d5a5a;
+  border: 0;
+  background-color: #f1d1d1;
+  border-radius: 50%;
+  margin-left: 1%;
+  cursor: pointer;
 `;
 
 const MyReview = () => {
@@ -212,6 +243,7 @@ const MyReview = () => {
     }
   };
 
+  // 날짜 선택 누르면 달력 표시, 제거
   const handleButtonClick = () => {
     setShowDatePicker(!showDatePicker);
     setShowDate(!showDate);
@@ -276,6 +308,40 @@ const MyReview = () => {
     return sortedReviewInfo.slice(startIndex, endIndex);
   };
 
+  // 페이지 10개씩 나누어 표시하기
+  const getPageNumbers = () => {
+    const totalPageCount = Math.ceil(reviewInfo.length / itemsPerPage);
+    const currentPage = pageNumber;
+
+    const pageNumbers = [];
+
+    if (currentPage <= 10) { // 현재 페이지가 10 이하인 경우
+      for (let i = 1; i <= Math.min(10, totalPageCount); i++) {
+        pageNumbers.push(i);
+      }
+      if (totalPageCount > 10) {
+        pageNumbers.push("...");
+        pageNumbers.push(totalPageCount);
+      }
+    } else { // 현재 페이지가 11 이상인 경우
+      pageNumbers.push(1);
+      pageNumbers.push("...");
+      const startPage = Math.floor((currentPage - 1) / 10) * 10 + 1;
+      const endPage = Math.min(startPage + 9, totalPageCount);
+      for (let i = startPage; i <= endPage; i++) {
+        pageNumbers.push(i);
+      }
+      if (endPage < totalPageCount) {
+        pageNumbers.push("...");
+        pageNumbers.push(totalPageCount);
+      }
+    }
+
+    return pageNumbers;
+  };
+
+  const pageNumbers = getPageNumbers();
+
   return (
     <OutBox>
       <Header />
@@ -330,30 +396,40 @@ const MyReview = () => {
               ))}
             </ContentDetail>
             <NumberSelectBox>
+              <SuperLeftButton
+                onClick={() => setPageNumber(1)}
+                disabled={isFirstPage}
+              >
+                {"<<"}
+              </SuperLeftButton>
               <LeftButton
                 onClick={() => handlePageChange(pageNumber - 1)}
                 disabled={isFirstPage}
               >
                 {"<"}
               </LeftButton>
-              {Array.from(
-                { length: Math.ceil(reviewInfo.length / itemsPerPage) },
-                (_, index) => (
-                  <PageNumber
-                    key={index}
-                    onClick={() => handlePageChange(index + 1)}
-                    active={pageNumber === index + 1}
-                  >
-                    {index + 1}
-                  </PageNumber>
-                )
-              )}
+              {pageNumbers.map((page, index) => (
+                <PageNumber
+                  key={index}
+                  onClick={() => handlePageChange(page)}
+                  active={pageNumber === page}
+                  disabled={page === "..."}
+                >
+                  {page}
+                </PageNumber>
+              ))}
               <RightButton
                 onClick={() => handlePageChange(pageNumber + 1)}
                 disabled={isLastPage}
               >
                 {">"}
               </RightButton>
+              <SuperRightButton
+                onClick={() => setPageNumber(Math.ceil(reviewInfo.length / itemsPerPage))}
+                disabled={isLastPage}
+              >
+                {">>"}
+              </SuperRightButton>
             </NumberSelectBox>
           </ContentBox>
         </Detail>
