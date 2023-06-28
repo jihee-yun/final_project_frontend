@@ -15,22 +15,16 @@ const ContainerBox = styled.div`
 const Box = styled.div`
   width: 80%;
   margin: 0 auto;
+
+  .r-title {
+    margin-top: 100px;
+  }
 `;
 
 const ChallengeBox = styled.div`
-  margin-top: 50px;
-  margin-bottom: 50px;
-  width: 200px;
-  height: 300px;
-  display: inline-block;
-  margin-right: 50px; 
-  border-radius: 20px;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-  cursor: pointer;
 `;
 
-const EventFooter = styled.div`
- 
+const EventFooter = styled.div` 
  .event-box{
   display: flex;
   flex-direction: row;
@@ -131,24 +125,46 @@ const LuckyBox = styled.div`
 `;
 
 const ChallengeTitle = styled.div`
+  position: relative;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  width: 200px;
+  height: 300px;
+  margin-right: 50px; 
+  border-radius: 20px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+
+  .shadow {
+    width: 100%;
+    height: 50%;
+    position: absolute;
+    bottom: 0;
+    border-radius: 20px;
+    background: linear-gradient(to top, rgba(0,0,0,.7) 23%, rgba(0,0,0,0) 100%);
+  }
 `;
 
 const Title = styled.div`
-  margin-left: 10px;
-  font-size: 1.1rem;
+  position: absolute;
+  bottom: 15px;
+  left: 0;
+  margin-left: 12px;
+  font-size: 1rem;
   margin-top: 240px;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: bolder;
 `;
 
 const Thumb = styled.div`
-
-  border: 1px solid black;
   width: 100%;
   height: 100%;
   object-fit: fit;
   background-image: url(${props => props.imageurl});
   background-size: cover;
   background-position: center;
- 
+  border-radius: 20px;
+  border: none;
 `;
 
 const Event = () => {
@@ -191,17 +207,15 @@ const Event = () => {
           <ChallengeBox onClick={navigateCh}>
             {challengeInfo && challengeInfo.map(item => (
               <ChallengeTitle key={item.challengeName} onClick={() => setChallengeInfo(item.challengeName)}>
-                <Title>{item.challengeName}</Title>
                 <Thumb className="img" imageurl={item.thumbnail}></Thumb>
+                <div className="shadow"></div>
+                <Title>{item.challengeName}</Title>
               </ChallengeTitle>
             ))}
           </ChallengeBox>
-          {/* <ChallengeBox onClick={navigateCh}>
-          </ChallengeBox>
-          <ChallengeBox onClick={navigateCh}>
-          </ChallengeBox>
-          <ChallengeBox onClick={navigateCh}>
-          </ChallengeBox> */}
+          <div className="r-title">
+            <h3>룰렛 돌리고 포인트 받아가기</h3>
+          </div>
           <Roulette />
           <EventFooter>
             <div className="event-box">

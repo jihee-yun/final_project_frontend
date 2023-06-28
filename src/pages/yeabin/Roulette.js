@@ -3,12 +3,14 @@ import styled, { keyframes } from "styled-components";
 import start from "./images/start.png"
 import pin from "./images/pin.png"
 import roulettePan from "./images/roulettePan.png";
+import celebration1 from "./images/celebration1.png";
+import celebration2 from "./images/celebration2.png";
 
 
 const Container = styled.h3`
   position: relative;
-  margin-top: 100px;
-  margin-bottom: 80px;
+  margin-top: 40px;
+  margin-bottom: 100px;
 `;
 
 const rotateAnimation = keyframes`
@@ -76,7 +78,6 @@ const WinBox = styled.div`
   position: relative;
   margin-left: auto;
   margin-right: auto;
-
   margin-top: 40px;
   font-size: 1.4rem;
   border: 4px solid #FFCFDA;
@@ -86,6 +87,21 @@ const WinBox = styled.div`
 
   .win-p {
     text-align: center;
+  }
+
+  .celebrate1 {
+    position: absolute;
+    top: 10px;
+    left: 70px;
+    width: 50px;
+    height: 50px;
+  }
+
+  .celebrate2 {
+    position: absolute;
+    top: 10px;
+    width: 50px;
+    height: 50px;
   }
   
 `;
@@ -138,7 +154,11 @@ const Roulette = () => {
       <WinBox show={winning !== null}>
         <div>
           {winning !== null && (
-            <p className="win-p">당첨 금액 : {winning}원</p>
+            <p className="win-p">
+              <img className="celebrate1" src={celebration1} alt="왼쪽컨페티" />
+              당첨 금액 : {winning}원 
+              <img className="celebrate2" src={celebration2} alt="오른쪽컨페티" />
+            </p>
           )}
         </div>
       </WinBox>
