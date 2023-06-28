@@ -10,6 +10,8 @@ import menu from "./images/restaurant-menu.png";
 import Slider from "./Slider";
 import AxiosApi from "./api/AxiosApi";
 import KaKaoMap from "./KaKaoMap";
+import Star from "./Star";
+import AvgStar from "./AvgStar";
 
 const Container = styled.div`
   width: 50%;
@@ -26,6 +28,44 @@ const Container = styled.div`
   .top {
     padding: 30px;
   }
+
+  .star{
+    display: flex;
+    position: relative;
+
+    p {
+      position: absolute;
+      font-weight: 600;
+      font-size: .7rem;
+      left: 200px;
+      top: -8px;
+      background-color: #FFCFDA;
+      border: 5px solid #FFCFDA;
+      border-radius: 15px;
+      cursor: pointer;
+    }
+  }
+  .navi{
+    margin-top: 20px;
+    height: 40px;
+    border-bottom: .3px solid lightgray;
+    align-items: center;
+    padding-left: 35px;
+    display: flex;
+    
+    div{
+      width: 70px;
+      height: 35px;
+      text-align: center;
+      align-items: center;
+      font-size: 1.1rem;
+      font-weight: bold;
+      &:hover{
+        border-bottom: 3px solid #FFCFDA;
+      }
+    }
+  }
+
   .middle{
     position: relative;
     
@@ -108,9 +148,18 @@ const CafeDetail = () => {
     <Link to="/cafe/main" style={{ textDecoration: "none", color: "inherit"}}><img src={logo} alt="스위트킹덤로고" /></Link>
     <div className="top">
     <h1>{cafe.cafeName}</h1>
+    <div className="star">
+      <AvgStar />
+      <Link to="/cafe/review" style={{ textDecoration: "none", color: "inherit"}}>
+      <p>전체 후기</p></Link>
+    </div>
     <h3>{cafe.addr}</h3>
     </div>
     <Slider cafeNum={cafeNum}/>
+    {/* <div className="navi">
+      <div>소개</div>
+      <div>후기</div>
+    </div> */}
     <div className="middle">
     <div className="content">
     <h2>{cafe.intro}</h2>
@@ -125,7 +174,7 @@ const CafeDetail = () => {
     <div className="detailbox"><img src={menu} alt="메뉴" />
     <div className="menulist">
     {cafe.menuList.map((menu) => {
-      const [ id, name, price] = menu.split(" - ");
+      const [id, name, price] = menu.split(" - ");
       return (
         <p key={id}>{name} - {price}</p>
       );

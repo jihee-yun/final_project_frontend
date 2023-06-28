@@ -4,6 +4,7 @@ import Main from './pages/now/Main';
 import SignUp from './pages/taehoon/SignUp';
 import Login from './pages/taehoon/Login';
 import Cafe from './pages/jihee/Cafe';
+import CafeReview from './pages/jihee/CafeReview';
 import CafeMain from './pages/jihee/CafeMain';
 import CafeDetail from './pages/jihee/CafeDetail';
 import Guild from './pages/jihee/Guild';
@@ -47,6 +48,7 @@ function App() {
         <Route path="/cafe" element={<Cafe/>}/>
         <Route path="/cafe/main" element={<CafeMain/>}/>
         <Route path="/cafe/detail" element={<CafeDetail/>}/>
+        <Route path="/cafe/review" element={<CafeReview/>}/>
         <Route path="/guild" element={<Guild/>}/>
         <Route path="/guild/detail" element={<GuildDetail/>}/>
         <Route path="/createguild" element={<NewGuild/>}/>
