@@ -4,6 +4,7 @@ import cafeimg1 from "./images/카페임시이미지.jpeg";
 import member from "./images/team.png";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserStore";
+import Header from "../now/component/Header";
 
 const Container = styled.div`
   width: 80%;
@@ -146,6 +147,7 @@ const Guild = () => {
 
   return(
     <>
+    <Header />
     <Container>
       <RegBox>
         <div className="context">
