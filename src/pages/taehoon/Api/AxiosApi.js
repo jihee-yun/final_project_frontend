@@ -8,7 +8,7 @@ const AxiosApi = {
   },
   
     // 회원가입
-    memberReg : async(id, pw, name) => {
+    userReg : async(id, pw, name) => {
         const member ={
             id : id,
             pw: pw,
@@ -18,7 +18,7 @@ const AxiosApi = {
     },
 
     // 로그인
-    memberLogin: async(id, pw) => {
+    userLogin: async(id, pw) => {
         const loginData = {
             id: id,
             pw: pw,

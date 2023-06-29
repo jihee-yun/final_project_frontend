@@ -254,7 +254,7 @@ const SignUp = () => {
 
   const closeModal = () => {
     setModalOpen(false);
-    navigate('/main');
+    navigate('/');
   }
 
   // 아이디(이메일) 정규식 확인
@@ -313,12 +313,12 @@ const SignUp = () => {
   }
 
   const LogoClick = () => {
-        navigate('/main');
+        navigate('/');
   }
   
 
   const handleSubmit = async() => {
-      const signUp = await AxiosApi.memberReg(userID, passWord);
+      const signUp = await AxiosApi.userReg(userID, passWord);
       console.log(signUp);
       setModalText("인증 이메일이 발송되었습니다.");
       setModalOpen(true);

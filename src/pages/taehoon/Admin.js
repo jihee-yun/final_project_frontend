@@ -140,12 +140,9 @@ const Admin = () => {
     }
 
     const LogoClick = () => {
-        navigate('/main');
+        navigate('/');
     }
-    
-    // const adminClick = () => {
-    //     navigate('/adminInfo');
-    // }
+
 
     return(
         <AdminBlock>

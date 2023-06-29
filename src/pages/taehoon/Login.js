@@ -239,7 +239,7 @@ const Login = () => {
                 setPassWord(inputPw);
                 handleLogin();
 
-                navigate("/main");
+                navigate('/');
             }else{
                 setModalopen(true);
             }
@@ -251,7 +251,7 @@ const Login = () => {
 
 
     const LogoClick = () => {
-        navigate('/main');
+        navigate('/');
     }
     
 

@@ -248,7 +248,7 @@ const AdminInfo = () => {
     };
 
     const LogoClick = () => {
-      navigate('/main');
+      navigate('/');
     }
 
     // 관리자 등록
@@ -271,7 +271,17 @@ const AdminInfo = () => {
         navigate('/adminDelete');
     }
 
-    
+    // 이벤트 더보기
+    const handleEvent = () => {
+      navigate('/manageEvent');
+    }
+
+    // 리뷰 더보기
+    const handleReview = () => {
+      navigate('/manageReview');
+    }
+
+
 
     return (
       <InfoBlock>
@@ -331,7 +341,7 @@ const AdminInfo = () => {
 
           <form action="#" method="text">
             <fieldset>
-              <p>더보기</p>
+              <p onClick={handleEvent}>더보기</p>
               <legend>이벤트 관리</legend>
                 <ul>
                   <li></li>
@@ -346,7 +356,7 @@ const AdminInfo = () => {
         <div className="form-column">
           <form action="#" method="text">
             <fieldset>
-              <p>더보기</p>
+              <p onClick={handleReview}>더보기</p>
               <legend>리뷰관리</legend>
               <ul>
                 <li></li>

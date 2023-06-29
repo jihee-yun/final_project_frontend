@@ -82,7 +82,7 @@ const FindID = () => {
       };
 
     const LogoClick = () => {
-        navigate('/main');
+        navigate('/');
     }
 
     return(
