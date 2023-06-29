@@ -8,7 +8,6 @@ import "swiper/css";
 const Container = styled.div`
 width: 90%;
 height: 500px;
-background-color: red;
 margin-top: 20px;
 border-radius: 10px;
 display: flex;
@@ -24,24 +23,23 @@ const RecommendContainer = styled.div`
 
 
 .left {
-    background-color: blue;
+    background-color: #FFD0E4;;
     width: 20%;
-    height: 400px;
+    height: auto;
 }
 
 .content {
-    background-color: blue;
+    background-color: #FFD0E4;
     width: 70%;
-    height: 400px;
+    height: auto;
 }
 `;
 
 const CustomSwiper = styled(Swiper)`
 	width: 100%;
-	height: 200px;
-	border: 1px solid #000;
-	background-color: #333333;
-	color: #ffffff;
+	height: 400px;
+    background-color: #FFD0E4;
+    display: flex;
 `;
 
 const Recommend = () => {
@@ -51,7 +49,7 @@ const Recommend = () => {
     return(
         <>
         <Container>
-            <h3 className="title">추천 리스트</h3>
+            <h2 className="title">추천 리스트</h2>
             <RecommendContainer>
             <CustomSwiper
             modules={[Autoplay]}
@@ -59,12 +57,12 @@ const Recommend = () => {
 				delay: 5000,
 			}}>
             <SwiperSlide>
-            <div className="left">글자</div>
-            <div className="content">이미지</div>
+            <div className="left">임시 슬라이드1</div>
+            <div className="content"></div>
             </SwiperSlide> 
             <SwiperSlide>
-            <div className="left">글자2</div>
-            <div className="content">이미지2</div>
+            <div className="left">임시 슬라이드2</div>
+            <div className="content"></div>
             </SwiperSlide>
             </CustomSwiper>
             </RecommendContainer>

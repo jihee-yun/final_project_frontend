@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import Logo from "../images/logo.png";
 import { Link } from "react-router-dom";
-import PersonIcon from '@mui/icons-material/Person';
 import SearchIcon from '@mui/icons-material/Search';
 
 const HeaderContainer = styled.header`
@@ -65,7 +64,6 @@ const Rightbox = styled.div`
         gap: 10px;
         text-align: center;
         padding-right: 20px;
-        width: 100%;
         height: 60px;
         background-color: #FFD0E4;
     }
@@ -90,6 +88,7 @@ const Navlink = styled(Link) `
     line-height: 40px;
     font-size: 1rem;
     font-weight: bold;
+    color: white;
 
     &:hover {
       color: #000;
