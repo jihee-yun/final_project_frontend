@@ -5,7 +5,6 @@ import quiz from "./images/quiz.png";
 import shopping from "./images/shopping.png";
 import { useNavigate } from "react-router-dom";
 import AxiosApi from "./Api/AxiosApi";
-import QuizModal from "./QuizModal";
 
 const ContainerBox = styled.div`
   /* max-width: 1440px;
@@ -22,6 +21,8 @@ const Box = styled.div`
 `;
 
 const ChallengeBox = styled.div`
+  width: 200px;
+  height: 300px;
 `;
 
 const EventFooter = styled.div` 
@@ -171,15 +172,15 @@ const Event = () => {
   const navigate = useNavigate();
   const [challengeInfo, setChallengeInfo] = useState("");
 
-  const [modalOpen, setModalOpen] = useState(false);
+  // const [modalOpen, setModalOpen] = useState(false);
 
-  const openModal = () => {
-    setModalOpen(true);
-  };
+  // const openModal = () => {
+  //   setModalOpen(true);
+  // };
 
-  const closeModal = () => {
-    setModalOpen(false);
-  };
+  // const closeModal = () => {
+  //   setModalOpen(false);
+  // };
 
   useEffect(() => {
     const challengeInfo = async() => {
@@ -225,8 +226,7 @@ const Event = () => {
                   <h3 className="quizTitle">깜짝 퀴즈</h3>
                   <p>퀴즈 풀고 포인트 받기</p>
                   <div className="quizButton">
-                    <button onClick={openModal}>퀴즈 풀기</button>
-                    <QuizModal type={true} open={modalOpen} close={closeModal}>커피 퀴즈 어쩌구 저쩌구</QuizModal>
+                    <button>퀴즈 풀기</button>
                   </div>
                 </div>
               </QuizBox>

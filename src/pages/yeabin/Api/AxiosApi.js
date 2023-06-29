@@ -6,5 +6,9 @@ const AxiosApi = {
   challengeGet: async(chList) => {
     return await axios.get(KH_DOMAIN + `/event/chList?chList=${chList}`);
   },
+
+  getCoupon: async(couponget) => {
+    return await axios.get(KH_DOMAIN + `/couponstore/couponget?couponget=${couponget}`);
+  },
 };
 export default AxiosApi;

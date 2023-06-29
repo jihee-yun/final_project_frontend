@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const ModalStyle = styled.div`
@@ -109,6 +109,21 @@ const ModalStyle = styled.div`
 
 const QuizModal = (props) => {
   const {open, confirm, close, type, header, children} = props;
+  // const [answers, setAnswers] = useState([]);
+  // const [questionData, setQuestionData] = useState({
+  //   'question' : '',
+  //   'answer' : ''
+  // })
+
+  // let array = [];
+  // for (let i = 0; i < 4; i++) {
+  //   let random = Math.floor(Math.random() * arrayLength);
+  //   if(array.includes(random)) {
+  //     i--;
+  //   } else {
+  //     array.push(random)
+  //   }
+  // }
 
   // &times; 는 X표 문자를 의미
   return (

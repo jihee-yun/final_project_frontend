@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import cafeThum from "./images/cafeThum.png";
+import AxiosApi from "./Api/AxiosApi";
 
 // 포인트로 카페 쿠폰 결제하는 상점
 
@@ -30,12 +31,12 @@ const MyPoint = styled.div`
 const CouponBox = styled.div`
   margin-bottom: 80px;
 
-  .coupon-box {
+  /* .coupon-box {
     display: flex;
     flex-direction: row;
-  }
+  } */
 
-  .coupon {
+  /* .coupon {
     border: 4px solid #FFCFDA;
     width: 380px;
     height: 130px;
@@ -44,7 +45,28 @@ const CouponBox = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-  }
+  } */
+`;
+
+const CouponList = styled.div`
+  border: 4px solid #FFCFDA;
+  width: 380px;
+  height: 130px;
+  border-radius: 40px;
+  margin: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Name = styled.div`
+  margin-right: 40px;
+  font-size: 1.1rem;
+  font-weight: bolder;
+`;
+
+const Price = styled.div`
+  font-weight: bolder;
 `;
 
 const CafeBox = styled.div`
@@ -96,6 +118,18 @@ const Notice = styled.div`
 `;
 
 const CouponStore = () => {
+  const [couponInfo, setCouponInfo] = useState("");
+
+  useEffect(() => {
+    const couponInfo = async() => {
+      const rsp = await AxiosApi.getCoupon("ALL");
+      if(rsp.status === 200) setCouponInfo(rsp.data);
+    };
+    couponInfo();
+  }, []);
+
+  console.log(couponInfo);
+
   return(
     <>
     <Container>
@@ -110,12 +144,14 @@ const CouponStore = () => {
         </MyPoint>
         <h3>포인트로 카페 할인 받기</h3>
         <CouponBox>
-          <div className="coupon-box">
-            <div className="coupon">
-              <p>아메리카노 1000원 할인 쿠폰</p>
-            </div>
-            <div className="coupon"></div>
-          </div>
+          {/* <div className="coupon-box"> */}
+            {couponInfo && couponInfo.map(item => (
+              <CouponList key={item.couponName} onClick={() => setCouponInfo(item.couponName)}>
+                <Name>{item.couponName}</Name>
+                <Price>{item.price} 포인트</Price>
+              </CouponList>
+            ))}
+          {/* </div> */}
         </CouponBox>
         <h3>포인트 사용 가능 매장 확인하기</h3>
         <CafeBox>

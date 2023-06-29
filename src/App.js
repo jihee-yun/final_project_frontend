@@ -37,6 +37,7 @@ import Report from './pages/taehoon/Report';
 import ChallengeMain from './pages/yeabin/ChallengeMain';
 import ManageEvent from './pages/taehoon/ManageEvent';
 import ManageReview from './pages/taehoon/ManageReview';
+import QuizMain from './pages/yeabin/QuizMain';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 function App() {
@@ -81,6 +82,7 @@ function App() {
         <Route path='/challengeMain' element={<ChallengeMain/>}/>
         <Route path='/manageEvent' element={<ManageEvent/>}/>
         <Route path='/manageReview' element={<ManageReview/>}/>
+        <Route path='/quizMain' element={<QuizMain/>}/>
       </Routes>
     </BrowserRouter>
     </UserStore>
