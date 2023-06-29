@@ -7,7 +7,6 @@ const Container = styled.div`
 width: 90%;
 height: 500px;
 margin-top: 20px;
-
 display: flex;
 align-items: center;
 flex-direction: column;
@@ -22,11 +21,12 @@ flex-direction: column;
     justify-content: center;
 }
 .RankingItem {
-    border: solid;
+    /* border: solid; */
     width: 30%;
     height: 200px;
     border-radius: 5px;
     overflow: hidden;
+    box-shadow: 0px 1px 3px black;
     }
 `;
 
@@ -35,7 +35,6 @@ position: relative;
 background: linear-gradient(to right, #000, #000);
 width: 100%;
 overflow: hidden;
-box-shadow: 15px 15px 25px black;
 &:hover .innerContent {
     opacity: 1;
     top: 50%;
