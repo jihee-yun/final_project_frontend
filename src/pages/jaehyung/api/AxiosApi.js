@@ -1,6 +1,5 @@
 import axios from "axios";
 const DOMAIN = "http://localhost:8111";
-const DOMAIN_MYPAGE_REVIEW = "http://localhost:8111/mypage/reiew";
 
 const AxiosApi = {
 
@@ -11,7 +10,15 @@ const AxiosApi = {
 
   reviewGet: async (userNum) => {
     return await axios.get(`http://localhost:8111/review/getbynum?usernum=${userNum}`);
-  }
+  },
 
+  reviewGetByDate : async (userNum, startDate, endDate) => {
+    const checkData = {
+      userNum : userNum,
+      startDate : startDate,
+      endDate : endDate
+    }
+    return await axios.post(DOMAIN + "/review/getbynumd&date", checkData);
+  }
 };
 export default AxiosApi;

@@ -109,7 +109,7 @@ const ContentDate = styled.p`
 `;
 const ContentDetail = styled.div`
   min-height: 600px;
-  border: 1px solid blue;
+//  border: 1px solid blue;
 `;
 const ContentLists = styled.p`
   display: flex;
@@ -117,7 +117,6 @@ const ContentLists = styled.p`
   margin-top: -1%;
   margin-left: 1%;
   margin-right: 1%;
-  cursor: pointer;
 `;
 const ListNum = styled.p`
   width: 10%;
@@ -144,6 +143,7 @@ const ListDate = styled.p`
   text-align: center;
 `;
 
+// 하단 페이지 숫자 표시 박스
 const NumberSelectBox = styled.div`
   height: 30px;
   margin-top: 3%;
@@ -151,6 +151,7 @@ const NumberSelectBox = styled.div`
   align-items: center;
   justify-content: center;
 `;
+// 페이지 1개씩 좌측 이동
 const LeftButton = styled.button`
   width: 30px;
   height: 30px;
@@ -162,6 +163,7 @@ const LeftButton = styled.button`
   margin-right: 2%;
   cursor: pointer;
 `;
+// 페이지 한개씩 우측 이동
 const RightButton = styled.button`
   width: 30px;
   height: 30px;
@@ -173,6 +175,7 @@ const RightButton = styled.button`
   margin-left: 2%;
   cursor: pointer;
 `;
+// 하단 페이지 번호
 const PageNumber = styled.p`
   margin-left: 1%;
   cursor: pointer;
