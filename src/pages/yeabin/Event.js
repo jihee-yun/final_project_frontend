@@ -182,6 +182,7 @@ const Event = () => {
   //   setModalOpen(false);
   // };
 
+
   useEffect(() => {
     const challengeInfo = async() => {
       const rsp = await AxiosApi.challengeGet("ALL");
@@ -200,6 +201,15 @@ const Event = () => {
     navigate('/couponStore');
   };
 
+  const windowOpen = () => {
+    const width = Math.min(window.innerWidth, 500);
+    const height = Math.min(window.innerHeight, 600);
+    const newWindow = window.open("", "_blank", `width=${width},height=${height}`);
+    newWindow.location.href = "/quizMain";
+  };
+
+  
+
   return(
     <>
       <ContainerBox>
@@ -207,7 +217,7 @@ const Event = () => {
           <h3>이 달의 챌린지</h3>
           <ChallengeBox onClick={navigateCh}>
             {challengeInfo && challengeInfo.map(item => (
-              <ChallengeTitle key={item.challengeName} onClick={() => setChallengeInfo(item.challengeName)}>
+              <ChallengeTitle key={item.challengeName}>
                 <Thumb className="img" imageurl={item.thumbnail}></Thumb>
                 <div className="shadow"></div>
                 <Title>{item.challengeName}</Title>
@@ -226,7 +236,7 @@ const Event = () => {
                   <h3 className="quizTitle">깜짝 퀴즈</h3>
                   <p>퀴즈 풀고 포인트 받기</p>
                   <div className="quizButton">
-                    <button>퀴즈 풀기</button>
+                    <button onClick={windowOpen}>퀴즈 풀기</button>
                   </div>
                 </div>
               </QuizBox>

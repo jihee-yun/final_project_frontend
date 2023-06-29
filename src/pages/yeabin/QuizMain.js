@@ -2,11 +2,37 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
+  width: 500px;
+  height: 600px;
+  text-align: center;
 `;
 
 const QuizBox = styled.div`
+  h3 {
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+
+  ul {
+    padding-left: 0;
+  }
+
   li {
     list-style: none;
+  }
+
+  button {
+    width: 300px;
+    height: 50px;
+    margin: 20px;
+    font-size: 1.1rem;
+    border: none;
+    background-color: #FFCFDA;
+  }
+
+  p{
+    margin-top: 40px;
+    font-size: 1.1rem;
   }
 `;
 
@@ -35,17 +61,12 @@ const QuizMain = () => {
           <ul>
             {options.map((option, index) => (
               <li key={index}>
-                <button
-                  onClick={() => handleClick(option)}
-                  disabled={isAnswered}
-                >
-                  {option}
-                </button>
+                <button onClick={() => handleClick(option)} disabled={isAnswered}>{option}</button>
               </li> 
             ))}
           </ul>
           {isAnswered && (
-            <p>{isCorrect ? '정답입니다! 50포인트가 적립됩니다.' : '오답입니다.'}</p>
+            <p>{isCorrect ? '정답! 10포인트가 적립됩니다.' : '땡! 내일 다시 도전해주세요.'}</p>
           )}
         </div>
       </QuizBox>

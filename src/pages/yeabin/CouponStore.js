@@ -144,14 +144,12 @@ const CouponStore = () => {
         </MyPoint>
         <h3>포인트로 카페 할인 받기</h3>
         <CouponBox>
-          {/* <div className="coupon-box"> */}
             {couponInfo && couponInfo.map(item => (
-              <CouponList key={item.couponName} onClick={() => setCouponInfo(item.couponName)}>
+              <CouponList key={item.couponName} onClick={() => console.log('결제로 이동 예정')}>
                 <Name>{item.couponName}</Name>
                 <Price>{item.price} 포인트</Price>
               </CouponList>
             ))}
-          {/* </div> */}
         </CouponBox>
         <h3>포인트 사용 가능 매장 확인하기</h3>
         <CafeBox>
