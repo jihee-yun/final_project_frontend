@@ -119,7 +119,7 @@ const Header = () => {
         </HeaderContainer>
         <NavContainer>
                 <ul className="Nav">
-                    <Navlink to="/cafe/main">카페 찾기</Navlink>
+                    <Navlink to="/cafe">카페 찾기</Navlink>
                     <Navlink to="/guild">길드</Navlink>
                     <Navlink to="/event">퀘스트</Navlink>
                     <Navlink to="/couponStore">상점</Navlink>

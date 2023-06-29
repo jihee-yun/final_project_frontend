@@ -1,7 +1,7 @@
 import React from "react";
 import { styled } from "styled-components";
 import cafe from "../images/cafe.jpg";
-// import MainAxiosApi from "../api/AxiosApi";
+import MainAxiosApi from "../api/AxiosApi";
 
 const Container = styled.div`
 width: 90%;

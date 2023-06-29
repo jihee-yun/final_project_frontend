@@ -44,7 +44,7 @@ function App() {
     <UserStore>
     <BrowserRouter>
       <Routes>
-        <Route path="/main" element={<Main/>}/>
+        <Route path="/" element={<Main/>}/>
         <Route path="/signup" element={<SignUp/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/cafe" element={<Cafe/>}/>
