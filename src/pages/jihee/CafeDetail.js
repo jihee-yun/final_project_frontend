@@ -13,6 +13,7 @@ import KaKaoMap from "./KaKaoMap";
 import Star from "./Star";
 import AvgStar from "./AvgStar";
 
+
 const Container = styled.div`
   width: 50%;
   margin: 0 auto;
@@ -124,6 +125,7 @@ const Container = styled.div`
 `;
 
 const CafeDetail = () => {
+  const navigate = useNavigate();
   const context = useContext(UserContext);
   const { cafeNum } = context; 
 
@@ -141,6 +143,10 @@ const CafeDetail = () => {
   console.log(cafeNum);
   console.log(detailInfo);
 
+  const sendDetailInfo = () => {
+    navigate("/cafe/review", {state: detailInfo});
+  }
+
   return(
     <>
     {detailInfo && detailInfo.map(cafe =>(
@@ -150,8 +156,7 @@ const CafeDetail = () => {
     <h1>{cafe.cafeName}</h1>
     <div className="star">
       <AvgStar />
-      <Link to="/cafe/review" style={{ textDecoration: "none", color: "inherit"}}>
-      <p>전체 후기</p></Link>
+       <p onClick={sendDetailInfo}>전체 후기</p>
     </div>
     <h3>{cafe.addr}</h3>
     </div>

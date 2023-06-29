@@ -40,7 +40,7 @@ const StarRating = styled.div`
 }
 `;
 
-const AvgStar = () => {
+const AvgStar = ({hideText}) => {
 
   const starAvg = 4.5; // 백에서 리뷰 평균 점수 계산하는 로직 구현해서 값 받아오기
 
@@ -67,9 +67,8 @@ const AvgStar = () => {
         <span><StarIcon /></span>
       </div>
     </div>
-    <div className="text">({starAvg} / 5)</div>
+    {!hideText && <div className="text">({starAvg} / 5)</div>}
     </StarRating>
-    
     </>
   );
 };
