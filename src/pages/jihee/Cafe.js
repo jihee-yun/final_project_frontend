@@ -3,6 +3,7 @@ import { UserContext } from "../../context/UserStore";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import seoul from "./images/서울.jpeg";
+import Header from "../now/component/Header";
 
 
 const Container = styled.div`
@@ -52,6 +53,7 @@ const Cafe = () => {
   }
   return(
     <>
+    <Header />
     <Container>
       <Box>
       <CategoryBox imageurl={seoul} onClick={() => selectCategory("전체")}><p>전체</p></CategoryBox>

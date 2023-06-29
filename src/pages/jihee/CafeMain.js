@@ -156,6 +156,7 @@ const CafeMain = () => {
 
   return(
     <>
+    <Header />
     <Container> 
     <Box>
     <button className="filter" onClick={filterModal}><img src={filterimg} alt="필터이미지" /><p>필터</p></button>
