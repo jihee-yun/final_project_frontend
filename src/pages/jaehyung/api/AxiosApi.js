@@ -18,7 +18,7 @@ const AxiosApi = {
       startDate : startDate,
       endDate : endDate
     }
-    return await axios.post(DOMAIN + "/review/getbynumd&date", checkData);
+    return await axios.post(`${DOMAIN}/review/getbynum&date`, checkData);
   }
 };
 export default AxiosApi;

@@ -255,11 +255,11 @@ const MyReview = () => {
   // 리뷰 데이터 받기
   useEffect(() => {
     const getReviewInfo = async () => {
-      const rsp = await AxiosApi.reviewGet(10000001);
+      const rsp = await AxiosApi.reviewGetByDate(10000001, startDate, endDate);
       if (rsp.status === 200) setReviewInfo(rsp.data);
     };
     getReviewInfo();
-  }, []);
+  }, [startDate]);
 
   // 화면 전환 효과
   useEffect(() => {
@@ -289,11 +289,9 @@ const MyReview = () => {
     showStyleTags();
   }, []);
 
-  // 최초 날짜 오늘로 설정
+  // 최초 날짜 한 달로 설정
   useEffect(() => {
-    const today = new Date(); // 현재 날짜
-    setStartDate(today);
-    setEndDate(today);
+    handleDateMonth();
   }, []);
 
   // 페이지 변경 시 아이템 표시
@@ -342,8 +340,38 @@ const MyReview = () => {
 
     return pageNumbers;
   };
-
   const pageNumbers = getPageNumbers();
+
+  // 조회 기간을 전체로 설정
+  const handleDateAll = () => {
+    setStartDate(new Date(2019, 11, 31));
+    setEndDate(new Date());
+    setPageNumber(1);
+  };
+  // 조회 기간을 일주일로 설정
+  const handleDateWeek = () => {
+    const today = new Date();
+    const oneWeekAgo = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 6);
+    setStartDate(oneWeekAgo);
+    setEndDate(today);
+    setPageNumber(1);
+  };
+  // 조회 기간을 한 달로 설정
+  const handleDateMonth = () => {
+    const today = new Date();
+    const oneMonthAgo = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate() -1);
+    setStartDate(oneMonthAgo);
+    setEndDate(today);
+    setPageNumber(1);
+  };
+  // 조회 기간을 일 년으로 설정
+  const handleDateYear = () => {
+    const today = new Date();
+    const oneYearAgo = new Date(today.getFullYear() - 1, today.getMonth(), today.getDate());
+    setStartDate(oneYearAgo);
+    setEndDate(today);
+    setPageNumber(1);
+  };
 
   return (
     <OutBox>
@@ -352,10 +380,10 @@ const MyReview = () => {
         <SideMenu />
         <Detail>
           <SelectBox>
-            <SelectButton>전체</SelectButton>
-            <SelectButton>일주일</SelectButton>
-            <SelectButton>한 달</SelectButton>
-            <SelectButton>일 년</SelectButton>
+            <SelectButton onClick={handleDateAll}>전체</SelectButton>
+            <SelectButton onClick={handleDateWeek}>일주일</SelectButton>
+            <SelectButton onClick={handleDateMonth}>한 달</SelectButton>
+            <SelectButton onClick={handleDateYear}>일 년</SelectButton>
             <DatePick>
               {showDate && (
                 <DateSelected onClick={handleButtonClick}>
