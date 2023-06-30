@@ -7,6 +7,7 @@ const AxiosApi = {
     return await axios.get(KH_DOMAIN + `/event/chList?chList=${chList}`);
   },
 
+  // 쿠폰 조회
   getCoupon: async(couponget) => {
     return await axios.get(KH_DOMAIN + `/couponstore/couponget?couponget=${couponget}`);
   },

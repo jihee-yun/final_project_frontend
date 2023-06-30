@@ -203,7 +203,7 @@ const Event = () => {
 
   const windowOpen = () => {
     const width = Math.min(window.innerWidth, 500);
-    const height = Math.min(window.innerHeight, 600);
+    const height = Math.min(window.innerHeight, 700);
     const newWindow = window.open("", "_blank", `width=${width},height=${height}`);
     newWindow.location.href = "/quizMain";
   };

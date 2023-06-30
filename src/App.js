@@ -38,6 +38,7 @@ import ChallengeMain from './pages/yeabin/ChallengeMain';
 import ManageEvent from './pages/taehoon/ManageEvent';
 import ManageReview from './pages/taehoon/ManageReview';
 import QuizMain from './pages/yeabin/QuizMain';
+import PayComplete from './pages/yeabin/PayComplete';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 function App() {
@@ -83,6 +84,7 @@ function App() {
         <Route path='/manageEvent' element={<ManageEvent/>}/>
         <Route path='/manageReview' element={<ManageReview/>}/>
         <Route path='/quizMain' element={<QuizMain/>}/>
+        <Route path='/payComplete' element={<PayComplete/>}/>
       </Routes>
     </BrowserRouter>
     </UserStore>

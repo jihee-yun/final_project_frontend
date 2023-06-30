@@ -2,14 +2,16 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
-  width: 500px;
-  height: 600px;
   text-align: center;
 `;
 
 const QuizBox = styled.div`
-  h3 {
+  h2 {
     margin-top: 40px;
+  }
+
+  h3 {
+    margin-top: 30px;
     margin-bottom: 40px;
   }
 
@@ -57,6 +59,7 @@ const QuizMain = () => {
     <Container>
       <QuizBox>
         <div>
+          <h2>오늘의 퀴즈</h2>
           <h3>{question}</h3>
           <ul>
             {options.map((option, index) => (
