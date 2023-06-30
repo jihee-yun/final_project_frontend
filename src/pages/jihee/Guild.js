@@ -1,10 +1,9 @@
-import React, { useContext } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import cafeimg1 from "./images/카페임시이미지.jpeg";
-import member from "./images/team.png";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../../context/UserStore";
 import Header from "../now/component/Header";
+import AxiosApi from "./api/AxiosApi";
+import GuildSection from "./GuildSection";
 
 const Container = styled.div`
   width: 80%;
@@ -52,94 +51,29 @@ const RegBox = styled.div`
 `;
 
 const GuildBox = styled.div`
+  width: 100%;
   display: flex;
-  justify-content: center;
-  gap: 100px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+
   @media (max-width: 768px) {
     flex-direction: column;
   }
 `;
 
-const GuildSection = styled.div`
-  @media (max-width: 768px) {
-    width: 100%;
-  }
-  margin-top: 50px;
-  width: 45%;
-  height: 210px;
-  transition: all 0.3s;
-  border-radius: 10px;
-  box-shadow: 0 1px 2px #A4A4A4;
-  cursor: pointer;
-
-  &:hover{
-    transform: scale(1.02);
-  }
-
-  .section1{
-    display: flex;
-    padding: 30px;
-  }
-
-  .thum{
-    width: 40%;
-    height: 150px;
-    border-radius: 5px;
-    object-fit: cover;
-    background-image: url(${props => props.imageurl});
-    background-size: cover;
-    background-position: center;
-  }
-
-  .section2{
-    margin-left: 30px;
-    button{
-      border: none;
-      height: 25px;
-      border-radius: 15px;
-    }
-
-    .guild-member{
-      width: 50px;
-      height: 50px;
-      border: 3px solid white;
-      border-radius: 50px;
-      margin-right: -15px;
-    }
-  }
-
-  .section3{
-    display: flex;
-    align-items: center;
-    margin-top: 35px;
-
-    .count-section{
-      display: flex;
-      align-items: center;
-      img{
-        width: 25px;
-        height: 25px;
-        margin: 10px 0 0 25px;
-      }
-      p{
-        margin-left: 10px;
-        font-size: 1.0rem;
-        font-weight: bold;
-        color: darkgray;
-      }
-    }
-  }
-`;
-
 const Guild = () => {
   const navigate = useNavigate();
-  const context = useContext(UserContext);
-  const { setGuildNum } = context;
 
-  const selectGuild = (guildNum) => {
-    setGuildNum(guildNum);
-    navigate('/guild/detail');
-  }
+  const [guildInfo, setGuildInfo ] = useState("");
+
+  useEffect(() => {
+    const guildInfo = async() => {
+      const response = await AxiosApi.guildInfoGet("All");
+      if(response.status === 200) setGuildInfo(response.data);
+    }
+    guildInfo();
+  },[]);
 
   const moveToNewGuild = () => {
     navigate('/createguild');
@@ -160,27 +94,7 @@ const Guild = () => {
       </RegBox>
       {/* <div className="middle-bar"></div> */}
       <GuildBox>
-      <GuildSection onClick={() => selectGuild("길드번호")}>
-      <div className="section1">
-        <img className="thum" src={cafeimg1} alt="길드이미지" />
-        <div className="section2">
-          <button>카페 이름</button> 
-          <p>길드 제목</p>
-          <div className="section3">
-          <div className="guild-member-section">
-          <img className="guild-member" src={cafeimg1} alt="프로필사진" />
-          <img className="guild-member" src={cafeimg1} alt="프로필사진" />
-          <img className="guild-member" src={cafeimg1} alt="프로필사진" />
-          </div>
-          <div className="count-section">
-            <img src={member} alt="멤버" />
-            <p>0/20</p>
-          </div>
-          </div>
-        </div>
-      </div>
-      </GuildSection>
-      <GuildSection></GuildSection>
+      <GuildSection guildInfo={guildInfo}/>
       </GuildBox>
     </Container>
     </>

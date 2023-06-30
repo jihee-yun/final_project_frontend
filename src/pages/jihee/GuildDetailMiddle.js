@@ -178,7 +178,7 @@ const GuildDetailMiddle = () => {
         </div>
         <button className="join">가입하기</button>
         <Modal open={modalOpen} type={false} close={closeModal} header="전체 멤버">
-    
+
         </Modal>
       </Middle>
     </>

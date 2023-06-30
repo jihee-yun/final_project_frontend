@@ -26,6 +26,26 @@ const Container = styled.div`
 const Box = styled.div`
   width: 90%;
   margin: 0 auto;
+
+  .top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .write{
+      height: 30px;
+      border: none;
+      border-radius: 5px;
+      background-color: #FFCFDA;
+      font-size: .8rem;
+      font-weight: 700;
+      cursor: pointer;
+
+      &:hover{
+        color: white;
+      }
+    }
+  }
 `;
 
 const ReviewBox = styled.div`
@@ -103,7 +123,10 @@ const CafeReview = () => {
     <Box>
     <div className="back" onClick={prevPage}><ArrowBackIosIcon style={{width: "18px", height: "18px"}}/></div>
     <br /><br />
+    <div className="top">
     <AvgStar star={star}/>
+    <button className="write">후기 작성</button>
+    </div>
     <br /><br /><br />
     <ReviewBox>
       <MemberBox>

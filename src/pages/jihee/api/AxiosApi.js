@@ -13,6 +13,10 @@ const AxiosApi = {
   // 카페 이미지 리스트 조회
   imgListGet: async(cafeNum) => {
     return await axios.get(KH_DOMAIN + `/cafe/img?cafeNum=${cafeNum}`);
+  },
+  // 길드 전체 리스트 조회
+  guildInfoGet: async(guildList) => {
+    return await axios.get(KH_DOMAIN + `/guild/all?guildList=${guildList}`)
   }
 
 };
