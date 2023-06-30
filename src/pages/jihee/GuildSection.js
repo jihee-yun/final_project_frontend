@@ -10,6 +10,7 @@ const GuildSectionBox = styled.div`
     width: 100%;
   }
 
+  position: relative;
   margin-top: 50px;
   width: 45%;
   height: 210px;
@@ -24,8 +25,9 @@ const GuildSectionBox = styled.div`
 
   .section1{
     display: flex;
+    align-items: center;
     flex-wrap: nowrap;
-    padding: 30px;
+    padding: 25px;
   }
 
   .section2{
@@ -36,6 +38,15 @@ const GuildSectionBox = styled.div`
       padding-left: 3px;
       font-weight: bold;
       font-size: .9rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 100%; /* 원하는 글자 수에 맞게 조정 */
+    }
+
+    .intro{
+      font-size: .8rem;
+      font-weight: normal;
     }
 
     button{
@@ -48,24 +59,18 @@ const GuildSectionBox = styled.div`
     .guild-member-section{
       display: flex;
     }
-
-    .guild-member{
-      width: 50px;
-      height: 50px;
-      border: 3px solid white;
-      border-radius: 50px;
-      margin-right: -15px;
-    }
   }
 
   .section3{
     width: 100%;
     display: flex;
     align-items: center;
-    margin-top: 35px;
+    /* margin-top: 35px; */
 
     .count-section{
-      width: 50%;
+      position: absolute;
+      right: 35px;
+      bottom: 28px;
       display: flex;
       align-items: center;
       
@@ -86,10 +91,23 @@ const GuildSectionBox = styled.div`
 
 const Thumb = styled.div`
     width: 40%;
-    height: 150px;
+    height: 160px;
     border-radius: 5px;
     object-fit: cover;
     background-image: url(${props => props.imageurl});
+    background-size: cover;
+    background-position: center;
+`;
+
+const Profile = styled.div`
+    width: 50px;
+    height: 50px;
+    border: 3px solid white;
+    border-radius: 50px;
+    /* box-shadow: 1px 1px 1px lightgray; */
+    margin-right: -15px;
+    object-fit: cover;
+    background-image: url(${props => props.imageurl2});
     background-size: cover;
     background-position: center;
 `;
@@ -109,21 +127,22 @@ const GuildSection = ({guildInfo}) => {
   return(
     <>
     {guildInfo && guildInfo.map(guild => (
-    <GuildSectionBox key={guild.id} onClick={() => selectGuild("길드번호")}>
+    <GuildSectionBox key={guild.id} onClick={() => selectGuild(guild.id)}>
       <div className="section1">
         <Thumb className="thum" imageurl={guild.thumbnail} />
         <div className="section2">
           <button>{guild.region}</button> 
           <p>{guild.guildName}</p>
+          <p className="intro">길드 한 줄 소개 소개 소개길드 한 줄 소개 소개 소개길드 한 줄 소개 소개 소개</p>
           <div className="section3">
           <div className="guild-member-section">
-          <img className="guild-member" src={cafeimg1} alt="프로필사진" />
-          <img className="guild-member" src={cafeimg1} alt="프로필사진" />
-          <img className="guild-member" src={cafeimg1} alt="프로필사진" />
+          {guild.memberProfileList.map((profile, index) => (
+            <Profile key={index} className="guild-member" imageurl2={profile} />
+          ))}
           </div>
           <div className="count-section">
             <img src={member} alt="멤버" />
-            <p>0/{guild.limitMember}</p>
+            <p>{guild.countMember}/{guild.limitMember}</p>
           </div>
           </div>
         </div>

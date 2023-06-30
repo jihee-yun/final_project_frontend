@@ -17,7 +17,11 @@ const AxiosApi = {
   // 길드 전체 리스트 조회
   guildInfoGet: async(guildList) => {
     return await axios.get(KH_DOMAIN + `/guild/all?guildList=${guildList}`)
-  }
+  },
+  // 특정 길드 디테일 정보 조회
+  guildDeInfoGet: async(guildNum) => {
+    return await axios.get(KH_DOMAIN + `/guild/detail?guildNum=${guildNum}`)
+  },
 
 };
 

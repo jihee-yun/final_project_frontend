@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import cafeimg1 from "./images/카페임시이미지.jpeg";
 import location from "./images/location.png";
@@ -37,7 +37,7 @@ const Middle = styled.div`
       }
     }
 
-    .host{
+    .host {
       width: 50px;
       height: 50px;
       border-radius: 50px;
@@ -67,7 +67,6 @@ const Middle = styled.div`
       border-radius: 50px;
       margin: 0 auto;
       object-fit: cover;
-      background-image: url(${props => props.imageurl});
       background-size: cover;
       background-position: center;
     }
@@ -135,8 +134,9 @@ const Middle = styled.div`
   }
 `;
 
-const GuildDetailMiddle = () => {
+const GuildDetailMiddle = ({guildNum, guildInfo}) => {
   const [modalOpen, setModalOpen] = useState(false);
+
 
   const memberModal = () => {
     setModalOpen(true);
@@ -148,18 +148,19 @@ const GuildDetailMiddle = () => {
 
   return(
     <>
-    <Middle>
+    {guildInfo && guildInfo.map(guild => (
+    <Middle key={guild.id}>
         <div className="box">
-        <p className="guild-content">카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명 내용카페 상세 설명</p>
+        <p className="guild-content">{guild.detailIntro}</p>
         <div className="member-box">
           <br /><br /><br /><br /><br />
           <p>멤버 소개</p>
           <br />
           <div className="host-box">
-          <div style={{ backgroundImage: `url(${cafeimg1})`}} className="host"></div>
+          <div className="host" style={{ backgroundImage: `url(${guild.leaderProfileList})` }}></div>
           <div className="host-intro">
-          <h5>방장 이름</h5>
-          <h6>소개소개소개</h6>
+          <h5>{guild.leaderId}</h5>
+          <h6>{guild.leaderIntro}</h6>
           </div>
           </div>
           <div className="members">
@@ -172,8 +173,8 @@ const GuildDetailMiddle = () => {
         <br /><br /><br />
         <div className="guide">
           <p>주요 안내사항</p>
-          <div className="detailbox"><img src={member} alt="회원수" /><p>10</p></div>
-          <div className="detailbox"><img src={location} alt="위치" /><p>서울특별시</p></div>
+          <div className="detailbox"><img src={member} alt="회원수" /><p>{guild.limitMember}</p></div>
+          <div className="detailbox"><img src={location} alt="위치" /><p>{guild.region}</p></div>
         </div>
         </div>
         <button className="join">가입하기</button>
@@ -181,6 +182,7 @@ const GuildDetailMiddle = () => {
 
         </Modal>
       </Middle>
+      ))}
     </>
   );
 };
