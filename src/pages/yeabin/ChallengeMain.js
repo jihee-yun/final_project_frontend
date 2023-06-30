@@ -157,14 +157,14 @@ const ChallengeMain = () => {
           <ChHeader>
             <div className="ch-header">
               <img src={challengePin} alt="핀" />
-              <h2>제휴 카페 "5곳" 방문하기 챌린지</h2>
+              <h2>제휴 카페 "5곳" 방문하기 퀘스트</h2>
             </div>
           </ChHeader>        
           <ChBox>
           <div className="ch-box1">
             <p className="title">참여 방법</p>
             <p className="step">STEP 1</p>
-            <p className="content">챌린지를 신청하세요.</p>
+            <p className="content">퀘스트를 신청하세요.</p>
             <p className="step">STEP 2</p>
             <p className="content">스위트킹덤 제휴 카페를 확인하세요.</p>
             <p className="step">STEP 3</p>
@@ -175,7 +175,7 @@ const ChallengeMain = () => {
           </ChBox>
           <Confirm>
             <div className="ch-box2">
-              <p className="title">챌린지 인증 방법</p>
+              <p className="title">퀘스트 인증 방법</p>
               <div className="content">
                 <p>카페 직원에게 고유 바코드를 보여주세요.</p>
                 <p>직원이 바코드를 찍으면 완료!</p>
@@ -185,7 +185,7 @@ const ChallengeMain = () => {
           <Btn>
             <div>
               <button onClick={openModal}>오늘부터 시작하기</button>
-              <ChallnegeModal type={true} open={modalOpen} close={closeModal}>챌린지 신청이 완료되었습니다.</ChallnegeModal>
+              <ChallnegeModal type={true} open={modalOpen} close={closeModal}>퀘스트 신청이 완료되었습니다.</ChallnegeModal>
             </div>
           </Btn>
         </div>

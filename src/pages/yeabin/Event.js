@@ -172,16 +172,6 @@ const Event = () => {
   const navigate = useNavigate();
   const [challengeInfo, setChallengeInfo] = useState("");
 
-  // const [modalOpen, setModalOpen] = useState(false);
-
-  // const openModal = () => {
-  //   setModalOpen(true);
-  // };
-
-  // const closeModal = () => {
-  //   setModalOpen(false);
-  // };
-
 
   useEffect(() => {
     const challengeInfo = async() => {
@@ -191,8 +181,6 @@ const Event = () => {
     challengeInfo();
   }, []);
 
-  console.log(challengeInfo);
-
   const navigateCh = () => {
     navigate('/challengeMain');
   };
@@ -201,7 +189,7 @@ const Event = () => {
     navigate('/couponStore');
   };
 
-  const windowOpen = () => {
+  const windowOpen = () => { // 퀴즈 새 창으로 열기
     const width = Math.min(window.innerWidth, 500);
     const height = Math.min(window.innerHeight, 700);
     const newWindow = window.open("", "_blank", `width=${width},height=${height}`);
@@ -214,7 +202,7 @@ const Event = () => {
     <>
       <ContainerBox>
         <Box>
-          <h3>이 달의 챌린지</h3>
+          <h3>이 달의 퀘스트</h3>
           <ChallengeBox onClick={navigateCh}>
             {challengeInfo && challengeInfo.map(item => (
               <ChallengeTitle key={item.challengeName}>
@@ -241,7 +229,7 @@ const Event = () => {
                 </div>
               </QuizBox>
               <AdBox>
-                <div><p>광고 이미지</p></div>
+                <div><p>광고 이미지 들어갈 자리</p></div>
               </AdBox>
               <LuckyBox>
                 <div>
