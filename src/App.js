@@ -39,6 +39,7 @@ import ManageEvent from './pages/taehoon/ManageEvent';
 import ManageReview from './pages/taehoon/ManageReview';
 import QuizMain from './pages/yeabin/QuizMain';
 import PayComplete from './pages/yeabin/PayComplete';
+import ManageGuild from './pages/taehoon/ManageGuild';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 function App() {
@@ -85,6 +86,7 @@ function App() {
         <Route path='/manageReview' element={<ManageReview/>}/>
         <Route path='/quizMain' element={<QuizMain/>}/>
         <Route path='/payComplete' element={<PayComplete/>}/>
+        <Route path='/mangeGuild' element={<ManageGuild/>}/>
       </Routes>
     </BrowserRouter>
     </UserStore>

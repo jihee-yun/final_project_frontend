@@ -8,20 +8,20 @@ const AxiosApi = {
   },
   
     // 회원가입
-    userReg : async(userId, pw, name) => {
+    userReg : async(user_id, password, name) => {
         const member ={
-            userId : userId,
-            pw: pw,
+            user_id : user_id,
+            password: password,
             name : name
     };
         return await axios.post(KH_DOMAIN + "/new", member);
     },
 
     // 로그인
-    userLogin: async(id, pw) => {
+    userLogin: async(user_id, password) => {
         const loginData = {
-            userId: id,
-            pw: pw,
+            user_id: user_id,
+            password: password,
           };
         
           try {

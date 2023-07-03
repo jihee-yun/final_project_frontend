@@ -280,7 +280,11 @@ const AdminInfo = () => {
     const handleReview = () => {
       navigate('/manageReview');
     }
-
+    
+    // 소모임 더보기
+    const handleGuild = () => {
+      navigate('/manageGuild');
+    }
 
 
     return (
@@ -328,8 +332,8 @@ const AdminInfo = () => {
             <div className="form-column">
                 <form action="#" method="text">
                   <fieldset>
-                      <p>더보기</p>
-                    <legend>통계관리</legend>
+                      <p onClick={handleGuild}>더보기</p>
+                    <legend>소모임 관리</legend>
                     
                     <ul>
                         <li></li>
