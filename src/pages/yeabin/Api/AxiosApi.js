@@ -11,5 +11,15 @@ const AxiosApi = {
   getCoupon: async(couponget) => {
     return await axios.get(KH_DOMAIN + `/couponstore/couponget?couponget=${couponget}`);
   },
+
+  // 포인트 추가
+  pointGet: async(winning) => {
+    const points = {
+      totalPoint: winning
+    };
+    return await axios.post(KH_DOMAIN + "/pointadd", points);
+  },
+
+  // 내 포인트 조회
 };
 export default AxiosApi;

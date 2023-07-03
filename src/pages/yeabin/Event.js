@@ -26,9 +26,11 @@ const ChallengeBox = styled.div`
 `;
 
 const EventFooter = styled.div` 
+
  .event-box{
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
  }
 `;
 

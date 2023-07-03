@@ -5,6 +5,7 @@ import pin from "./images/pin.png"
 import roulettePan from "./images/roulettePan.png";
 import celebration1 from "./images/celebration1.png";
 import celebration2 from "./images/celebration2.png";
+import AxiosApi from "./Api/AxiosApi";
 
 
 const Container = styled.h3`
@@ -116,9 +117,12 @@ const Roulette = () => {
   
     const stopTime = Math.floor(Math.random() * 4) + 3; // 3 ~ 6초 사이 정수값 랜덤으로 멈춤
   
-    setTimeout(() => {
+    setTimeout(async() => {
       setIsSpinning(false);
       showWinning(stopTime); // 당첨 금액 보여줌
+
+      AxiosApi.pointGet(winning);
+
     }, stopTime * 1000); // 랜덤 멈추기
   };
 
