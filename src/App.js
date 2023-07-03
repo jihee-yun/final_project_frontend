@@ -86,7 +86,7 @@ function App() {
         <Route path='/manageReview' element={<ManageReview/>}/>
         <Route path='/quizMain' element={<QuizMain/>}/>
         <Route path='/payComplete' element={<PayComplete/>}/>
-        <Route path='/mangeGuild' element={<ManageGuild/>}/>
+        <Route path='/manageGuild' element={<ManageGuild/>}/>
       </Routes>
     </BrowserRouter>
     </UserStore>
