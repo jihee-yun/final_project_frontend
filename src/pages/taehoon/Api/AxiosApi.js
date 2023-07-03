@@ -3,14 +3,14 @@ const KH_DOMAIN = "http://localhost:8111";
 
 const AxiosApi = {
   // 회원가입 여부 
-  checkId : async(id) => {
-    return await axios.get(KH_DOMAIN + "/check?id=" + id);
+  checkId : async(userId) => {
+    return await axios.get(KH_DOMAIN + `/check?userId=${userId}`);
   },
   
     // 회원가입
-    userReg : async(id, pw, name) => {
+    userReg : async(userId, pw, name) => {
         const member ={
-            id : id,
+            userId : userId,
             pw: pw,
             name : name
     };
@@ -20,12 +20,12 @@ const AxiosApi = {
     // 로그인
     userLogin: async(id, pw) => {
         const loginData = {
-            id: id,
+            userId: id,
             pw: pw,
           };
         
           try {
-            const response = await axios.post('/login', loginData);
+            const response = await axios.post(KH_DOMAIN +'/login', loginData);
             const { authToken } = response.data; // 서버에서 발급한 토큰 받아오기
         
             // 토큰 저장 (로컬 스토리지 등에 저장)

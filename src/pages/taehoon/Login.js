@@ -190,8 +190,8 @@ const Login = () => {
 
     // 카카오
     const LoginKakao = () => {
-        const REDIRECT_URI = `${process.env.REACT_APP_KAKAO_REDIRECT_URI}`;
-        const CLIENT_ID = `${process.env.REACT_APP_RESTAPI_KAKAO_APP_KEY}`;
+        const REDIRECT_URI = `http://localhost:8111/login/oauth/kakao`;
+        const CLIENT_ID = `6d3f2009d780565597964da82299382f`;
         const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
         window.location.href = KAKAO_AUTH_URL;
     }

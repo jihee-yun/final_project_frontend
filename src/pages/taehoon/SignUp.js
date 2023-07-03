@@ -308,7 +308,7 @@ const SignUp = () => {
             setIsID(true);
         }else{
             setIdMsg("이미 사용중인 아이디입니다.");
-            setIdMsg(false);
+            setIsID(false);
         }
   }
 
