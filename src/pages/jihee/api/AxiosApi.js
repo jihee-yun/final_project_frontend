@@ -3,8 +3,12 @@ const KH_DOMAIN = "http://localhost:8111";
 
 const AxiosApi = {
   // 지역별 카페 정보 조회
-  cafeInfoGet: async(region) => {
-    return await axios.get(KH_DOMAIN + `/cafe/region?region=${region}`);
+  cafeInfoGet: async(region, sortingOption) => {
+    let url = KH_DOMAIN + `/cafe/region?region=${region}`;
+    if(sortingOption) {
+      url += `&sortingOption=${sortingOption}`;
+    }
+    return axios.get(url);
   },
   // 카페 디테일 정보 조회
   detailInfoGet: async(cafeNum) => {

@@ -1,12 +1,42 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import logo from "./images/logo.png";
+import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
+import img from "./images/upload.png";
 
 const Container = styled.div`
   width: 50%;
   margin: 0 auto;
   background-color: #FAFAFA;
+
+  .upload-box{
+      position: absolute;
+      top: 180px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      img{
+        width: 75px;
+        height: 75px;
+      }
+    }
+
+
+
+  .thumbnail{
+    width: 100%;
+    position: relative;
+
+    .cancel{
+      position: absolute;
+      right: -30px;
+      top: 77px;
+    }
+  }
 
   .content{
     width: 80%;
@@ -21,7 +51,7 @@ const Container = styled.div`
   }
 
   .upload-btn{
-    width: 100px;
+    width: 300px;
     height: 30px;
     border: none;
     border-radius: 30px;
@@ -36,6 +66,18 @@ const Container = styled.div`
     &:hover{
       color: white;
     }
+  }
+
+  .upload-img{
+    margin-top: 20px;
+    width: 100%;
+    height: 350px;
+    border: 1px dashed lightgray;
+    /* box-shadow: 1px 1px 1px lightgray; */
+    object-fit: cover;
+    background-image: url(${props => props.imageurl});
+    background-size: cover;
+    background-position: center;
   }
 
   #guild-thum {
@@ -80,6 +122,26 @@ const NewGuildSecond = () => {
   const location = useLocation();
   const {region, guildName, guildIntro} = location.state;
 
+  // 이미지 미리보기
+  const [imageSrc, setImageSrc] = useState(null);
+
+  const onUpload = async(e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    const result = await new Promise((resolve) => {
+      reader.onload = () => {
+        resolve(reader.result || null);
+      };
+    });
+    setImageSrc(result);
+  }
+
+  const clearImg = () => {
+    setImageSrc(null);
+  }
+
   console.log(region, guildName, guildIntro);
 
   const createGuild = () => {
@@ -95,13 +157,19 @@ const NewGuildSecond = () => {
       <div className="content">
       <Link to="/guild" style={{ textDecoration: "none", color: "inherit"}}><img src={logo} alt="스위트킹덤로고" /></Link>
       <br /><br /><br /><br /><br />
-      <div className="item">
+      <div className="thumbnail">
       <h4>길드 썸네일을 등록해볼까요?</h4>
       <br />
       <label htmlFor="guild-thum">
-          <div className="upload-btn">사진 첨부</div>
+        {!imageSrc && <div className="upload-box">
+          <img src={img} alt="업로드버튼" />
+          <div className="upload-btn">클릭해서 사진을 업로드하세요</div>
+        </div>
+        }
       </label>
-      <input type="file" id="guild-thum" accept="image/*" />
+      <input type="file" id="guild-thum" accept="image/*" onChange={e => onUpload(e)} />
+      <div className="upload-img" style={{ backgroundImage: `url(${imageSrc})` }} />
+      {imageSrc && <DisabledByDefaultIcon className="cancel" style={{width:"30px", height:"30px", cursor:"pointer"}} onClick={clearImg}/>}
       </div>
       <br /><br /><br />
       <div className="item">

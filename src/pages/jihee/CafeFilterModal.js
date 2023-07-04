@@ -41,8 +41,14 @@ const ModalBox = styled.div`
 `;
 
 
-const CafeFilterModal = ({selectOption, setSelectOption}) => {
+const CafeFilterModal = ({selectRegion, setSelectRegion, selectOption, setSelectOption}) => {
+  
+  
   // 필터 선택
+
+  const regionChange = (e) => {
+    setSelectRegion(e.target.value);
+  }
   const optionChange = (e) => {
     setSelectOption(e.target.value);
   }
@@ -55,23 +61,23 @@ const CafeFilterModal = ({selectOption, setSelectOption}) => {
         <p>지역별</p>
         <div>
           <label htmlFor="all"><span>전체</span></label>
-          <input type="radio" id="all" name="filterOption" value="전체" 
-          checked={selectOption === "전체"} onChange={optionChange} />
+          <input type="radio" id="all" name="region" value="전체" 
+          checked={selectRegion === "전체"} onChange={regionChange} />
         </div>
         <div>
           <label htmlFor="seoul"><span>서울특별시</span> </label>
-          <input type="radio" id="seoul" name="filterOption" value="서울특별시" 
-          checked={selectOption === "서울특별시"} onChange={optionChange} />
+          <input type="radio" id="seoul" name="region" value="서울특별시" 
+          checked={selectRegion === "서울특별시"} onChange={regionChange} />
         </div>
         <div>
           <label htmlFor="gyeonggi"><span>경기도</span></label>
-          <input type="radio" id="gyeonggi" name="filterOption" value="경기도" 
-          checked={selectOption === "경기도"} onChange={optionChange} />
+          <input type="radio" id="gyeonggi" name="region" value="경기도" 
+          checked={selectRegion === "경기도"} onChange={regionChange} />
         </div>
         <div>
           <label htmlFor="busan"><span>부산광역시</span></label>
-          <input type="radio" id="busan" name="filterOption" value="부산광역시" 
-          checked={selectOption === "부산광역시"} onChange={optionChange} />
+          <input type="radio" id="busan" name="region" value="부산광역시" 
+          checked={selectRegion === "부산광역시"} onChange={regionChange} />
         </div>
       </div>
       <div className="select">

@@ -48,7 +48,7 @@ const Box = styled.div`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: left;
+  justify-content: space-between;
   align-items: center;
   padding-top: 50px;
   margin-top: 100px;
@@ -114,26 +114,35 @@ const Thumb = styled.div`
 const CafeMain = () => {
   const navigate = useNavigate();
   const context = useContext(UserContext);
-  const { region, setCafeNum } = context; // cafeNum 유저스토어에 저장하기
+  const { region, setRegion, setCafeNum } = context; // cafeNum 유저스토어에 저장하기
 
     // 카페 정보 받아오기
     const [cafeInfo, setCafeInfo] = useState("");
+    // 인기순, 별점순 정렬
+    const [sortingOption, setSortingOption] = useState("");
+    // 필터 값 저장
+    const [selectRegion, setSelectRegion] = useState("");
+    const [selectOption, setSelectOption] = useState("");
 
     useEffect(() => {
       const cafeInfo = async() => {
-        const response = await AxiosApi.cafeInfoGet(region);
+        let response;
+        if(sortingOption === "인기순") {
+          response = await AxiosApi.cafeInfoGet(region, "인기순");
+        } else if(sortingOption === "별점순") {
+          response = await AxiosApi.cafeInfoGet(region, "별점순");
+        } else response = await AxiosApi.cafeInfoGet(region);
         if(response.status === 200) setCafeInfo(response.data);
       };
       cafeInfo();
-    }, [region]);
+    }, [region, sortingOption]);
 
   console.log(cafeInfo);
   console.log(region);
+  console.log(sortingOption);
 
   // 모달창
   const [modalOpen, setModalOpen] = useState(false);
-  // 필터 값 저장
-  const [selectOption, setSelectOption] = useState("");
   
   const filterModal = () => {
     setModalOpen(true);
@@ -145,7 +154,9 @@ const CafeMain = () => {
 
   // 필터 값으로 결과 조회
   const confirm = () => {
-    console.log(selectOption);
+    setRegion(selectRegion);
+    setSortingOption(selectOption);
+    console.log("필터 선택 값 : " + selectOption);
     setModalOpen(false);
   }
 
@@ -174,7 +185,9 @@ const CafeMain = () => {
     </Box>
     </Container>
     <Modal open={modalOpen} type={true} close={closeModal} confirm={() => confirm(selectOption)} header="필터">
-    <CafeFilterModal selectOption={selectOption} setSelectOption={setSelectOption}/>
+    <CafeFilterModal 
+    selectRegion={selectRegion} setSelectRegion={setSelectRegion}
+    selectOption={selectOption} setSelectOption={setSelectOption}/>
     </Modal>
     </>
   );

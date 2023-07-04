@@ -3,7 +3,9 @@ import styled from "styled-components";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import AvgStar from "./AvgStar";
 import Star from "./Star";
-import img from "./images/카페임시이미지.jpeg";
+import img2 from "./images/카페임시이미지.jpeg";
+import img from "./images/카페4-4.jpeg";
+import img1 from "./images/카페5-2.jpeg";
 
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -95,13 +97,14 @@ const Img = styled.div`
  gap: 20px;
 
  .photo img{
-  width: 150px;
-  height: 150px;
+  width: 314px;
+  height: 314px;
   margin-top: 20px;
   object-fit: cover;
   background-image: url(${props => props.imageurl});
   background-size: cover;
   background-position: center;
+  border-radius: 5px;
  }
 `;
 
@@ -130,7 +133,7 @@ const CafeReview = () => {
     <br /><br /><br />
     <ReviewBox>
       <MemberBox>
-        <div className="profile"><img src={img} alt="프사" /></div>
+        <div className="profile"><img src={img2} alt="프사" /></div>
         <div className="right">
           <div className="star"><Star /></div>
           <div className="id"><span>jihee1025&nbsp;&nbsp;&nbsp;2023-06-29</span></div>
@@ -139,7 +142,7 @@ const CafeReview = () => {
       <Content><p>커피가 맛있어여..</p></Content>
       <Img>
       <div className="photo" imageurl={img}><img src={img} alt="이미지" /></div>
-      <div className="photo" imageurl={img}><img src={img} alt="이미지" /></div>
+      <div className="photo" imageurl={img}><img src={img1} alt="이미지" /></div>
       </Img>
       <br /><hr />
     </ReviewBox>
