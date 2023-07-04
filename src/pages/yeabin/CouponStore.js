@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import cafeThum from "./images/cafeThum.png";
 import AxiosApi from "./Api/AxiosApi";
 
 // 포인트로 카페 쿠폰 결제하는 상점
@@ -30,27 +29,14 @@ const MyPoint = styled.div`
 
 const CouponBox = styled.div`
   margin-bottom: 80px;
-
-  /* .coupon-box {
-    display: flex;
-    flex-direction: row;
-  } */
-
-  /* .coupon {
-    border: 4px solid #FFCFDA;
-    width: 380px;
-    height: 130px;
-    border-radius: 40px;
-    margin: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  } */
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-between; */
 `;
 
 const CouponList = styled.div`
   border: 4px solid #FFCFDA;
-  width: 380px;
+  width: 400px;
   height: 130px;
   border-radius: 40px;
   margin: 40px;
@@ -60,18 +46,26 @@ const CouponList = styled.div`
 `;
 
 const Name = styled.div`
-  margin-right: 40px;
+  margin-right: 25px;
   font-size: 1.1rem;
   font-weight: bolder;
 `;
 
 const Price = styled.div`
   font-weight: bolder;
+  background-color: #FFCFDA;
+  padding: 10px;
+  border-radius: 40px;
+`;
+
+const CafeAll = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
 const CafeBox = styled.div`
   border-radius: 20px;
-  /* float: left; */
   width: 220px;
   height: 220px;
   margin: 30px;
@@ -98,15 +92,6 @@ const CafeBox = styled.div`
     bottom: 0;
     text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.8);
   }
-
-  /* .shadow {
-    width: 100%;
-    height: 50%;
-    position: absolute;
-    bottom: 0;
-    border-radius: 20px;
-    background: linear-gradient(to top, rgba(0,0,0,.7) 23%, rgba(0,0,0,0) 100%);
-  } */
 
 `;
 
@@ -152,15 +137,12 @@ const CouponStore = () => {
             ))}
         </CouponBox>
         <h3>포인트 사용 가능 매장 확인하기</h3>
-        <CafeBox>
-          <div className="cafe-box">
-            <img src={cafeThum} alt="카페썸네일" />
-            {/* <div className="shadow"></div> */}
-            <div className="cafeName">
-              <p>미뉴트 빠삐용</p>
-            </div>
-          </div>
-        </CafeBox>
+        <CafeAll>
+          <CafeBox></CafeBox>
+          <CafeBox></CafeBox>
+          <CafeBox></CafeBox>
+          <CafeBox></CafeBox>
+        </CafeAll>
         <Notice>
           <div>
             <p><b>포인트 유의사항</b></p>

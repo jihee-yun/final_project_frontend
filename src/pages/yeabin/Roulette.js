@@ -119,12 +119,12 @@ const Roulette = () => {
   
     setTimeout(async() => {
       setIsSpinning(false);
-      showWinning(stopTime); // 당첨 금액 보여줌
-
-      AxiosApi.pointGet(winning);
+      const amount = showWinning(stopTime); // 당첨 금액
+      AxiosApi.pointGet(amount);
 
     }, stopTime * 1000); // 랜덤 멈추기
   };
+
 
   const showWinning = (stopTime) => {
     let amount = null;
