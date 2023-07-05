@@ -1,8 +1,10 @@
-import React from "react";
+import {useState} from "react";
 import styled from "styled-components";
 import Logo from "../images/logo.png";
 import { Link } from "react-router-dom";
 import SearchIcon from '@mui/icons-material/Search';
+import MenuIcon from '@mui/icons-material/Menu';
+import Sidebar from "./Sidebar";
 
 const HeaderContainer = styled.header`
     padding: 1.8rem 0;
@@ -100,6 +102,11 @@ const Navlink = styled(Link) `
 
 `;
 const Header = () => {
+  const [showSidebar, setShowSidebar] = useState(false);
+
+  const handleMenuIconClick = () => {
+    setShowSidebar(prevShowSidebar => !prevShowSidebar);
+  };
     
     return(
         <>
@@ -114,6 +121,12 @@ const Header = () => {
                 <Link to="/login" style={{marginRight: "10px"}}>로그인</Link>
                 <Link to="/signup">회원가입</Link>
         </div>
+        <div>
+                <MenuIcon
+                onClick={()=>handleMenuIconClick()}
+                style={{fontSize: 30, marginRight: 10, fill: "black"}}/>
+                {showSidebar && <Sidebar />}
+                </div>
         </Rightbox>
         </HeaderContainer>
         <NavContainer>
@@ -122,7 +135,7 @@ const Header = () => {
                     <Navlink to="/guild">길드</Navlink>
                     <Navlink to="/event">퀘스트</Navlink>
                     <Navlink to="/couponStore">상점</Navlink>
-                     <div className="search">
+        <div className="search">
         <input
           type="search"
           className="search-bar"

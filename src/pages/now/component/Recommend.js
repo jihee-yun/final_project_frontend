@@ -1,48 +1,62 @@
-import React from "react";
+import { useRef, useState } from "react";
 import { styled } from "styled-components";
-import { Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination } from "swiper";
 
 import "swiper/css";
+import "swiper/css/pagination";
 
 const Container = styled.div`
 width: 90%;
 height: 500px;
 margin-top: 20px;
-border-radius: 10px;
 display: flex;
 align-items: center;
 flex-direction: column;
 `;
 
-const RecommendContainer = styled.div`
-    width: 100%;
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-
-
-.left {
-    background-color: #FFD0E4;;
-    width: 20%;
-    height: auto;
-}
-
-.content {
-    background-color: #FFD0E4;
-    width: 70%;
-    height: auto;
-}
-`;
 
 const CustomSwiper = styled(Swiper)`
-	width: 100%;
-	height: 400px;
-    background-color: #FFD0E4;
-    display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  box-shadow: 0px 1px 3px black;
+
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+} */
+
+.swiper-pagination-bullet {
+     width: 12px; 
+     height: 12px; 
+     background: transparent; 
+     border: 1px solid #FFD0E4; 
+     opacity: 1; 
+    }
+.swiper-pagination-bullet-active { 
+    width: 40px; 
+    transition: 
+    width .5s; 
+    border-radius: 5px; 
+    background-color: #FFD0E4; 
+    border: 1px solid transparent; 
+}
 `;
 
 const Recommend = () => {
+
     
 
  
@@ -50,22 +64,20 @@ const Recommend = () => {
         <>
         <Container>
             <h2 className="title">추천 리스트</h2>
-            <RecommendContainer>
             <CustomSwiper
-            modules={[Autoplay]}
+             pagination={{
+                dynamicBullets: true,
+              }}
+            modules={[Autoplay, Pagination]}
 			autoplay={{
 				delay: 5000,
 			}}>
-            <SwiperSlide>
-            <div className="left">임시 슬라이드1</div>
-            <div className="content"></div>
-            </SwiperSlide> 
-            <SwiperSlide>
-            <div className="left">임시 슬라이드2</div>
-            <div className="content"></div>
-            </SwiperSlide>
+            <SwiperSlide>임시 슬라이드1</SwiperSlide> 
+            <SwiperSlide>임시 슬라이드2</SwiperSlide> 
+            <SwiperSlide>임시 슬라이드3</SwiperSlide> 
+            <SwiperSlide>임시 슬라이드4</SwiperSlide> 
+            <SwiperSlide>임시 슬라이드5</SwiperSlide> 
             </CustomSwiper>
-            </RecommendContainer>
         </Container>
         </>
 

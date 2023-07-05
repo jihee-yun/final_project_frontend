@@ -1,5 +1,6 @@
 import {useRef, useEffect, useState} from "react";
 import Header from "./component/Header";
+import Footer from "./component/Footer";
 import Map from "./component/Map";
 import Ranking from "./component/Ranking";
 import Recommend from "./component/Recommend"
@@ -24,6 +25,7 @@ const Main = () => {
         <Map/>
         <Ranking/>
         <Recommend/>
+        <Footer/>
         </Container>
         </>
 

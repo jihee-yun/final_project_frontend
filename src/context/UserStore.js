@@ -19,6 +19,8 @@ const UserStore = ({children}) => {
   const [cafeNum, setCafeNum] = useState("");
   // 길드번호
   const [guildNum, setGuildNum] = useState("");
+  // 사이드바
+   const [isSidebar, setIsSidebar] = useState(true);
 
   const restoreSession = async() => {
     const token =  localStorage.getItem('token');
@@ -57,7 +59,7 @@ const UserStore = ({children}) => {
 
   const contextValue = {
     userID, setUserID, passWord, setPassWord, isLogin, setIsLogin, userNum, setUserNum, region, setRegion, cafeNum, setCafeNum, guildNum, setGuildNum,
-    handleLogin, handleLogOut 
+    handleLogin, handleLogOut, setIsSidebar
   };
 
 
