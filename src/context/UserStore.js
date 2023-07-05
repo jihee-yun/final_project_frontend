@@ -5,6 +5,9 @@ import { Navigate } from "react-router-dom";
 export const UserContext = createContext(null);
 
 const UserStore = ({children}) => {
+  // 엑세스 토큰, 리프레시 토큰
+  const [accessToken, setAccessToken] = useState("");
+  const [refreshToken, setRefreshToken] = useState("");
   // 아이디
   const [userID, setUserID] = useState("");
   // 비밀번호
@@ -20,7 +23,7 @@ const UserStore = ({children}) => {
   // 길드번호
   const [guildNum, setGuildNum] = useState("");
   // 사이드바
-   const [isSidebar, setIsSidebar] = useState(true);
+  const [isSidebar, setIsSidebar] = useState(true);
 
   const restoreSession = async() => {
     const token =  localStorage.getItem('token');
@@ -58,7 +61,9 @@ const UserStore = ({children}) => {
 
 
   const contextValue = {
-    userID, setUserID, passWord, setPassWord, isLogin, setIsLogin, userNum, setUserNum, region, setRegion, cafeNum, setCafeNum, guildNum, setGuildNum,
+    accessToken, setAccessToken, refreshToken, setRefreshToken,
+    userID, setUserID, passWord, setPassWord, isLogin, setIsLogin, userNum, setUserNum, 
+    region, setRegion, cafeNum, setCafeNum, guildNum, setGuildNum,
     handleLogin, handleLogOut, setIsSidebar
   };
 
