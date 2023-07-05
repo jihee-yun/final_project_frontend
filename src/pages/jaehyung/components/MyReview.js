@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Navigate, useNavigate } from "react-router-dom";
-import AxiosApi from "../api/MypageApi";
+import MypageApi from "../api/AxiosApi";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Header from "./Header";

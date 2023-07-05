@@ -1,7 +1,7 @@
 import axios from "axios";
 const DOMAIN = "http://localhost:8111";
 
-const MypageApi = {
+const AxiosApi = {
   // 리뷰 전체 다 불러오기(테스트용)
   reviewGet: async (userNum) => {
     return await axios.get(`http://localhost:8111/review/getbynum?usernum=${userNum}`);
@@ -46,4 +46,4 @@ const MypageApi = {
       }
     }
 };
-export default MypageApi;
+export default AxiosApi;
