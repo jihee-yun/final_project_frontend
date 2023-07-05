@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AxiosApi from "./Api/AxiosApi";
 
 // 포인트로 카페 쿠폰 결제하는 상점
@@ -56,6 +56,7 @@ const Price = styled.div`
   background-color: #FFCFDA;
   padding: 10px;
   border-radius: 40px;
+  cursor: pointer;
 `;
 
 const CafeAll = styled.div`
@@ -104,6 +105,7 @@ const Notice = styled.div`
 
 const CouponStore = () => {
   const [couponInfo, setCouponInfo] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const couponInfo = async() => {
@@ -113,7 +115,12 @@ const CouponStore = () => {
     couponInfo();
   }, []);
 
-  console.log(couponInfo);
+  // console.log(couponInfo);
+
+  const navigatePay = () => {
+    navigate('/couponPayment');
+  }
+
 
   return(
     <>
@@ -132,7 +139,7 @@ const CouponStore = () => {
             {couponInfo && couponInfo.map(item => (
               <CouponList key={item.couponName} onClick={() => console.log('결제로 이동 예정')}>
                 <Name>{item.couponName}</Name>
-                <Price>{item.price} 포인트</Price>
+                <Price onClick={navigatePay}>{item.price} 포인트</Price>
               </CouponList>
             ))}
         </CouponBox>
