@@ -110,7 +110,8 @@ const WinBox = styled.div`
 
 const Roulette = () => {
   const [isSpinning, setIsSpinning] = useState(false); 
-  const [winning, setWinning] = useState(null);
+  const [winning, setWinning] = useState(0);
+  let amount = 0;
 
   const handleStartClick = () => {
     setIsSpinning(true); // 회전 시작
@@ -119,15 +120,15 @@ const Roulette = () => {
   
     setTimeout(async() => {
       setIsSpinning(false);
-      const amount = showWinning(stopTime); // 당첨 금액
+      showWinning(stopTime); // 당첨 금액 보여줌
+
       AxiosApi.pointGet(amount);
 
     }, stopTime * 1000); // 랜덤 멈추기
   };
 
-
   const showWinning = (stopTime) => {
-    let amount = null;
+    
     if (stopTime === 3 || stopTime === 5) {
       amount = 50;
     } else if (stopTime === 4 || stopTime === 6) {
@@ -155,9 +156,9 @@ const Roulette = () => {
           </Pan>
         </div>
       </OuterBox>
-      <WinBox show={winning !== null}>
+      <WinBox show={winning !== 0}>
         <div>
-          {winning !== null && (
+          {winning !== 0 && (
             <p className="win-p">
               <img className="celebrate1" src={celebration1} alt="왼쪽컨페티" />
               당첨 금액 : {winning}원 

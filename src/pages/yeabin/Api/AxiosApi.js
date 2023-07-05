@@ -17,7 +17,7 @@ const AxiosApi = {
     const points = {
       totalPoint: winning
     };
-    return await axios.post(KH_DOMAIN + "/pointadd", points);
+    return await axios.post(KH_DOMAIN + "/roulette/pointadd", points);
   },
 
   // 내 포인트 조회
