@@ -1,11 +1,19 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import logo from "./images/logo.png";
 import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
 import img from "./images/upload.png";
+import { storage } from "../../context/Firebase";
+import { deleteObject, getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { async } from "@firebase/util";
+import AxiosApi from "./api/AxiosApi";
 
 const Container = styled.div`
+  @media (max-width: 430px) {
+    width: 100%;
+  }
+
   width: 50%;
   margin: 0 auto;
   background-color: #FAFAFA;
@@ -24,8 +32,6 @@ const Container = styled.div`
         height: 75px;
       }
     }
-
-
 
   .thumbnail{
     width: 100%;
@@ -115,42 +121,93 @@ const Input = styled.input`
   height: 30px;
   padding-left: 15px;
   background-color: rgba(255, 207, 218, 0.5);
+  box-sizing: border-box;
 `;
 
 const NewGuildSecond = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const {region, guildName, guildIntro} = location.state;
+  const {region, guildName, guildIntro, guildDetailIntro} = location.state;
+
+  // 인풋으로 값 입력받기
+  const [meetDay, setMeetDay] = useState("");
+  const [member, setMember] = useState("");
 
   // 이미지 미리보기
   const [imageSrc, setImageSrc] = useState(null);
 
   const onUpload = async(e) => {
     const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
 
-    const result = await new Promise((resolve) => {
-      reader.onload = () => {
-        resolve(reader.result || null);
-      };
-    });
-    setImageSrc(result);
+    const storageRef = ref(storage,`images/${file.name}`);
+
+    try {
+      // if (imageSrc) {
+      //   const previousImageRef = ref(storage, imageSrc);
+      //   await deleteObject(previousImageRef);
+      // }
+
+      await uploadBytes(storageRef, file);
+      const imageUrl = await getDownloadURL(storageRef);
+      setImageSrc(imageUrl);
+      console.log("Url 경로 : " + imageSrc);
+    } catch(error) {
+      console.log(error);
+    }
   }
 
-  const clearImg = () => {
-    setImageSrc(null);
+  const updatePreview = async () => {
+    if (imageSrc) {
+      const image = new Image();
+      image.src = imageSrc;
+      await image.decode();
+      // 이미지가 로드된 후에 배경 이미지를 업데이트하기 위해 이미지를 먼저 로드
+      setImageSrc(imageSrc);
+      // 이미지 경로 확인
+      console.log("Url 경로 : " + imageSrc);
+    }
+  };
+
+  useEffect(() => {
+    updatePreview();
+  }, [imageSrc]);
+
+
+
+  const clearImg = async() => {
+    try {
+      if (imageSrc) {
+        const previousImageRef = ref(storage, imageSrc);
+        await deleteObject(previousImageRef);
+      }
+      setImageSrc(null);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-  console.log(region, guildName, guildIntro);
+  const onChangeDay = (e) => {
+    setMeetDay(e.target.value);
+  };
 
-  const createGuild = () => {
+  const onChangeMember = (e) => {
+    setMember(e.target.value);
+  };
 
+  console.log(region, guildName, guildIntro, guildDetailIntro, meetDay, member);
+
+  const createGuild = async() => {
+    // const response = await AxiosApi.createNewGuild(
+    //   1, guildName, guildIntro, guildDetailIntro, meetDay, 
+    //   member, region, imageSrc
+    // );
+    // console.log(response.data);
   };
 
   const prevPage = () => {
     navigate(-1);
   };
+
   return(
     <>
     <Container>
@@ -172,24 +229,21 @@ const NewGuildSecond = () => {
       {imageSrc && <DisabledByDefaultIcon className="cancel" style={{width:"30px", height:"30px", cursor:"pointer"}} onClick={clearImg}/>}
       </div>
       <br /><br /><br />
-      <div className="item">
+      <div className="item-date">
       <h4>만날 날짜를 입력해볼까요?</h4>
-      <Input placeholder="달력 넣어볼까..."></Input>
-      </div>
-      <br /><br /><br />
-      <div className="item">
-      <h4>만날 시간을 입력해볼까요?</h4>
-      <Input></Input>
+      <Input type="date" onChange={onChangeDay}></Input>
       </div>
       <br /><br /><br />
       <div className="item">
       <h4>길드 인원을 정해볼까요?</h4>
-      <Input></Input>
+      <Input onChange={onChangeMember}></Input>
       </div>
       <br /><br /><br />
       <div className="button-box">
       <button onClick={prevPage}>이전</button>
+      {meetDay && member && (
       <button onClick={createGuild}>개설</button>
+      )}
       </div>
       </div>
     </Container>

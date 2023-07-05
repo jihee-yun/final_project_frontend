@@ -52,7 +52,7 @@ const Box = styled.div`
   align-items: center;
   padding-top: 50px;
   margin-top: 100px;
-  gap: 10px;
+  /* gap: 10px; */
 `;
 
 const CafeBox = styled.div`

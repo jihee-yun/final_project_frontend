@@ -6,6 +6,9 @@ import warning from "./images/warning.png";
 
 
 const Container = styled.div`
+  @media (max-width: 430px) {
+    width: 100%;
+  }
   width: 50%;
   margin: 0 auto;
   background-color: #FAFAFA;
@@ -75,6 +78,7 @@ const Input = styled.input`
   height: 30px;
   text-indent: 10px;
   background-color: rgba(255, 207, 218, 0.5);
+  box-sizing: border-box;
 `;
 
 const Detail = styled.textarea`
@@ -86,8 +90,9 @@ const Detail = styled.textarea`
   height: 300px;
   background-color: rgba(255, 207, 218, 0.5);
   margin-top: 30px;
-  text-indent: 10px;
-  padding-top: 10px;
+  /* text-indent: 10px; */
+  padding: 10px 10px 0 10px;
+  box-sizing: border-box;
 `;
 
 const NewGuild = () => {
@@ -97,6 +102,7 @@ const NewGuild = () => {
   const [region, setRegion] = useState("");
   const [guildName, setGuildName] = useState("");
   const [guildIntro, setGuildIntro] = useState("");
+  const [guildDetailIntro, setGuildDetailIntro] = useState("");
 
   const onChangeRegion = (e) => {
     setRegion(e.target.value);
@@ -110,9 +116,14 @@ const NewGuild = () => {
     setGuildIntro(e.target.value);
   }
 
+  const onChangeDetailIntro = (e) => {
+    setGuildDetailIntro(e.target.value);
+  }
+
   const nextPage = () => {
-    navigate('/createguild/second', {state : {region, guildName, guildIntro}});
+    navigate('/createguild/second', {state : {region, guildName, guildIntro, guildDetailIntro}});
   };
+
 
   return(
     <>
@@ -132,6 +143,11 @@ const NewGuild = () => {
     </div>
     <br /><br /><br />
     <div className="item">
+      <h4>한 줄로 길드를 소개해볼까요?</h4>
+      <Input onChange={onChangeIntro}></Input>
+    </div>
+    <br /><br /><br />
+    <div className="item">
       <h4>길드를 자세하게 소개해볼까요?</h4>
       <div className="box1">
         <img src={warning} alt="뿅" />
@@ -139,12 +155,14 @@ const NewGuild = () => {
       </div>
       <li>주로 어떤 활동을 하게 될지 알려주세요</li>
       <li>이런 사람과 잘 맞아요! 길드 성향을 알려주세요</li>
-      <Detail onChange={onChangeIntro}></Detail>
+      <Detail onChange={onChangeDetailIntro}></Detail>
     </div>
     <br /><br /><br />
-    <div className="button-box">
+    {region && guildName && guildIntro && guildDetailIntro
+    && (<div className="button-box">
     <button onClick={nextPage}>다음</button>
     </div>
+    )}
     </div>
     </Container>
     </>
