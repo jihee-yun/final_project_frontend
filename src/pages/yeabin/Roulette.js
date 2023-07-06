@@ -46,7 +46,7 @@ const OuterBox = styled.div`
     border: 3px solid black; */
   }
 
-  animation: ${rotateAnimation} 2s infinite linear;
+  animation: ${rotateAnimation} 1.5s infinite linear;
   animation-play-state: ${({ isspinning }) => (isspinning ? "running" : "paused")};
 `;
 
@@ -112,6 +112,7 @@ const Roulette = () => {
   const [isSpinning, setIsSpinning] = useState(false); 
   const [winning, setWinning] = useState(0);
   let amount = 0;
+  
 
   const handleStartClick = () => {
     setIsSpinning(true); // 회전 시작
@@ -129,11 +130,15 @@ const Roulette = () => {
 
   const showWinning = (stopTime) => {
     
-    if (stopTime === 3 || stopTime === 5) {
-      amount = 50;
-    } else if (stopTime === 4 || stopTime === 6) {
-      amount = 500;
-    }
+  if (stopTime === 3) {
+    amount = 50;
+  } else if (stopTime === 4) {
+    amount = 100;
+  } else if (stopTime === 5) {
+    amount = 30;
+  } else if (stopTime === 6) {
+    amount = 500;
+  }
 
     setWinning(amount);
   };

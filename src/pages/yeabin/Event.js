@@ -21,8 +21,11 @@ const Box = styled.div`
 `;
 
 const ChallengeBox = styled.div`
-  width: 200px;
-  height: 300px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 `;
 
 const EventFooter = styled.div` 
@@ -131,7 +134,7 @@ const ChallengeTitle = styled.div`
   position: relative;
   margin-top: 50px;
   margin-bottom: 50px;
-  width: 200px;
+  width: 220px;
   height: 300px;
   margin-right: 50px; 
   border-radius: 20px;
@@ -191,11 +194,12 @@ const Event = () => {
     navigate('/couponStore');
   };
 
-  const windowOpen = () => { // 퀴즈 새 창으로 열기
-    const width = Math.min(window.innerWidth, 500);
-    const height = Math.min(window.innerHeight, 700);
-    const newWindow = window.open("", "_blank", `width=${width},height=${height}`);
-    newWindow.location.href = "/quizMain";
+  const quizOpen = () => { // 퀴즈 새 창으로 열기
+    // const width = Math.min(window.innerWidth, 500);
+    // const height = Math.min(window.innerHeight, 700);
+    // const newWindow = window.open("", "_blank", `width=${width},height=${height}`);
+    // newWindow.location.href = "/quizMain";
+    navigate('/quizMain');
   };
 
   
@@ -226,7 +230,7 @@ const Event = () => {
                   <h3 className="quizTitle">깜짝 퀴즈</h3>
                   <p>퀴즈 풀고 포인트 받기</p>
                   <div className="quizButton">
-                    <button onClick={windowOpen}>퀴즈 풀기</button>
+                    <button onClick={quizOpen}>퀴즈 풀기</button>
                   </div>
                 </div>
               </QuizBox>

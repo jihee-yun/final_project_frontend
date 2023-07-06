@@ -12,12 +12,20 @@ const AxiosApi = {
     return await axios.get(KH_DOMAIN + `/couponstore/couponget?couponget=${couponget}`);
   },
 
-  // 포인트 추가
+  // 룰렛 포인트 적립
   pointGet: async(winning) => {
     const points = {
       totalPoint: winning
     };
     return await axios.post(KH_DOMAIN + "/roulette/pointadd", points);
+  },
+  
+  // 퀴즈 포인트 적립
+  quizPoint: async() => {
+    const points = {
+      totalPoint: 10
+    };
+    return await axios.post(KH_DOMAIN + "/quizmain/quizpoint", points);
   },
 
   // 내 포인트 조회
