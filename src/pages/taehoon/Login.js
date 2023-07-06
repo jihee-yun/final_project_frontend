@@ -6,7 +6,7 @@ import kakao from "../../images/kakao.png";
 import naver from "../../images/naver.png";
 import google from "../../images/google.png";
 import { UserContext } from "../../context/UserStore";
-import TokenAxiosApi from "./Api/TokenAxiosApi";
+import AxiosApi from "./Api/AxiosApi";
 import Modal from "../jihee/Modal";
 
 
@@ -197,7 +197,7 @@ const Login = () => {
     }
 
     const context = useContext(UserContext);
-    const {setUserID, setPassWord, handleLogin} = context;
+    const {setUserID, setPassWord, setIsLogin} = context;
 
     const navigate = useNavigate("");
     
@@ -216,37 +216,32 @@ const Login = () => {
     }
 
     const onChangePw = (e) => {
-        const passwordCurrent = e.target.value;
-        setInputPw(passwordCurrent);
+        // const passwordCurrent = e.target.value;
+        // setInputPw(passwordCurrent);
+        setInputPw(e.target.value);
     }
 
     const onClickLogin = async() => {
-        try {
-            const rsp = await TokenAxiosApi.getToken(inputId, inputPw);
-            console.log(inputId);
-            console.log(inputPw);
-
-            if(rsp.status === 200) {
-                localStorage.setItem('token', rsp.data);
-                const token = localStorage.getItem('token');
-                console.log(token);
-
-                const userInfoResponse = await TokenAxiosApi.userInfo(token);
-                const userData = JSON.stringify(userInfoResponse, null, 2);
-                const userDataObject = JSON.parse(userData);
-
-                setUserID(inputId);
-                setPassWord(inputPw);
-                handleLogin();
-
-                navigate('/');
-            }else{
-                setModalopen(true);
-            }
-        }catch(error) {
-            setModalopen(true);
-        }
+        
+        const response = await AxiosApi.userLogin(inputId, inputPw);
+    
+        if(response) handleLoginSuccess();
+        else handleLoginFail();
+        
     }
+
+
+    const handleLoginSuccess = () => {
+        console.log('로그인 성공');
+        navigate('/');
+    }
+
+      
+    const handleLoginFail = () => {
+        console.log('로그인 실패');
+        setModalopen(true);
+    };
+
 
 
 

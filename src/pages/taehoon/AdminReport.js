@@ -62,17 +62,22 @@ const AdminReportBlock = styled.div`
     }
 
     .number {
-        width: 60px;
-        height: 30px;
-    }
-
-    .title {
         width: 100px;
         height: 30px;
     }
 
+    .title {
+        width: 300px;
+        height: 30px;
+    }
+
+    .user {
+        width: 160px;
+        height: 30px;
+    }
+
     .date {
-        width: 80px;
+        width: 150px;
         height: 30px;
     }
 
@@ -120,6 +125,7 @@ const AdminReport = () => {
                 <thead>
                     <tr>
                         <th class="number">번호</th>
+                        <th class="user">작성자</th>
                         <th class="title">제목</th>
                         <th class="date">날짜</th>
                     </tr>

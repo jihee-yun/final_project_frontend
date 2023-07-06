@@ -242,9 +242,9 @@ const SignUp = () => {
   // 약관 동의
   const [isChecked, setIsChecked] = useState(false);
 
-  const handleCheckBox = (e) => {
-    setIsChecked(e.target.checked);
-    console.log(isChecked);
+  const handleCheckBox = () => {
+    setIsChecked(!isChecked);
+    // console.log(isChecked);
   };
 
   // 이름
@@ -302,13 +302,13 @@ const SignUp = () => {
   const onClickIdCheck = async() => {
         console.log(userID);
         const mailCheck = await AxiosApi.checkId(userID);
-        console.log(mailCheck);
+        console.log(mailCheck.data);
         if(mailCheck.data === true) {
-            setIdMsg("사용 가능한 아이디입니다.");
-            setIsID(true);
-        }else{
             setIdMsg("이미 사용중인 아이디입니다.");
             setIsID(false);
+        }else{
+            setIdMsg("사용 가능한 아이디입니다.");
+            setIsID(true);
         }
   }
 
@@ -318,9 +318,9 @@ const SignUp = () => {
   
 
   const handleSubmit = async() => {
-      const signUp = await AxiosApi.userReg(userID, passWord);
+      const signUp = await AxiosApi.userReg(userID, passWord, name);
       console.log(signUp);
-      setModalText("인증 이메일이 발송되었습니다.");
+      setModalText("회원가입이 완료되었습니다.");
       setModalOpen(true);
   };
 
@@ -520,8 +520,9 @@ const SignUp = () => {
                             
                     </div>
                 <div className="myCheck">
-                    <label for="myCheckbox">Sweet Kingdom 회원 약관에 동의합니다.</label>
+                    <label for="myCheckbox">Sweet Kingdom 회원 약관에 동의합니다.
                     <input type="checkbox" id="myCheckbox" checked={isChecked} onChange={handleCheckBox}/>
+                    </label>
                 </div>
 
 
