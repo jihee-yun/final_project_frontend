@@ -4,12 +4,12 @@ import AxiosApi from "./Api/AxiosApi";
 
 const Container = styled.div`
   text-align: center;
-  margin-top: 100px;
+  margin-top: 80px;
 `;
 
 const QuizBox = styled.div`
   h2 {
-    margin-top: 40px;
+    margin: 20px 0 60px 0;
   }
 
   h3 {
@@ -27,16 +27,19 @@ const QuizBox = styled.div`
 
   button {
     width: 300px;
-    height: 50px;
+    height: 60px;
     margin: 20px;
     font-size: 1.1rem;
+    font-weight: bolder;
     border: none;
     background-color: #FFCFDA;
+    border-radius: 20px;
   }
 
   p{
     margin-top: 40px;
     font-size: 1.1rem;
+    font-weight: bolder;
   }
 `;
 
@@ -45,9 +48,9 @@ const QuizMain = () => {
   const [isAnswered, setIsAnswered] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
 
-  const question = '여기ㅇㅔ 문제를 쓸게요';
-  const options = ['답 1', '답 2', '답 3', '답 4'];
-  const answer = '답 2';
+  const question = '세계 최초로 카페를 연 나라는 어디일까요?';
+  const options = ['이탈리아', '콜롬비아', '터키', '프랑스'];
+  const answer = '터키';
   const amount = 10;
 
   const handleClick = async (option) => {
@@ -56,8 +59,8 @@ const QuizMain = () => {
       setIsAnswered(true);
       setIsCorrect(option === answer);
 
-      if (option === answer && isCorrect) {
-        await AxiosApi.quizPoint();
+      if (option === answer && option === answer) {
+        AxiosApi.quizPoint(amount);
       }
     }
   };
@@ -76,7 +79,7 @@ const QuizMain = () => {
             ))}
           </ul>
           {isAnswered && (
-            <p>{isCorrect ? `정답! ${amount} 포인트가 적립됩니다.` : '땡! 내일 다시 도전해주세요.'}</p>
+            <p>{isCorrect ? `정답! ${amount} 포인트가 적립됩니다.` : '땡! 아쉽지만 내일 다시 도전해주세요.'}</p>
           )}
         </div>
       </QuizBox>

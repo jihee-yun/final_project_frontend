@@ -21,9 +21,9 @@ const AxiosApi = {
   },
   
   // 퀴즈 포인트 적립
-  quizPoint: async() => {
+  quizPoint: async(amount) => {
     const points = {
-      totalPoint: 10
+      totalPoint: amount
     };
     return await axios.post(KH_DOMAIN + "/quizmain/quizpoint", points);
   },
