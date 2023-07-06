@@ -2,12 +2,15 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { UserContext } from "../../context/UserStore";
-import cafeimg1 from "./images/카페임시이미지.jpeg";
 import member from "./images/team.png";
 
 const GuildSectionBox = styled.div`
   @media (max-width: 768px) {
     width: 100%;
+  }
+  @media (max-width: 430px) {
+    width: 100%;
+    height: 400px;
   }
 
   position: relative;
@@ -24,6 +27,9 @@ const GuildSectionBox = styled.div`
   }
 
   .section1{
+    @media (max-width: 430px) {
+    flex-direction: column;
+    }
     display: flex;
     align-items: center;
     flex-wrap: nowrap;
@@ -31,6 +37,11 @@ const GuildSectionBox = styled.div`
   }
 
   .section2{
+    @media (max-width: 430px) {
+    width: 90%;
+    margin-top: 30px;
+    margin-left: 0;
+    }
     width: 50%;
     margin-left: 30px;
 
@@ -90,6 +101,9 @@ const GuildSectionBox = styled.div`
 `;
 
 const Thumb = styled.div`
+    @media (max-width: 430px) {
+    width: 90%;
+    }
     width: 40%;
     height: 160px;
     border-radius: 5px;

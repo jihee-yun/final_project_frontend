@@ -23,7 +23,7 @@ const RatingBox = styled.div`
   }
 `;
 
-const Star = () => {
+const Star = ({setScore}) => {
 
   // 별 선택 상태값 관리
   const [clicked, setClicked] = useState([false, false, false, false, false]);
@@ -37,12 +37,12 @@ const Star = () => {
       clickStates[i] = i <= index ? true : false;
     }
     setClicked(clickStates);
+    setScore(clickStates.filter(Boolean).length);
   }
 
-  // 별점 저장 및 별점에 따라 문구 출력
-  const score = clicked.filter(Boolean).length;
+  // 별점에 따라 문구 출력
   let scoreText = "";
-  switch(score) {
+  switch(clicked.filter(Boolean).length) {
     case 1 : scoreText = "1점 (별로예요)"; break;
     case 2 : scoreText = "2점 (그냥그래요)"; break;
     case 3 : scoreText = "3점 (괜찮아요)"; break;
@@ -50,8 +50,6 @@ const Star = () => {
     case 5 : scoreText = "5점 (최고예요)"; break;
     default : scoreText = "";
   }
-
-  console.log("현재 별점 : " + score);
 
   return(
     <>

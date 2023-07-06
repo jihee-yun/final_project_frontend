@@ -54,6 +54,11 @@ const Middle = styled.div`
   }
 
   .members{
+    @media (max-width: 768px) {
+     h4{
+      font-size: .9rem;
+     }
+    }
     height: 200px;
     background-color: #FAF2F2;
     border-radius: 5px;

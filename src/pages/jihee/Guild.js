@@ -6,16 +6,13 @@ import AxiosApi from "./api/AxiosApi";
 import GuildSection from "./GuildSection";
 
 const Container = styled.div`
+  @media (max-width: 768px) {
+    width: 100%;
+  }
   width: 80%;
   margin: 0 auto;
   padding: 50px;
-
-  /* .middle-bar{
-    width: 100%;
-    height: 20px;
-    background-color: #FAFAFA;
-    margin-top: 50px;
-  } */
+  box-sizing: border-box;
 `;
 
 const RegBox = styled.div`
@@ -24,6 +21,11 @@ const RegBox = styled.div`
   background-color: #FAFAFA;
 
   .context{
+    @media (max-width: 768px) {
+      h1{
+        font-size: 1.5rem;
+      }
+    }
     padding: 50px;
 
     .context2{

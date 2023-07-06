@@ -5,6 +5,7 @@ import RatingStar from "../jihee/RatingStar";
 import { useNavigate } from "react-router-dom";
 import upload from "./images/upload.png";
 import upload2 from "./images/upload.png";
+import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
 
 
 const Container = styled.div`
@@ -84,6 +85,22 @@ const Container = styled.div`
     }
   }
 
+  .cancel {
+    position: absolute;
+    left: 183px;
+    top: 58px;
+  }
+
+  .cancel2 {
+    @media (max-width: 768px) {
+      top: 290px;
+      left: 183px;
+    }
+    position: absolute;
+    left: 425px;
+    top: 58px;
+  }
+
   .upload-btn2{
     @media (max-width: 768px) {
       top: 365px;
@@ -120,6 +137,9 @@ const CafeReviewWrite = () => {
   // 이미지 미리보기
   const [imageSrc, setImageSrc] = useState(null);
   const [imageSrc2, setImageSrc2] = useState(null);
+  const [score, setScore] = useState(0);
+
+  console.log("넘어온 값 : " + score);
 
   const onUpload = async(e, imageIndex) => {
     const file = e.target.files[0];
@@ -143,6 +163,15 @@ const CafeReviewWrite = () => {
   const prevPage = () => {
     navigate(-1);
   }
+
+  const clearImg = (index) => {
+    if (index === 1) {
+      setImageSrc("");
+    } else if (index === 2) {
+      setImageSrc2("");
+    }
+  }
+
   return(
     <>
     <Container>
@@ -150,7 +179,7 @@ const CafeReviewWrite = () => {
         <div className="back" onClick={prevPage}><ArrowBackIosIcon style={{width: "18px", height: "18px"}}/></div>
         <div className="star">
           <h3>별점을 선택해주세요</h3>
-          <RatingStar />
+          <RatingStar setScore={setScore}/>
         </div>
         <div className="write">
         <Detail placeholder="후기 내용을 작성해주세요" ></Detail>
@@ -164,12 +193,14 @@ const CafeReviewWrite = () => {
             </label>
             <input type="file" id="img1" accept="image/*" onChange={e=> onUpload(e, 1)}/>
             <div className="image1" style={{ backgroundImage: `url(${imageSrc})` }}></div>
+            {imageSrc && <DisabledByDefaultIcon className="cancel" style={{width:"30px", height:"30px", cursor:"pointer"}} onClick={() => clearImg(1)}/>}
             <label htmlFor="img2">
               {!imageSrc2 && (
               <div className="upload-btn2"><img src={upload2} alt="업로드버튼" /></div>)}
             </label>
             <input type="file" id="img2" accept="image/*" onChange={e=> onUpload(e, 2)}/>
             <div className="image2" style={{ backgroundImage: `url(${imageSrc2})` }}></div>
+            {imageSrc2 && <DisabledByDefaultIcon className="cancel2" style={{width:"30px", height:"30px", cursor:"pointer"}} onClick={() => clearImg(2)}/>}
           </div>
         </div>
       </div>

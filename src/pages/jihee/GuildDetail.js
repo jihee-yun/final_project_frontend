@@ -1,11 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { UserContext } from "../../context/UserStore";
 import GuildDetailMiddle from "./GuildDetailMiddle";
 import AxiosApi from "./api/AxiosApi";
+import logo from "./images/logo.png";
 
 const Container = styled.div`
+  @media (max-width: 768px) {
+    width: 100%;
+  }
   width: 50%;
   margin: 0 auto;
   position: relative;
@@ -15,6 +19,16 @@ const Top = styled.div`
   width: 100%;
   margin: 0 auto;
   position: relative;
+`;
+
+const Logo = styled.img`
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  width: 80px;
+  height: 80px;
+  z-index: 2;
+  cursor: pointer;
 `;
 
 const Box = styled.div`
@@ -99,6 +113,7 @@ const GuildDetail = () => {
     <Container key={guild.id}>
       <Top>
         <Thumb className="img" imageurl={guild.thumbnail} />
+        <Link to="/guild" style={{ textDecoration: "none", color: "inherit"}}><Logo src={logo} alt="스위트킹덤로고" /></Link>
       </Top>
       <Box>
         <div className="box">
