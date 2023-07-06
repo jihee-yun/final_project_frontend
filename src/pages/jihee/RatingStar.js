@@ -9,10 +9,20 @@ const RatingBox = styled.div`
     color: #C4C4C4;
     cursor: pointer;
   }
+
   .yellow {
     color: #f7e600;
   }
-`
+
+  .score{
+    height: 50px;
+    padding-top: 5px;
+    font-size: .9rem;
+    font-weight: bold;
+    color: gray;
+  }
+`;
+
 const Star = () => {
 
   // 별 선택 상태값 관리
@@ -29,7 +39,18 @@ const Star = () => {
     setClicked(clickStates);
   }
 
+  // 별점 저장 및 별점에 따라 문구 출력
   const score = clicked.filter(Boolean).length;
+  let scoreText = "";
+  switch(score) {
+    case 1 : scoreText = "1점 (별로예요)"; break;
+    case 2 : scoreText = "2점 (그냥그래요)"; break;
+    case 3 : scoreText = "3점 (괜찮아요)"; break;
+    case 4 : scoreText = "4점 (좋아요)"; break;
+    case 5 : scoreText = "5점 (최고예요)"; break;
+    default : scoreText = "";
+  }
+
   console.log("현재 별점 : " + score);
 
   return(
@@ -41,6 +62,7 @@ const Star = () => {
       className={clicked[el] && 'yellow'}
       size="10"/>
     ))}
+    <div className="score">{scoreText}</div>
     </RatingBox>
     </>
   );

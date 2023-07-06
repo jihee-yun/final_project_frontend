@@ -16,6 +16,7 @@ const Container = styled.div`
   @media (max-width: 430px) {
     width: 100%;
   }
+  
   width: 50%;
   margin: 0 auto;
 
@@ -132,6 +133,7 @@ const CafeReview = () => {
   const prevPage = () => {
     navigate(-1);
   }
+
   return(
     <>
     <Container>

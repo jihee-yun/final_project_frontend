@@ -6,7 +6,6 @@ import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
 import img from "./images/upload.png";
 import { storage } from "../../context/Firebase";
 import { deleteObject, getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { async } from "@firebase/util";
 import AxiosApi from "./api/AxiosApi";
 
 const Container = styled.div`

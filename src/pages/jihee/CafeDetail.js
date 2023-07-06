@@ -15,6 +15,13 @@ import AvgStar from "./AvgStar";
 
 
 const Container = styled.div`
+  @media (max-width: 768px) {
+    width: 70%;
+    margin: 0 auto;
+  }
+  @media (max-width: 430px) {
+    width: 100%;
+  }
   width: 50%;
   margin: 0 auto;
   /* box-shadow: 0 3px 3px lightgray; */

@@ -44,6 +44,9 @@ const Container = styled.div`
 `;
 
 const Box = styled.div`
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
   position: relative;
   width: 100%;
   display: flex;
