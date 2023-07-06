@@ -197,11 +197,11 @@ const NewGuildSecond = () => {
   console.log(region, guildName, guildIntro, guildDetailIntro, meetDay, member);
 
   const createGuild = async() => {
-    // const response = await AxiosApi.createNewGuild(
-    //   1, guildName, guildIntro, guildDetailIntro, meetDay, 
-    //   member, region, imageSrc
-    // );
-    // console.log(response.data);
+    const response = await AxiosApi.createNewGuild(
+      1, guildName, guildIntro, guildDetailIntro, meetDay, 
+      member, region, imageSrc
+    );
+    console.log(response.data);
   };
 
   const prevPage = () => {

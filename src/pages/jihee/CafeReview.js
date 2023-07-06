@@ -6,10 +6,16 @@ import Star from "./Star";
 import img2 from "./images/카페임시이미지.jpeg";
 import img from "./images/카페4-4.jpeg";
 import img1 from "./images/카페5-2.jpeg";
-
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Container = styled.div`
+  @media (max-width: 768px) {
+    width: 70%;
+    margin: 0 auto;
+  }
+  @media (max-width: 430px) {
+    width: 100%;
+  }
   width: 50%;
   margin: 0 auto;
 
@@ -92,12 +98,18 @@ const Content = styled.div`
 `;
 
 const Img = styled.div`
+  @media (max-width: 430px) {
+    flex-direction: column;
+  }
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
  width: 100%;
  display: flex;
  gap: 20px;
 
  .photo img{
-  width: 314px;
+  width: 100%;
   height: 314px;
   margin-top: 20px;
   object-fit: cover;
@@ -128,7 +140,8 @@ const CafeReview = () => {
     <br /><br />
     <div className="top">
     <AvgStar star={star}/>
-    <button className="write">후기 작성</button>
+    <Link to="/cafe/review/write" style={{ textDecoration: "none", color: "inherit"}}>
+    <button className="write">후기 작성</button></Link>
     </div>
     <br /><br /><br />
     <ReviewBox>
