@@ -34,6 +34,8 @@ import MyPoint from './pages/jaehyung/components/MyPoint';
 import MyRanking from './pages/jaehyung/components/MyRanking';
 import MyInformation from './pages/jaehyung/components/MyInformation';
 import MyReport from './pages/jaehyung/components/MyReport';
+import MemberLoginPage from './pages/jaehyung/MemberLoginPage';
+import MemberSignUpPage from './pages/jaehyung/MemberSignUpPage';
 import Report from './pages/taehoon/Report';
 import ChallengeMain from './pages/yeabin/ChallengeMain';
 import ManageEvent from './pages/taehoon/ManageEvent';
@@ -83,6 +85,8 @@ function App() {
         <Route path='/mypage/ranking' element={<MyRanking/>}/>
         <Route path='/mypage/information' element={<MyInformation/>}/>
         <Route path='/mypage/report' element={<MyReport/>}/>
+        <Route path='/memberlogin' element={<MemberLoginPage/>}/>
+        <Route path='/membersignup' element={<MemberSignUpPage/>}/>
         <Route path='/report' element={<Report/>}/>
         <Route path='/challengeMain' element={<ChallengeMain/>}/>
         <Route path='/manageEvent' element={<ManageEvent/>}/>
