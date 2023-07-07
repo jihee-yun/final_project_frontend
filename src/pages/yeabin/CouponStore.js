@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import AxiosApi from "./Api/AxiosApi";
+import { UserContext } from "../../context/UserStore";
 
 // 포인트로 카페 쿠폰 결제하는 상점
 
@@ -106,6 +107,8 @@ const Notice = styled.div`
 const CouponStore = () => {
   const [couponInfo, setCouponInfo] = useState("");
   const navigate = useNavigate();
+  // const context = useContext(UserContext);
+  // const {setCouponName} = context;
 
   useEffect(() => {
     const couponInfo = async() => {
@@ -117,7 +120,8 @@ const CouponStore = () => {
 
   // console.log(couponInfo);
 
-  const navigatePay = () => {
+  const navigatePay = (coupon) => {
+    // setCouponName(coupon);
     navigate('/couponPayment');
   }
 

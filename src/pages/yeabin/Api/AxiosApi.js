@@ -29,5 +29,8 @@ const AxiosApi = {
   },
 
   // 내 포인트 조회
+  myPointGet: async(mypoint) => {
+    return await axios.get(KH_DOMAIN + `/point/mypoint?mypoint=${mypoint}`);
+  },
 };
 export default AxiosApi;

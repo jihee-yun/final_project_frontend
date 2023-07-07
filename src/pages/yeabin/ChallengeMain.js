@@ -152,7 +152,6 @@ const ChallengeMain = () => {
   return(
     <>
     <Container>
-      {/* <div><img src={chImg1} alt="전체" /></div> */}
       <Box>
         <div>
           <ChHeader>
@@ -178,8 +177,8 @@ const ChallengeMain = () => {
             <div className="ch-box2">
               <p className="title">퀘스트 인증 방법</p>
               <div className="content">
-                <p>카페 직원에게 고유 바코드를 보여주세요.</p>
-                <p>직원이 바코드를 찍으면 완료!</p>
+                <p>카페 직원에게 아이디를 알려주세요.</p>
+                <p>마이페이지에서 스탬프가 찍혔는지 확인하면 완료!</p>
               </div>
             </div>
           </Confirm>
