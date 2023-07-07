@@ -22,10 +22,15 @@ const RegBox = styled.div`
 
   .context{
     @media (max-width: 768px) {
+      padding: 30px;
       h1{
-        font-size: 1.5rem;
+        font-size: 1.2rem;
+      }
+      h3{
+        font-size: .9rem;
       }
     }
+
     padding: 50px;
 
     .context2{
@@ -36,6 +41,9 @@ const RegBox = styled.div`
   }
   
   button{
+    @media (max-width: 768px) {
+      font-size: .9rem;
+    }
     margin-bottom: 50px;
     width: 150px;
     height: 40px;

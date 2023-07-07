@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import RatingStar from "../jihee/RatingStar";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import upload from "./images/upload.png";
 import upload2 from "./images/upload.png";
 import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
+import AxiosApi from "./api/AxiosApi";
+import { async } from "@firebase/util";
 
 
 const Container = styled.div`
@@ -116,6 +118,29 @@ const Container = styled.div`
       height: 50px;
     }
   }
+
+  .send{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+
+   button { 
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+    width: 90%;
+    height: 50px;
+    border: none;
+    background-color: #FFCFDA;
+    border-radius: 5px;
+    font-size: .9rem;
+    font-weight: bold;
+    color: #585858;
+    &:hover{
+      color: white;
+    }
+  }
+  }
 `;
 
 const Detail = styled.textarea`
@@ -133,11 +158,17 @@ const Detail = styled.textarea`
 
 const CafeReviewWrite = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const cafeNum = location?.state?.cafeNum;
+
+
+  console.log("CafeReviewWrite - cafeNum:", cafeNum);
 
   // 이미지 미리보기
   const [imageSrc, setImageSrc] = useState(null);
   const [imageSrc2, setImageSrc2] = useState(null);
-  const [score, setScore] = useState(0);
+  const [score, setScore] = useState("");
+  const [content, setContent] = useState("");
 
   console.log("넘어온 값 : " + score);
 
@@ -157,12 +188,12 @@ const CafeReviewWrite = () => {
     if (file) {
       reader.readAsDataURL(file);
     }
-  }
+  };
 
   // 이전 페이지로 이동
   const prevPage = () => {
     navigate(-1);
-  }
+  };
 
   const clearImg = (index) => {
     if (index === 1) {
@@ -170,7 +201,20 @@ const CafeReviewWrite = () => {
     } else if (index === 2) {
       setImageSrc2("");
     }
-  }
+  };
+
+  // 후기 내용
+  const changeContent = (e) => {
+    setContent(e.target.value);
+  };
+
+  // 후기 작성
+  const writeReview = async() => {
+    const response = await AxiosApi.createNewReview(
+      1, cafeNum, content, score, imageSrc, imageSrc2
+    );
+    console.log(response.data);
+  };
 
   return(
     <>
@@ -182,7 +226,7 @@ const CafeReviewWrite = () => {
           <RatingStar setScore={setScore}/>
         </div>
         <div className="write">
-        <Detail placeholder="후기 내용을 작성해주세요" ></Detail>
+        <Detail placeholder="후기 내용을 작성해주세요" onChange={changeContent}></Detail>
         </div>
         <div className="upload">
           <p>이미지 첨부(최대 2장)</p>
@@ -204,6 +248,7 @@ const CafeReviewWrite = () => {
           </div>
         </div>
       </div>
+      {score && content && (<div className="send" onClick={writeReview}><button>작성하기</button></div>)}
     </Container>
     </>
   );

@@ -186,7 +186,7 @@ const NewGuildSecond = () => {
   }
 
   const onChangeDay = (e) => {
-    setMeetDay(e.target.value);
+   setMeetDay(e.target.value);
   };
 
   const onChangeMember = (e) => {

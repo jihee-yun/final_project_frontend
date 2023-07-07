@@ -69,6 +69,7 @@ const GuildSectionBox = styled.div`
 
     .guild-member-section{
       display: flex;
+      height: 50px;
     }
   }
 
@@ -108,7 +109,7 @@ const Thumb = styled.div`
     height: 160px;
     border-radius: 5px;
     object-fit: cover;
-    background-image: url(${props => props.imageurl});
+    background-image: url(${props => props.$imageurl});
     background-size: cover;
     background-position: center;
 `;
@@ -121,7 +122,7 @@ const Profile = styled.div`
     /* box-shadow: 1px 1px 1px lightgray; */
     margin-right: -15px;
     object-fit: cover;
-    background-image: url(${props => props.imageurl2});
+    background-image: url(${props => props.$imageurl2});
     background-size: cover;
     background-position: center;
 `;
@@ -143,7 +144,7 @@ const GuildSection = ({guildInfo}) => {
     {guildInfo && guildInfo.map(guild => (
     <GuildSectionBox key={guild.id} onClick={() => selectGuild(guild.id)}>
       <div className="section1">
-        <Thumb className="thum" imageurl={guild.thumbnail} />
+        <Thumb className="thum" $imageurl={guild.thumbnail} />
         <div className="section2">
           <button>{guild.region}</button> 
           <p>{guild.guildName}</p>
@@ -151,7 +152,7 @@ const GuildSection = ({guildInfo}) => {
           <div className="section3">
           <div className="guild-member-section">
           {guild.memberProfileList.map((profile, index) => (
-            <Profile key={index} className="guild-member" imageurl2={profile} />
+            <Profile key={index} className="guild-member" $imageurl2={profile} />
           ))}
           </div>
           <div className="count-section">

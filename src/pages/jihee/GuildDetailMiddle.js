@@ -156,7 +156,13 @@ const GuildDetailMiddle = ({guildNum, guildInfo}) => {
     {guildInfo && guildInfo.map(guild => (
     <Middle key={guild.id}>
         <div className="box">
-        <p className="guild-content">{guild.detailIntro}</p>
+        <p className="guild-content">  {guild.detailIntro.split("\n").map((line, index) => (
+          <React.Fragment key={index}>
+            {line}
+            <br />
+          </React.Fragment>
+        ))}
+        </p>
         <div className="member-box">
           <br /><br /><br /><br /><br />
           <p>멤버 소개</p>

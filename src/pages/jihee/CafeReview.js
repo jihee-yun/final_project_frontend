@@ -16,7 +16,7 @@ const Container = styled.div`
   @media (max-width: 430px) {
     width: 100%;
   }
-  
+
   width: 50%;
   margin: 0 auto;
 
@@ -125,9 +125,10 @@ const CafeReview = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const info = location.state;
+  const cafeNum = info[0].id;
 
   console.log(info);
-
+  console.log(cafeNum);
   const star = 5;
   
   const prevPage = () => {
@@ -142,7 +143,7 @@ const CafeReview = () => {
     <br /><br />
     <div className="top">
     <AvgStar star={star}/>
-    <Link to="/cafe/review/write" style={{ textDecoration: "none", color: "inherit"}}>
+    <Link to={{ pathname: "/cafe/review/write", state: { cafeNum: cafeNum } }} style={{ textDecoration: "none", color: "inherit"}}>
     <button className="write">후기 작성</button></Link>
     </div>
     <br /><br /><br />
