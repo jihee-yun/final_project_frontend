@@ -4,6 +4,7 @@ import challengePin from "./images/challengePin.png"
 import { Link } from "react-router-dom";
 import ChallnegeModal from "./ChallengeModal";
 
+
 const Container = styled.div`
   width: 80%;
   margin: 0 auto;
