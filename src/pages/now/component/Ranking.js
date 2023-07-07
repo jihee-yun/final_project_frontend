@@ -1,7 +1,6 @@
 import React from "react";
 import { styled } from "styled-components";
 import cafe from "../images/cafe.jpg";
-import MainAxiosApi from "../api/AxiosApi";
 
 const Container = styled.div`
 width: 90%;
@@ -97,7 +96,7 @@ const Ranking = () => {
                     <img src={cafe} alt="카페임시" className="cafe"/>
                 <div className="innerContent">
                     <span className="cafeTitel">부빙</span>
-                    <span class="overview">부암동 빙수 먹고싶다</span>
+                    <span className="overview">부암동 빙수 먹고싶다</span>
                 </div>
             </ImgContainer>
                 </div>

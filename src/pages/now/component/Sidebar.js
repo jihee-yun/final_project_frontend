@@ -1,28 +1,62 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from "react-router-dom";
 import { styled } from 'styled-components';
 import profile from '../images/leeknow.jpg';
+import { UserContext } from '../../../context/UserStore';
+import CloseIcon from '@mui/icons-material/CloseOutlined';
 
 const Container = styled.div`
-  display: flex;
-  border-right: 1px solid #e0e0e0;
+  box-sizing: border-box;
+  width: 300px;
+  height: 100%;
+  display: none;
+  position: fixed;
+  right: -300px;
+  transition: right 0.3s ease-in-out;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 20%;
+  padding: 25px;
+  border-radius: 10px;
+  background: rgb(223, 214, 210, 0.9);
+  z-index: 11;
+  &.active {
+    right: 0px;
+  }
 `
+const SideBarTop = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  .xButton {
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 3px;
+    display: flex;
+    color: black;
+    justify-content: center;
+    align-items: center;
+    &:active {
+      background: rgb(193, 159, 138);
+      color: white;
+    }
+  }
+`;
 
 const Profile = styled.img`
-  width: 150px;
-  height: 150px;
-  border-radius: 100%;
+width: 200px;
+  height: 200px;
+  margin: 16px 16px 16px 16px;
+  background: white;
+  border-radius: 10px;
+  cursor: pointer;
+  align-self: center;
 `
 
 const Menu = styled.div`
-  margin-top: 30px;
-  width: 200px;
+width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
 `  
 
 const Side = styled.ul`
@@ -47,22 +81,23 @@ transition: 1s;
 
 
 const Sidebar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(false);
 
-  const toggleMenu = () => {
-    setIsOpen(isOpen => !isOpen);
-  }
+
 
   return (
     <Container> 
+      <SideBarTop>
+        <button className="xButton" onClick={() => setShowSidebar(false)}>
+          <CloseIcon />
+        </button>
+      </SideBarTop>
       <Profile src={profile}></Profile>
       <Menu>
-      <Side className={isOpen ? "show-menu" : "hide-menu"}>
         <Link to="/cafe">카페 찾기</Link>
         <Link to="/guild">길드</Link>
         <Link to="/event">퀘스트</Link>
         <Link to="/couponStore">상점</Link>
-      </Side>
       </Menu>
     </Container>
   )

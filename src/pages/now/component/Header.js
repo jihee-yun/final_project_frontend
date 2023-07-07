@@ -93,7 +93,7 @@ const Navlink = styled(Link) `
     color: white;
 
     &:hover {
-      color: #000;
+      color: #000; 
         
     }
   .MyPage {
@@ -107,7 +107,6 @@ const Header = () => {
   const handleMenuIconClick = () => {
     setShowSidebar(prevShowSidebar => !prevShowSidebar);
   };
-    
     return(
         <>
         <HeaderContainer>
@@ -122,11 +121,13 @@ const Header = () => {
                 <Link to="/signup">회원가입</Link>
         </div>
         <div>
-                <MenuIcon
-                onClick={()=>handleMenuIconClick()}
-                style={{fontSize: 30, marginRight: 10, fill: "black"}}/>
-                {showSidebar && <Sidebar />}
-                </div>
+        <div>
+          <MenuIcon
+            onClick={()=>handleMenuIconClick()}
+            style={{fontSize: 30, marginRight: 10, fill: "black"}}/>
+            {showSidebar && <Sidebar />}
+        </div>
+        </div>
         </Rightbox>
         </HeaderContainer>
         <NavContainer>
