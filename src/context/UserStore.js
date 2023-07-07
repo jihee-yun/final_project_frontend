@@ -5,6 +5,8 @@ import { Navigate } from "react-router-dom";
 export const UserContext = createContext(null);
 
 const UserStore = ({children}) => {
+  // 인증 방식
+  const [grantType, setGrantType] = useState("");
   // 엑세스 토큰, 리프레시 토큰
   const [accessToken, setAccessToken] = useState("");
   const [refreshToken, setRefreshToken] = useState("");
@@ -61,7 +63,7 @@ const UserStore = ({children}) => {
 
 
   const contextValue = {
-    accessToken, setAccessToken, refreshToken, setRefreshToken,
+    grantType, setGrantType, accessToken, setAccessToken, refreshToken, setRefreshToken,
     userID, setUserID, passWord, setPassWord, isLogin, setIsLogin, userNum, setUserNum, 
     region, setRegion, cafeNum, setCafeNum, guildNum, setGuildNum,
     handleLogin, handleLogOut, setIsSidebar

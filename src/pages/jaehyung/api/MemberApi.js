@@ -17,13 +17,12 @@ const MemberApi = {
     return await axios.post(`${DOMAIN}/member/signup`, signupData);
   },
 
-  memberLogIn : async (memberId, password, authority) => {
-    const logInData = {
+  memberLogin : async (memberId, password) => {
+    const loginData = {
       memberId : memberId,
-      password : password,
-      authority : authority
+      password : password
     }
-    return await axios.post(`${DOMAIN}/member/login`, logInData);
+    return await axios.post(`${DOMAIN}/member/login`, loginData);
   }
 
 

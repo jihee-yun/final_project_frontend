@@ -2,7 +2,7 @@ import React, {useEffect, useState, useContext} from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import MemberApi from "./api/MemberApi";
-import { UserContext } from "../../context/UserStore";
+import { UserStore } from "../../context/UserStore";
 import { storage } from "../../utils/Firebase";
 import { ref, getDownloadURL } from "firebase/storage";
 
@@ -93,16 +93,20 @@ const MemberLoginPage = () => {
     const memberId = document.getElementById("memberId").value;
     const password = document.getElementById("password").value;
 
+    console.log(memberId);
+    console.log(password);
+    console.log(authority);
+
     try {
-      const response = await MemberApi.memberLogIn(memberId, password, authority);
-      const { grantType, accessToken, refreshToken } = response.data;
-      console.log("로그인 성공:", response.data);
-      
-      // 상태 값을 업데이트합니다.
-      setGrantType(grantType);
-      setAccessToken(accessToken);
-      setRefreshToken(refreshToken);
-      
+      const rsp = await MemberApi.memberLogin(memberId, password);
+      if(rsp.status){
+        const { grantTypeRsp, accessTokenRsp, refreshTokenRsp } = rsp.data;
+        console.log("로그인 성공:", rsp.data);
+        // 방식과 토큰 저장
+        setGrantType(grantTypeRsp);
+        setAccessToken(accessTokenRsp);
+        setRefreshToken(refreshTokenRsp);
+      }
     } catch (error) {
       console.error("로그인 실패:", error);
     }
@@ -114,17 +118,17 @@ const MemberLoginPage = () => {
       <TextBox>로그인</TextBox>
       <LoginBox>
         <InputBox>
-          <IdInputLabel htmlFor="memberIdt">아이디</IdInputLabel>
+          <IdInputLabel htmlFor="memberId">아이디</IdInputLabel>
           <IdInput id="memberId" type="text" />
-          <PasswordInputLabel htmlFor="passwor">비밀번호</PasswordInputLabel>
+          <PasswordInputLabel htmlFor="password">비밀번호</PasswordInputLabel>
           <PasswordInput id="password" type="password" />          
           <AuthSelect>
             <RadioLabel>
               <RadioButton
                 type="radio"
                 name="authority"
-                value="user"
-                checked={authority === "user"}
+                value="ROLE_USER"
+                checked={authority === "ROLE_USER"}
                 onChange={handleAuthTypeChange}
               />
               일반 회원
@@ -133,8 +137,8 @@ const MemberLoginPage = () => {
               <RadioButton
                 type="radio"
                 name="authority"
-                value="business"
-                checked={authority === "business"}
+                value="ROLE_MEMBER"
+                checked={authority === "ROLE_MEMBER"}
                 onChange={handleAuthTypeChange}
               />
               사업자 회원
