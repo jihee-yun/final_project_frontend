@@ -8,11 +8,16 @@ const AxiosApi = {
       },
       
         // 회원가입
-        userReg : async(userId, password, name) => {
+        userReg : async(userId, password, name, phone, email, birthday, gender, authority) => {
             const member ={
                 userId : userId,
                 password: password,
-                name : name
+                name : name,
+                phone : phone,
+                email : email,
+                birthday : birthday,
+                gender : gender,
+                authority : authority
         };
             return await axios.post(KH_DOMAIN + "/user/new", member);
         },
@@ -21,7 +26,7 @@ const AxiosApi = {
         userLogin: async (userId, password) => {
         const loginData = {
           userId: userId,
-          password: password,
+          password: password
         };
 
         try {
