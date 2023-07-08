@@ -14,7 +14,6 @@ const Side = styled.div`
   align-items: center;
   border: 1px solid black;
   transition: opacity 1.3s ease-in-out;
-  opacity: ${({ loaded }) => (loaded ? 1 : 0)};
 `;
 
 const ProfileBox = styled.div`
@@ -77,7 +76,6 @@ const SideMenu = () => {
 
   const [userInfo, setUserInfo] = useState([]);
   const [imageUrls, setImageUrls] = useState([]);
-  const [loaded, setLoaded] = useState(false);
 
   // 로그인시 회원 번호
   const { userNum } = useContext(UserContext);
@@ -98,38 +96,8 @@ const SideMenu = () => {
       });
   }, []);
 
-  useEffect(() => {
-    const styleTags = Array.from(
-      document.querySelectorAll('style[data-styled="true"]')
-    );
-
-    const showStyleTags = () => {
-      let currentIndex = 0;
-      const interval = setInterval(() => {
-        const currentTag = styleTags[currentIndex];
-
-        if (currentTag) {
-          currentTag.setAttribute("data-loaded", "true");
-          currentIndex++;
-        
-          if (currentIndex >= styleTags.length) {
-            clearInterval(interval);
-            setLoaded(true);
-          }
-        } else {
-          clearInterval(interval);
-          setLoaded(true);
-        }
-        
-      }, 200); // 각 스타일 태그가 표시되는 시간 간격 (200ms)
-    };
-    showStyleTags();
-  }, []);
-
-
-
   return (
-    <Side loaded={loaded}>
+    <Side>
       <ProfileBox>
         <img className="profileImg" src={imageUrls[0]} alt="프로필 이미지" onClick={()=>navigate("/mypage")}/>
         <MyName onClick={()=>navigate("/mypage/blog")}>~~~님 블로그 이동</MyName>

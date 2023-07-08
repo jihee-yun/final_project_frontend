@@ -15,7 +15,6 @@ const OutBox = styled.div`
   flex-direction: column;
   align-items: center;
   transition: opacity 1.8s ease-in-out;
-  opacity: ${({ loaded }) => (loaded ? 1 : 0)};
 `;
 
 const Container = styled.div`
@@ -101,7 +100,6 @@ const MyPage = () => {
 
   const [userInfo, setUserInfo] = useState([]);
   const [imageUrls, setImageUrls] = useState([]);
-  const [loaded, setLoaded] = useState(false);
 
   // 로그인시 회원 번호
   const { userNum } = useContext(UserContext);
@@ -122,37 +120,8 @@ const MyPage = () => {
   //     });
   // }, []);
 
-  // 화면 전환 효과
-  useEffect(() => {
-    const styleTags = Array.from(
-      document.querySelectorAll('style[data-styled="true"]')
-    );
-
-    const showStyleTags = () => {
-      let currentIndex = 0;
-      const interval = setInterval(() => {
-        const currentTag = styleTags[currentIndex];
-
-        if (currentTag) {
-          currentTag.setAttribute("data-loaded", "true");
-          currentIndex++;
-        
-          if (currentIndex >= styleTags.length) {
-            clearInterval(interval);
-            setLoaded(true);
-          }
-        } else {
-          clearInterval(interval);
-          setLoaded(true);
-        }
-        
-      }, 200);
-    };
-    showStyleTags();
-  }, []);
-
   return(
-    <OutBox  loaded={loaded}>
+    <OutBox>
     <Header />
     <Container>
       <SideMenu />
