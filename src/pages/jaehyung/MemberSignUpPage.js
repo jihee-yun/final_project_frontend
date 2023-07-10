@@ -120,6 +120,11 @@ const MemberSignUpPage = () => {
       } else if (authorityGet === "ROLE_MEMBER") {
         rsp = await MemberApi.memberSignup(memberId, password, name, phone, email, birth, genderGet, authorityGet);
       }
+      if(rsp.status){
+        //const { memberId } = rsp.data;
+        console.log("회원가입 성공:", rsp.data);
+        navigate("/memberlogin");
+      }
     } catch (error) {
       console.error("회원가입 실패:", error);
     }

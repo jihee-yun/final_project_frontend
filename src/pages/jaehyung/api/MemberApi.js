@@ -3,9 +3,9 @@ const DOMAIN = "http://localhost:8111";
 
 const MemberApi = {
   // 일반 회원 로그인
-  memberSignup : async (memberId, password, name, phone, email, birthday, gender, authority) => {
+  userSignup : async (userId, password, name, phone, email, birthday, gender, authority) => {
     const signupData = {
-      memberId : memberId,
+      userId : userId,
       password : password,
       name : name,
       phone : phone,
@@ -33,9 +33,9 @@ const MemberApi = {
   },
 
   // 일반 회원 로그인
-  userLogin : async (memberId, password) => {
+  userLogin : async (userId, password) => {
     const loginData = {
-      memberId : memberId,
+      userId : userId,
       password : password
     }
     return await axios.post(`${DOMAIN}/user/login`, loginData);
@@ -50,12 +50,12 @@ const MemberApi = {
   },
 
   // 조회에 사용될 회원 번호 조회
-  numberGet : async (userId) => {
-    const userIdData = {
-      userId : userId
-    }
-    return await axios.post(`${DOMAIN}/member/numberget`, userIdData);
-  },
+  // numberGet : async (userId) => {
+  //   const userIdData = {
+  //     userId : userId
+  //   }
+  //   return await axios.post(`${DOMAIN}/member/numberget`, userIdData);
+  // },
 
 
 
