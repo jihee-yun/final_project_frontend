@@ -57,7 +57,7 @@ const Star = ({setScore}) => {
     {starArray.map(el => (
       <StarIcon key={el} 
       onClick={() => starClick(el)}
-      className={clicked[el] && 'yellow'}
+      className={clicked[el] ? 'yellow' : ''}
       size="10"/>
     ))}
     <div className="score">{scoreText}</div>
