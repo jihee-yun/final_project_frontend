@@ -23,9 +23,18 @@ const MemberApi = {
       password : password
     }
     return await axios.post(`${DOMAIN}/member/login`, loginData);
+  },
+
+
+
+
+  // 한줄소개 업데이트 테스트
+  introUpdate: async (intro) => {
+    const introData = {
+      intro : intro
+    }
+    return await axios.post(`${DOMAIN}/info/intro`, introData);
   }
-
-
 
 };
 export default MemberApi;

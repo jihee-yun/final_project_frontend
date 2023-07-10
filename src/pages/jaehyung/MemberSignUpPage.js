@@ -5,7 +5,6 @@ import MemberApi from "./api/MemberApi";
 import { UserStore } from "../../context/UserStore";
 import { storage } from "../../utils/Firebase";
 import { ref, getDownloadURL } from "firebase/storage";
-import { AddToHomeScreen } from "@material-ui/icons";
 
 const Container = styled.div`
   display: flex;

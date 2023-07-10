@@ -20,7 +20,7 @@ const AxiosApi = {
       startDate : startDate,
       endDate : endDate
     }
-    return await axios.post(`${DOMAIN}/review/getbynum&date`, checkData, {
+    return await axios.post(`${DOMAIN}/review/getbynumdate`, checkData, {
       headers: {
         Authorization: `${grantType} ${accessToken}`
       }
