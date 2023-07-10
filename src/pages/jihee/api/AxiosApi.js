@@ -39,9 +39,23 @@ const AxiosApi = {
       thumbnail : url
     };
     return await axios.post(KH_DOMAIN + "/guild/newGuild", guildData);
-  }
+  },
   // 새로운 리뷰 작성
-  // 리뷰 조회
+  createNewReview: async(memNum, cafeNum, content, score, url1, url2) => {
+    const reviewData = {
+      memNum: memNum,
+      cafeNum: cafeNum,
+      content: content,
+      score: score,
+      url1: url1,
+      url2: url2
+    }
+    return await axios.post(KH_DOMAIN + `/review/newReview`, reviewData);
+  },
+  // 특정 카페 리뷰 조회
+  cafeReviewGet: async(cafeNum) => {
+    return await axios.get(KH_DOMAIN  + `/review/cafeReview?cafeNum=${cafeNum}`);
+  }
   // 카페 좋아요 누르기
 
 

@@ -1,12 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import AvgStar from "./AvgStar";
 import Star from "./Star";
-import img2 from "./images/카페임시이미지.jpeg";
-import img from "./images/카페4-4.jpeg";
-import img1 from "./images/카페5-2.jpeg";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import AxiosApi from "./api/AxiosApi";
 
 const Container = styled.div`
   @media (max-width: 768px) {
@@ -29,6 +27,12 @@ const Container = styled.div`
   hr {
     background-color: lightgray;
     border: .3px solid lightgray;
+  }
+
+  .count-review {
+    margin-left: 5px;
+    font-size: .8rem;
+    font-weight: bold;
   }
 `;
 
@@ -59,6 +63,7 @@ const Box = styled.div`
 
 const ReviewBox = styled.div`
   width: 100%;
+  margin-top: 50px;
 `;
 
 const MemberBox = styled.div`
@@ -108,8 +113,9 @@ const Img = styled.div`
  width: 100%;
  display: flex;
  gap: 20px;
+`;
 
- .photo img{
+const Photo = styled.div`
   width: 100%;
   height: 314px;
   margin-top: 20px;
@@ -118,7 +124,6 @@ const Img = styled.div`
   background-size: cover;
   background-position: center;
   border-radius: 5px;
- }
 `;
 
 const CafeReview = () => {
@@ -127,12 +132,31 @@ const CafeReview = () => {
   const info = location.state;
   const cafeNum = info[0].id;
 
+  // 특정 카페 리뷰 조회
+  const [cafeReviewInfo, setCafeReviewInfo] = useState("");
+
+  useEffect(() => {
+    const cafeReview = async() => {
+      const response = await AxiosApi.cafeReviewGet(cafeNum);
+      if(response.status === 200) setCafeReviewInfo(response.data);
+    };
+    cafeReview();
+  }, [cafeNum]);
+
   console.log(info);
   console.log(cafeNum);
-  const star = 5;
+  console.log(cafeReviewInfo);
+  
+  // 평균 별점 점수 전달
+  const star = cafeReviewInfo.length > 0 ? cafeReviewInfo[0].avgScore : 0;
+  const count = cafeReviewInfo.length > 0 ? cafeReviewInfo[0].countReview : 0;
   
   const prevPage = () => {
     navigate(-1);
+  }
+
+  const sendCafeNum = () => {
+    navigate('/cafe/review/write', {state : {cafeNum}});
   }
 
   return(
@@ -141,27 +165,28 @@ const CafeReview = () => {
     <Box>
     <div className="back" onClick={prevPage}><ArrowBackIosIcon style={{width: "18px", height: "18px"}}/></div>
     <br /><br />
+    <div className="count-review"><p>총 {count}개의 후기</p></div>
     <div className="top">
-    <AvgStar star={star}/>
-    <Link to={{ pathname: "/cafe/review/write", state: { cafeNum: cafeNum } }} style={{ textDecoration: "none", color: "inherit"}}>
-    <button className="write">후기 작성</button></Link>
+    <AvgStar avgStar={star}/>
+    <button className="write" onClick={sendCafeNum}>후기 작성</button>
     </div>
-    <br /><br /><br />
-    <ReviewBox>
+    {cafeReviewInfo && cafeReviewInfo.map(review =>(
+    <ReviewBox key={review.id}>
       <MemberBox>
-        <div className="profile"><img src={img2} alt="프사" /></div>
+        <div className="profile"><img src={review.profile} alt="프사" /></div>
         <div className="right">
-          <div className="star"><Star /></div>
-          <div className="id"><span>jihee1025&nbsp;&nbsp;&nbsp;2023-06-29</span></div>
+          <div className="star"><Star star={review.score} /></div>
+          <div className="id"><span>{review.userId}&nbsp;&nbsp;&nbsp;{review.writtenDay}</span></div>
         </div>
       </MemberBox>
-      <Content><p>커피가 맛있어여..</p></Content>
+      <Content><p>{review.content}</p></Content>
       <Img>
-      <div className="photo" imageurl={img}><img src={img} alt="이미지" /></div>
-      <div className="photo" imageurl={img}><img src={img1} alt="이미지" /></div>
+      <Photo className="photo" imageurl={review.url1}></Photo>
+      <Photo className="photo" imageurl={review.url2}></Photo>
       </Img>
       <br /><hr />
     </ReviewBox>
+     ))}
     </Box>
     </Container>
     </>
