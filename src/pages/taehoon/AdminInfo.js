@@ -10,98 +10,138 @@ import userManage from "./images/userManage.png";
 
 
 const InfoBlock = styled.div`
-  position: relative;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   background-color: white;
-  margin-bottom: 30px;
+  text-align: center;
 
-    .container {
-       
-    }
+  .logo {
+    width: 150px;
+    height: 150px;
+    margin-top: 10px;
+    cursor: pointer;
+  }
 
-    .logo {
-        width: 150px;
-        height: 150px;
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        margin-top: 10px;
-        cursor: pointer;
-    }
+  .row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 80px;
+    margin-left: 50px;
+  }
 
-    .Delete {
-        margin-left: -30px;
-    }
+  .row > div {
+    flex-basis: calc(50% - 10px);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    margin-right: 100px;
+  }
 
-    
+  .row img {
+    width: 200px;
+    height: 150px;
+    margin-right: 10px;
+  }
+
+  .row span {
+    flex-grow: 1; /* 남은 공간을 차지하여 줄바꿈이 일어나지 않도록 함 */
+    white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+    overflow: hidden; /* 내용이 넘칠 경우 숨김 처리 */
+    text-overflow: ellipsis; /* 내용이 넘칠 경우 ...으로 표시 */
+    margin-left: 5px;
+    font-size: 20px;
+    font-weight: bolder;
+  }
+
+  .Delete {
+    justify-content: center; /* 가로 중앙 정렬 */
+    margin-top: 10px; /* 삭제 요소와 상위 요소 사이의 간격을 조정 */
+  }
+
+  .Delete span {
+    margin-left: 30px;
+  }
+
+  .report {
+    justify-content: center; /* 가로 중앙 정렬 */
+    margin-top: 10px; /* 신고 내역 요소와 상위 요소 사이의 간격을 조정 */
+    margin-left: 40px;
+  }
+
+  .report span {
+    margin-top: 30px;
+  }
+
 `;
 
-
-
-
 const AdminInfo = () => {
+  const navigate = useNavigate("");
 
-    const navigate = useNavigate("");
+  const LogoClick = () => {
+    navigate('/');
+  }
 
-  
-    const LogoClick = () => {
-      navigate('/');
-    }
+  // 사용자 관리
+  const handleUserManage = () => {
+    navigate('/userManage');
+  }
 
-    // 관리자 등록
-    const handleAdminReg = () => {
-        navigate('/adminReg');
-    }
+  // 신고
+  const handleReport = () => {
+    navigate('/adminReport');
+  }
 
-    // 사용자 관리
-    const handleUserManage = () => {
-        navigate('/userManage');
-    }
+  // 삭제
+  const handleDelete = () => {
+    navigate('/adminDelete');
+  }
 
-    // 신고
-    const handleDeclaration = () => {
-        navigate('/adminReport');
-    }
+  // 리뷰 
+  const handleReview = () => {
+    navigate('/manageReview');
+  }
 
-    // 삭제
-    const handleDelete = () => {
-        navigate('/adminDelete');
-    }
+  return (
+    <InfoBlock>
+      <div className="logo">
+        <img src={logo} alt="logo" className="logo" onClick={LogoClick} />
+      </div>
 
-    // 이벤트 더보기
-    const handleEvent = () => {
-      navigate('/manageEvent');
-    }
-
-    // 리뷰 더보기
-    const handleReview = () => {
-      navigate('/manageReview');
-    }
-    
-    // 소모임 더보기
-    const handleGuild = () => {
-      navigate('/manageGuild');
-    }
-
-
-    return (
-      <InfoBlock>
-        <div className="cotainer">
-
-            
+      <div className="row">
+        <div onClick={handleUserManage} className="userManage">
+          <img src={userManage} alt="userManage"/>
+          <span>사용자 관리</span>
         </div>
 
-        <div className="logo">
-            <img src={logo} alt="logo" className="logo" onClick={LogoClick}/>
+        <div onClick={handleReview} className="review">
+          <img src={review} alt="review"/>
+          <span>리뷰 관리</span>
+        </div>
+      </div>
+
+      <div className="row">
+        <div onClick={handleDelete} className="Delete">
+          <img src={Delete} alt="Delete"/>
+          <span>삭제</span>
         </div>
 
-        <div className="form-container">
-            
+        <div onClick={handleReport} className="report">
+          <img src={report} alt="report"/>
+          <span>신고 내역</span>
         </div>
-     
-      </InfoBlock>
-    );
-  };
-  
-  export default AdminInfo;
+      </div>
+    </InfoBlock>
+  );
+};
+
+export default AdminInfo;
+
+
+
+
+
+
+
