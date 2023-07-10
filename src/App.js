@@ -20,7 +20,6 @@ import AdminInfo from './pages/taehoon/AdminInfo';
 import CouponStore from './pages/yeabin/CouponStore';
 import PointStore from './pages/yeabin/PointStore';
 import FindID from './pages/taehoon/FindID';
-import AdminReg from './pages/taehoon/AdminReg';
 import AdminDelete from './pages/taehoon/AdminDelete';
 import AdminReport from './pages/taehoon/AdminReport';
 import UserManage from './pages/taehoon/UserManage';
@@ -38,11 +37,9 @@ import MemberLoginPage from './pages/jaehyung/MemberLoginPage';
 import MemberSignUpPage from './pages/jaehyung/MemberSignUpPage';
 import Report from './pages/taehoon/Report';
 import ChallengeMain from './pages/yeabin/ChallengeMain';
-import ManageEvent from './pages/taehoon/ManageEvent';
 import ManageReview from './pages/taehoon/ManageReview';
 import QuizMain from './pages/yeabin/QuizMain';
 import PayComplete from './pages/yeabin/PayComplete';
-import ManageGuild from './pages/taehoon/ManageGuild';
 import CouponPayment from './pages/yeabin/CouponPayment';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 
@@ -71,7 +68,6 @@ function App() {
         <Route path='/couponStore' element={<CouponStore/>}/>
         <Route path='/pointStore' element={<PointStore/>}/>
         <Route path='/findId' element={<FindID/>}/>
-        <Route path='/adminReg' element={<AdminReg/>}/>
         <Route path='/adminDelete' element={<AdminDelete/>}/>
         <Route path='/adminReport' element={<AdminReport/>}/>
         <Route path='/userManage' element={<UserManage/>}/>
@@ -89,11 +85,9 @@ function App() {
         <Route path='/membersignup' element={<MemberSignUpPage/>}/>
         <Route path='/report' element={<Report/>}/>
         <Route path='/challengeMain' element={<ChallengeMain/>}/>
-        <Route path='/manageEvent' element={<ManageEvent/>}/>
         <Route path='/manageReview' element={<ManageReview/>}/>
         <Route path='/quizMain' element={<QuizMain/>}/>
         <Route path='/payComplete' element={<PayComplete/>}/>
-        <Route path='/manageGuild' element={<ManageGuild/>}/>
         <Route path='/couponPayment' element={<CouponPayment/>}/>
       </Routes>
     </BrowserRouter>
