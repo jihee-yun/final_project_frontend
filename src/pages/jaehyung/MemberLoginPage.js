@@ -72,7 +72,7 @@ const MemberLoginPage = () => {
   // 일반 회원, 사업자 회원 구분
   const [authority, setAuthority] = useState("ROLE_MEMBER");
   // useContext 토큰 저장
-  const {setGrantType, setAccessToken, setRefreshToken } = useContext(UserContext);
+  const {setGrantType, setAccessToken, setRefreshToken, setUserNum } = useContext(UserContext);
 
   // 파이어베이스 스토리지 이미지 로딩
   useEffect(() => {
@@ -97,19 +97,19 @@ const MemberLoginPage = () => {
   const handleLogin = async () => {
     const memberId = document.getElementById("memberId").value;
     const password = document.getElementById("password").value;
-
-    console.log(memberId);
-    console.log(password);
-    console.log(authority);
+    const authorityGet = authority;
 
     try {
-      const rsp = await MemberApi.memberLogin(memberId, password);
+      let rsp;
+      if (authorityGet === "ROLE_USER") {
+        rsp = await MemberApi.userLogin(memberId, password);
+      } else if (authorityGet === "ROLE_MEMBER") {
+        rsp = await MemberApi.memberLogin(memberId, password);
+      }
+
       if(rsp.status){
         const { grantType, accessToken, refreshToken } = rsp.data;
         console.log("로그인 성공:", rsp.data);
-        console.log(grantType);
-        console.log(accessToken);
-        console.log(refreshToken);
         // 방식과 토큰 저장
         setGrantType(grantType);
         setAccessToken(accessToken);
@@ -140,7 +140,7 @@ const MemberLoginPage = () => {
                 checked={authority === "ROLE_USER"}
                 onChange={handleAuthTypeChange}
               />
-              일반 회원
+              일반 회원(미적용 기능)
             </RadioLabel>
             <RadioLabel>
               <RadioButton
@@ -150,7 +150,7 @@ const MemberLoginPage = () => {
                 checked={authority === "ROLE_MEMBER"}
                 onChange={handleAuthTypeChange}
               />
-              사업자 회원
+              사업자 회원(미적용 기능)
             </RadioLabel>
           </AuthSelect>
         </InputBox>

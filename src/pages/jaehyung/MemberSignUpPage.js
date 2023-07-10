@@ -114,29 +114,15 @@ const MemberSignUpPage = () => {
     const authorityGet = authority;
 
     try {
-      console.log(memberId);
-      console.log(password);
-      console.log(name);
-      console.log(phone);
-      console.log(email);
-      console.log(birth);
-      console.log(genderGet);
-      console.log(authorityGet);
-
-      const rsp = await MemberApi.memberSignup(memberId, password, name, phone, email, birth, genderGet, authorityGet);
-      if(rsp.status){
-        //const { memberId } = rsp.data;
-        console.log("회원가입 성공:", rsp.data);
-        navigate("/memberlogin");
+      let rsp;
+      if (authorityGet === "ROLE_USER") {
+        rsp = await MemberApi.userSignup(memberId, password, name, phone, email, birth, genderGet, authorityGet);
+      } else if (authorityGet === "ROLE_MEMBER") {
+        rsp = await MemberApi.memberSignup(memberId, password, name, phone, email, birth, genderGet, authorityGet);
       }
     } catch (error) {
       console.error("회원가입 실패:", error);
     }
-
-
-
-
-
   }
 
 
