@@ -107,8 +107,8 @@ const Notice = styled.div`
 const CouponStore = () => {
   const [couponInfo, setCouponInfo] = useState("");
   const navigate = useNavigate();
-  // const context = useContext(UserContext);
-  // const {setCouponName} = context;
+  const context = useContext(UserContext);
+  const {setCouponNum} = context;
 
   useEffect(() => {
     const couponInfo = async() => {
@@ -121,7 +121,7 @@ const CouponStore = () => {
   // console.log(couponInfo);
 
   const navigatePay = (coupon) => {
-    // setCouponName(coupon);
+    setCouponNum(coupon);
     navigate('/couponPayment');
   }
 
@@ -141,7 +141,7 @@ const CouponStore = () => {
         <h3>포인트로 카페 할인 받기</h3>
         <CouponBox>
             {couponInfo && couponInfo.map(item => (
-              <CouponList key={item.couponName} onClick={() => console.log('결제로 이동 예정')}>
+              <CouponList key={item.couponName} onClick={() => console.log('결제로 이동')}>
                 <Name>{item.couponName}</Name>
                 <Price onClick={navigatePay}>{item.price} 포인트</Price>
               </CouponList>

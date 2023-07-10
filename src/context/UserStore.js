@@ -26,6 +26,10 @@ const UserStore = ({children}) => {
   const [guildNum, setGuildNum] = useState("");
   // 사이드바
   const [isSidebar, setIsSidebar] = useState(true);
+  // 쿠폰번호
+  const [couponNum, setCouponNum] = useState("");
+  // 챌린지번호
+  const [challengeNum, setChallengeNum] = useState("");
 
   const restoreSession = async() => {
     const token =  localStorage.getItem('token');
@@ -66,7 +70,7 @@ const UserStore = ({children}) => {
     grantType, setGrantType, accessToken, setAccessToken, refreshToken, setRefreshToken,
     userID, setUserID, passWord, setPassWord, isLogin, setIsLogin, userNum, setUserNum, 
     region, setRegion, cafeNum, setCafeNum, guildNum, setGuildNum,
-    handleLogin, handleLogOut, setIsSidebar
+    handleLogin, handleLogOut, setIsSidebar, couponNum, setCouponNum, challengeNum, setChallengeNum
   };
 
 
