@@ -49,13 +49,21 @@ const MemberApi = {
     return await axios.post(`${DOMAIN}/member/login`, loginData);
   },
 
-  // 조회에 사용될 회원 번호 조회
-  // numberGet : async (userId) => {
-  //   const userIdData = {
-  //     userId : userId
-  //   }
-  //   return await axios.post(`${DOMAIN}/member/numberget`, userIdData);
-  // },
+  // 조회에 사용될 일반 회원 번호 조회
+  userNumGet : async (userId) => {
+    const userIdData = {
+      userId : userId
+    }
+    return await axios.post(`${DOMAIN}/user/numget`, userIdData);
+  },
+
+  // 조회에 사용될 사업자 회원 번호 조회
+  memberNumGet : async (memberId) => {
+    const memberIdData = {
+      memberId : memberId
+    }
+    return await axios.post(`${DOMAIN}/member/numget`, memberIdData);
+  },
 
 
 

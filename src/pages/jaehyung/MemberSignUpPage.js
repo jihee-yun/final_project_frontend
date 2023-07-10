@@ -128,6 +128,8 @@ const MemberSignUpPage = () => {
     } catch (error) {
       console.error("회원가입 실패:", error);
     }
+
+
   }
 
 
@@ -135,7 +137,7 @@ const MemberSignUpPage = () => {
   return(
     <Container>
       <Logo src={imageUrls[0]} alt="반전 로고 이미지" onClick={()=>navigate("/")}></Logo>
-      <GoToSignUp>로그인 테스트로 이동</GoToSignUp>
+      <GoToSignUp onClick={()=>navigate("/memberlogin")}>로그인 테스트로 이동</GoToSignUp>
       <SignupBox>
         <TextBox>회원가입 테스트</TextBox>
         <div>
