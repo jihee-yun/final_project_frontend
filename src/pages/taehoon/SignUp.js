@@ -682,7 +682,7 @@ const SignUp = () => {
 
                 
                 <div className="signBtn">
-                  {(isChecked && isID && isPw && isConPw && isEmail && isBirth) ?
+                  {(isChecked && isID && isPw && isConPw && isEmail && isBirth && isPhone) ?
                     <button className="enable-button" onClick={handleSubmit}>회원가입</button> :
                     <button className="disable-button">회원가입</button>}
                     <Modal open={modalOpen} close={closeModal} header="Sweet Kingdom">{modalText}</Modal>

@@ -205,6 +205,7 @@ const Login = () => {
     const [inputId, setInputId] = useState("");
     const [inputPw, setInputPw] = useState("");
 
+
     //팝업 처리
     const [modalOpen, setModalopen] = useState(false);
     const closeModal = () => {
@@ -221,13 +222,17 @@ const Login = () => {
         setInputPw(e.target.value);
     }
 
+    const handleKeyPress = (event) => {
+        if (event.key === "Enter") {
+          event.preventDefault(); // 기본 엔터 키 동작 방지
+          onClickLogin(); // 로그인 함수 호출
+        }
+      };
+
     const onClickLogin = async() => {
-        
         const response = await AxiosApi.userLogin(inputId, inputPw);
-    
         if(response) handleLoginSuccess();
         else handleLoginFail();
-        
     }
 
 
@@ -262,11 +267,11 @@ const Login = () => {
                     <br/>
 
                     <div className="item2">
-                        <Input placeholder="아이디(이메일)" value={inputId} onChange={onChangeId}/>
+                        <Input placeholder="아이디(이메일)" value={inputId} onChange={onChangeId} onKeyPress={handleKeyPress}/>
                     </div>
 
                     <div className="item2">
-                        <Input type="password" placeholder="비밀번호" value={inputPw} onChange={onChangePw}/>
+                        <Input type="password" placeholder="비밀번호" value={inputPw} onChange={onChangePw} onKeyPress={handleKeyPress}/>
                     </div>
 
                     <div className="item2">

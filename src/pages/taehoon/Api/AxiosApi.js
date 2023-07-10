@@ -23,20 +23,29 @@ const AxiosApi = {
         },
 
         // 로그인
-        userLogin: async (userId, password) => {
-        const loginData = {
-          userId: userId,
-          password: password
-        };
+        userLogin: async (userId, password, grantType, accessToken) => {
+          console.log('grantType:', grantType);
+          console.log('accessToken:', accessToken);
 
-        try {
-          const response = await axios.post(KH_DOMAIN + "/user/login", loginData);
-          return response.data; // 로그인 성공 시 추가 작업을 위해 필요한 데이터 반환
-        } catch (error) {
-          // 로그인 실패 처리
-          throw new Error('로그인에 실패했습니다.');
-        }
+          const loginData = {
+            userId: userId,
+            password: password
+          };
+
+        return await axios.post(KH_DOMAIN + "/user/login", loginData, {
+          headers: {
+            Authorization: `${grantType} ${accessToken}`
+          }
+        });
       },
+
+      findPw: async(email) => {
+        const data = {
+            email: email
+        };
+        return await axios.post(KH_DOMAIN + "/findpw", data);
+    },
+         
 
         // 관리자 등록
         adminReg : async(name, gender, age, adminId, adminPw) => {
@@ -48,7 +57,18 @@ const AxiosApi = {
             adminPw : adminPw
           };
           return await axios.post(KH_DOMAIN + "/admin", admin);
-        } 
+        },
+        
+        // 신고 내역 조회
+        reportGet : async(reportNum, userId, title, reportDate) => {
+          const report = {
+            reportNum : reportNum,
+            userId : userId,
+            title : title,
+            reportDate : reportDate
+
+          }
+        }
     };
 
 export default AxiosApi;
