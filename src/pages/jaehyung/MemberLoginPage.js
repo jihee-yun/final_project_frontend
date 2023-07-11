@@ -72,7 +72,7 @@ const MemberLoginPage = () => {
   // 일반 회원, 사업자 회원 구분
   const [authority, setAuthority] = useState("ROLE_MEMBER");
   // useContext 토큰 저장
-  const {setGrantType, setAccessToken, setRefreshToken, setUserNum } = useContext(UserContext);
+  const {setGrantType, setAccessToken, setRefreshToken, setUserNum, setUserName, setUserAuthoruty } = useContext(UserContext);
 
   // 파이어베이스 스토리지 이미지 로딩
   useEffect(() => {
@@ -136,14 +136,21 @@ const MemberLoginPage = () => {
 
         // 토큰 디코딩하여 클레임 값을 추출
         const [headerBase64, payloadBase64] = accessToken.split('.');
-        const payload = JSON.parse(atob(payloadBase64));
+        const payload = JSON.parse(decodeURIComponent(escape(atob(payloadBase64))));
         const userNum = payload.userNum;
+        const userName = payload.userName;
+        const userAuthority = payload.userAuthority;
         console.log('userNum:', userNum);
+        console.log('userName:', userName);
+        console.log('userAuthority:', userAuthority);
         
         // 방식과 토큰 저장
         setGrantType(grantType);
         setAccessToken(accessToken);
         setRefreshToken(refreshToken);
+        setUserNum(userNum);
+        setUserName(userName);
+        setUserAuthoruty(userAuthority);
         navigate("/mypage");
         // handleGetNum();
       }

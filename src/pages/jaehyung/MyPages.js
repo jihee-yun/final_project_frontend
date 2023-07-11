@@ -5,8 +5,8 @@ import AxiosApi from "./api/AxiosApi";
 import { UserContext } from "../../context/UserStore";
 import { storage } from "../../utils/Firebase";
 import { ref, getDownloadURL } from "firebase/storage";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Header from "../now/component/Header";
+import Footer from "../now/component/Footer";
 import SideMenu from "./components/SideMenu";
 import ChatBot from "./components/ChatBot";
 

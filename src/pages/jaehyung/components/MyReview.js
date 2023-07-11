@@ -220,7 +220,7 @@ const SuperRightButton = styled.button`
 `;
 
 const MyReview = () => {
-    // useContext 토큰 저장
+    // useContext 토큰 불러오기
     const {grantType, accessToken, refreshToken} = useContext(UserContext);
 
   // 날짜 선택 state

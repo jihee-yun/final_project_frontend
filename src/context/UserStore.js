@@ -18,6 +18,10 @@ const UserStore = ({children}) => {
   const [isLogin, setIsLogin] = useState(false);
   // 로그인시 쿼리문에 쓰일 회원번호
   const [userNum, setUserNum] = useState(0);
+  // 로그인시 토큰에 받아올 회원 이름
+  const [userName, setUserName] = useState("");
+  // 로그인시 토큰에 받아올 회원 종류(권한)
+  const [userAuthority, setUserAuthoruty] = useState("");
   // 지역별 카페메인으로 이동
   const [region, setRegion] = useState("");
   // 카페번호
@@ -69,6 +73,7 @@ const UserStore = ({children}) => {
   const contextValue = {
     grantType, setGrantType, accessToken, setAccessToken, refreshToken, setRefreshToken,
     userID, setUserID, passWord, setPassWord, isLogin, setIsLogin, userNum, setUserNum, 
+    userName, setUserName, userAuthority, setUserAuthoruty, 
     region, setRegion, cafeNum, setCafeNum, guildNum, setGuildNum,
     handleLogin, handleLogOut, setIsSidebar, couponNum, setCouponNum, challengeNum, setChallengeNum
   };
