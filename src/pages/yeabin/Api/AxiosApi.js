@@ -32,5 +32,10 @@ const AxiosApi = {
   myPointGet: async(mypoint) => {
     return await axios.get(KH_DOMAIN + `/point/mypoint?mypoint=${mypoint}`);
   },
+
+  // 내 정보 조회
+  myInfoGet: async(myinfo) => {
+    return await axios.get(KH_DOMAIN + `/couponstore/myinfo?myinfo=${myinfo}`);
+  },
 };
 export default AxiosApi;

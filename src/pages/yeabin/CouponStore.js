@@ -104,8 +104,15 @@ const Notice = styled.div`
   margin-top: 100px;
 `;
 
+const InfoBox = styled.div`
+`;
+
+const InfoList = styled.div`
+`;
+
 const CouponStore = () => {
   const [couponInfo, setCouponInfo] = useState("");
+  const [myinfo, setMyInfo] = useState("");
   const navigate = useNavigate();
   const context = useContext(UserContext);
   const {setCouponNum} = context;
@@ -118,12 +125,20 @@ const CouponStore = () => {
     couponInfo();
   }, []);
 
+  useEffect(() => {
+    const myinfo = async() => {
+      const response = await AxiosApi.myInfoGet("ALL");
+      if(response.status === 200) setMyInfo(response.data);
+    };
+    myinfo();
+  }, []);
+
   // console.log(couponInfo);
 
   const navigatePay = (coupon) => {
     setCouponNum(coupon);
     navigate('/couponPayment');
-  }
+  };
 
 
   return(
@@ -131,9 +146,15 @@ const CouponStore = () => {
     <Container>
       <Box>
         <MyPoint>
-          <div>
-            <h3>(회원)님 현재 보유 포인트 : </h3>
-          </div>
+          <InfoBox>
+            {myinfo && myinfo.map(item => (
+              <InfoList key={item.userNum}>
+                <Name>{item.name}님 현재 보유 포인트 : </Name> 
+                {/* 로그인 한 회원만 보이게 수정 */}
+                {/* 포인트 불러오기 */}
+              </InfoList>
+            ))}
+          </InfoBox>
           <div className="goEvent">
             <Link to='/event' className="link_style">받을 수 있는 포인트 확인하기</Link>
           </div>
