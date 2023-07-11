@@ -1,10 +1,10 @@
-import {useState} from "react";
+import {useState, useContext} from "react";
 import styled from "styled-components";
 import Logo from "../images/logo.png";
 import { Link } from "react-router-dom";
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
-import Sidebar from "./Sidebar";
+import Sidebar from "./Sidebar"
 
 const HeaderContainer = styled.header`
     padding: 1.8rem 0;
@@ -99,14 +99,26 @@ const Navlink = styled(Link) `
   .MyPage {
     font-size: 2.5rem;
   }
-
 `;
-const Header = () => {
-  const [showSidebar, setShowSidebar] = useState(false);
+const HamburgerBtn = styled.button`
+  width: 3rem;
+  height: 3rem;
+  margin-right: 20px;
+  padding: 0;
+  border: none;
+  border-radius: 3px;
+  color: white;
+  outline: none;
+  justify-content: center;
+  align-items: center;
+  &:active {
+    border: none;
+  }
+`;
+const Header = (props) => {
 
-  const handleMenuIconClick = () => {
-    setShowSidebar(prevShowSidebar => !prevShowSidebar);
-  };
+
+
     return(
         <>
         <HeaderContainer>
@@ -120,14 +132,8 @@ const Header = () => {
                 <Link to="/login" style={{marginRight: "10px"}}>로그인</Link>
                 <Link to="/signup">회원가입</Link>
         </div>
-        <div>
-        <div>
-          <MenuIcon
-            onClick={()=>handleMenuIconClick()}
-            style={{fontSize: 30, marginRight: 10, fill: "black"}}/>
-            {showSidebar && <Sidebar />}
-        </div>
-        </div>
+        <Sidebar width={320}> 
+      </Sidebar>
         </Rightbox>
         </HeaderContainer>
         <NavContainer>
