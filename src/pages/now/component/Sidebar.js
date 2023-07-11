@@ -13,13 +13,13 @@ const Container = styled.div`
 const SidebarContainer = styled.div`
 background-color: white;
   border-left: 2px solid #202020;
-  position: fixed;
   top: 0;
   bottom: 0;
   right: 0;
   transition: 0.4s ease;
   height: 100%;
-  z-index: 99;
+  display: none;
+  
 
 `
 const SidebarTop=styled.div`
