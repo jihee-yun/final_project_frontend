@@ -1,22 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import { useLocation } from "react-router-dom";
 
 const Box = styled.div`
   margin-top: 100px;
 `;
 
 const Container = styled.div`
-  border: 1px solid black;
-  width: 40%;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  
 
-  .cName {
-    margin-top: 80px;
-  }
 
   .myPoint {
     margin-top: 80px;
@@ -40,16 +31,54 @@ const Container = styled.div`
   }
 `;
 
+const CouponBox = styled.div`
+  border: 1px solid black;
+  width: 40%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const CouponList = styled.div`
+`;
+
+const Name = styled.div`
+
+`;
+
+const MyPoint = styled.div`
+`;
+
+const Price = styled.div`
+`;
+
 const CouponPayment = () => {
+
+  const location = useLocation();
+  const info = location.state && location.state.filterCoupon;
+
+  console.log(info);
+
   return(
     <Box>
       <Container>
-        <div>
-          <p className="cName">쿠폰 이름 들어갈 자리~</p>
+        <CouponBox>
+          {info && info.map(coupon => (
+            <CouponList key={coupon.id} >
+              <Name>{coupon.couponName}</Name>
+              <MyPoint>보유 포인트 : </MyPoint>
+              <Price>차감 포인트 : {coupon.price}</Price>
+              <button>결제 하기</button>
+            </CouponList>
+          ))}
+        </CouponBox>
+          
+        {/* <div>
           <p className="myPoint">보유 포인트 : </p>
           <p className="minus">차감 포인트 : </p>
           <button className="payBtn">결제 하기</button>
-        </div>
+        </div> */}
       </Container>
     </Box>
   );
