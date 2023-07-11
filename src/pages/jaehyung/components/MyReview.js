@@ -5,8 +5,8 @@ import AxiosApi from "../api/AxiosApi";
 import { UserContext } from "../../../context/UserStore";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Header from "./Header";
-import Footer from "./Footer";
+import Header from "../../now/component/Header";
+import Footer from "../../now/component/Footer";
 import SideMenu from "./SideMenu";
 import ChatBot from "./ChatBot";
 
@@ -220,8 +220,8 @@ const SuperRightButton = styled.button`
 `;
 
 const MyReview = () => {
-    // useContext 토큰 불러오기
-    const {grantType, accessToken, refreshToken} = useContext(UserContext);
+  // useContext 저장값 불러오기
+  const {grantType, accessToken, refreshToken, userNum, userName, userAuthority} = useContext(UserContext);
 
   // 날짜 선택 state
   const [showDatePicker, setShowDatePicker] = useState(false);

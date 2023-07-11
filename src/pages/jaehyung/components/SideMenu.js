@@ -8,6 +8,7 @@ import { ref, getDownloadURL } from "firebase/storage";
 
 const Side = styled.div`
   width: 300px;
+  min-width: 200px;
   height: 1000px;
   display: flex;
   flex-direction: column;
@@ -104,8 +105,8 @@ const SideMenu = () => {
         <MyPoint onClick={()=>navigate("/mypage/point")}>~~~ point</MyPoint>
       </ProfileBox>
       <NaviButton onClick={()=>navigate("/mypage/review")}>작성 리뷰</NaviButton>
+      <NaviButton onClick={()=>navigate("/mypage/guild")}>참여 길드</NaviButton>
       <NaviButton onClick={()=>navigate("/mypage/challenge")}>참여 챌린지</NaviButton>
-      <NaviButton onClick={()=>navigate("/mypage/somoim")}>참여 소모임</NaviButton>
       <NaviButton onClick={()=>navigate("/mypage/event")}>참여 이벤트</NaviButton>
       <NaviButton onClick={()=>navigate("/mypage/calendar")}>캘린더</NaviButton>
       <NaviButton onClick={()=>navigate("/mypage/point")}>결제 / 포인트</NaviButton>

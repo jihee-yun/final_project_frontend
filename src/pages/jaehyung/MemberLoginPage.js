@@ -93,6 +93,14 @@ const MemberLoginPage = () => {
     setAuthority(event.target.value);
   };
 
+  // 엔터키로 로그인 버튼 동작
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault(); // 기본 엔터 동작(페이지 새로고침) 방지
+      handleLogin(); // 로그인 버튼 클릭 함수 호출
+    }
+  };
+
   // // 로그인 성공시 조회용 회원 번호 받아오기
   // const handleGetNum = async () => {
   //   const memberId = document.getElementById("memberId").value;
@@ -166,9 +174,9 @@ const MemberLoginPage = () => {
       <LoginBox>
         <InputBox>
           <IdInputLabel htmlFor="memberId">아이디</IdInputLabel>
-          <IdInput id="memberId" type="text" />
+          <IdInput id="memberId" type="text" onKeyDown={handleKeyDown}/>
           <PasswordInputLabel htmlFor="password">비밀번호</PasswordInputLabel>
-          <PasswordInput id="password" type="password" />          
+          <PasswordInput id="password" type="password" onKeyDown={handleKeyDown}/>          
           <AuthSelect>
             <RadioLabel>
               <RadioButton

@@ -26,7 +26,7 @@ import UserManage from './pages/taehoon/UserManage';
 import MyPage from './pages/jaehyung/MyPages';
 import MyReview from './pages/jaehyung/components/MyReview';
 import MyChallenge from './pages/jaehyung/components/MyChallenge';
-import MySomoim from './pages/jaehyung/components/MySomoim';
+import MyGuild from './pages/jaehyung/components/MyGuild';
 import MyEvent from './pages/jaehyung/components/MyEvent';
 import MyCalendar from './pages/jaehyung/components/MyCalendar';
 import MyPoint from './pages/jaehyung/components/MyPoint';
@@ -74,7 +74,7 @@ function App() {
         <Route path='/mypage' element={<MyPage/>}/>
         <Route path='/mypage/review' element={<MyReview/>}/>
         <Route path='/mypage/challenge' element={<MyChallenge/>}/>
-        <Route path='/mypage/somoim' element={<MySomoim/>}/>
+        <Route path='/mypage/guild' element={<MyGuild/>}/>
         <Route path='/mypage/event' element={<MyEvent/>}/>
         <Route path='/mypage/calendar' element={<MyCalendar/>}/>
         <Route path='/mypage/point' element={<MyPoint/>}/>
