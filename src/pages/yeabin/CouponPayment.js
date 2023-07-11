@@ -7,21 +7,18 @@ const Box = styled.div`
 `;
 
 const Container = styled.div`
+  border: 1px solid lightgray;
+  width: 40%;
+  margin: 0 auto;
 
-
-  .myPoint {
-    margin-top: 80px;
-    font-size: 1.1rem;
-  }  
-
-  .minus {
+  h2 {
     margin-top: 50px;
-    font-size: 1.1rem;
+    text-align: center;
   }
 
   .payBtn {
     width: 350px;
-    height: 40px;
+    height: 50px;
     border: none;
     background-color: #FFCFDA;
     font-size: 1.1rem;
@@ -32,9 +29,6 @@ const Container = styled.div`
 `;
 
 const CouponBox = styled.div`
-  border: 1px solid black;
-  width: 40%;
-  margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -44,13 +38,19 @@ const CouponList = styled.div`
 `;
 
 const Name = styled.div`
-
+  margin-top: 50px;
+  font-size: 1.2rem;
+  font-weight: bolder;
 `;
 
 const MyPoint = styled.div`
+  margin-top: 50px;
+  font-size: 1.1rem;
 `;
 
 const Price = styled.div`
+  margin-top: 50px;
+  font-size: 1.1rem;
 `;
 
 const CouponPayment = () => {
@@ -63,22 +63,17 @@ const CouponPayment = () => {
   return(
     <Box>
       <Container>
+        <h2>쿠폰 결제</h2>
         <CouponBox>
           {info && info.map(coupon => (
             <CouponList key={coupon.id} >
               <Name>{coupon.couponName}</Name>
               <MyPoint>보유 포인트 : </MyPoint>
               <Price>차감 포인트 : {coupon.price}</Price>
-              <button>결제 하기</button>
+              <button className="payBtn">결제 하기</button>
             </CouponList>
           ))}
         </CouponBox>
-          
-        {/* <div>
-          <p className="myPoint">보유 포인트 : </p>
-          <p className="minus">차감 포인트 : </p>
-          <button className="payBtn">결제 하기</button>
-        </div> */}
       </Container>
     </Box>
   );
