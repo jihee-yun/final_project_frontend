@@ -28,37 +28,24 @@ const ModalStyle = styled.div`
         width: 90%;
         max-width: 450px;
         margin: 0 auto;
-        border-radius: 10px;
+        border-radius: 0.3rem;
         background-color: #fff;
         /* 팝업이 열릴때 스르륵 열리는 효과 */
         animation: modal-show 0.3s;
         overflow: hidden;
     }
     section > header {
-        display: flex;
-        justify-content: space-around;
-        width: 100%;
-        /* margin: 0 auto; */
-        /* padding-left: 10px; */
-        /* position: relative; */
-        /* padding: 16px 64px 16px 35px; */
-        /* background-color: #FFCFDA; */
-        font-size: 1rem;
-        font-weight: bold;
-
-        .box{
-            width: 35%;
-        }
-
-        p {
-            padding-left: 5px;
-        }
+        width: 90%;
+        position: relative;
+        padding: 16px 0px 16px 35px;
+        background-color: white;
+        font-weight: 700;
     }
 
     section > header button {
-        /* position: absolute;
+        position: absolute;
         top: 15px;
-        right: 3px; */
+        right: 20px;
         width: 30px;
         font-size: 21px;
         font-weight: 700;
@@ -68,8 +55,8 @@ const ModalStyle = styled.div`
     }
     section > main {
         padding: 16px;
-        /* border-bottom: 1px solid #dee2e6;
-        border-top: 1px solid #dee2e6; */
+        border-bottom: 1px solid #dee2e6;
+        border-top: 1px solid #dee2e6;
     }
     section > footer {
         padding: 12px 16px;
@@ -83,12 +70,6 @@ const ModalStyle = styled.div`
         font-size: 13px;
         font-weight: bold;
     }
-
-    section > hr{
-        border: .5px solid lightgray;
-        background-color: lightgray;
-    }
-
     @keyframes modal-show {
         from {
             opacity: 0;
@@ -119,17 +100,15 @@ const Modal = (props) => {
                 {open && 
                     <section>
                         <header>
-                            <p>{header}</p>
-                            <div className="box"></div>
+                            {header}
                             <button onClick={close}>
                                 &times;  
                             </button>
                         </header>
-                        <hr />
                         <main>{children}</main>
                         <footer>
                             {type && <button onClick={confirm}>확인</button>}
-                            {type && <button onClick={close}>취소</button>}
+                            <button onClick={close}>취소</button>
                         </footer>
                     </section>
                 }

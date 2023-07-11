@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import cafeimg1 from "./images/카페임시이미지.jpeg";
 import location from "./images/location.png";
 import member from "./images/member.png";
-import Modal from "./Modal";
+import Modal from "./Modal2";
+import GuildMemberModal from "./GuildMemberModal";
 
 const Middle = styled.div`
   position: absolute;
@@ -190,7 +191,7 @@ const GuildDetailMiddle = ({guildNum, guildInfo}) => {
         </div>
         <button className="join">가입하기</button>
         <Modal open={modalOpen} type={false} close={closeModal} header="전체 멤버">
-
+          <GuildMemberModal></GuildMemberModal>
         </Modal>
       </Middle>
       ))}

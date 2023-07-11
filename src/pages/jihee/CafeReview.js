@@ -5,6 +5,8 @@ import AvgStar from "./AvgStar";
 import Star from "./Star";
 import { useLocation, useNavigate } from "react-router-dom";
 import AxiosApi from "./api/AxiosApi";
+import like from "../jihee/images/like1.png";
+import dot from "../jihee/images/dots.png";
 
 const Container = styled.div`
   @media (max-width: 768px) {
@@ -64,6 +66,11 @@ const Box = styled.div`
 const ReviewBox = styled.div`
   width: 100%;
   margin-top: 50px;
+  .review-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 `;
 
 const MemberBox = styled.div`
@@ -126,6 +133,37 @@ const Photo = styled.div`
   border-radius: 5px;
 `;
 
+const Like = styled.div`
+  margin-top: 20px;
+  width: 10%;
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 60px;
+    height: 25px;
+    background-color: white;
+    border: .5px solid lightgray;
+    border-radius: 15px;
+    box-shadow: 0px 1px 1px lightgray;
+    cursor: pointer;
+  }
+
+  img {
+    width: 12px;
+    height: 12px;
+  }
+`;
+
+const Bar = styled.div`
+  img {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+`;
+
 const CafeReview = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -172,6 +210,7 @@ const CafeReview = () => {
     </div>
     {cafeReviewInfo && cafeReviewInfo.map(review =>(
     <ReviewBox key={review.id}>
+      <div className="review-top">
       <MemberBox>
         <div className="profile"><img src={review.profile} alt="프사" /></div>
         <div className="right">
@@ -179,11 +218,14 @@ const CafeReview = () => {
           <div className="id"><span>{review.userId}&nbsp;&nbsp;&nbsp;{review.writtenDay}</span></div>
         </div>
       </MemberBox>
+      <Bar><img src={dot} alt="메뉴바" /></Bar>
+      </div>
       <Content><p>{review.content}</p></Content>
       <Img>
       <Photo className="photo" imageurl={review.url1}></Photo>
       <Photo className="photo" imageurl={review.url2}></Photo>
       </Img>
+      <Like><button><img src={like} alt="좋아요" /><p>{review.likeCount}</p></button></Like>
       <br /><hr />
     </ReviewBox>
      ))}

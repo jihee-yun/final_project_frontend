@@ -93,28 +93,28 @@ const MemberLoginPage = () => {
     setAuthority(event.target.value);
   };
 
-  // 로그인 성공시 조회용 회원 번호 받아오기
-  const handleGetNum = async () => {
-    const memberId = document.getElementById("memberId").value;
-    const password = document.getElementById("password").value;
-    const authorityGet = authority;
-    try {
-      let rsp2;
-      if (authorityGet === "ROLE_USER") {
-        rsp2 = await MemberApi.userNumGet(memberId);
-      } else if (authorityGet === "ROLE_MEMBER") {
-        rsp2 = await MemberApi.memberNumGet(memberId);
-      }
-      if(rsp2.status) {
-        const { userNum } = rsp2.data;
-        console.log("번호 수신 성공: ", rsp2.data);
-        setUserNum(userNum);
-        navigate("/mypage");
-      }
-    } catch(error) {
-      console.error("번호 수신 실패: ", error);
-    }
-  }
+  // // 로그인 성공시 조회용 회원 번호 받아오기
+  // const handleGetNum = async () => {
+  //   const memberId = document.getElementById("memberId").value;
+  //   const password = document.getElementById("password").value;
+  //   const authorityGet = authority;
+  //   try {
+  //     let rsp2;
+  //     if (authorityGet === "ROLE_USER") {
+  //       rsp2 = await MemberApi.userNumGet(memberId);
+  //     } else if (authorityGet === "ROLE_MEMBER") {
+  //       rsp2 = await MemberApi.memberNumGet(memberId);
+  //     }
+  //     if(rsp2.status) {
+  //       const { userNum } = rsp2.data;
+  //       console.log("번호 수신 성공: ", rsp2.data);
+  //       setUserNum(userNum);
+  //       navigate("/mypage");
+  //     }
+  //   } catch(error) {
+  //     console.error("번호 수신 실패: ", error);
+  //   }
+  // }
 
   // 로그인 함수
   const handleLogin = async () => {
@@ -133,11 +133,19 @@ const MemberLoginPage = () => {
       if(rsp.status){
         const { grantType, accessToken, refreshToken } = rsp.data;
         console.log("로그인 성공:", rsp.data);
+
+        // 토큰 디코딩하여 클레임 값을 추출
+        const [headerBase64, payloadBase64] = accessToken.split('.');
+        const payload = JSON.parse(atob(payloadBase64));
+        const userNum = payload.userNum;
+        console.log('userNum:', userNum);
+        
         // 방식과 토큰 저장
         setGrantType(grantType);
         setAccessToken(accessToken);
         setRefreshToken(refreshToken);
-        handleGetNum();
+        navigate("/mypage");
+        // handleGetNum();
       }
     } catch (error) {
       console.error("로그인 실패:", error);
