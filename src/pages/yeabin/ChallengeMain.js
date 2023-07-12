@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import challengePin from "./images/challengePin.png"
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import ChallnegeModal from "./ChallengeModal";
 
 
@@ -140,6 +140,11 @@ const CafeIntro = styled.div`
 
 const ChallengeMain = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  // const [challengeInfo, setChallengeInfo] = useState("");
+  const location = useLocation();
+  const info = location.state && location.state.editedInfo;
+
+  console.log(info);
 
   const openModal = () => {
     setModalOpen(true);
@@ -148,6 +153,8 @@ const ChallengeMain = () => {
   const closeModal = () => {
     setModalOpen(false);
   };
+
+
 
   return(
     <>
