@@ -2,9 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import {Link, useNavigate} from "react-router-dom";
 import logo from "../../images/logo.png";
-import kakao from "../../images/kakao.png";
-import naver from "../../images/naver.png";
-import google from "../../images/google.png";
+// import kakao from "../../images/kakao.png";
+// import naver from "../../images/naver.png";
+// import google from "../../images/google.png";
 import { UserContext } from "../../context/UserStore";
 import AxiosApi from "./Api/AxiosApi";
 import Modal from "../jihee/Modal";
@@ -287,15 +287,15 @@ const Login = () => {
                     </div>
 
                     <br/>
-                    <h4>OR</h4>
+                    {/* <h4>OR</h4> */}
 
-                    <div className="socialLogin">
+                    {/* <div className="socialLogin">
                         
                             <img src={kakao} alt="kakao" className="kakao" onClick={LoginKakao}/>
                         
                         <img src={naver} alt="naver" className="naver"/>
                         <img src={google} alt="google" className="google"/>
-                    </div>
+                    </div> */}
 
                     <Modal open={modalOpen} close={closeModal} header="Sweet Kingdom">
                         아이디 및 패스워드를 확인하세요.

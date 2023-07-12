@@ -78,6 +78,10 @@ const FindID = () => {
     const [emailMsg, setEmailMsg] = useState("");
     const [isEmail, setIsEmail] = useState("");
 
+    // 팝업
+    const [modalOpen, setModalOpen] = useState(false);
+    const [modalText, setModalText] = useState(false);
+
 
         // 이메일 정규식
         const onChangeEmail = (e) => {
@@ -95,8 +99,28 @@ const FindID = () => {
         }
     }
 
+    const handleSendEmail = async () => {
+        try {
+          // 이메일 전송 요청
+          const response = await AxiosApi.findId(email);
+      
+          // 이메일 전송 성공
+          setModalText('이메일로 전송되었습니다.');
+          setModalOpen(true);
+        } catch (error) {
+          // 이메일 전송 실패
+          setModalText('이메일 전송에 실패했습니다.');
+          setModalOpen(true);
+        }
+      };
+
     const LogoClick = () => {
         navigate('/');
+    }
+
+    const closeModal = () => {
+        setModalOpen(false);
+        navigate("/login");
     }
 
     return(
@@ -116,12 +140,15 @@ const FindID = () => {
             </div>
 
             <div className="check">
-                <button>확인</button>
+                <button onClick={handleSendEmail}>확인</button>
+                <Modal open={modalOpen} close={closeModal} header="Sweet Kingdom">이메일로 전송되었습니다.</Modal>
             </div>
 
             <div className="hint">
                 {email.length > 0 && (<span className={`message ${isEmail ? 'success' : 'error'}`}>{emailMsg}</span>)}
             </div>
+
+            
 
         </FindIdBlock>
     );

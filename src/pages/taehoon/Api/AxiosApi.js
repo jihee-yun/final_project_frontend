@@ -39,11 +39,20 @@ const AxiosApi = {
         });
       },
 
+      // 비밀번호 찾기
       findPw: async(email) => {
         const data = {
             email: email
         };
         return await axios.post(KH_DOMAIN + "/findpw", data);
+    },
+
+    // 아이디 찾기
+    findId : async(email) => {
+      const data = {
+        email : email
+      };
+      return await axios.post(KH_DOMAIN + "/findId", data);
     },
          
 
@@ -59,7 +68,7 @@ const AxiosApi = {
           return await axios.post(KH_DOMAIN + "/admin", admin);
         },
         
-        // 신고 내역 조회
+        // // 신고 내역 조회
         reportGet : async(reportNum, userId, title, reportDate) => {
           const report = {
             reportNum : reportNum,
@@ -67,8 +76,10 @@ const AxiosApi = {
             title : title,
             reportDate : reportDate
 
-          }
+          };
+          return await axios.get(KH_DOMAIN + `/report/getReportNum?reportNum=${reportNum}`, report);
         }
+
     };
 
 export default AxiosApi;
