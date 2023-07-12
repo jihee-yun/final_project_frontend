@@ -1,11 +1,11 @@
 import {useState, useContext} from "react";
+import { UserContext } from "../../../context/UserStore";
 import styled from "styled-components";
 import Logo from "../images/logo.png";
 import { Link } from "react-router-dom";
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
 import Sidebar from "./Sidebar"
-import UserStore from "../../../context/UserStore";
 
 const HeaderContainer = styled.header`
     padding: 1.8rem 0;
@@ -104,11 +104,10 @@ const Navlink = styled(Link) `
 
 const Header = () => {
   const [isOpen, setOpen] = useState(false);
-  const [showSidebar, setShowSidebar] = useState(false);
-  const { setIsSidebar } = useContext(UserStore);
+  const { isSidebar, setIsSidebar } = useContext(UserContext);
 
   const handleClickMenuIcon = () => {
-    setIsSidebar(true);
+    isSidebar(false);
   }
 
   
@@ -126,6 +125,7 @@ const Header = () => {
                 <Link to="/signup">회원가입</Link>
         </div>
         <MenuIcon className="openBtn" onClick={handleClickMenuIcon}/> 
+        {isSidebar && <Sidebar />}
         </Rightbox>
         </HeaderContainer>
         <NavContainer>
