@@ -144,12 +144,44 @@ const SignUpBlock = styled.div`
 
   @media (max-width: 768px) {
     width: 100%;
-    height: auto;
-    padding: 5px;
+    margin-left: 0;
 
     .agreeContents {
       width: 100%;
-      margin-bottom: 20px;
+      max-width: 450px;
+    }
+
+    .container {
+      align-items: center;
+    }
+
+    .row {
+      flex-direction: row;
+      margin-left: 0;
+      margin-right: 90px;
+    }
+
+    .label {
+      font-size: 20px;
+      margin-right: 30px;
+      display: flex;
+      align-items: center;
+    }
+
+    input[type="radio"] {
+      margin-left: 10px;
+    }
+
+    .item1 {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-left: 0;
+    }
+
+    .item1 button {
+      width: 20%;
+      margin-left: 30px;
+      margin-top: 10px;
     }
 
     .signBtn {
@@ -157,22 +189,8 @@ const SignUpBlock = styled.div`
       margin-right: 0;
     }
 
-    .item1 {
-      margin-top: -40px;
-    }
-
-    .item1 button {
-      margin-top: 20px;
-      margin-left: 30px;
-    }
-
-    .hint {
-      margin-top: -50px;
-    }
-
-    .signBtn {
-      margin-bottom: 20px;
-      margin-top: 60px;
+    .signBtn button {
+      width: 50%;
     }
   }
 `;
@@ -193,6 +211,10 @@ const SignTitle = styled.div`
     margin-left: -60px;
     color: #FFCFDA;
     font-weight: bolder;
+
+    @media (max-width:768px) {
+        margin-left: 15px;
+    }
 `;
 
 const SignAgree = styled.div`
@@ -212,7 +234,8 @@ const Input = styled.input`
   outline-style: none; /* 포커스시 발생하는 효과 제거를 원한다면 */
 
   @media (max-width:768px) {
-    margin-top: 60px;
+    margin-top: 30px;
+    width: 350px;
   }
 `;
 
