@@ -157,6 +157,22 @@ const MyInformation = () => {
     fetchMemberInfo();
   }, [userNum]);
 
+  // 비밀번호 수정
+  const handlePasswordChange = async () => {
+    const password = document.getElementById("newPassword").value;
+    try {
+      const rsp = await MemberApi.passwordUpdate(userNum, password, grantType, accessToken);
+      if(rsp.status) {
+        if(rsp.data = "true") {
+          console.log("비밀번호 업데이트 성공: ", rsp.data);
+        } else {
+          console.log("통신은 성공, 비밀번호 업데이트 실패", rsp.data);
+        }
+      }
+    } catch(error) {
+      console.log("비밀번호 업데이트 실패: ", error);
+    }
+  }
 
   // 한줄 소개 수정
   const handleIntroChange = async () => {
@@ -218,10 +234,10 @@ const MyInformation = () => {
             </SpecificBox>
             <SpecificBox>
               <InfoType>회원 비밀번호</InfoType>
-              <GrayInput type="text" placeholder={"기존 비밀번호"}/>
-              <GrayInput type="text" placeholder={"새로운 비밀번호"}/>
-              <GrayInput type="text" placeholder={"새로운 비밀번호 확인"}/>
-              <PhoneChangeButton>변경하기</PhoneChangeButton>
+              <GrayInput id="password" type="text" placeholder={"기존 비밀번호"}/>
+              <GrayInput id="newPassword" type="text" placeholder={"새로운 비밀번호"}/>
+              <GrayInput id="newPasswordCheck" type="text" placeholder={"새로운 비밀번호 확인"}/>
+              <PhoneChangeButton onClick={handlePasswordChange}>변경하기</PhoneChangeButton>
             </SpecificBox>
 
 
