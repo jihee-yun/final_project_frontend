@@ -7,6 +7,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import AxiosApi from "./api/AxiosApi";
 import like from "../jihee/images/like1.png";
 import dot from "../jihee/images/dots.png";
+import CafeReviewModal from "./CafeReviewModal";
 
 const Container = styled.div`
   @media (max-width: 768px) {
@@ -111,9 +112,6 @@ const Content = styled.div`
 `;
 
 const Img = styled.div`
-  @media (max-width: 430px) {
-    flex-direction: column;
-  }
   @media (max-width: 768px) {
     flex-direction: column;
   }
@@ -123,7 +121,10 @@ const Img = styled.div`
 `;
 
 const Photo = styled.div`
-  width: 100%;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+  width: 50%;
   height: 314px;
   margin-top: 20px;
   object-fit: cover;
@@ -157,6 +158,7 @@ const Like = styled.div`
 `;
 
 const Bar = styled.div`
+  position: relative;
   img {
     width: 20px;
     height: 20px;
@@ -172,6 +174,13 @@ const CafeReview = () => {
 
   // 특정 카페 리뷰 조회
   const [cafeReviewInfo, setCafeReviewInfo] = useState("");
+  // 모달창 상태값 
+  const [isModalVisible, setModalVisible] = useState(false);
+  // 특정 리뷰 값만 모달창 오픈
+  const [openReviewId, setOpenReviewId] = useState(null);
+
+  const memNum = 3; // 여기에 이제 로그인 된 회원번호 받아오기
+  console.log(cafeReviewInfo);
 
   useEffect(() => {
     const cafeReview = async() => {
@@ -180,10 +189,6 @@ const CafeReview = () => {
     };
     cafeReview();
   }, [cafeNum]);
-
-  console.log(info);
-  console.log(cafeNum);
-  console.log(cafeReviewInfo);
   
   // 평균 별점 점수 전달
   const star = cafeReviewInfo.length > 0 ? cafeReviewInfo[0].avgScore : 0;
@@ -191,10 +196,23 @@ const CafeReview = () => {
   
   const prevPage = () => {
     navigate(-1);
-  }
+  };
 
   const sendCafeNum = () => {
     navigate('/cafe/review/write', {state : {cafeNum}});
+  };
+
+  const modalOpen = (id) => {
+    setModalVisible(!isModalVisible);
+    setOpenReviewId(id);
+  };
+
+  const closeModal = () => {
+    setOpenReviewId(null);
+  };
+
+  const changeLikeCount = (id) => {
+    console.log(id);
   }
 
   return(
@@ -218,14 +236,18 @@ const CafeReview = () => {
           <div className="id"><span>{review.userId}&nbsp;&nbsp;&nbsp;{review.writtenDay}</span></div>
         </div>
       </MemberBox>
-      <Bar><img src={dot} alt="메뉴바" /></Bar>
+      <Bar onClick={() => modalOpen(review.id)}>
+      {review.userNum === memNum && <img src={dot} alt="메뉴바" />}
+      {isModalVisible && openReviewId === review.id && (
+        <CafeReviewModal reviewInfo={cafeReviewInfo} id={review.id} cafeNum={cafeNum} onClose={closeModal} />
+      )}
+      </Bar>
       </div>
       <Content><p>{review.content}</p></Content>
       <Img>
-      <Photo className="photo" imageurl={review.url1}></Photo>
-      <Photo className="photo" imageurl={review.url2}></Photo>
-      </Img>
-      <Like><button><img src={like} alt="좋아요" /><p>{review.likeCount}</p></button></Like>
+      {review.url1 && <Photo className="photo" imageurl={review.url1}></Photo>}
+      {review.url2 && <Photo className="photo" imageurl={review.url2}></Photo>} </Img>
+      <Like onClick={() => changeLikeCount(review.id)}><button><img src={like} alt="좋아요" /><p>{review.likeCount}</p></button></Like>
       <br /><hr />
     </ReviewBox>
      ))}

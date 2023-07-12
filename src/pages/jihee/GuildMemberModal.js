@@ -12,25 +12,29 @@ const Box = styled.div`
   display: flex;
   justify-content: space-around;
   gap: 10px;
-
 `;
 
 const MemberBox = styled.div`
   width: 50px;
   height: 50px;
-  border: 1px solid black;
   border-radius: 50%;
+  object-fit: cover;
+  background-image: url(${props => props.imageurl});
+  background-size: cover;
+  background-position: center;
 `;
 
-const GuildMemberModal = () => {
+const GuildMemberModal = ({members}) => {
+
+  console.log(members);
+
   return(
     <>
     <ModalBox> 
       <Box>
-        <MemberBox></MemberBox>
-        <MemberBox></MemberBox>
-        <MemberBox></MemberBox>
-        <MemberBox></MemberBox>
+      {members && members.map(index => (
+        <MemberBox key={index} imageurl={index}></MemberBox>
+      ))}
       </Box>
     </ModalBox>
     </>

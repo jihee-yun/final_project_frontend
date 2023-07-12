@@ -156,14 +156,15 @@ const Detail = styled.textarea`
   box-sizing: border-box;
 `;
 
-const CafeReviewWrite = () => {
+const CafeReviewEdit = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const selectInfo = location.state && location.state.selectInfo;
   const cafeNum = location.state && location.state.cafeNum;
 
   // 이미지 미리보기
-  const [imageSrc, setImageSrc] = useState(null);
-  const [imageSrc2, setImageSrc2] = useState(null);
+  const [imageSrc, setImageSrc] = useState(selectInfo[0].url1);
+  const [imageSrc2, setImageSrc2] = useState(selectInfo[0].url2);
   const [score, setScore] = useState("");
   const [content, setContent] = useState("");
 
@@ -172,7 +173,6 @@ const CafeReviewWrite = () => {
   const [uploadedImage2, setUploadedImage2] = useState(null);
 
   console.log("넘어온 값 : " + score);
-  console.log("CafeReviewWrite - cafeNum:", cafeNum);
 
   const onUpload = async(e, imageIndex) => {
     const file = e.target.files[0];
@@ -212,11 +212,15 @@ const CafeReviewWrite = () => {
     setContent(e.target.value);
   };
 
+  // 수정 시 필요한 값 할당
+  const reviewNum = selectInfo[0].id;
+  const editScore = score ? score : selectInfo[0].score;
+
   // 후기 작성
-  const writeReview = async() => {  
+  const updateReview = async() => {  
     try{
-      let imageUrl1 = null;
-      let imageUrl2 = null;
+      let imageUrl1 = selectInfo[0].url1;
+      let imageUrl2 = selectInfo[0].url2;
 
       if (uploadedImage1) {
         const storageRef1 = ref(storage, `reviewImg/${uploadedImage1.name}`);
@@ -234,13 +238,14 @@ const CafeReviewWrite = () => {
 
       console.log("url 경로 1: " + imageUrl1);
       console.log("url 경로 2: " + imageUrl2);
-  
-      const response = await AxiosApi.createNewReview(
-        3, cafeNum, content, score, imageUrl1, imageUrl2
+
+      const response = await AxiosApi.editReview(
+        cafeNum, reviewNum, content, editScore, imageUrl1, imageUrl2
       );
+
       console.log(response.data);
       if(response.data === true) {
-        alert("리뷰가 작성되었습니다.");
+        alert("리뷰가 수정되었습니다.");
         navigate(-1);
       }
     } catch(error) {
@@ -250,15 +255,16 @@ const CafeReviewWrite = () => {
 
   return(
     <>
-    <Container>
+    {selectInfo && selectInfo.map(review =>(
+    <Container key={review.id}>
       <div className="box">
         <div className="back" onClick={prevPage}><ArrowBackIosIcon style={{width: "18px", height: "18px"}}/></div>
         <div className="star">
           <h3>별점을 선택해주세요</h3>
-          <RatingStar setScore={setScore}/>
+          <RatingStar getScore={review.score} setScore={setScore}/>
         </div>
         <div className="write">
-        <Detail placeholder="후기 내용을 작성해주세요" onChange={changeContent}></Detail>
+        <Detail placeholder={review.content} onChange={changeContent}></Detail>
         </div>
         <div className="upload">
           <p>이미지 첨부(최대 2장)</p>
@@ -280,10 +286,11 @@ const CafeReviewWrite = () => {
           </div>
         </div>
       </div>
-      {score && content && (<div className="send" onClick={writeReview}><button>작성하기</button></div>)}
+      {score && content && (<div className="send" onClick={updateReview}><button>수정하기</button></div>)}
     </Container>
+    ))}
     </>
   );
 };
 
-export default CafeReviewWrite;
+export default CafeReviewEdit;
