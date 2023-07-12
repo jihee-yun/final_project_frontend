@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
 import Sidebar from "./Sidebar"
+import UserStore from "../../../context/UserStore";
 
 const HeaderContainer = styled.header`
     padding: 1.8rem 0;
@@ -100,25 +101,17 @@ const Navlink = styled(Link) `
     font-size: 2.5rem;
   }
 `;
-const HamburgerBtn = styled.button`
-  width: 3rem;
-  height: 3rem;
-  margin-right: 20px;
-  padding: 0;
-  border: none;
-  border-radius: 3px;
-  color: white;
-  outline: none;
-  justify-content: center;
-  align-items: center;
-  &:active {
-    border: none;
+
+const Header = () => {
+  const [isOpen, setOpen] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(false);
+  const { setIsSidebar } = useContext(UserStore);
+
+  const handleClickMenuIcon = () => {
+    setIsSidebar(true);
   }
-`;
-const Header = (props) => {
 
-
-
+  
     return(
         <>
         <HeaderContainer>
@@ -132,8 +125,7 @@ const Header = (props) => {
                 <Link to="/login" style={{marginRight: "10px"}}>로그인</Link>
                 <Link to="/signup">회원가입</Link>
         </div>
-        <Sidebar width={320}> 
-      </Sidebar>
+        <MenuIcon className="openBtn" onClick={handleClickMenuIcon}/> 
         </Rightbox>
         </HeaderContainer>
         <NavContainer>
@@ -155,7 +147,6 @@ const Header = (props) => {
         //   onClick={handleSearchInconClick}
         />
       </div>
-                    {/* <Navlink><PersonIcon style={{color: "white"}} className="MyPage"/></Navlink> */}
                 </ul>
                 
         </NavContainer>

@@ -75,7 +75,7 @@ const UserStore = ({children}) => {
     userID, setUserID, passWord, setPassWord, isLogin, setIsLogin, userNum, setUserNum, 
     userName, setUserName, userAuthority, setUserAuthoruty, 
     region, setRegion, cafeNum, setCafeNum, guildNum, setGuildNum,
-    handleLogin, handleLogOut, setIsSidebar, couponNum, setCouponNum, challengeNum, setChallengeNum
+    handleLogin, handleLogOut, isSidebar, setIsSidebar, couponNum, setCouponNum, challengeNum, setChallengeNum
   };
 
 
