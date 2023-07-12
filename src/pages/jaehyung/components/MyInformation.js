@@ -7,6 +7,7 @@ import Header from "../../now/component/Header";
 import Footer from "../../now/component/Footer";
 import SideMenu from "./SideMenu";
 import ChatBot from "./ChatBot";
+import { Password } from "@mui/icons-material";
 
 const OutBox = styled.div`
   display: flex;
@@ -23,7 +24,6 @@ const Container = styled.div`
 `;
 const Detail = styled.div`
   width: 100%;
-  height: 1000px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -45,7 +45,6 @@ const SelectBox = styled.div`
 const ContentBox = styled.div`
   width: 90%;
   min-width: 500px;
-  height: 780px;
   margin-top: 3%;
   border: 1px solid #F3E1E1;
   border-radius: 15px;
@@ -54,43 +53,68 @@ const ContentBox = styled.div`
 `;
 const SpecificBox = styled.div`
   margin: 20px;
-  border: 1px solid red;
+  border: 1px solid #F3E1E1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border-radius: 15px;
 `;
 const TitleBox = styled.div`
   margin-top: 5px;
   border: 1px solid blue;
 `;
-const InformationBox = styled.div`
-  margin-top: 5px;
-  margin-bottom: 5px;
-  border: 1px solid blue;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
 
-const Introinput = styled.input`
-  width: 90%;
-  height: 100px;
-`;
-const IntroButton = styled.button`
-
-`;
 // 각 박스별 정보 표시 p태크
 const InfoType = styled.p`
   width: 80%;
   min-width: 100px;
 `;
-// 핸드폰 번호 수정 input
-const PhoneInput = styled.input`
+// 변경 불가능한 회원정보 표시하는 텍스트 박스
+const TextBox = styled.p`
   width: 80%;
   min-width: 200px;
   height: 30px;
+  line-height: 30px;
+  margin-top: -5px;
+  margin-bottom: 10px;
+  padding-left: 10px;
+  border: 0;
+  background-color: #eee;
+`;
+// 비밀번호 입력창
+
+
+// 한 줄 소개 수정 입력창
+const Introinput = styled.input`
+  width: 90%;
+  min-width: 200px;
+  height: 150px;
+  &:focus {
+    outline: none;
+  }
+  margin-bottom: 10px;
+  padding-left: 5px;
+`;
+// 한 줄 소개 수정 버튼
+const IntroButton = styled.button`
+  width: 150px;
+  height: 40px;
+  margin: 5px;
+  color: white;
+  background-color: #F1D1D1;
+  border: 0;
+  cursor: pointer;
+`;
+
+// 핸드폰 번호 수정 input
+const GrayInput = styled.input`
+  width: 80%;
+  min-width: 200px;
+  height: 30px;
+  line-height: 30px;
   margin-bottom: 5px;
+  padding-left: 10px;
   border: 0;
   background-color: #eee;
   &:focus {
@@ -103,7 +127,6 @@ const PhoneChangeButton = styled.button`
   height: 40px;
   margin: 5px;
   color: white;
-  //text-shadow: -.5px -.5px 0 black, .5px -.5px 0 black, -.5px .5px 0 black, .5px .5px 0 black;
   background-color: #F1D1D1;
   border: 0;
   cursor: pointer;
@@ -114,21 +137,64 @@ const MyInformation = () => {
   // useContext 저장값 불러오기
   const {grantType, accessToken, refreshToken, userNum, userName, userAuthority} = useContext(UserContext);
 
+  // 유저 정보 상태 관리
+  const [memberInfo, setMemberInfo] = useState(null);
+
+  // 유저 정보 가져오기
+  useEffect(() => {
+    const fetchMemberInfo = async () => {
+      try {
+        const rsp = await MemberApi.getMemberInfo(userNum, grantType, accessToken);
+        if (rsp.status) {
+          setMemberInfo(rsp.data[0]);
+          console.log("유저 정보 가져오기 성공: ", rsp.data[0])
+        }
+      } catch (error) {
+        console.log("유저 정보 가져오기 실패: ", error);
+      }
+    };
+
+    fetchMemberInfo();
+  }, [userNum]);
 
 
   // 한줄 소개 수정
   const handleIntroChange = async () => {
     const intro = document.getElementById("intro").value;
     try {
-      const rsp = await MemberApi.introUpdate(intro);
+      const rsp = await MemberApi.introUpdate(userNum, intro, grantType, accessToken);
       if(rsp.status) {
-        console.log("한줄소개 업데이트 성공: ", rsp.data);
+        if(rsp.data = "true") {
+          console.log("한 줄 소개 업데이트 성공: ", rsp.data);
+        } else {
+          console.log("통신은 성공, 한 줄 소개 업데이트 실패", rsp.data);
+        }
       }
     } catch(error) {
       console.log("한줄소개 업데이트 실패: ", error);
     }
+  }
 
+  // 전화번호 변경
+  const handlePhoneChange = async () => {
+    const phone = document.getElementById("phone").value;
+    try {
+      const rsp = await MemberApi.phoneUpdate(userNum, phone, grantType, accessToken);
+      if (rsp.status) {
+        if(rsp.data = "true") {
+          console.log("전화번호 업데이트 성공: ", rsp.data);
+        } else {
+          console.log("통신은 성공, 전화번호 업데이트 실패", rsp.data);
+        }
+      }
+    } catch (error) {
+      console.log("전화번호 업데이트 실패: ", error);
+    }
+  };
 
+  // memberInfo가 로딩 중일 때 표시할 로딩 스피너 등의 UI를 추가할 수 있습니다.
+  if (!memberInfo) {
+    return <div>회원 정보 로딩중...</div>;
   }
 
   return (
@@ -141,17 +207,33 @@ const MyInformation = () => {
             회원 정보
           </SelectBox>
           <ContentBox>
+          <TitleBox>회원 정보 수정</TitleBox>
             <SpecificBox>
-              <TitleBox>내 소개</TitleBox>
-              <InformationBox>
-                <Introinput id="intro" type="text"></Introinput>
-              </InformationBox>
-              <IntroButton onclick={handleIntroChange}>변경하기</IntroButton>
+              <InfoType>프로필 이미지 수정</InfoType>
+
             </SpecificBox>
             <SpecificBox>
-              <InfoType>전화번호 변경(-없이 숫자만 입력)</InfoType>
-              <PhoneInput id="phone" type="text"></PhoneInput>
-              <PhoneChangeButton>저장하기</PhoneChangeButton>
+              <InfoType>회원 아이디</InfoType>
+              <TextBox>{memberInfo.memberId}</TextBox>
+            </SpecificBox>
+            <SpecificBox>
+              <InfoType>회원 비밀번호</InfoType>
+              <GrayInput type="text" placeholder={"기존 비밀번호"}/>
+              <GrayInput type="text" placeholder={"새로운 비밀번호"}/>
+              <GrayInput type="text" placeholder={"새로운 비밀번호 확인"}/>
+              <PhoneChangeButton>변경하기</PhoneChangeButton>
+            </SpecificBox>
+
+
+            <SpecificBox>
+              <InfoType>한 줄 소개(255자 제한)</InfoType>
+              <Introinput id="intro" type="text" defaultValue={memberInfo ? memberInfo.intro : ''}></Introinput>
+              <IntroButton onClick={handleIntroChange}>변경하기</IntroButton>
+            </SpecificBox>
+            <SpecificBox>
+              <InfoType>전화번호 변경(-포함하여 입력)</InfoType>
+              <GrayInput id="phone" type="text" defaultValue={memberInfo ? memberInfo.phone : ''} />
+              <PhoneChangeButton onClick={handlePhoneChange}>변경하기</PhoneChangeButton>
             </SpecificBox>
             <SpecificBox>
 

@@ -13,8 +13,6 @@ const AxiosApi = {
 
   // 회원 번호로 날짜 내의 리뷰 조회
   reviewGetByDate : async (userNum, startDate, endDate, grantType, accessToken) => {
-    console.log(grantType);
-    console.log(accessToken);
     const checkData = {
       userNum : userNum,
       startDate : startDate,

@@ -2,7 +2,7 @@ import axios from "axios";
 const DOMAIN = "http://localhost:8111";
 
 const MemberApi = {
-  // 일반 회원 로그인
+  // 일반 회원 가입
   userSignup : async (userId, password, name, phone, email, birthday, gender, authority) => {
     const signupData = {
       userId : userId,
@@ -17,7 +17,7 @@ const MemberApi = {
     return await axios.post(`${DOMAIN}/user/signup`, signupData);
   },
 
-  // 사업자 회원 로그인
+  // 사업자 회원 가입
   memberSignup : async (memberId, password, name, phone, email, birthday, gender, authority) => {
     const signupData = {
       memberId : memberId,
@@ -67,13 +67,38 @@ const MemberApi = {
 
 
 
+  // 마이페이지 정보수정을 위한 회원 정보 조회
+  getMemberInfo: async (memberNum, grantType, accessToken) => {
+    return await axios.get(`${DOMAIN}/info/memberinfo?membernum=${memberNum}`, {
+      headers: {
+        Authorization: `${grantType} ${accessToken}`
+      }
+    });
+  },
 
   // 한줄소개 업데이트 테스트
-  introUpdate: async (intro) => {
+  introUpdate: async (memberNum, intro, grantType, accessToken) => {
     const introData = {
+      memberNum : memberNum,
       intro : intro
     }
-    return await axios.post(`${DOMAIN}/info/intro`, introData);
+    return await axios.post(`${DOMAIN}/info/introchange`, introData, {
+      headers: {
+        Authorization: `${grantType} ${accessToken}`
+      }
+    });
+  },
+  // 전화 번호 업데이트
+  phoneUpdate: async(memberNum, phone, grantType, accessToken) => {
+    const phoneData = {
+      memberNum : memberNum,
+      phone : phone
+    }
+    return await axios.post(`${DOMAIN}/info/phonechange`, phoneData, {
+      headers: {
+        Authorization: `${grantType} ${accessToken}`
+      }
+    });
   }
 
 };
