@@ -24,21 +24,13 @@ const AxiosApi = {
 
         // 로그인
         userLogin: async (userId, password, grantType, accessToken) => {
-          console.log('grantType:', grantType);
-          console.log('accessToken:', accessToken);
-
           const loginData = {
             userId: userId,
             password: password
           };
 
-        return await axios.post(KH_DOMAIN + "/user/login", loginData, {
-          headers: {
-            Authorization: `${grantType} ${accessToken}`
-          }
-        });
+        return await axios.post(KH_DOMAIN + "/user/login", loginData)
       },
-
       // 비밀번호 찾기
       findPw: async(email) => {
         const data = {
