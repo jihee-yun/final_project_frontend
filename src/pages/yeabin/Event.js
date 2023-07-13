@@ -6,6 +6,7 @@ import shopping from "./images/shopping.png";
 import { useNavigate } from "react-router-dom";
 import AxiosApi from "./Api/AxiosApi";
 import ad from "./images/event-ad.png";
+import Header from "../now/component/Header";
 
 const ContainerBox = styled.div`
   /* max-width: 1440px;
@@ -15,6 +16,11 @@ const ContainerBox = styled.div`
 const Box = styled.div`
   width: 80%;
   margin: 0 auto;
+  margin-top: 80px;
+
+  h3 {
+    margin-left: 40px;
+  }
 
   .r-title {
     margin-top: 100px;
@@ -221,6 +227,7 @@ const Event = () => {
 
   return(
     <>
+    <Header />
       <ContainerBox>
         <Box>
           <h3>이 달의 퀘스트</h3>

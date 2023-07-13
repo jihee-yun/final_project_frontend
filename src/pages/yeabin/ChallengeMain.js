@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import challengePin from "./images/challengePin.png"
 import { Link, useLocation } from "react-router-dom";
 import ChallnegeModal from "./ChallengeModal";
-
+import Header from "../now/component/Header";
 
 const Container = styled.div`
   width: 80%;
@@ -158,6 +158,7 @@ const ChallengeMain = () => {
 
   return(
     <>
+    <Header />
     <Container>
       <Box>
         <div>

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Header from "../now/component/Header";
 
 // 현금으로 포인트 충전하는 상점
 
@@ -47,6 +48,7 @@ const Titlebox = styled.div`
 const PointStore = () => {
   return(
     <>
+    <Header />
     <ContainerBox>
       <Titlebox>
         <h3>포인트 충전하기</h3>
