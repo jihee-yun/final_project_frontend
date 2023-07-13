@@ -3,8 +3,9 @@ import styled from "styled-components";
 import Roulette from "./Roulette";
 import quiz from "./images/quiz.png";
 import shopping from "./images/shopping.png";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import AxiosApi from "./Api/AxiosApi";
+import ad from "./images/event-ad.png";
 
 const ContainerBox = styled.div`
   /* max-width: 1440px;
@@ -42,12 +43,13 @@ const EventFooter = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  flex-wrap: wrap;
  }
 `;
 
 const QuizBox = styled.div`
-  width: 280px;
-  height: 280px;
+  width: 260px;
+  height: 330px;
   border-radius: 20px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
   margin: 50px;
@@ -55,7 +57,7 @@ const QuizBox = styled.div`
   img {
     width: 80px;
     height: 80px;
-    margin: 20px 0 10px 20px;
+    margin: 40px 0 10px 20px;
   }
   
   h3 {
@@ -75,7 +77,7 @@ const QuizBox = styled.div`
     margin: 0 auto;
   }
   button {
-    margin-top: 25px;
+    margin-top: 45px;
     width: 100%;
     height: 35px;
     border: none;
@@ -89,15 +91,17 @@ const QuizBox = styled.div`
 `;
 
 const AdBox = styled.div`
-  width: 280px;
-  height: 280px;
-  border: 1px solid black;
-  margin: 50px;
+  .adImg {
+    width: 260px;
+    height: 330px;
+    /* border: 1px solid black; */
+    margin: 50px;
+  }
 `;
 
 const LuckyBox = styled.div`
-  width: 280px;
-  height: 280px;
+  width: 260px;
+  height: 330px;
   border-radius: 20px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
   margin: 50px;
@@ -105,7 +109,7 @@ const LuckyBox = styled.div`
   img {
     width: 80px;
     height: 80px;
-    margin: 20px 0 10px 20px;
+    margin: 40px 0 10px 20px;
   }
   
   h3 {
@@ -125,7 +129,7 @@ const LuckyBox = styled.div`
     margin: 0 auto;
   }
   button {
-    margin-top: 25px;
+    margin-top: 45px;
     width: 100%;
     height: 35px;
     border: none;
@@ -248,7 +252,11 @@ const Event = () => {
                 </div>
               </QuizBox>
               <AdBox>
-                <div><p>광고 이미지 들어갈 자리</p></div>
+                <div>
+                  <a href="https://www.coca-cola.co.kr/" target="_blank" rel="noopener noreferrer">
+                  <img className="adImg" src={ad} alt="광고" />
+                  </a>
+                </div>
               </AdBox>
               <LuckyBox>
                 <div>

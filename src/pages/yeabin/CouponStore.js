@@ -19,7 +19,7 @@ const MyPoint = styled.div`
  .goEvent {
     color: gray;
     font-size : 0.8rem;
-    margin-bottom: 50px;
+    margin: 10px 0 60px 0;
 
     .link_style {
       color: inherit;
@@ -32,7 +32,6 @@ const CouponBox = styled.div`
   margin-bottom: 80px;
   display: flex;
   flex-direction: row;
-  /* justify-content: space-between; */
 `;
 
 const CouponList = styled.div`
@@ -101,10 +100,11 @@ const Notice = styled.div`
   color: grey;
   font-size: 0.8rem;
   line-height: .5rem;
-  margin-top: 100px;
+  margin: 100px 0 60px 0;
 `;
 
 const InfoBox = styled.div`
+  margin-top: 60px;
 `;
 
 const InfoList = styled.div`
@@ -168,7 +168,7 @@ const CouponStore = () => {
               </CouponList>
             ))}
         </CouponBox>
-        <h3>포인트 사용 가능 매장 확인하기</h3>
+        <h3>지역 별 포인트 사용 가능 매장 확인하기</h3>
         <CafeAll>
           <CafeBox></CafeBox>
           <CafeBox></CafeBox>
