@@ -179,7 +179,7 @@ const CafeReview = () => {
   // 특정 리뷰 값만 모달창 오픈
   const [openReviewId, setOpenReviewId] = useState(null);
 
-  const memNum = 3; // 여기에 이제 로그인 된 회원번호 받아오기
+  const memNum = 2; // 여기에 이제 로그인 된 회원번호 받아오기
   console.log(cafeReviewInfo);
 
   useEffect(() => {

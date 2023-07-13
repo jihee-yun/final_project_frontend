@@ -22,16 +22,16 @@ const AxiosApi = {
             return await axios.post(KH_DOMAIN + "/user/new", member);
         },
 
-         // 로그인
+        // 로그인
         userLogin: async (userId, password, grantType, accessToken) => {
           console.log('grantType:', grantType);
           console.log('accessToken:', accessToken);
-        
+
           const loginData = {
             userId: userId,
             password: password
           };
-        
+
         return await axios.post(KH_DOMAIN + "/user/login", loginData, {
           headers: {
             Authorization: `${grantType} ${accessToken}`

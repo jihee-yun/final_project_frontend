@@ -197,6 +197,7 @@ const Login = () => {
     }
 
     const context = useContext(UserContext);
+    const {setGrantType, setAccessToken, setRefreshToken, setUserNum, setUserName, setUserAuthoruty } = useContext(UserContext);
     const {setUserID, setPassWord, setIsLogin} = context;
 
     const navigate = useNavigate("");
@@ -204,7 +205,6 @@ const Login = () => {
     // 키보드 입력
     const [inputId, setInputId] = useState("");
     const [inputPw, setInputPw] = useState("");
-
 
     //팝업 처리
     const [modalOpen, setModalopen] = useState(false);
@@ -231,7 +231,16 @@ const Login = () => {
 
     const onClickLogin = async() => {
         const response = await AxiosApi.userLogin(inputId, inputPw);
-        if(response) handleLoginSuccess();
+        if(response.status) {
+            const { grantType, accessToken, refreshToken} = response.data;
+            console.log(response.data);
+
+            setGrantType(grantType);
+            setAccessToken(accessToken);
+            setRefreshToken(refreshToken);
+            handleLoginSuccess();
+            
+        }
         else handleLoginFail();
     }
 
