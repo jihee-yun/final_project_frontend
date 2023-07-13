@@ -60,10 +60,10 @@ const Footer = () => {
           <Link to="/">Workers</Link>
         </li>
         <li>
-          <Link to="/">BEST</Link>
+          <Link to="/report">Report</Link>
         </li>
         <li>
-          <Link to="/">QnA</Link>
+          <Link to="/"></Link>
         </li>
       </Sitemap>
       <FooterInfo>

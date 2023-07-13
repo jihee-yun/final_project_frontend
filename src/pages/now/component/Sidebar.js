@@ -1,78 +1,121 @@
-import React, { useState } from 'react'
+import { useContext, useState } from 'react'
 import { Link } from "react-router-dom";
 import { styled } from 'styled-components';
 import profile from '../images/leeknow.jpg';
-import MenuIcon from '@mui/icons-material/Menu';
-
-
-
+import { UserContext } from "../../../context/UserStore";
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 
 const SidebarContainer = styled.div`
-  background-color: #202020;
-  transition: 0.4s ease;
+  box-sizing: border-box;
+  width: 300px;
   height: 100%;
-`
+  position: fixed;
+  top: 0;
+  right: ${(props) => props.Xlocation};
+  transition: 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+  border-radius: 10px;
+  background: #F2F2F2;
+  z-index: 100;
+  background-color: #F2F2F2;
 
+  /* &.active {
+    right: 0px;
+    trans
+  } */
+`;
 const SidebarTop = styled.div`
-display: flex;
-flex-direction: column;
+  display: flex;
+  justify-content: flex-end;
+  .xButton {
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 3px;
+    display: flex;
+    color: black;
+    justify-content: center;
+    align-items: center;
+    &:active {
+      background: #000000;
+      color: white;
+    }
+  }
+  
 `;
 
+const ProfileBox = styled.div`
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+  .userName {
+    align-self: center;
+  }
+
+`
+
 const Profile = styled.img`
- width: 200px;
+  width: 200px;
   height: 200px;
   margin: 16px 16px 16px 16px;
   background: white;
   border-radius: 10px;
   cursor: pointer;
   align-self: center;
-  @media screen and (max-width: 1024px) {
-    margin-right: 16px;
-  }
+
+`
+
+const MenuBox = styled.div`
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
 `
 
 const Menu = styled.ul`
-  width: 90%;
-  height: 100%;
+  
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  align-self: center;
+  list-style:none;
 `  
+const NavLink = styled(Link) `
+  text-decoration: none;
+  margin-bottom: 30px;
+  font-size: 30px;
+  color: inherit;
+  align-self: center;
+`
 
-
-
-const Sidebar = ({ width, children }) => {
-  const [isOpen, setOpen] = useState(false);
-  const [xPosition, setX] = useState(-width);
-  
-// button 클릭 시 토글
-  const toggleMenu = () => {
-    if (xPosition < 0) {
-      setX(0);
-      setOpen(true);
-    } else {
-      setX(-width);
-      setOpen(false);
-    }
-  };
+const Sidebar = () => {
+  const { isSidebar, setIsSidebar } = useContext(UserContext);
 
 
   return (
-      <SidebarContainer  style={{ transform: `translatex(${-xPosition}px)`}}>
-      <button onClick={() => toggleMenu()}>
-          {isOpen ? <span>X</span> : <MenuIcon /> }
-      </button>
+      <SidebarContainer  Xlocation={isSidebar}>
       <SidebarTop>
-      <Profile src={profile}/>
+      <button className="xButton" onClick={() => setIsSidebar("-300px")}>
+          <CloseRoundedIcon />
+        </button>
       </SidebarTop>
+      <ProfileBox>
+      <Profile src={profile}/>
+      <div className='userName'>리빗</div>
+      </ProfileBox>
+      <MenuBox>
       <Menu>
-        <Link to="/cafe">카페 찾기</Link>
-        <Link to="/guild">길드</Link>
-        <Link to="/event">퀘스트</Link>
-        <Link to="/couponStore">상점</Link>
+        <NavLink to="/cafe">카페 찾기</NavLink>
+        <NavLink to="/guild">길드</NavLink>
+        <NavLink to="/event">퀘스트</NavLink>
+        <NavLink to="/couponStore">상점</NavLink>
       </Menu>
+      </MenuBox>
       </SidebarContainer>
 
   )

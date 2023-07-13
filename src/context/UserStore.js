@@ -29,7 +29,7 @@ const UserStore = ({children}) => {
   // 길드번호
   const [guildNum, setGuildNum] = useState("");
   // 사이드바
-  const [isSidebar, setIsSidebar] = useState(false);
+  const [isSidebar, setIsSidebar] = useState("-300px");
   // 쿠폰번호
   const [couponNum, setCouponNum] = useState("");
   // 챌린지번호

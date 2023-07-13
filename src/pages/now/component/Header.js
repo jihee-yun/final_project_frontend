@@ -1,11 +1,10 @@
-import {useState, useContext} from "react";
+import { useContext } from "react";
 import { UserContext } from "../../../context/UserStore";
 import styled from "styled-components";
 import Logo from "../images/logo.png";
 import { Link } from "react-router-dom";
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
-import Sidebar from "./Sidebar"
 
 const HeaderContainer = styled.header`
     padding: 1.8rem 0;
@@ -15,7 +14,7 @@ const HeaderContainer = styled.header`
     width: 100%;
     margin: 0 auto;
     height: 150px;
-    z-index: 100;
+    z-index: 98;
 
     *{
         box-sizing: border-box;
@@ -35,13 +34,13 @@ const HeaderContainer = styled.header`
     `;
 
 const Rightbox = styled.div`
-
   display: flex;
+ 
   
 
 .member {
   align-self: flex-start;
-  padding-right: 60px;
+  padding-right: 40px;
   margin-bottom: 10px;
   font-weight: bold;
   font-size: 13px;
@@ -51,6 +50,18 @@ const Rightbox = styled.div`
         color: #6e6e6e;
     }
 }
+
+`;
+
+const HamburgerBtn = styled.button`
+  margin-right: 60px;
+  padding: 0;
+  color: black;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  cursor: pointer;
+  border:none;
 `;
 
     const NavContainer = styled.nav `
@@ -102,13 +113,9 @@ const Navlink = styled(Link) `
   }
 `;
 
-const Header = () => {
-  const [isOpen, setOpen] = useState(false);
-  const { isSidebar, setIsSidebar } = useContext(UserContext);
 
-  const handleClickMenuIcon = () => {
-    isSidebar(false);
-  }
+const Header = () => {
+  const { isSidebar, setIsSidebar } = useContext(UserContext);
 
   
     return(
@@ -124,8 +131,10 @@ const Header = () => {
                 <Link to="/login" style={{marginRight: "10px"}}>로그인</Link>
                 <Link to="/signup">회원가입</Link>
         </div>
-        <MenuIcon className="openBtn" onClick={handleClickMenuIcon}/> 
-        {isSidebar && <Sidebar />}
+        <HamburgerBtn
+          className="HamburgerBtn" onClick={() => setIsSidebar("0")}>
+          <MenuIcon  style={{fontSize: 30, marginRight: 10,}} />
+        </HamburgerBtn>
         </Rightbox>
         </HeaderContainer>
         <NavContainer>
