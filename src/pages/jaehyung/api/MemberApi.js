@@ -66,7 +66,6 @@ const MemberApi = {
 //  },
 
 
-
   // 마이페이지 정보수정을 위한 회원 정보 조회
   getMemberInfo: async (memberNum, grantType, accessToken) => {
     return await axios.get(`${DOMAIN}/info/memberinfo?membernum=${memberNum}`, {
@@ -76,7 +75,21 @@ const MemberApi = {
     });
   },
 
-  // 한줄소개 업데이트 테스트
+  // 비밀번호 업데이트
+  passwordUpdate: async (memberNum, password, newPassword, grantType, accessToken) => {
+    const passwordData = {
+      memberNum : memberNum,
+      password : password,
+      newPassword : newPassword
+    }
+    return await axios.post(`${DOMAIN}/info/passwordchange`, passwordData, {
+      headers: {
+        Authorization: `${grantType} ${accessToken}`
+      }
+    });
+  },
+
+  // 한줄소개 업데이트
   introUpdate: async (memberNum, intro, grantType, accessToken) => {
     const introData = {
       memberNum : memberNum,

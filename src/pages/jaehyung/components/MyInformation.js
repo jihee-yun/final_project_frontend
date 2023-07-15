@@ -82,7 +82,10 @@ const TextBox = styled.p`
   border: 0;
   background-color: #eee;
 `;
-// 비밀번호 입력창
+// 비밀번호 입력문구
+const ValidationMessage = styled.p`
+  color: ${props => props.isValid ? 'blue' : 'red'};
+`;
 
 
 // 한 줄 소개 수정 입력창
@@ -139,6 +142,15 @@ const MyInformation = () => {
 
   // 유저 정보 상태 관리
   const [memberInfo, setMemberInfo] = useState(null);
+  // 비밀 번호 변경시 비교용
+  const [newPassword, setNewPassword] = useState("");
+  const [newPasswordCheck, setNewPasswordCheck] = useState("");
+  // 비밀번호 유효성 검사, 메세지
+  const [isValidPassword, setIsValidPassword] = useState(false);
+  const [passwordValidationMessage, setPasswordValidationMessage] = useState("");
+  const [newPasswordCheckMessage, setNewPasswordCheckMessage] = useState("");
+
+
 
   // 유저 정보 가져오기
   useEffect(() => {
@@ -153,15 +165,39 @@ const MyInformation = () => {
         console.log("유저 정보 가져오기 실패: ", error);
       }
     };
-
     fetchMemberInfo();
   }, [userNum]);
 
+  // 비밀 번호 조합 확인
+  const validatePassword = (password) => {
+    const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
+    if (regex.test(password)) {
+      setPasswordValidationMessage("정상적인 조합입니다.");
+      setIsValidPassword(true);
+    } else {
+      setPasswordValidationMessage("조합을 다시 확인해주세요.");
+      setIsValidPassword(false);
+    }
+  }
+  // 새 비밀번호 일치 여부 확인
+  const handlePasswordCheckChange = (e) => {
+    setNewPasswordCheck(e.target.value);
+    if(newPassword === e.target.value) {
+      setNewPasswordCheckMessage("새 비밀번호 값이 일치합니다.");
+    } else {
+      setNewPasswordCheckMessage("새 비밀번호를 동일하게 입력해 주세요.");
+    }
+  }
+
   // 비밀번호 수정
   const handlePasswordChange = async () => {
-    const password = document.getElementById("newPassword").value;
+    const password = document.getElementByName("password").value;
+    if (newPassword !== newPasswordCheck) {
+      alert("비밀번호가 일치하지 않습니다!");
+      return;
+    }
     try {
-      const rsp = await MemberApi.passwordUpdate(userNum, password, grantType, accessToken);
+      const rsp = await MemberApi.passwordUpdate(userNum, password, newPassword, grantType, accessToken);
       if(rsp.status) {
         if(rsp.data = "true") {
           console.log("비밀번호 업데이트 성공: ", rsp.data);
@@ -176,7 +212,7 @@ const MyInformation = () => {
 
   // 한줄 소개 수정
   const handleIntroChange = async () => {
-    const intro = document.getElementById("intro").value;
+    const intro = document.getElementByName("intro").value;
     try {
       const rsp = await MemberApi.introUpdate(userNum, intro, grantType, accessToken);
       if(rsp.status) {
@@ -193,7 +229,7 @@ const MyInformation = () => {
 
   // 전화번호 변경
   const handlePhoneChange = async () => {
-    const phone = document.getElementById("phone").value;
+    const phone = document.getElementByName("phone").value;
     try {
       const rsp = await MemberApi.phoneUpdate(userNum, phone, grantType, accessToken);
       if (rsp.status) {
@@ -234,21 +270,51 @@ const MyInformation = () => {
             </SpecificBox>
             <SpecificBox>
               <InfoType>회원 비밀번호</InfoType>
-              <GrayInput id="password" type="text" placeholder={"기존 비밀번호"}/>
-              <GrayInput id="newPassword" type="text" placeholder={"새로운 비밀번호"}/>
-              <GrayInput id="newPasswordCheck" type="text" placeholder={"새로운 비밀번호 확인"}/>
-              <PhoneChangeButton onClick={handlePasswordChange}>변경하기</PhoneChangeButton>
+              <GrayInput
+                name="password"
+                type="password"
+                placeholder={"기존 비밀번호"}
+              />
+              <GrayInput
+                name="newPassword"
+                type="password"
+                placeholder={"새로운 비밀번호(영문자, 숫자, 특수기호 포함 8자리 이상)"}
+                value={newPassword}
+                onChange={(e) => {
+                  setNewPassword(e.target.value);
+                  validatePassword(e.target.value);
+                }}
+              />
+              <ValidationMessage isValid={isValidPassword}>
+                {passwordValidationMessage}
+              </ValidationMessage>
+              <GrayInput
+                name="newPasswordCheck"
+                type="password"
+                placeholder={"새로운 비밀번호 확인"}
+                value={newPasswordCheck}
+                onChange={handlePasswordCheckChange}
+              />
+              <ValidationMessage isValid={newPassword === newPasswordCheck}>
+                {newPasswordCheckMessage}
+              </ValidationMessage>
+              <PhoneChangeButton
+                disabled={newPassword !== newPasswordCheck}
+                onClick={handlePasswordChange}
+              >
+                변경하기
+              </PhoneChangeButton>
             </SpecificBox>
 
 
             <SpecificBox>
               <InfoType>한 줄 소개(255자 제한)</InfoType>
-              <Introinput id="intro" type="text" defaultValue={memberInfo ? memberInfo.intro : ''}></Introinput>
+              <Introinput name="intro" type="text" defaultValue={memberInfo ? memberInfo.intro : ''}></Introinput>
               <IntroButton onClick={handleIntroChange}>변경하기</IntroButton>
             </SpecificBox>
             <SpecificBox>
               <InfoType>전화번호 변경(-포함하여 입력)</InfoType>
-              <GrayInput id="phone" type="text" defaultValue={memberInfo ? memberInfo.phone : ''} />
+              <GrayInput name="phone" type="text" defaultValue={memberInfo ? memberInfo.phone : ''} />
               <PhoneChangeButton onClick={handlePhoneChange}>변경하기</PhoneChangeButton>
             </SpecificBox>
             <SpecificBox>

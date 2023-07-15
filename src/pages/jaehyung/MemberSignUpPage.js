@@ -104,12 +104,12 @@ const MemberSignUpPage = () => {
   };
 
   const handleSignup = async () => {
-    const memberId = document.getElementById("memberId").value;
-    const password = document.getElementById("password").value;
-    const name = document.getElementById("name").value;
-    const phone = document.getElementById("phone").value;
-    const email = document.getElementById("email").value;
-    const birth = document.getElementById("birth").value;
+    const memberId = document.getElementByName("memberId").value;
+    const password = document.getElementByName("password").value;
+    const name = document.getElementByName("name").value;
+    const phone = document.getElementByName("phone").value;
+    const email = document.getElementByName("email").value;
+    const birth = document.getElementByName("birth").value;
     const genderGet = gender;
     const authorityGet = authority;
 
@@ -142,27 +142,27 @@ const MemberSignUpPage = () => {
         <TextBox>회원가입 테스트</TextBox>
         <div>
           <InputLabel htmlFor="memberId">아이디</InputLabel>
-          <Input id="memberId" type="text" />
+          <Input name="memberId" type="text" />
         </div>
         <div>
           <InputLabel htmlFor="password">비밀번호</InputLabel>
-          <Input id="password" type="password" />    
+          <Input name="password" type="password" />    
         </div>
         <div>
           <InputLabel htmlFor="name">이름</InputLabel>
-          <Input id="name" type="text"></Input>
+          <Input name="name" type="text"></Input>
         </div>
         <div>
           <InputLabel htmlFor="phone">핸드폰</InputLabel>
-          <Input id="phone" type="text"></Input>
+          <Input name="phone" type="text"></Input>
         </div>
         <div>
           <InputLabel htmlFor="email">이메일</InputLabel>
-          <Input id="email" type="text"></Input>
+          <Input name="email" type="text"></Input>
         </div>
         <div>
           <InputLabel htmlFor="birth">생년월일</InputLabel>
-          <Input id="birth" type="text" placeholder="ex)2000-01-01"></Input>
+          <Input name="birth" type="text" placeholder="ex)2000-01-01"></Input>
         </div>
         <RadioSelect>
           성별

@@ -103,8 +103,8 @@ const MemberLoginPage = () => {
 
   // // 로그인 성공시 조회용 회원 번호 받아오기
   // const handleGetNum = async () => {
-  //   const memberId = document.getElementById("memberId").value;
-  //   const password = document.getElementById("password").value;
+  //   const memberId = document.getElementsByName("memberId").value;
+  //   const password = document.getElementsByName("password").value;
   //   const authorityGet = authority;
   //   try {
   //     let rsp2;
@@ -126,8 +126,8 @@ const MemberLoginPage = () => {
 
   // 로그인 함수
   const handleLogin = async () => {
-    const memberId = document.getElementById("memberId").value;
-    const password = document.getElementById("password").value;
+    const memberId = document.getElementsByName("memberId").value;
+    const password = document.getElementsByName("password").value;
     const authorityGet = authority;
 
     try {
@@ -174,9 +174,9 @@ const MemberLoginPage = () => {
       <LoginBox>
         <InputBox>
           <IdInputLabel htmlFor="memberId">아이디</IdInputLabel>
-          <IdInput id="memberId" type="text" onKeyDown={handleKeyDown}/>
+          <IdInput name="memberId" type="text" onKeyDown={handleKeyDown}/>
           <PasswordInputLabel htmlFor="password">비밀번호</PasswordInputLabel>
-          <PasswordInput id="password" type="password" onKeyDown={handleKeyDown}/>          
+          <PasswordInput name="password" type="password" onKeyDown={handleKeyDown}/>          
           <AuthSelect>
             <RadioLabel>
               <RadioButton
