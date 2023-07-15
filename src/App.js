@@ -70,9 +70,9 @@ function App() {
         <Route path='/couponStore' element={<CouponStore/>}/>
         <Route path='/pointStore' element={<PointStore/>}/>
         <Route path='/findId' element={<FindID/>}/>
-        <Route path='/adminDelete' element={<AdminDelete/>}/>
-        <Route path='/adminReport' element={<AdminReport/>}/>
-        <Route path='/userManage' element={<UserManage/>}/>
+        <Route path='/admin/delete' element={<AdminDelete/>}/>
+        <Route path='/admin/report' element={<AdminReport/>}/>
+        <Route path='/admin/userManage' element={<UserManage/>}/>
         <Route path='/mypage' element={<MyPage/>}/>
         <Route path='/mypage/review' element={<MyReview/>}/>
         <Route path='/mypage/challenge' element={<MyChallenge/>}/>
@@ -87,7 +87,7 @@ function App() {
         <Route path='/membersignup' element={<MemberSignUpPage/>}/>
         <Route path='/report' element={<Report/>}/>
         <Route path='/challengeMain' element={<ChallengeMain/>}/>
-        <Route path='/manageReview' element={<ManageReview/>}/>
+        <Route path='/admin/manageReview' element={<ManageReview/>}/>
         <Route path='/quizMain' element={<QuizMain/>}/>
         <Route path='/payComplete' element={<PayComplete/>}/>
         <Route path='/couponPayment' element={<CouponPayment/>}/>

@@ -86,22 +86,22 @@ const AdminInfo = () => {
 
   // 사용자 관리
   const handleUserManage = () => {
-    navigate('/userManage');
+    navigate('/admin/userManage');
   }
 
   // 신고
   const handleReport = () => {
-    navigate('/adminReport');
+    navigate('/admin/report');
   }
 
   // 삭제
   const handleDelete = () => {
-    navigate('/adminDelete');
+    navigate('/admin/delete');
   }
 
   // 리뷰 
   const handleReview = () => {
-    navigate('/manageReview');
+    navigate('/admin/manageReview');
   }
 
   return (
