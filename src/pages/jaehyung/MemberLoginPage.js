@@ -126,8 +126,8 @@ const MemberLoginPage = () => {
 
   // 로그인 함수
   const handleLogin = async () => {
-    const memberId = document.getElementsByName("memberId").value;
-    const password = document.getElementsByName("password").value;
+    const memberId = document.getElementById("memberId").value;
+    const password = document.getElementById("password").value;
     const authorityGet = authority;
 
     try {
@@ -174,9 +174,9 @@ const MemberLoginPage = () => {
       <LoginBox>
         <InputBox>
           <IdInputLabel htmlFor="memberId">아이디</IdInputLabel>
-          <IdInput name="memberId" type="text" onKeyDown={handleKeyDown}/>
+          <IdInput id="memberId" type="text" onKeyDown={handleKeyDown}/>
           <PasswordInputLabel htmlFor="password">비밀번호</PasswordInputLabel>
-          <PasswordInput name="password" type="password" onKeyDown={handleKeyDown}/>          
+          <PasswordInput id="password" type="password" onKeyDown={handleKeyDown}/>          
           <AuthSelect>
             <RadioLabel>
               <RadioButton
