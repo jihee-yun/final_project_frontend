@@ -33,6 +33,7 @@ const QuizBox = styled.div`
     font-weight: bolder;
     border: none;
     background-color: #FFCFDA;
+    cursor: pointer;
     /* border-radius: 20px; */
   }
 
@@ -60,7 +61,7 @@ const QuizMain = () => {
       setIsCorrect(option === answer);
 
       if (option === answer && option === answer) {
-        AxiosApi.quizPoint(amount);
+        AxiosApi.pointGet(amount);
       }
     }
   };

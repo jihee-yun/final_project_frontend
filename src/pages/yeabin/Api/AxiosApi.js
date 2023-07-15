@@ -21,12 +21,12 @@ const AxiosApi = {
   },
   
   // 퀴즈 포인트 적립
-  quizPoint: async(amount) => {
-    const points = {
-      totalPoint: amount
-    };
-    return await axios.post(KH_DOMAIN + "/quizmain/quizpoint", points);
-  },
+  // quizPoint: async(amount) => {
+  //   const points = {
+  //     totalPoint: amount
+  //   };
+  //   return await axios.post(KH_DOMAIN + "/quizmain/quizpoint", points);
+  // },
 
   // 내 포인트 조회
   myPointGet: async(mypoint) => {
