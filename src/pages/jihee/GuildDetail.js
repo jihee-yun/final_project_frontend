@@ -102,7 +102,7 @@ const GuildDetail = () => {
       if(response.status === 200) setDetailInfo(response.data);
     };
     detailInfo();
-  },[guildNum]);
+  },[]);
 
   console.log(guildNum);
   console.log(detailInfo);

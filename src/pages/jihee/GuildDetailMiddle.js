@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import location from "./images/location.png";
 import member from "./images/member.png";
 import Modal from "./Modal2";
 import GuildMemberModal from "./GuildMemberModal";
+import AxiosApi from "./api/AxiosApi";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Middle = styled.div`
   position: absolute;
@@ -133,7 +135,7 @@ const Middle = styled.div`
     border: none;
     border-radius: 5px;
     background-color: #FFCFDA;
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: bold;
     color: #585858;
     margin-top: 30px;
@@ -143,12 +145,43 @@ const Middle = styled.div`
       color: white;
     }
   }
+
+  .is-join{
+    width: 100%;
+    height: 50px;
+    border: none;
+    border-radius: 5px;
+    background-color: lightgray;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    margin-top: 30px;
+  }
 `;
 
 const GuildDetailMiddle = ({guildNum, guildInfo}) => {
+  const navigate = useNavigate("");
   const [modalOpen, setModalOpen] = useState(false);
+  const [isTrue, setIsTrue] = useState("");
+  
+  // 가입 여부 확인
+  const userNum = 2;
 
-  console.log(guildInfo);
+  useEffect(() => {
+    const isMember = async() => {
+      const response = await AxiosApi.isMemberGet(guildNum, userNum);
+      if(response.status === 200) setIsTrue(response.data);
+    }
+    isMember();
+  },[]);
+
+  const joinGuild = async() => {
+    const response = await AxiosApi.joinGuild(guildNum, userNum);
+    if(response.data === true) {
+      alert("길드에 가입되었습니다.")
+      navigate(-1);
+    }
+  }
 
   const memberModal = () => {
     setModalOpen(true);
@@ -199,7 +232,8 @@ const GuildDetailMiddle = ({guildNum, guildInfo}) => {
           <div className="detailbox"><img src={location} alt="위치" /><p>{guild.region}</p></div>
         </div>
         </div>
-        <button className="join">가입하기</button>
+        {isTrue === 1 ? (<button className="is-join">이미 가입된 회원입니다</button>)
+        : (<button className="join" onClick={joinGuild}>가입하기</button>)}
         <Modal open={modalOpen} type={false} close={closeModal} header="전체 멤버">
           <GuildMemberModal members={guild.memberProfileList}></GuildMemberModal>
         </Modal>

@@ -50,7 +50,7 @@ const Star = ({getScore, setScore}) => {
       }
       setClicked(clickStates);
     }
-  }, [getScore]);
+  }, []);
 
 
   // 별점에 따라 문구 출력

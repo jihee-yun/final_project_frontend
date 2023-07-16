@@ -40,7 +40,18 @@ const AxiosApi = {
     };
     return await axios.post(KH_DOMAIN + "/guild/newGuild", guildData);
   },
+  // 길드 가입 회원 확인하기
+  isMemberGet: async(guildNum, userNum) => {
+    return await axios.get(KH_DOMAIN + `/guild/isMember?guildNum=${guildNum}&userNum=${userNum}`)
+  },
   //길드 가입하기
+  joinGuild: async(guildNum, userNum) => {
+    const data = {
+      guildNum: guildNum,
+      userNum: userNum
+    }
+    return await axios.post(KH_DOMAIN + `/guild/join`, data);
+  },
   // 새로운 리뷰 작성
   createNewReview: async(memNum, cafeNum, content, score, url1, url2) => {
     const reviewData = {
