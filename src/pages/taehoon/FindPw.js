@@ -109,10 +109,16 @@ const FindPw = () => {
         try {
           // 이메일 전송 요청
           const response = await AxiosApi.findPw(email);
-      
+          
           // 이메일 전송 성공
-          setModalText('이메일로 전송되었습니다.');
-          setModalOpen(true);
+          if (response.status === 200) {
+            setModalText('이메일로 전송되었습니다.');
+            setModalOpen(true);
+          } else {
+            // 이메일 전송 실패
+            setModalText('이메일 전송에 실패했습니다.');
+            setModalOpen(true);
+          }
         } catch (error) {
           // 이메일 전송 실패
           setModalText('이메일 전송에 실패했습니다.');
@@ -136,7 +142,7 @@ const FindPw = () => {
             <br/>
 
             <div className="findpw">
-                <p>비밀번호 찾기를 위해 ID를 입력해 주세요.</p>
+                <p>비밀번호 찾기를 위해 이메일을 입력해 주세요.</p>
             </div>
 
             <div className="inputEmail">

@@ -102,7 +102,31 @@ const AdminDelete = () => {
         <div class="form-container">
             <form action="#" method="text">
                 <fieldset>
-                    <legend>작성 리뷰</legend>
+                    <legend>리뷰 내역</legend>
+                    <ul>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </fieldset>
+            </form>
+
+            <form action="#" method="text">
+                <fieldset>
+                    <legend>신고 내역</legend>
+                    <ul>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </fieldset>
+            </form>
+
+            <form action="#" method="text">
+                <fieldset>
+                    <legend>사용자</legend>
                     <ul>
                         <li></li>
                         <li></li>
@@ -115,30 +139,6 @@ const AdminDelete = () => {
             <form action="#" method="text">
                 <fieldset>
                     <legend>이벤트</legend>
-                    <ul>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                    </ul>
-                </fieldset>
-            </form>
-
-            <form action="#" method="text">
-                <fieldset>
-                    <legend>챌린지</legend>
-                    <ul>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                    </ul>
-                </fieldset>
-            </form>
-
-            <form action="#" method="text">
-                <fieldset>
-                    <legend>소모임</legend>
                     <ul>
                         <li></li>
                         <li></li>

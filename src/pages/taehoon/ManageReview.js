@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import logo from "../../images/logo.png";
 import { useNavigate } from "react-router-dom";
@@ -80,6 +80,28 @@ const ManageReviewBlock = styled.div`
         height: 30px;
     }
 
+    .selectBtn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        margin-bottom: 20px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        border: none;
+        color: black;
+        font-weight: bolder;
+        font-size: 15px;
+        background-color: white;
+        cursor: pointer;
+    }
+
+    span {
+        font-size: 25px;
+    }
+
     @media (max-width: 768px) {
         .board {
             width: 100%;
@@ -98,16 +120,82 @@ const ManageReviewBlock = styled.div`
     }
 `;
 
+
     const ManageReview = () => {
         const navigate = useNavigate("");
 
+        // 날짜 선택 state
+        const [showDatePicker, setShowDatePicker] = useState("");
+        const [showDate, setShowDate] = useState("");
+        const [startDate, setStartDate] = useState("");
+        const [endDate, setEndDate] = useState("");
+
+        const [reviewInfo, setReviewInfo] = useState("");
+        const [pageNumber, setPageNumber] = useState("");
+        const perPage = 10;
+
         const onClickLogo = () => {
             navigate('/admininfo');
+    }
 
-        // const reportList = async() => {
-        //     const response = await AxiosApi.reportGet()
-        // }
-    }   
+     // 첫번째 페이지
+     const firstPage = pageNumber === 1;
+
+     // 마지막 페이지
+     const lastPage = Math.ceil(reviewInfo.length / perPage);
+ 
+     const handleDateChange = (date) => {
+         setStartDate(date[0]);
+         setEndDate(date[1]);
+ 
+     // startDate와 endDate가 설정되면 DatePicker를 숨김
+         if (date[0] && date[1]) {
+             setShowDatePicker(false);
+             setShowDate(true);
+         }
+     };
+ 
+      // 날짜 선택 누르면 달력 표시, 제거
+     const handleButtonClick = () => {
+         setShowDatePicker(!showDatePicker);
+         setShowDate(!showDate);
+     };
+
+
+    
+    // 조회 기간을 전체로 설정
+    const handleDateAll = () => {
+        setStartDate(new Date(2019, 11, 31));
+        setEndDate(new Date());
+        setPageNumber(1);
+    };
+
+    // 조회 기간을 일주일로 설정
+    const handleDateWeek = () => {
+        const today = new Date();
+        const oneWeekAgo = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 6);
+        setStartDate(oneWeekAgo);
+        setEndDate(today);
+        setPageNumber(1);
+    };
+
+    // 조회 기간을 한 달로 설정
+    const handleDateMonth = () => {
+        const today = new Date();
+        const oneMonthAgo = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate() -1);
+        setStartDate(oneMonthAgo);
+        setEndDate(today);
+        setPageNumber(1);
+    };
+
+    // 조회 기간을 일 년으로 설정
+    const handleDateYear = () => {
+        const today = new Date();
+        const oneYearAgo = new Date(today.getFullYear() - 1, today.getMonth(), today.getDate());
+        setStartDate(oneYearAgo);
+        setEndDate(today);
+        setPageNumber(1);
+    };
     
     return(
         
@@ -118,6 +206,16 @@ const ManageReviewBlock = styled.div`
 
             <div className="review">
                 <h2>리뷰 관리</h2>
+            </div>
+
+            <div className="selectBtn">
+                <button className="btn" onClick={handleDateAll}>전체</button>
+                <span>|</span>
+                <button className="btn" onClick={handleDateWeek}>일주일</button>
+                <span>|</span>
+                <button className="btn" onClick={handleDateMonth}>한 달</button>
+                <span>|</span>
+                <button className="btn" onClick={handleDateYear}>일 년</button>
             </div>
 
             <table className="board">

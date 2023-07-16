@@ -31,6 +31,7 @@ const AxiosApi = {
 
         return await axios.post(KH_DOMAIN + "/user/login", loginData)
       },
+
       // 비밀번호 찾기
       findPw: async(email) => {
         const data = {
@@ -47,29 +48,15 @@ const AxiosApi = {
       return await axios.post(KH_DOMAIN + "/findId", data);
     },
          
-
-        // 관리자 등록
-        adminReg : async(name, gender, age, adminId, adminPw) => {
-          const admin = {
-            name : name,
-            gender : gender,
-            age : age,
-            adminId : adminId,
-            adminPw : adminPw
-          };
-          return await axios.post(KH_DOMAIN + "/admin", admin);
-        },
         
-        // // 신고 내역 조회
-        reportGet : async(reportNum, userId, title, reportDate) => {
-          const report = {
-            reportNum : reportNum,
-            userId : userId,
-            title : title,
-            reportDate : reportDate
-
-          };
-          return await axios.get(KH_DOMAIN + `/report/getReportNum?reportNum=${reportNum}`, report);
+        // 신고 번호로 조회
+        // reportGet : async(reportNum) => {
+        //   return await axios.get(KH_DOMAIN + `/admin/report/getbynum?reportNum=${reportNum}`);
+        // },
+        
+        // 신고 전체 조회
+        reportGetAll: async () => {
+          return await axios.get(KH_DOMAIN + '/admin/report/all');
         }
 
     };
