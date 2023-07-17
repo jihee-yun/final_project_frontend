@@ -4,10 +4,14 @@ import { useLocation } from "react-router-dom";
 
 const Box = styled.div`
   margin-top: 100px;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+
 `;
 
 const Container = styled.div`
-  border: 1px solid lightgray;
+  /* border: 1px solid lightgray; */
   width: 40%;
   margin: 0 auto;
 
@@ -62,19 +66,19 @@ const CouponPayment = () => {
 
   return(
     <Box>
-      <Container>
-        <h2>쿠폰 결제</h2>
-        <CouponBox>
-          {info && info.map(coupon => (
-            <CouponList key={coupon.id} >
-              <Name>{coupon.couponName}</Name>
-              <MyPoint>보유 포인트 : </MyPoint>
-              <Price>차감 포인트 : {coupon.price}</Price>
-              <button className="payBtn">결제 하기</button>
-            </CouponList>
-          ))}
-        </CouponBox>
-      </Container>
+    <Container>
+      <h2>쿠폰 결제</h2>
+      <CouponBox>
+        {info && info.map(coupon => (
+          <CouponList key={coupon.id} >
+            <Name>{coupon.couponName}</Name>
+            <MyPoint>보유 포인트 : </MyPoint>
+            <Price>차감 포인트 : {coupon.price}</Price>
+            <button className="payBtn">결제 하기</button>
+          </CouponList>
+        ))}
+      </CouponBox>
+    </Container>
     </Box>
   );
 };

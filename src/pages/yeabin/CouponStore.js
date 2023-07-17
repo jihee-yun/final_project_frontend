@@ -71,6 +71,14 @@ const CafeAll = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 const CafeBox = styled.div`
@@ -166,7 +174,7 @@ const CouponStore = () => {
       <h3>포인트로 카페 할인 받기</h3>
       <CouponBox>
           {couponInfo && couponInfo.map(item => (
-            <CouponList key={item.couponNum} onClick={() => console.log('결제로 이동')}>
+            <CouponList key={item.couponNum}>
               <Name>{item.couponName}</Name>
               <Price onClick={() => navigatePay(item.id)}>{item.price} 포인트</Price>
             </CouponList>

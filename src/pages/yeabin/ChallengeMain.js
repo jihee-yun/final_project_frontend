@@ -14,10 +14,13 @@ const Box = styled.div`
   width: 80%;
   margin: 0 auto;
 
+  @media (max-width: 768px) {
+    width: 700px;
+  }
+
   h2 {
     font-weight: bolder;
   }
-
 `;
 
 const ChHeader = styled.div`
@@ -37,6 +40,7 @@ const ChHeader = styled.div`
 const ChBox = styled.div`
   margin-top: 40px;
   margin-bottom: 40px;
+
   .ch-box1 {
     width: auto;
     height: 550px;
