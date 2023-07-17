@@ -2,15 +2,11 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import AxiosApi from "./Api/AxiosApi";
-// import { UserContext } from "../../context/UserStore";
 import Header from "../now/component/Header";
 
 // 포인트로 카페 쿠폰 결제하는 상점
 
 const Container = styled.div`
-`;
-
-const Box = styled.div`
   width: 80%;
   margin: 0 auto;
 `;
@@ -33,6 +29,17 @@ const CouponBox = styled.div`
   margin-bottom: 80px;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 const CouponList = styled.div`
@@ -104,11 +111,9 @@ const Notice = styled.div`
   margin: 100px 0 60px 0;
 `;
 
-const InfoBox = styled.div`
-  margin-top: 60px;
-`;
 
 const InfoList = styled.div`
+  margin-top: 60px;
 `;
 
 const CouponStore = () => {
@@ -146,46 +151,41 @@ const CouponStore = () => {
     <>
     <Header />
     <Container>
-      <Box>
-        <MyPoint>
-          <InfoBox>
-            {myinfo && myinfo.map(item => (
-              <InfoList key={item.userNum}>
-                <Name>{item.name}님 현재 보유 포인트 : </Name> 
-                {/* 로그인 한 회원만 보이게 수정 */}
-                {/* 포인트 불러오기 */}
-              </InfoList>
-            ))}
-          </InfoBox>
-          <div className="goEvent">
-            <Link to='/event' className="link_style">받을 수 있는 포인트 확인하기</Link>
-          </div>
-        </MyPoint>
-        <h3>포인트로 카페 할인 받기</h3>
-        <CouponBox>
-            {couponInfo && couponInfo.map(item => (
-              <CouponList key={item.couponNum} onClick={() => console.log('결제로 이동')}>
-                <Name>{item.couponName}</Name>
-                <Price onClick={() => navigatePay(item.id)}>{item.price} 포인트</Price>
-              </CouponList>
-            ))}
-        </CouponBox>
-        <h3>지역 별 포인트 사용 가능 매장 확인하기</h3>
-        <CafeAll>
-          <CafeBox></CafeBox>
-          <CafeBox></CafeBox>
-          <CafeBox></CafeBox>
-          <CafeBox></CafeBox>
-        </CafeAll>
-        <Notice>
-          <div>
-            <p><b>포인트 유의사항</b></p>
-            <p>SWEET KINGDOM 포인트는 100원 단위로 사용이 가능합니다.</p>
-            <p>포인트는 타인에게 양도하거나 판매할 수 없습니다.</p>
-          </div>
-        </Notice>
-      </Box>
-
+      <MyPoint>
+          {myinfo && myinfo.map(item => (
+            <InfoList key={item.userNum}>
+              <Name>{item.name}님 현재 보유 포인트 : </Name> 
+              {/* 로그인 한 회원만 보이게 수정 */}
+              {/* 포인트 불러오기 */}
+            </InfoList>
+          ))}
+        <div className="goEvent">
+          <Link to='/event' className="link_style">받을 수 있는 포인트 확인하기</Link>
+        </div>
+      </MyPoint>
+      <h3>포인트로 카페 할인 받기</h3>
+      <CouponBox>
+          {couponInfo && couponInfo.map(item => (
+            <CouponList key={item.couponNum} onClick={() => console.log('결제로 이동')}>
+              <Name>{item.couponName}</Name>
+              <Price onClick={() => navigatePay(item.id)}>{item.price} 포인트</Price>
+            </CouponList>
+          ))}
+      </CouponBox>
+      <h3>지역 별 포인트 사용 가능 매장 확인하기</h3>
+      <CafeAll>
+        <CafeBox></CafeBox>
+        <CafeBox></CafeBox>
+        <CafeBox></CafeBox>
+        <CafeBox></CafeBox>
+      </CafeAll>
+      <Notice>
+        <div>
+          <p><b>포인트 유의사항</b></p>
+          <p>SWEET KINGDOM 포인트는 100원 단위로 사용이 가능합니다.</p>
+          <p>포인트는 타인에게 양도하거나 판매할 수 없습니다.</p>
+        </div>
+      </Notice>
     </Container>
     </>
   );

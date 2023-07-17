@@ -8,11 +8,6 @@ import AxiosApi from "./Api/AxiosApi";
 import ad from "./images/event-ad.png";
 import Header from "../now/component/Header";
 
-const ContainerBox = styled.div`
-  /* max-width: 1440px;
-  margin: 0 auto; */
-`;
-
 const Box = styled.div`
   width: 80%;
   margin: 0 auto;
@@ -36,11 +31,7 @@ const ChallengeContainer = styled.div`
 `;
 
 const ChallengeBox = styled.div`
-  /* display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center; */
+
 `;
 
 const EventFooter = styled.div` 
@@ -215,11 +206,7 @@ const Event = () => {
     navigate('/couponStore');
   };
 
-  const quizOpen = () => { // 퀴즈 새 창으로 열기
-    // const width = Math.min(window.innerWidth, 500);
-    // const height = Math.min(window.innerHeight, 700);
-    // const newWindow = window.open("", "_blank", `width=${width},height=${height}`);
-    // newWindow.location.href = "/quizMain";
+  const quizOpen = () => {
     navigate('/quizMain');
   };
 
@@ -228,57 +215,55 @@ const Event = () => {
   return(
     <>
     <Header />
-      <ContainerBox>
-        <Box>
-          <h3>이 달의 퀘스트</h3>
-          <ChallengeContainer>
-          {challengeInfo && challengeInfo.map(item => (
-          <ChallengeBox key={item.id} onClick={() => navigateCh(item.id)}>
-              <ChallengeTitle >
-                <Thumb  className="img" imageurl={item.thumbnail}></Thumb>
-                <div className="shadow"></div>
-                <Title>{item.challengeName}</Title>
-              </ChallengeTitle>
-          </ChallengeBox>
-          ))}
-          </ChallengeContainer>
-          <div className="r-title">
-            <h3>룰렛 돌리고 포인트 받아가기</h3>
+      <Box>
+        <h3>이 달의 퀘스트</h3>
+        <ChallengeContainer>
+        {challengeInfo && challengeInfo.map(item => (
+        <ChallengeBox key={item.id} onClick={() => navigateCh(item.id)}>
+            <ChallengeTitle >
+              <Thumb  className="img" imageurl={item.thumbnail}></Thumb>
+              <div className="shadow"></div>
+              <Title>{item.challengeName}</Title>
+            </ChallengeTitle>
+        </ChallengeBox>
+        ))}
+        </ChallengeContainer>
+        <div className="r-title">
+          <h3>룰렛 돌리고 포인트 받아가기</h3>
+        </div>
+        <Roulette />
+        <EventFooter>
+          <div className="event-box">
+            <QuizBox>
+              <div>
+                <img src={quiz} alt="퀴즈" />
+                <h3 className="quizTitle">깜짝 퀴즈</h3>
+                <p>퀴즈 풀고 포인트 받기</p>
+                <div className="quizButton">
+                  <button onClick={quizOpen}>퀴즈 풀기</button>
+                </div>
+              </div>
+            </QuizBox>
+            <AdBox>
+              <div>
+                <a href="https://www.coca-cola.co.kr/" target="_blank" rel="noopener noreferrer">
+                <img className="adImg" src={ad} alt="광고" />
+                </a>
+              </div>
+            </AdBox>
+            <LuckyBox>
+              <div>
+              <img src={shopping} alt="퀴즈" />
+                <h3 className="shoppingTitle">포인트샵</h3>
+                <p>쌓인 포인트로 구매하세요!</p>
+                <div className="shoppingButton">
+                <button onClick={navigatePoint}>바로 가기</button>
+                </div>
+              </div>
+          </LuckyBox>
           </div>
-          <Roulette />
-          <EventFooter>
-            <div className="event-box">
-              <QuizBox>
-                <div>
-                  <img src={quiz} alt="퀴즈" />
-                  <h3 className="quizTitle">깜짝 퀴즈</h3>
-                  <p>퀴즈 풀고 포인트 받기</p>
-                  <div className="quizButton">
-                    <button onClick={quizOpen}>퀴즈 풀기</button>
-                  </div>
-                </div>
-              </QuizBox>
-              <AdBox>
-                <div>
-                  <a href="https://www.coca-cola.co.kr/" target="_blank" rel="noopener noreferrer">
-                  <img className="adImg" src={ad} alt="광고" />
-                  </a>
-                </div>
-              </AdBox>
-              <LuckyBox>
-                <div>
-                <img src={shopping} alt="퀴즈" />
-                  <h3 className="shoppingTitle">포인트샵</h3>
-                  <p>쌓인 포인트로 구매하세요!</p>
-                  <div className="shoppingButton">
-                  <button onClick={navigatePoint}>바로 가기</button>
-                  </div>
-                </div>
-            </LuckyBox>
-            </div>
-          </EventFooter>
-        </Box>
-      </ContainerBox>
+        </EventFooter>
+      </Box>
     </>
   );
 };

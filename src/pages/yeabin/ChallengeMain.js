@@ -140,7 +140,6 @@ const CafeIntro = styled.div`
 
 const ChallengeMain = () => {
   const [modalOpen, setModalOpen] = useState(false);
-  // const [challengeInfo, setChallengeInfo] = useState("");
   const location = useLocation();
   const info = location.state && location.state.editedInfo;
 
@@ -153,8 +152,6 @@ const ChallengeMain = () => {
   const closeModal = () => {
     setModalOpen(false);
   };
-
-
 
   return(
     <>
