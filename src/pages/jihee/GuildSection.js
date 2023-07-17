@@ -157,7 +157,7 @@ const GuildSection = ({guildInfo}) => {
           </div>
           <div className="count-section">
             <img src={member} alt="멤버" />
-            <p>{guild.countMember}/{guild.limitMember}</p>
+            <p>{guild.countMember + 1}/{guild.limitMember}</p>
           </div>
           </div>
         </div>

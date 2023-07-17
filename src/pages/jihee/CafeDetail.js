@@ -11,7 +11,7 @@ import Slider from "./Slider";
 import AxiosApi from "./api/AxiosApi";
 import KaKaoMap from "./KaKaoMap";
 import AvgStar from "./AvgStar";
-
+import CafeLike from "./CafeLike";
 
 const Container = styled.div`
   @media (max-width: 768px) {
@@ -30,6 +30,12 @@ const Container = styled.div`
     height: 100px;
     margin: 30px 0 0 30px;
     cursor: pointer;
+  }
+
+  .cafe-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
 
   .top {
@@ -138,6 +144,9 @@ const CafeDetail = () => {
   // 카페 디테일 정보 받아오기
   const [detailInfo, setDetailInfo] = useState("");
 
+  // 회원 번호
+  const memNum = 2;
+
   useEffect(() => {
     const detailInfo = async() => {
       const response = await AxiosApi.detailInfoGet(cafeNum);
@@ -159,7 +168,10 @@ const CafeDetail = () => {
     <Container key={cafe.id}>
     <Link to="/cafe/main" style={{ textDecoration: "none", color: "inherit"}}><img src={logo} alt="스위트킹덤로고" /></Link>
     <div className="top">
-    <h1>{cafe.cafeName}</h1>
+      <div className="cafe-name">
+        <h1>{cafe.cafeName}</h1>
+        <CafeLike cafeNum={cafe.id} memNum={memNum}/>
+      </div>
     <div className="star">
       <AvgStar avgStar={cafe.avgScore}/>
        <p onClick={sendDetailInfo}>전체 후기</p>

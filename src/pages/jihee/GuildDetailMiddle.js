@@ -4,8 +4,10 @@ import location from "./images/location.png";
 import member from "./images/member.png";
 import Modal from "./Modal2";
 import GuildMemberModal from "./GuildMemberModal";
+import GuildJoinModal from "./GuildJoinModal";
+import CompleteModal from "./CompleteModal";
 import AxiosApi from "./api/AxiosApi";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Middle = styled.div`
   position: absolute;
@@ -72,7 +74,6 @@ const Middle = styled.div`
       width: 50px;
       height: 50px;
       border-radius: 50px;
-      /* margin: 0 auto; */
       object-fit: cover;
       background-size: cover;
       background-position: center;
@@ -129,43 +130,41 @@ const Middle = styled.div`
     }
   }
 
-  .join{
-    width: 100%;
-    height: 50px;
-    border: none;
-    border-radius: 5px;
-    background-color: #FFCFDA;
-    font-size: 1rem;
-    font-weight: bold;
-    color: #585858;
-    margin-top: 30px;
-    cursor: pointer;
-
-    &:hover{
+  .join-button{
+    .is-join, .limit-member, .join{
+      width: 100%;
+      height: 50px;
+      border: none;
+      border-radius: 5px;
+      background-color: lightgray;
+      font-size: 1rem;
+      font-weight: bold;
       color: white;
-    }
-  }
+      margin-top: 30px;
+    } 
+    .join{
+      background-color: #FFCFDA;
+      cursor: pointer;
 
-  .is-join{
-    width: 100%;
-    height: 50px;
-    border: none;
-    border-radius: 5px;
-    background-color: lightgray;
-    font-size: 1rem;
-    font-weight: bold;
-    color: white;
-    margin-top: 30px;
+      &:hover{
+        color: white;
+      }
+    }
   }
 `;
 
 const GuildDetailMiddle = ({guildNum, guildInfo}) => {
   const navigate = useNavigate("");
-  const [modalOpen, setModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(null);
   const [isTrue, setIsTrue] = useState("");
   
   // 가입 여부 확인
-  const userNum = 2;
+  const userNum = 3;
+
+  // 인원 마감 버튼
+  const { limitMember, memberNumList } = guildInfo[0];
+  console.log(limitMember, memberNumList);
+  const isJoinable = memberNumList.length < limitMember - 1;
 
   useEffect(() => {
     const isMember = async() => {
@@ -178,17 +177,20 @@ const GuildDetailMiddle = ({guildNum, guildInfo}) => {
   const joinGuild = async() => {
     const response = await AxiosApi.joinGuild(guildNum, userNum);
     if(response.data === true) {
-      alert("길드에 가입되었습니다.")
-      navigate(-1);
+      openModal("complete");
     }
   }
 
-  const memberModal = () => {
-    setModalOpen(true);
+  const complete = () => {
+    navigate(-1);
+  }
+
+  const openModal = (type) => {
+    setModalOpen(type);
   };
 
   const closeModal = () => {
-    setModalOpen(false);
+    setModalOpen(null);
   };
 
   return(
@@ -196,7 +198,8 @@ const GuildDetailMiddle = ({guildNum, guildInfo}) => {
     {guildInfo && guildInfo.map(guild => (
     <Middle key={guild.id}>
         <div className="box">
-        <p className="guild-content">  {guild.detailIntro.split("\n").map((line, index) => (
+        <p className="guild-content">  
+        {guild.detailIntro.split("\n").map((line, index) => (
           <React.Fragment key={index}>
             {line}
             <br />
@@ -222,7 +225,7 @@ const GuildDetailMiddle = ({guildNum, guildInfo}) => {
             </div>
             <br />
             <h4>함께 할 멤버들을 확인하고 길드에 가입해 보세요!</h4>
-            <button onClick={memberModal}>전체 멤버 확인하기</button>
+            <button onClick={() => openModal("members")}>전체 멤버 확인하기</button>
           </div>
         </div>
         <br /><br /><br />
@@ -232,10 +235,22 @@ const GuildDetailMiddle = ({guildNum, guildInfo}) => {
           <div className="detailbox"><img src={location} alt="위치" /><p>{guild.region}</p></div>
         </div>
         </div>
-        {isTrue === 1 ? (<button className="is-join">이미 가입된 회원입니다</button>)
-        : (<button className="join" onClick={joinGuild}>가입하기</button>)}
-        <Modal open={modalOpen} type={false} close={closeModal} header="전체 멤버">
-          <GuildMemberModal members={guild.memberProfileList}></GuildMemberModal>
+        <div className="join-button">
+          {isTrue === 1 ? (<button className="is-join">이미 가입된 회원입니다</button>)
+          : !isJoinable ? (
+            <button className="limit-member">인원 마감</button>
+          ) : (
+            <button className="join" onClick={() => openModal("join")}>가입하기</button>
+          )}
+        </div>
+        <Modal move={modalOpen === "complete" ? true : false} open={modalOpen !== null} type={modalOpen === "join" ? true : false} confirm={modalOpen === "join" ? joinGuild : complete} close={closeModal} header={modalOpen === "join" ? "길드 가입" : modalOpen === "complete" ? "완료" : "전체 멤버"}>
+          {modalOpen === "members" ? (
+            <GuildMemberModal members={guild.memberProfileList} />
+          ) : modalOpen === "join" ? (
+            <GuildJoinModal />
+          ) : modalOpen === "complete" ? (
+            <CompleteModal content={"가입이 완료되었습니다"}/>
+          ) : null}
         </Modal>
       </Middle>
       ))}

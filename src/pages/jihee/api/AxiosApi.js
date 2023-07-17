@@ -88,10 +88,22 @@ const AxiosApi = {
     }
     return await axios.post(KH_DOMAIN + `/review/delete`, data);
   },
-  // 리뷰 좋아요 누르기
-  // 리뷰 좋아요 취소
-  // 카페 좋아요 누르기
-  // 카페 좋아요 취소
+  // 리뷰 좋아요
+  reviewLike: async(memNum, id) => {
+    const data = {
+      memNum: memNum,
+      reviewId: id
+    }
+    return await axios.post(KH_DOMAIN + `/review/like`, data);
+  },
+  // 카페 좋아요 
+  cafeLike: async(cafeNum, memNum) => {
+    const data = {
+      cafeNum: cafeNum,
+      memNum: memNum
+    }
+    return await axios.post(KH_DOMAIN + `/cafe/like`, data);
+  }
 };
 
 export default AxiosApi;

@@ -7,6 +7,8 @@ import img from "./images/upload.png";
 import { storage } from "../../context/Firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import AxiosApi from "./api/AxiosApi";
+import Modal from "./Modal2";
+import CompleteModal from "./CompleteModal";
 
 const Container = styled.div`
   @media (max-width: 430px) {
@@ -128,6 +130,8 @@ const NewGuildSecond = () => {
   const location = useLocation();
   const {region, guildName, guildIntro, guildDetailIntro} = location.state;
 
+  const [isModalOpen, setModalOpen] = useState(false);
+
   // 인풋으로 값 입력받기
   const [meetDay, setMeetDay] = useState("");
   const [member, setMember] = useState("");
@@ -164,12 +168,12 @@ const NewGuildSecond = () => {
     setMember(e.target.value);
   };
 
+  // 길드 생성
   const createGuild = async() => {
     const file = uploadedImage;
     const storageRef = ref(storage,`images/${file.name}`);
 
     try {
-     
       await uploadBytes(storageRef, file);
       const imageUrl = await getDownloadURL(storageRef);
       setImageSrc(imageUrl);
@@ -184,14 +188,17 @@ const NewGuildSecond = () => {
     );
     console.log(response.data);
     if(response.data === true) {
-      alert("새로운 길드가 생성되었습니다")
-      navigate("/guild");
+      setModalOpen(true);
     }
   };
 
   const prevPage = () => {
     navigate(-1);
   };
+
+  const complete = () => {
+    navigate("/guild");
+  }
 
   return(
     <>
@@ -231,6 +238,9 @@ const NewGuildSecond = () => {
       )}
       </div>
       </div>
+      <Modal move={true} header="완료" open={isModalOpen} confirm={complete}>
+        <CompleteModal content={"리뷰가 등록되었습니다"}/>
+    </Modal>
     </Container>
     </>
   );

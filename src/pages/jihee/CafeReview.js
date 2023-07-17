@@ -5,9 +5,11 @@ import AvgStar from "./AvgStar";
 import Star from "./Star";
 import { useLocation, useNavigate } from "react-router-dom";
 import AxiosApi from "./api/AxiosApi";
-import like from "../jihee/images/like1.png";
 import dot from "../jihee/images/dots.png";
 import CafeReviewModal from "./CafeReviewModal";
+import CafeReviewLike from "./CafeReviewLike";
+import Modal from "./Modal2";
+import CompleteModal from "./CompleteModal";
 
 const Container = styled.div`
   @media (max-width: 768px) {
@@ -134,29 +136,6 @@ const Photo = styled.div`
   border-radius: 5px;
 `;
 
-const Like = styled.div`
-  margin-top: 20px;
-  width: 10%;
-
-  button {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    width: 60px;
-    height: 25px;
-    background-color: white;
-    border: .5px solid lightgray;
-    border-radius: 15px;
-    box-shadow: 0px 1px 1px lightgray;
-    cursor: pointer;
-  }
-
-  img {
-    width: 12px;
-    height: 12px;
-  }
-`;
-
 const Bar = styled.div`
   position: relative;
   img {
@@ -178,8 +157,9 @@ const CafeReview = () => {
   const [isModalVisible, setModalVisible] = useState(false);
   // 특정 리뷰 값만 모달창 오픈
   const [openReviewId, setOpenReviewId] = useState(null);
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 
-  const memNum = 2; // 여기에 이제 로그인 된 회원번호 받아오기
+  const memNum = 3; // 여기에 이제 로그인 된 회원번호 받아오기
   console.log(cafeReviewInfo);
 
   useEffect(() => {
@@ -210,9 +190,13 @@ const CafeReview = () => {
   const closeModal = () => {
     setOpenReviewId(null);
   };
+  
+  const completeModal = (isOpen) => {
+    setDeleteModalOpen(isOpen);
+  };
 
-  const changeLikeCount = (id) => {
-    console.log(id);
+  const complete = () => {
+    navigate(-1);
   }
 
   return(
@@ -239,7 +223,7 @@ const CafeReview = () => {
       <Bar onClick={() => modalOpen(review.id)}>
       {review.userNum === memNum && <img src={dot} alt="메뉴바" />}
       {isModalVisible && openReviewId === review.id && (
-        <CafeReviewModal reviewInfo={cafeReviewInfo} id={review.id} cafeNum={cafeNum} onClose={closeModal} />
+        <CafeReviewModal reviewInfo={cafeReviewInfo} id={review.id} cafeNum={cafeNum} onClose={closeModal} isModalOpen={completeModal} />
       )}
       </Bar>
       </div>
@@ -247,11 +231,14 @@ const CafeReview = () => {
       <Img>
       {review.url1 && <Photo className="photo" imageurl={review.url1}></Photo>}
       {review.url2 && <Photo className="photo" imageurl={review.url2}></Photo>} </Img>
-      <Like onClick={() => changeLikeCount(review.id)}><button><img src={like} alt="좋아요" /><p>{review.likeCount}</p></button></Like>
+      <CafeReviewLike memNum={memNum} reviewId={review.id} likeCount={review.likeCount}/>
       <br /><hr />
     </ReviewBox>
      ))}
     </Box>
+    <Modal move={true} header="완료" open={isDeleteModalOpen} confirm={complete}>
+      <CompleteModal content={"리뷰가 삭제되었습니다"}/>
+    </Modal>
     </Container>
     </>
   );

@@ -54,9 +54,27 @@ const ModalStyle = styled.div`
         background-color: transparent;
     }
     section > main {
-        padding: 16px;
-        border-bottom: 1px solid #dee2e6;
-        border-top: 1px solid #dee2e6;
+    padding: 16px;
+    border-bottom: 1px solid #dee2e6;
+    border-top: 1px solid #dee2e6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    }
+    section > main button {
+        padding: 6px 12px;
+        min-width: 80%; // 메인 버튼 크기 조절
+        height: 35px;
+        margin: 5px;
+        color: #585858;
+        background-color: #ffcfda;
+        border-radius: 5px;
+        font-size: 13px;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     section > footer {
         padding: 12px 16px;
@@ -91,8 +109,10 @@ const ModalStyle = styled.div`
 `;
 
 const Modal = (props) => {
-    const {open, confirm, close, type, header, children} = props;
+    const {open, confirm, close, type, header, children, move} = props;
 
+    console.log(open);
+    
     // &times; 는 X표 문자를 의미
     return (
         <ModalStyle>
@@ -105,11 +125,16 @@ const Modal = (props) => {
                                 &times;  
                             </button>
                         </header>
-                        <main>{children}</main>
+                        <main>
+                            {children}
+                            {move && <button onClick={confirm}>확인</button>}    
+                        </main>
+                        {!move && (
                         <footer>
                             {type && <button onClick={confirm}>확인</button>}
                             <button onClick={close}>취소</button>
                         </footer>
+                        )}
                     </section>
                 }
             </div>

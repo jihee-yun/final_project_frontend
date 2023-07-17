@@ -3,12 +3,12 @@ import styled from "styled-components";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import RatingStar from "../jihee/RatingStar";
 import { useLocation, useNavigate } from "react-router-dom";
-import upload from "./images/upload.png";
-import upload2 from "./images/upload.png";
-import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
 import AxiosApi from "./api/AxiosApi";
 import { storage } from "../../context/Firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import Modal from "./Modal2";
+import CompleteModal from "./CompleteModal";
+import CafeImageUploader from "./CafeImageUploader";
 
 const Container = styled.div`
   @media (max-width: 768px) { 
@@ -44,81 +44,6 @@ const Container = styled.div`
     justify-content: center;
   }
 
-  .upload{
-    position: relative;
-    padding-top: 15px;
-    font-size: .9rem;
-    font-weight: bold;
-    color: darkgray;
-  }
-
-  .upload-box{
-    @media (max-width: 768px) {
-      flex-direction: column;
-    }
-    display: flex;
-  }
-
-  #img1, #img2{
-    display: none;
-  }
-
-  .image1, .image2{
-    margin-right: 60px;
-    width: 180px;
-    height: 180px;
-    border: 1px dashed lightgray;
-    margin-bottom: 50px;
-    object-fit: cover;
-    background-image: url(${props => props.imageurl});
-    background-size: cover;
-    background-position: center;
-  }
-
-  .upload-btn{
-    position: absolute;
-    top: 130px;
-    left: 65px;
-    cursor: pointer;
-
-    img{
-      width: 50px;
-      height: 50px;
-    }
-  }
-
-  .cancel {
-    position: absolute;
-    left: 183px;
-    top: 58px;
-  }
-
-  .cancel2 {
-    @media (max-width: 768px) {
-      top: 290px;
-      left: 183px;
-    }
-    position: absolute;
-    left: 425px;
-    top: 58px;
-  }
-
-  .upload-btn2{
-    @media (max-width: 768px) {
-      top: 365px;
-      left: 66px;
-    }
-    position: absolute;
-    top: 130px;
-    left: 308px;
-    cursor: pointer;
-
-    img{
-      width: 50px;
-      height: 50px;
-    }
-  }
-
   .send{
     display: flex;
     justify-content: center;
@@ -136,11 +61,12 @@ const Container = styled.div`
     font-size: .9rem;
     font-weight: bold;
     color: #585858;
+
     &:hover{
       color: white;
     }
   }
-  }
+}
 `;
 
 const Detail = styled.textarea`
@@ -161,9 +87,7 @@ const CafeReviewWrite = () => {
   const location = useLocation();
   const cafeNum = location.state && location.state.cafeNum;
 
-  // 이미지 미리보기
-  const [imageSrc, setImageSrc] = useState(null);
-  const [imageSrc2, setImageSrc2] = useState(null);
+  const [isModalOpen, setModalOpen] = useState(false);
   const [score, setScore] = useState("");
   const [content, setContent] = useState("");
 
@@ -174,43 +98,23 @@ const CafeReviewWrite = () => {
   console.log("넘어온 값 : " + score);
   console.log("CafeReviewWrite - cafeNum:", cafeNum);
 
-  const onUpload = async(e, imageIndex) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-
-    reader.onloadend = () => {
-      const imageURL = reader.result;
-      if (imageIndex === 1) {
-        setImageSrc(imageURL);
-        setUploadedImage1(file);
-      } else if (imageIndex === 2) {
-        setImageSrc2(imageURL);
-        setUploadedImage2(file);
-      }
-    };
-
-    if (file) {
-      reader.readAsDataURL(file);
-    }
-  };
-
   // 이전 페이지로 이동
   const prevPage = () => {
     navigate(-1);
-  };
-
-  const clearImg = (index) => {
-    if (index === 1) {
-      setImageSrc("");
-    } else if (index === 2) {
-      setImageSrc2("");
-    }
   };
 
   // 후기 내용
   const changeContent = (e) => {
     setContent(e.target.value);
   };
+
+  const receive1 = (receive) => {
+    setUploadedImage1(receive);
+  }
+
+  const receive2 = (receive) => {
+    setUploadedImage2(receive);
+  }
 
   // 후기 작성
   const writeReview = async() => {  
@@ -240,13 +144,16 @@ const CafeReviewWrite = () => {
       );
       console.log(response.data);
       if(response.data === true) {
-        alert("리뷰가 작성되었습니다.");
-        navigate(-1);
+        setModalOpen(true);
       }
     } catch(error) {
       console.log(error);
     }
   };
+  
+  const complete = () => {
+    navigate(-1);
+  }
 
   return(
     <>
@@ -260,28 +167,13 @@ const CafeReviewWrite = () => {
         <div className="write">
         <Detail placeholder="후기 내용을 작성해주세요" onChange={changeContent}></Detail>
         </div>
-        <div className="upload">
-          <p>이미지 첨부(최대 2장)</p>
-          <div className="upload-box">
-            <label htmlFor="img1">
-              {!imageSrc && (
-              <div className="upload-btn"><img src={upload} alt="업로드버튼" /></div>)}
-            </label>
-            <input type="file" id="img1" accept="image/*" onChange={e=> onUpload(e, 1)}/>
-            <div className="image1" style={{ backgroundImage: `url(${imageSrc})` }}></div>
-            {imageSrc && <DisabledByDefaultIcon className="cancel" style={{width:"30px", height:"30px", cursor:"pointer"}} onClick={() => clearImg(1)}/>}
-            <label htmlFor="img2">
-              {!imageSrc2 && (
-              <div className="upload-btn2"><img src={upload2} alt="업로드버튼" /></div>)}
-            </label>
-            <input type="file" id="img2" accept="image/*" onChange={e=> onUpload(e, 2)}/>
-            <div className="image2" style={{ backgroundImage: `url(${imageSrc2})` }}></div>
-            {imageSrc2 && <DisabledByDefaultIcon className="cancel2" style={{width:"30px", height:"30px", cursor:"pointer"}} onClick={() => clearImg(2)}/>}
-          </div>
-        </div>
+        <CafeImageUploader setUploadedImage1={receive1} setUploadedImage2={receive2} />
       </div>
       {score && content && (<div className="send" onClick={writeReview}><button>작성하기</button></div>)}
     </Container>
+    <Modal move={true} header="완료" open={isModalOpen} confirm={complete}>
+      <CompleteModal content={"리뷰가 등록되었습니다"}/>
+    </Modal>
     </>
   );
 };
