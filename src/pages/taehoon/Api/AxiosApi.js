@@ -49,14 +49,14 @@ const AxiosApi = {
     },
          
         
-        // 신고 번호로 조회
-        // reportGet : async(reportNum) => {
-        //   return await axios.get(KH_DOMAIN + `/admin/report/getbynum?reportNum=${reportNum}`);
-        // },
-        
         // 신고 전체 조회
         reportGetAll: async () => {
           return await axios.get(KH_DOMAIN + '/admin/report/all');
+        },
+
+        // 신고 내용 조회
+        reportGetContents : async(reportNum) => {
+          return await axios.get(KH_DOMAIN + `/admin/report/getContents?reportNum=${reportNum}`)
         }
 
     };

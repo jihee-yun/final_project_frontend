@@ -51,6 +51,7 @@ const AdminReportBlock = styled.div`
         border: 1px solid #ddd;
         padding: 8px;
         text-align: center;
+        font-weight: bolder;
     }
 
     .board th {
@@ -200,8 +201,35 @@ const SuperRightButton = styled.button`
   cursor: pointer;
 `;
 
+const ModalContent = styled.div`
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  max-width: 600px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+`;
 
+const CloseButtonHover = styled.span`
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bolder;
 
+  &:hover, &:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+`;
+
+const ContentBox = styled.div`
+  margin-top: 20px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 8px;
+`;
 
 const AdminReport = () => {
     const navigate = useNavigate("");
@@ -213,33 +241,21 @@ const AdminReport = () => {
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
 
-    const [reportNum, setReportNum] = useState("");
-
     const [reportInfo, setReportInfo] = useState([]);
     const [pageNumber, setPageNumber] = useState("");
     const perPage = 10;
-
-    // 선택한 신고 정보를 저장하는 상태
-    const [selectedReport, setSelectedReport] = useState(null);
-
-    // 신고 정보를 클릭했을 때 호출되는 함수
-    const handleReportClick = (report) => {
-        setSelectedReport(report);
-        navigate(`/admin/report?reportNum=${report.reportNum}`);
-        
-    };
-
-    // 선택한 신고 정보를 닫을 때 호출되는 함수
-    const handleCloseReport = () => {
-        setSelectedReport(null);
-        navigate("/admin/report");
-    };
 
     // 첫번째 페이지
     const firstPage = pageNumber === 1;
 
     // 마지막 페이지
     const lastPage = Math.ceil(reportInfo.length / perPage);
+
+    // 신고내역 클릭에 대한 상태를 저장할 state를 생성
+    const [selectedReport, setSelectedReport] = useState(null);
+
+    // 모달 팝업을 보여주기 위한 상태
+    const [showModal, setShowModal] = useState(false);
 
     const handleDateChange = (date) => {
         setStartDate(date[0]);
@@ -268,6 +284,21 @@ const AdminReport = () => {
         // getReportInfo 함수 호출
         getReportInfo();
       }, []);
+
+       // 클릭 이벤트를 처리할 함수
+    const handleRowClick = (reportNum) => {
+        const selectedReportData = getCurrentItems().find(report => report.reportNum === reportNum);
+        setSelectedReport(selectedReportData);
+        setShowModal(true); // 모달 팝업 보여주기
+        navigate(`/admin/report?reportNum=${reportNum}`);
+    };
+
+    // 모달 닫기 처리
+    const closeModal = () => {
+        setShowModal(false);
+        setSelectedReport(null); // 선택한 신고내역 초기화
+        navigate(`/admin/report`);
+    };
 
     // 페이지 변경 시 아이템 표시
     const handlePageChange = (page) => {
@@ -357,6 +388,27 @@ const AdminReport = () => {
     const LogoClick = () => {
         navigate('/admininfo');
     }
+
+    // 모달 팝업을 보여줄 때, 조건부 렌더링을 통해 해당 모달 컨텐츠가 보여지도록 해야 합니다.
+    if (showModal && selectedReport) {
+        return (
+            <div className="modal">
+                <ModalContent>
+                <CloseButtonHover onClick={closeModal}>&times;</CloseButtonHover>
+                    <h2>제목 : {selectedReport.title}</h2>
+                    <p>글번호 : {selectedReport.reportNum}</p>
+                    <p>작성자 : {selectedReport.userId}</p>
+                    <p>날짜 : {selectedReport.reportDate}</p>
+                    <br/>
+                    <h3>내용</h3>
+                <ContentBox>
+                    <p>{selectedReport.content}</p>
+
+                </ContentBox>
+                </ModalContent>
+            </div>
+        );
+      }
     
     
     return(
@@ -400,8 +452,7 @@ const AdminReport = () => {
                 />
               )}
             </DatePick>
-           
-        
+
             <table className="board">
                 <thead>
                     <tr>
@@ -412,16 +463,19 @@ const AdminReport = () => {
                     </tr>
                 </thead>
                 <tbody>
-            {getCurrentItems().map((report) => (
-                <tr onClick={() => handleReportClick(report)}>
-                    <td className="number">{report.reportNum}</td>
-                    <td className="user">{report.userId}</td>
-                    <td className="title">{report.title}</td>
-                    <td className="date">{report.reportDate}</td>
-                </tr>
-            ))}
-        </tbody>
-        </table>
+                    {getCurrentItems().map((report) => (
+                        <tr key={report.reportNum}>
+                            <td className="number" onClick={() => handleRowClick(report.reportNum)} style={{ cursor: 'pointer' }}>{report.reportNum}</td>
+                            <td className="user">{report.userId}</td>
+                            <td className="title" onClick={() => handleRowClick(report.reportNum)} style={{ cursor: 'pointer' }}>
+                                {report.title}
+                            </td>
+                            <td className="date">{report.reportDate}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+
         <NumberSelectBox>
               <SuperLeftButton
                 onClick={() => setPageNumber(1)}
@@ -458,8 +512,6 @@ const AdminReport = () => {
                 {">>"}
               </SuperRightButton>
             </NumberSelectBox>
-
-       
         </AdminReportBlock>
     );
 }

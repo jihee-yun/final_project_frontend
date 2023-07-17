@@ -45,7 +45,7 @@ const AdminDeclarationBlock = styled.div`
         width: 500px;
         height: 300px;
         margin-bottom: 20px;
-        margin-top: 20px;
+        margin-top: 5px;
         margin-left: 20px;
         font-size: 15px;
     }
@@ -65,6 +65,17 @@ const AdminDeclarationBlock = styled.div`
         width: 150px;
         height: 30px;
         margin-top :20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        font-size: 14px;
+        color: #333;
+        margin-right: 330px;
+    }
+
+    .title input[type="text"] {
+        width: 150px;
+        height: 30px;
+        margin-top :10px;
         border: 1px solid #ccc;
         border-radius: 10px;
         font-size: 14px;
@@ -106,7 +117,7 @@ const AdminDeclarationBlock = styled.div`
     .reportBtn button {
         width: 150px;
         height: 30px;
-        margin-top: 40px;
+        margin-top: 20px;
         border: none;
         background-color: #FFCFDA;
         cursor: pointer;
@@ -203,6 +214,11 @@ const Report = () => {
     const [reportText, setReportText] = useState("");
     const [reportTypes, setReportTypes] = useState([]);
     const [userId, setUserId] = useState("");
+    const [title, setTitle] = useState("");
+
+    const onChangeTitle = (e) => {
+        setTitle(e.target.value);
+    }
 
     const onChangeId = (e) => {
         setUserId(e.target.value);
@@ -295,6 +311,10 @@ const Report = () => {
 
                 <div className="writer">
                     <input type="id" placeholder="작성자" value={userId} onChange={onChangeId}/>
+                </div>
+
+                <div className="title">
+                    <input type="text" placeholder="글 제목" value={title} onChange={onChangeTitle}/>
                 </div>
 
                 <textarea
