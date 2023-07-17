@@ -57,7 +57,13 @@ const AxiosApi = {
         // 신고 내용 조회
         reportGetContents : async(reportNum) => {
           return await axios.get(KH_DOMAIN + `/admin/report/getContents?reportNum=${reportNum}`)
+        },
+
+        // 리뷰 전체 조회
+        reviewGetAll : async() => {
+          return await axios.get(KH_DOMAIN + `/admin/review/all`);
         }
+
 
     };
 

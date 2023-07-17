@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import logo from "../../images/logo.png";
 import { useNavigate } from "react-router-dom";
 import AxiosApi from "./Api/AxiosApi";
+import DatePicker from "react-datepicker";
 
 const ManageReviewBlock = styled.div`
     position: relative;
@@ -60,23 +61,18 @@ const ManageReviewBlock = styled.div`
         background-color: #ddd;
     }
 
-    .number {
+    .reviewNum {
         width: 60px;
         height: 30px;
     }
 
-    .writer {
-        width: 70px;
-        height: 30px;
-    }
-
-    .title {
-        width: 150px;
+    .cafeNum {
+        width: 80px;
         height: 30px;
     }
 
     .date {
-        width: 120px;
+        width: 80px;
         height: 30px;
     }
 
@@ -120,6 +116,128 @@ const ManageReviewBlock = styled.div`
     }
 `;
 
+const DateSelected = styled.p`
+  cursor: pointer;
+`;
+
+const DatePick = styled.div`
+  min-width: 100px;
+  margin-left: auto;
+  margin-right: 1%;
+  padding-left: 1%;
+  padding-right: 1%;
+  border: 1px solid #f3e1e1;
+  border-radius: 10px;
+`;
+
+
+// 하단 페이지 숫자 표시 박스
+const NumberSelectBox = styled.div`
+  height: 30px;
+  margin-top: 3%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+// 페이지 1개씩 좌측 이동
+const LeftButton = styled.button`
+  width: 30px;
+  height: 30px;
+  font-size: large;
+  color: #7d5a5a;
+  border: 0;
+  background-color: #f1d1d1;
+  border-radius: 50%;
+  margin-right: 2%;
+  cursor: pointer;
+`;
+// 페이지 한개씩 우측 이동
+const RightButton = styled.button`
+  width: 30px;
+  height: 30px;
+  font-size: large;
+  color: #7d5a5a;
+  border: 0;
+  background-color: #f1d1d1;
+  border-radius: 50%;
+  margin-left: 2%;
+  cursor: pointer;
+`;
+// 하단 페이지 번호
+const PageNumber = styled.p`
+  margin-left: 1%;
+  cursor: pointer;
+  color: #7D5A5A;
+  ${({ active }) =>
+    active &&
+    `
+    font-size: 20px;
+    font-weight: bold;
+  `}
+  ${({ disabled }) =>
+    disabled &&
+    `
+  pointer-events: none;
+  color: gray;
+  `}
+`;
+
+const SuperLeftButton = styled.button`
+  width: 30px;
+  height: 30px;
+  letter-spacing: -2px;
+  font-size: large;
+  color: #7d5a5a;
+  border: 0;
+  background-color: #f1d1d1;
+  border-radius: 50%;
+  margin-right: 1%;
+  cursor: pointer;
+`;
+const SuperRightButton = styled.button`
+  width: 30px;
+  height: 30px;
+  letter-spacing: -2px;
+  font-size: large;
+  color: #7d5a5a;
+  border: 0;
+  background-color: #f1d1d1;
+  border-radius: 50%;
+  margin-left: 1%;
+  cursor: pointer;
+`;
+
+const ModalContent = styled.div`
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  max-width: 600px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+`;
+
+const CloseButtonHover = styled.span`
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bolder;
+
+  &:hover, &:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+`;
+
+const ContentBox = styled.div`
+  margin-top: 20px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 8px;
+`;
+
+
 
     const ManageReview = () => {
         const navigate = useNavigate("");
@@ -130,7 +248,7 @@ const ManageReviewBlock = styled.div`
         const [startDate, setStartDate] = useState("");
         const [endDate, setEndDate] = useState("");
 
-        const [reviewInfo, setReviewInfo] = useState("");
+        const [reviewInfo, setReviewInfo] = useState([]);
         const [pageNumber, setPageNumber] = useState("");
         const perPage = 10;
 
@@ -143,6 +261,12 @@ const ManageReviewBlock = styled.div`
 
      // 마지막 페이지
      const lastPage = Math.ceil(reviewInfo.length / perPage);
+
+     // 신고내역 클릭에 대한 상태를 저장할 state를 생성
+    const [selectedReview, setSelectedReview] = useState(null);
+
+    // 모달 팝업을 보여주기 위한 상태
+    const [showModal, setShowModal] = useState(false);
  
      const handleDateChange = (date) => {
          setStartDate(date[0]);
@@ -161,8 +285,83 @@ const ManageReviewBlock = styled.div`
          setShowDate(!showDate);
      };
 
+     useEffect(()=> {
+        const getReviewInfo = async() => {
+            const rsp = await AxiosApi.reviewGetAll();
+            if(rsp.status===200) setReviewInfo(rsp.data);
+        };
+        getReviewInfo();
+    },[]);
 
-    
+    // 클릭 이벤트를 처리할 함수
+    const handleRowClick = (userNum) => {
+        const selectedReviewData = getCurrentItems().find(review => review.userNum === userNum);
+        setSelectedReview(selectedReviewData);
+        setShowModal(true); // 모달 팝업 보여주기
+        navigate(`/admin/review?userNum=${userNum}`);
+    };
+
+    // 모달 닫기 처리
+    const closeModal = () => {
+        setShowModal(false);
+        setSelectedReview(null); // 선택한 신고내역 초기화
+        navigate(`/admin/review`);
+    };
+
+    // 페이지 변경 시 아이템 표시
+    const handlePageChange = (page) => {
+        setPageNumber(page);
+    };
+
+
+    // 현재 페이지에 해당하는 아이템 가져오기
+    const getCurrentItems = () => {
+        // reviewDate를 기준으로 내림차순으로 reviewInfo를 정렬합니다.
+        const sortedReviewInfo = reviewInfo.sort(
+          (a, b) => new Date(b.writtenTime) - new Date(a.writtenTime)
+        );
+      
+        const startIndex = (pageNumber - 1) * perPage;
+        const endIndex = startIndex + perPage;
+      
+        return sortedReviewInfo.slice(startIndex, endIndex);
+      };
+
+  // 페이지 10개씩 나누어 표시하기
+  const getPageNumbers = () => {
+    const totalPageCount = Math.ceil(reviewInfo.length / perPage);
+    const currentPage = pageNumber;
+
+    const pageNumbers = [];
+
+    if (currentPage <= 10) { // 현재 페이지가 10 이하인 경우
+      for (let i = 1; i <= Math.min(10, totalPageCount); i++) {
+        pageNumbers.push(i);
+      }
+      if (totalPageCount > 10) {
+        pageNumbers.push("...");
+        pageNumbers.push(totalPageCount);
+      }
+    } else { // 현재 페이지가 11 이상인 경우
+      pageNumbers.push(1);
+      pageNumbers.push("...");
+      const startPage = Math.floor((currentPage - 1) / 10) * 10 + 1;
+      const endPage = Math.min(startPage + 9, totalPageCount);
+      for (let i = startPage; i <= endPage; i++) {
+        pageNumbers.push(i);
+      }
+      if (endPage < totalPageCount) {
+        pageNumbers.push("...");
+        pageNumbers.push(totalPageCount);
+      }
+    }
+
+    return pageNumbers;
+  };
+
+
+    const pageNumbers = getPageNumbers();
+
     // 조회 기간을 전체로 설정
     const handleDateAll = () => {
         setStartDate(new Date(2019, 11, 31));
@@ -196,6 +395,26 @@ const ManageReviewBlock = styled.div`
         setEndDate(today);
         setPageNumber(1);
     };
+
+    // 모달 팝업을 보여줄 때, 조건부 렌더링을 통해 해당 모달 컨텐츠가 보여지도록 해야 합니다.
+    if (showModal && selectedReview) {
+        return (
+            <div className="modal">
+                <ModalContent>
+                <CloseButtonHover onClick={closeModal}>&times;</CloseButtonHover>
+                    <h2>리뷰번호 : {selectedReview.userNum}</h2>
+                    <p>카페번호 : {selectedReview.cafeNum}</p>
+                    <p>날짜 : {selectedReview.writtenTime}</p>
+                    <br/>
+                    <h3>내용</h3>
+                <ContentBox>
+                    <p>{selectedReview.reviewContent}</p>
+
+                </ContentBox>
+                </ModalContent>
+            </div>
+        );
+      }
     
     return(
         
@@ -218,19 +437,83 @@ const ManageReviewBlock = styled.div`
                 <button className="btn" onClick={handleDateYear}>일 년</button>
             </div>
 
+            <DatePick>
+              {showDate && (
+                <DateSelected onClick={handleButtonClick}>
+                  {startDate && endDate
+                    ? `${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}`
+                    : "Show DatePicker"}
+                </DateSelected>
+              )}
+              {showDatePicker && (
+                <DatePicker
+                  selected={startDate}
+                  onChange={handleDateChange}
+                  startDate={startDate}
+                  endDate={endDate}
+                  selectsRange
+                  inline
+                />
+              )}
+            </DatePick>
+
             <table className="board">
                 <thead>
                     <tr>
-                        <th class="number">번호</th>
-                        <th class="writer">작성자</th>
-                        <th class="title">제목</th>
+                        <th class="reviewNum">리뷰번호</th>
+                        <th class="cafeNum">카페번호</th>
                         <th class="date">날짜</th>
                     </tr>
                 </thead>
                 <tbody>
-
+                {getCurrentItems().map((review) => (
+                        <tr key={review.userNum}>
+                            <td className="reviewNum" onClick={() => handleRowClick(review.userNum)} style={{ cursor: 'pointer' }}>{review.userNum}</td>
+                            <td className="cafeNum" onClick={() => handleRowClick(review.userNum)} style={{ cursor: 'pointer' }}>
+                                {review.cafeNum}
+                            </td>
+                            <td className="date">{review.writtenTime}</td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
+
+            <NumberSelectBox>
+              <SuperLeftButton
+                onClick={() => setPageNumber(1)}
+                disabled={firstPage}
+              >
+                {"<<"}
+              </SuperLeftButton>
+              <LeftButton
+                onClick={() => handlePageChange(pageNumber - 1)}
+                disabled={firstPage}
+              >
+                {"<"}
+              </LeftButton>
+              {pageNumbers.map((page, index) => (
+                <PageNumber
+                  key={index}
+                  onClick={() => handlePageChange(page)}
+                  active={pageNumber === page}
+                  disabled={page === "..."}
+                >
+                  {page}
+                </PageNumber>
+              ))}
+              <RightButton
+                onClick={() => handlePageChange(pageNumber + 1)}
+                disabled={lastPage}
+              >
+                {">"}
+              </RightButton>
+              <SuperRightButton
+                onClick={() => setPageNumber(Math.ceil(reviewInfo.length / perPage))}
+                disabled={lastPage}
+              >
+                {">>"}
+              </SuperRightButton>
+            </NumberSelectBox>
         </ManageReviewBlock>
     );
 }

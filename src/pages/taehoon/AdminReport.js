@@ -285,7 +285,7 @@ const AdminReport = () => {
         getReportInfo();
       }, []);
 
-       // 클릭 이벤트를 처리할 함수
+    // 클릭 이벤트를 처리할 함수
     const handleRowClick = (reportNum) => {
         const selectedReportData = getCurrentItems().find(report => report.reportNum === reportNum);
         setSelectedReport(selectedReportData);
