@@ -46,6 +46,7 @@ const ManageReviewBlock = styled.div`
         border: 1px solid #ddd;
         padding: 8px;
         text-align: center;
+        font-weight: bolder;
     }
 
     .board th {
@@ -298,14 +299,14 @@ const ContentBox = styled.div`
         const selectedReviewData = getCurrentItems().find(review => review.userNum === userNum);
         setSelectedReview(selectedReviewData);
         setShowModal(true); // 모달 팝업 보여주기
-        navigate(`/admin/review?userNum=${userNum}`);
+        navigate(`/admin/manageReview?userNum=${userNum}`);
     };
 
     // 모달 닫기 처리
     const closeModal = () => {
         setShowModal(false);
         setSelectedReview(null); // 선택한 신고내역 초기화
-        navigate(`/admin/review`);
+        navigate(`/admin/manageReview`);
     };
 
     // 페이지 변경 시 아이템 표시
@@ -466,15 +467,15 @@ const ContentBox = styled.div`
                     </tr>
                 </thead>
                 <tbody>
-                {getCurrentItems().map((review) => (
-                        <tr key={review.userNum}>
-                            <td className="reviewNum" onClick={() => handleRowClick(review.userNum)} style={{ cursor: 'pointer' }}>{review.userNum}</td>
-                            <td className="cafeNum" onClick={() => handleRowClick(review.userNum)} style={{ cursor: 'pointer' }}>
-                                {review.cafeNum}
-                            </td>
-                            <td className="date">{review.writtenTime}</td>
-                        </tr>
-                    ))}
+                    {getCurrentItems().map((review) => (
+                            <tr key={review.userNum}>
+                                <td className="reviewNum" onClick={() => handleRowClick(review.userNum)} style={{ cursor: 'pointer' }}>{review.userNum}</td>
+                                <td className="cafeNum" onClick={() => handleRowClick(review.userNum)} style={{ cursor: 'pointer' }}>
+                                    {review.cafeNum}
+                                </td>
+                                <td className="date">{review.writtenTime}</td>
+                            </tr>
+                        ))}
                 </tbody>
             </table>
 
