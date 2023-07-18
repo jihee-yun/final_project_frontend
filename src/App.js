@@ -43,6 +43,7 @@ import QuizMain from './pages/yeabin/QuizMain';
 import PayComplete from './pages/yeabin/PayComplete';
 import CouponPayment from './pages/yeabin/CouponPayment';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
+import ServiceCenter from './pages/now/ServiceCenter';
 import ScrollToTop from './pages/jihee/ScrollToTop';
 
 function App() {
@@ -93,6 +94,7 @@ function App() {
         <Route path='/quizMain' element={<QuizMain/>}/>
         <Route path='/payComplete' element={<PayComplete/>}/>
         <Route path='/couponPayment' element={<CouponPayment/>}/>
+        <Route path='/servicecenter' element={<ServiceCenter/>}/>
       </Routes>
     </BrowserRouter>
     </UserStore>

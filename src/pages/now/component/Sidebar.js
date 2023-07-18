@@ -98,7 +98,9 @@ const Sidebar = () => {
 
 
   return (
+
       <SidebarContainer  Xlocation={isSidebar}>
+       
       <SidebarTop>
       <button className="xButton" onClick={() => setIsSidebar("-300px")}>
           <CloseRoundedIcon />
@@ -116,7 +118,9 @@ const Sidebar = () => {
         <NavLink to="/couponStore">상점</NavLink>
       </Menu>
       </MenuBox>
+      
       </SidebarContainer>
+     
 
   )
 }

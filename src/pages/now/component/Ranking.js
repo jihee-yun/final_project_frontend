@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { styled } from "styled-components";
 import cafe from "../images/cafe.jpg";
+import MainAxiosApi from "../api/AxiosApi";
+
 
 const Container = styled.div`
 width: 90%;
@@ -64,7 +66,7 @@ overflow: hidden;
         flex-direction: column;
         align-items: center;
 
-         .cafeTitel {
+         .cafeTitle {
             font-size: 1.2rem;
             font-weight: 700;
         }
@@ -78,35 +80,55 @@ overflow: hidden;
 `;
 
 const Ranking = () => {
-    // const onClickTMP = () => {
-    //     const response = MainAxiosApi.Tmp(1);
-    //     console.log(response.then((result) => result.data));
-    // }
+    const [cafeRankingInfo, setCafeRankingInfo] = useState([]);
+
+
+    useEffect(() => {
+        const cafeInfo = async () => {
+          try {
+            const rsp = await MainAxiosApi.MainInfoGet();
+            if (rsp.status) {
+              setCafeRankingInfo(rsp.data.slice(0, 6));
+              console.log("카페 정보 가져오기 성공: ", rsp.data)
+            }
+          } catch (error) {
+            console.log("카페 정보 가져오기 실패: ", error);
+          }
+        };
+    
+        cafeInfo();
+        console.log(cafeRankingInfo);
+      }, []);
+      
+
     
     return(
         <>
-        <Container>
+        
+        <Container >
+    
         <div className="title">
             <h2 >실시간 인기 카페 확인하기</h2>
             </div>
             <div className="RankingContainer">
-                <div className="RankingItem">
-            <ImgContainer>
-                {/* <button onClick={onClickTMP}>a</button> */}
-                    <img src={cafe} alt="카페임시" className="cafe"/>
+            {cafeRankingInfo.map(ranking => (
+                <div className="RankingItem" key={ranking.id}>
+            
+            <ImgContainer >
+                    <img src={ranking.thumbnail} alt="카페임시" className="cafe"/>
                 <div className="innerContent">
-                    <span className="cafeTitel">부빙</span>
-                    <span className="overview">부암동 빙수 먹고싶다</span>
+                    <span className="cafeTitle" onClick={()=> console.log(ranking)}>{ranking.cafeName}</span>
+                    <span className="overview">{ranking.intro}</span>
                 </div>
             </ImgContainer>
+             
                 </div>
-                <div className="RankingItem"></div>
-                <div className="RankingItem"></div>
-                <div className="RankingItem"></div>
-                <div className="RankingItem"></div>
-                <div className="RankingItem"></div>
+                ))}
             </div>
+            
         </Container>
+       
+         
         </>
 
     );

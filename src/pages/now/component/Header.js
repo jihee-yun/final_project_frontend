@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../../context/UserStore";
 import styled from "styled-components";
 import Logo from "../images/logo.png";
@@ -54,7 +54,9 @@ const Rightbox = styled.div`
 `;
 
 const HamburgerBtn = styled.button`
+  margin-top: -5px;
   margin-right: 60px;
+  margin-left: -10px;
   padding: 0;
   color: black;
   justify-content: center;
@@ -116,6 +118,7 @@ const Navlink = styled(Link) `
 
 const Header = () => {
   const { isSidebar, setIsSidebar } = useContext(UserContext);
+
 
   
     return(

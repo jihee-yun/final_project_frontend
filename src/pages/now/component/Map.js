@@ -40,7 +40,7 @@ overflow: hidden;
         margin-top: 20px;
         border-radius: 5px;
     }
-    h3 {
+    .title {
         border-bottom: solid;
     }
     .sub {
