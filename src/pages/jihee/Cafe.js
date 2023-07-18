@@ -3,7 +3,7 @@ import { UserContext } from "../../context/UserStore";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { StyleSheetManager } from "styled-components";
-import seoul from "./images/서울.jpeg";
+import seoul from "./images/seoul.jpeg";
 import Header from "../now/component/Header";
 
 
