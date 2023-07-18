@@ -41,12 +41,12 @@ const Container = styled.div`
     }
   }
 
-  .item{
+  /* .item{
     li{
       font-size: .7rem;
       margin: 10px 0 10px 25px;
     }
-  }
+  } */
 
   .button-box {
     display: flex;
@@ -67,6 +67,30 @@ const Container = styled.div`
       color: white;
     }
     }
+  }
+`;
+
+
+const Item = styled.div`
+  .category{
+    display: flex;
+    gap: 10px;
+
+    button{
+      width: 70px;
+      height: 30px;
+      border: none;
+      border-radius: 15px;
+      background-color: #FFCFDA;
+      font-weight: 600;
+      &:hover{
+        background-color: white;
+      }
+    }
+  }
+  li{
+    font-size: .7rem;
+    margin: 10px 0 10px 25px;
   }
 `;
 
@@ -103,6 +127,7 @@ const NewGuild = () => {
   const [guildName, setGuildName] = useState("");
   const [guildIntro, setGuildIntro] = useState("");
   const [guildDetailIntro, setGuildDetailIntro] = useState("");
+  const [category, setCategory] = useState("");
 
   const onChangeRegion = (e) => {
     setRegion(e.target.value);
@@ -121,7 +146,7 @@ const NewGuild = () => {
   }
 
   const nextPage = () => {
-    navigate('/createguild/second', {state : {region, guildName, guildIntro, guildDetailIntro}});
+    navigate('/createguild/second', {state : {region, guildName, guildIntro, guildDetailIntro, category}});
   };
 
 
@@ -131,23 +156,31 @@ const NewGuild = () => {
     <div className="content">
     <Link to="/guild" style={{ textDecoration: "none", color: "inherit"}}><img src={logo} alt="스위트킹덤로고" /></Link>
     <h3>새로운 길드 생성을 위해 몇가지 질문을 드릴게요</h3>
-    <br /><br /><br /><br /><br />
-    <div className="item">
-      <h4>지역을 입력해볼까요?</h4>
-      <Input onChange={onChangeRegion}></Input>
-    </div>
     <br /><br /><br />
-    <div className="item">
+    <Item>
+      <h4>카테고리를 선택해볼까요?</h4>
+      <div className="category">
+      <button onClick={() => setCategory(1)} style={{ boxShadow: category === 1 ? "inset 1px 1px 1px lightgray" : "none", backgroundColor: category === 1 ? "white" : "#FFCFDA" }}>친목</button>
+      <button onClick={() => setCategory(2)} style={{ boxShadow: category === 2 ? "inset 1px 1px 1px lightgray" : "none", backgroundColor: category === 2 ? "white" : "#FFCFDA" }}>퀘스트</button>
+      </div>
+    </Item>
+    <br /><br /><br />
+    <Item>
+      <h4>지역을 입력해볼까요?</h4>
+      <Input placeholder="도/시/구/ 등 자유롭게 입력" onChange={onChangeRegion}></Input>
+    </Item>
+    <br /><br /><br />
+    <Item>
       <h4>길드 이름을 정해볼까요?</h4>
       <Input onChange={onChangeName}></Input>
-    </div>
+    </Item>
     <br /><br /><br />
-    <div className="item">
+    <Item>
       <h4>한 줄로 길드를 소개해볼까요?</h4>
       <Input onChange={onChangeIntro}></Input>
-    </div>
+    </Item>
     <br /><br /><br />
-    <div className="item">
+    <Item>
       <h4>길드를 자세하게 소개해볼까요?</h4>
       <div className="box1">
         <img src={warning} alt="뿅" />
@@ -156,10 +189,10 @@ const NewGuild = () => {
       <li>주로 어떤 활동을 하게 될지 알려주세요</li>
       <li>이런 사람과 잘 맞아요! 길드 성향을 알려주세요</li>
       <Detail onChange={onChangeDetailIntro}></Detail>
-    </div>
+    </Item>
     <br /><br /><br />
     {region && guildName && guildIntro && guildDetailIntro
-    && (<div className="button-box">
+    && category && (<div className="button-box">
     <button onClick={nextPage}>다음</button>
     </div>
     )}

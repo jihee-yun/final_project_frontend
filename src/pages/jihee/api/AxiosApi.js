@@ -27,13 +27,14 @@ const AxiosApi = {
     return await axios.get(KH_DOMAIN + `/guild/detail?guildNum=${guildNum}`)
   },
   // 새로운 길드 생성
-  createNewGuild: async(memNum, guildName, guildIntro, guildDetailIntro, meetDay, member, region, url) => {
+  createNewGuild: async(memNum, guildName, guildIntro, guildDetailIntro, meetDay, category, member, region, url) => {
     const guildData = {
       memNum : memNum,
       guildName : guildName,
       guildIntro : guildIntro,
       guildDetailIntro : guildDetailIntro,
       meetDay : meetDay,
+      category: category,
       member : member,
       region : region,
       thumbnail : url

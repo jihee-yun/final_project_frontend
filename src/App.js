@@ -43,11 +43,13 @@ import QuizMain from './pages/yeabin/QuizMain';
 import PayComplete from './pages/yeabin/PayComplete';
 import CouponPayment from './pages/yeabin/CouponPayment';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
+import ScrollToTop from './pages/jihee/ScrollToTop';
 
 function App() {
   return (
     <UserStore>
     <BrowserRouter>
+    <ScrollToTop />
       <Routes>
         <Route path="/" element={<Main/>}/>
         <Route path="/signup" element={<SignUp/>}/>

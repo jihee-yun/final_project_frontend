@@ -110,8 +110,6 @@ const ModalStyle = styled.div`
 
 const Modal = (props) => {
     const {open, confirm, close, type, header, children, move} = props;
-
-    console.log(open);
     
     // &times; 는 X표 문자를 의미
     return (

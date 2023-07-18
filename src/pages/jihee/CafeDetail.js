@@ -179,10 +179,6 @@ const CafeDetail = () => {
     <h3>{cafe.addr}</h3>
     </div>
     <Slider cafeNum={cafeNum}/>
-    {/* <div className="navi">
-      <div>소개</div>
-      <div>후기</div>
-    </div> */}
     <div className="middle">
     <div className="content">
     <h2>{cafe.intro}</h2>

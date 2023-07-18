@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import logo from "./images/logo.png";
@@ -128,7 +128,7 @@ const Input = styled.input`
 const NewGuildSecond = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const {region, guildName, guildIntro, guildDetailIntro} = location.state;
+  const {region, guildName, guildIntro, guildDetailIntro, category} = location.state;
 
   const [isModalOpen, setModalOpen] = useState(false);
 
@@ -184,7 +184,7 @@ const NewGuildSecond = () => {
 
     const response = await AxiosApi.createNewGuild(
       1, guildName, guildIntro, guildDetailIntro, meetDay, 
-      member, region, imageSrc
+      category, member, region, imageSrc
     );
     console.log(response.data);
     if(response.data === true) {
@@ -193,7 +193,7 @@ const NewGuildSecond = () => {
   };
 
   const prevPage = () => {
-    navigate(-1);
+    navigate("/createguild");
   };
 
   const complete = () => {
@@ -239,8 +239,8 @@ const NewGuildSecond = () => {
       </div>
       </div>
       <Modal move={true} header="완료" open={isModalOpen} confirm={complete}>
-        <CompleteModal content={"리뷰가 등록되었습니다"}/>
-    </Modal>
+        <CompleteModal content={"길드가 등록되었습니다"}/>
+      </Modal>
     </Container>
     </>
   );

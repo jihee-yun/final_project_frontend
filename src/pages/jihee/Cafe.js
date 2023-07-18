@@ -65,6 +65,7 @@ const Cafe = () => {
 
   const selectCategory = (category) => {
     setRegion(category);
+    localStorage.setItem("region", category);
     navigate('/cafe/main')
   }
 

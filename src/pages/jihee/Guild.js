@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "../now/component/Header";
 import AxiosApi from "./api/AxiosApi";
 import GuildSection from "./GuildSection";
+import GuildFilterCategory from "./GuildFilterCategory";
 
 const Container = styled.div`
   @media (max-width: 768px) {
@@ -76,17 +77,22 @@ const Guild = () => {
   const navigate = useNavigate();
 
   const [guildInfo, setGuildInfo ] = useState("");
+  const [category, setCategory] = useState("All");
 
   useEffect(() => {
     const guildInfo = async() => {
-      const response = await AxiosApi.guildInfoGet("All");
+      const response = await AxiosApi.guildInfoGet(category);
       if(response.status === 200) setGuildInfo(response.data);
     }
     guildInfo();
-  },[]);
+  },[category]);
 
   const moveToNewGuild = () => {
     navigate('/createguild');
+  }
+
+  const categoryChange = (e) => {
+    setCategory(e);
   }
 
   return(
@@ -103,6 +109,7 @@ const Guild = () => {
         <button onClick={moveToNewGuild}>길드 만들기</button>
       </RegBox>
       {/* <div className="middle-bar"></div> */}
+      <GuildFilterCategory onClickCategory={categoryChange} />
       <GuildBox>
       <GuildSection guildInfo={guildInfo}/>
       </GuildBox>
