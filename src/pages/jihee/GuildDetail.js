@@ -90,7 +90,6 @@ const HostProfile = styled.div`
 `;
 
 const GuildDetail = () => {
-  const navigate = useNavigate();
   const context = useContext(UserContext);
   const { guildNum } = context;
 

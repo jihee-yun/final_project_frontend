@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import location from "./images/location.png";
 import member from "./images/member.png";
@@ -8,6 +8,7 @@ import GuildJoinModal from "./GuildJoinModal";
 import CompleteModal from "./CompleteModal";
 import AxiosApi from "./api/AxiosApi";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/UserStore";
 
 const Middle = styled.div`
   position: absolute;
@@ -154,12 +155,11 @@ const Middle = styled.div`
 `;
 
 const GuildDetailMiddle = ({guildNum, guildInfo}) => {
+  const context = useContext(UserContext);
+  const { userNum } = context;
   const navigate = useNavigate("");
   const [modalOpen, setModalOpen] = useState(null);
   const [isTrue, setIsTrue] = useState("");
-  
-  // 가입 여부 확인
-  const userNum = 3;
 
   // 인원 마감 버튼
   const { limitMember, memberNumList } = guildInfo[0];

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import logo from "./images/logo.png";
@@ -9,6 +9,7 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import AxiosApi from "./api/AxiosApi";
 import Modal from "./Modal2";
 import CompleteModal from "./CompleteModal";
+import { UserContext } from "../../context/UserStore";
 
 const Container = styled.div`
   @media (max-width: 430px) {
@@ -126,11 +127,15 @@ const Input = styled.input`
 `;
 
 const NewGuildSecond = () => {
+  const context = useContext(UserContext);
+  const { userNum } = context; 
   const navigate = useNavigate();
   const location = useLocation();
   const {region, guildName, guildIntro, guildDetailIntro, category} = location.state;
 
   const [isModalOpen, setModalOpen] = useState(false);
+
+  console.log(userNum);
 
   // 인풋으로 값 입력받기
   const [meetDay, setMeetDay] = useState("");
@@ -183,7 +188,7 @@ const NewGuildSecond = () => {
     }
 
     const response = await AxiosApi.createNewGuild(
-      1, guildName, guildIntro, guildDetailIntro, meetDay, 
+      userNum, guildName, guildIntro, guildDetailIntro, meetDay, 
       category, member, region, imageSrc
     );
     console.log(response.data);

@@ -139,13 +139,10 @@ const Container = styled.div`
 const CafeDetail = () => {
   const navigate = useNavigate();
   const context = useContext(UserContext);
-  const { cafeNum } = context; 
+  const { userNum, cafeNum } = context; 
 
   // 카페 디테일 정보 받아오기
   const [detailInfo, setDetailInfo] = useState("");
-
-  // 회원 번호
-  const memNum = 2;
 
   useEffect(() => {
     const detailInfo = async() => {
@@ -170,7 +167,7 @@ const CafeDetail = () => {
     <div className="top">
       <div className="cafe-name">
         <h1>{cafe.cafeName}</h1>
-        <CafeLike cafeNum={cafe.id} memNum={memNum}/>
+        <CafeLike cafeNum={cafe.id} memNum={userNum}/>
       </div>
     <div className="star">
       <AvgStar avgStar={cafe.avgScore}/>

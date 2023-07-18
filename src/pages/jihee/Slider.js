@@ -1,7 +1,6 @@
 
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import cafeimg1 from "./images/카페임시이미지.jpeg";
 import { StyleSheetManager } from 'styled-components';
 import DotPageNation from "./DotPageNation";
 import AxiosApi from "./api/AxiosApi";

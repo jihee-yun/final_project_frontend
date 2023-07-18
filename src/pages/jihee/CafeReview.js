@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import AvgStar from "./AvgStar";
@@ -10,6 +10,7 @@ import CafeReviewModal from "./CafeReviewModal";
 import CafeReviewLike from "./CafeReviewLike";
 import Modal from "./Modal2";
 import CompleteModal from "./CompleteModal";
+import { UserContext } from "../../context/UserStore";
 
 const Container = styled.div`
   @media (max-width: 768px) {
@@ -146,6 +147,8 @@ const Bar = styled.div`
 `;
 
 const CafeReview = () => {
+  const context = useContext(UserContext);
+  const { userNum } = context;
   const navigate = useNavigate();
   const location = useLocation();
   const info = location.state;
@@ -159,7 +162,6 @@ const CafeReview = () => {
   const [openReviewId, setOpenReviewId] = useState(null);
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 
-  const memNum = 3; // 여기에 이제 로그인 된 회원번호 받아오기
   console.log(cafeReviewInfo);
 
   useEffect(() => {
@@ -221,7 +223,7 @@ const CafeReview = () => {
         </div>
       </MemberBox>
       <Bar onClick={() => modalOpen(review.id)}>
-      {review.userNum === memNum && <img src={dot} alt="메뉴바" />}
+      {review.userNum === userNum && <img src={dot} alt="메뉴바" />}
       {isModalVisible && openReviewId === review.id && (
         <CafeReviewModal reviewInfo={cafeReviewInfo} id={review.id} cafeNum={cafeNum} onClose={closeModal} isModalOpen={completeModal} />
       )}
@@ -231,7 +233,7 @@ const CafeReview = () => {
       <Img>
       {review.url1 && <Photo className="photo" imageurl={review.url1}></Photo>}
       {review.url2 && <Photo className="photo" imageurl={review.url2}></Photo>} </Img>
-      <CafeReviewLike memNum={memNum} reviewId={review.id} likeCount={review.likeCount}/>
+      <CafeReviewLike memNum={userNum} reviewId={review.id} likeCount={review.likeCount}/>
       <br /><hr />
     </ReviewBox>
      ))}
