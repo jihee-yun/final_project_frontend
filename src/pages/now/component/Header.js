@@ -118,7 +118,8 @@ const Navlink = styled(Link) `
 
 
 const Header = () => {
-  const { isSidebar, setIsSidebar, isLogin,setIsLogin,  userName } = useContext(UserContext);
+  const { isSidebar, setIsSidebar, isLogin, setIsLogin,  userName, setUserName, 
+    setGrantType, setAccessToken,setRefreshToken, setUserNum, setUserAuthoruty}  = useContext(UserContext);
   const navigate = useNavigate();
   const [isMobile, setIsMobile] = useState(false);
 
@@ -139,6 +140,12 @@ const Header = () => {
 
   // 로그아웃 버튼 누르면 함수 실행
   const handleLogout = () => {
+    setGrantType("");
+    setAccessToken("");
+    setRefreshToken("");
+    setUserNum("");
+    setUserName("");
+    setUserAuthoruty("");
     setIsLogin(false);
     navigate("/");
   }

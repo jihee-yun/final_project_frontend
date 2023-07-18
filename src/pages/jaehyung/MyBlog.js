@@ -5,9 +5,10 @@ import AxiosApi from "./api/AxiosApi";
 import { UserContext } from "../../context/UserStore";
 import { storage } from "../../utils/Firebase";
 import { ref, getDownloadURL } from "firebase/storage";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
 import SideMenu from "./components/SideMenu";
+import Header from "../now/component/Header";
+import Footer from "../now/component/Footer";
+import ChatBot from "./components/ChatBot";
 
 
 
@@ -15,7 +16,15 @@ const MyBlog = () => {
 
 
   return(
-    <></>
+    <>
+      <Header />
+
+    
+    
+
+
+      <Footer />
+    </>
   );
 };
 export default MyBlog;

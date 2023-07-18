@@ -102,7 +102,7 @@ const SideMenu = () => {
     <Side>
       <ProfileBox>
         <img className="profileImg" src={imageUrls[0]} alt="프로필 이미지" onClick={()=>navigate("/mypage")}/>
-        <MyName onClick={()=>navigate("/mypage/blog")}>{userName}님 블로그 이동</MyName>
+        <MyName onClick={()=>navigate("/blog")}>{userName}님 블로그 이동</MyName>
         <MyPoint onClick={()=>navigate("/mypage/point")}>~~~ point</MyPoint>
       </ProfileBox>
       <NaviButton onClick={()=>navigate("/mypage/review")}>작성 리뷰</NaviButton>

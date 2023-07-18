@@ -27,7 +27,7 @@ const Detail = styled.div`
   flex-direction: column;
   align-items: center;
 
-  border: 2px solid yellow;
+  /* border: 2px solid yellow; */
 `;
 // 상세 페이지 상단 선택 박스(회원 정보 수정, 알림 설정)
 const SelectBox = styled.div`
@@ -61,7 +61,7 @@ const SpecificBox = styled.div`
 `;
 const TitleBox = styled.div`
   margin-top: 5px;
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
 `;
 
 // 각 박스별 정보 표시 p태크
