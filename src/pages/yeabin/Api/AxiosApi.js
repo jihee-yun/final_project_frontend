@@ -29,5 +29,19 @@ const AxiosApi = {
   myInfoGet: async(myinfo) => {
     return await axios.get(KH_DOMAIN + `/couponstore/myinfo?myinfo=${myinfo}`);
   },
+
+  // 챌린지 신청
+  challengeApply: async(challengeId, userId) => {
+    const data = {
+      challengeId: challengeId,
+      userId: userId
+    };
+    return await axios.post(KH_DOMAIN + "/mychallenge/apply", data)
+  },
+
+  // 마이챌린지 조회
+  mychallengeGet: async(userNum, challengeId) => {
+    return await axios.get(KH_DOMAIN + `/mychallenge/get?userNum=${userNum}&challengeId=${challengeId}`);
+  },
 };
 export default AxiosApi;

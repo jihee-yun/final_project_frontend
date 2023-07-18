@@ -4,6 +4,7 @@ import challengePin from "./images/challengePin.png"
 import { Link, useLocation } from "react-router-dom";
 import ChallnegeModal from "./ChallengeModal";
 import Header from "../now/component/Header";
+import AxiosApi from "./Api/AxiosApi";
 
 const Container = styled.div`
   width: 80%;
@@ -15,7 +16,7 @@ const Box = styled.div`
   margin: 0 auto;
 
   @media (max-width: 768px) {
-    width: 700px;
+    width: 80%;
   }
 
   h2 {
@@ -146,11 +147,15 @@ const ChallengeMain = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const location = useLocation();
   const info = location.state && location.state.editedInfo;
+  const {challengeId, userId} = location.state;
 
   console.log(info);
 
-  const openModal = () => {
-    setModalOpen(true);
+  const applyChallenge = async() => {
+    const response = await AxiosApi.challengeApply(challengeId, userId);
+    if(response.status === 200 && response.data === true) {
+      setModalOpen(true);
+    }
   };
 
   const closeModal = () => {
@@ -193,7 +198,7 @@ const ChallengeMain = () => {
           </Confirm>
           <Btn>
             <div>
-              <button onClick={openModal}>오늘부터 시작하기</button>
+              <button onClick={applyChallenge}>오늘부터 시작하기</button>
               <ChallnegeModal type={true} open={modalOpen} close={closeModal}>퀘스트 신청이 완료되었습니다.</ChallnegeModal>
             </div>
           </Btn>

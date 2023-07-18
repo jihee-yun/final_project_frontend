@@ -6,9 +6,14 @@ import shopping from "./images/shopping.png";
 import { useNavigate } from "react-router-dom";
 import AxiosApi from "./Api/AxiosApi";
 import ad from "./images/event-ad.png";
+import ad2 from "./images/ad-media.png";
 import Header from "../now/component/Header";
 
 const Box = styled.div`
+  @media (max-width: 768px) {
+    width: 100%;
+    
+  }
   width: 80%;
   margin: 0 auto;
   margin-top: 80px;
@@ -66,8 +71,7 @@ const QuizBox = styled.div`
   margin: 50px;
 
   img {
-    width: 80px;
-    height: 80px;
+    width: 30%;
     margin: 40px 0 10px 20px;
   }
   
@@ -108,6 +112,27 @@ const AdBox = styled.div`
     /* border: 1px solid black; */
     margin: 50px;
   }
+  @media (max-width: 768px) {
+    .adImg {
+      display: none;
+    }
+  }
+`;
+
+const MediaBox = styled.div`
+  .ad {
+    display: none;
+  }
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-bottom: 50px;
+    .ad {
+      display: block;
+      width: 100%;
+      height: 220px;
+    }
+  }
+
 `;
 
 const LuckyBox = styled.div`
@@ -118,8 +143,7 @@ const LuckyBox = styled.div`
   margin: 50px;
 
   img {
-    width: 80px;
-    height: 80px;
+    width: 30%;
     margin: 40px 0 10px 20px;
   }
   
@@ -248,6 +272,11 @@ const Event = () => {
         <Roulette />
         <EventFooter>
           <div className="event-box">
+            <MediaBox>
+              <a href="https://www.coca-cola.co.kr/" target="_blank" rel="noopener noreferrer">
+                <img className="ad" src={ad2} alt="광고2" />
+              </a>
+            </MediaBox>
             <QuizBox>
               <div>
                 <img src={quiz} alt="퀴즈" />
