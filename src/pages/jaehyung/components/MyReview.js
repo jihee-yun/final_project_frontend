@@ -21,8 +21,6 @@ const Container = styled.div`
 
   display: flex;
   justify-content: center;
-  align-items: center;
-  transition: opacity 1.8s ease-in-out;
 `;
 const Detail = styled.div`
   width: 100%;
@@ -31,7 +29,7 @@ const Detail = styled.div`
   flex-direction: column;
   align-items: center;
 
-  border: 2px solid yellow;
+  /* border: 2px solid yellow; */
 `;
 
 const SelectBox = styled.div`

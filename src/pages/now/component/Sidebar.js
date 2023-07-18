@@ -114,7 +114,7 @@ const Sidebar = () => {
       <Menu>
         <NavLink to="/cafe">카페 찾기</NavLink>
         <NavLink to="/guild">길드</NavLink>
-        <NavLink to="/event">퀘스트</NavLink>
+        <NavLink to="/event">이벤트</NavLink>
         <NavLink to="/couponStore">상점</NavLink>
       </Menu>
       </MenuBox>

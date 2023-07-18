@@ -20,7 +20,6 @@ const Container = styled.div`
   
   display: flex;
   justify-content: center;
-  align-items: center;
 `;
 const Detail = styled.div`
   width: 100%;

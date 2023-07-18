@@ -9,19 +9,20 @@ import { ref, getDownloadURL } from "firebase/storage";
 const Side = styled.div`
   width: 300px;
   min-width: 200px;
-  height: 1000px;
+  height: 800px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid black;
-  transition: opacity 1.3s ease-in-out;
+  border: 1px solid #7D5A5A;
+  border-radius: 3px;
 `;
 
 const ProfileBox = styled.div`
   width: 95%;
   height: 200px;
   margin: 2%;
-  border: 1px solid blue;
+  border: 1px solid #7D5A5A;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -36,7 +37,7 @@ const ProfileBox = styled.div`
 `;
 
 const MyName = styled.p`
-  border: 1px solid black;
+  /* border: 1px solid black; */
   margin-top : 2%;
   margin-bottom: 0;
   cursor: pointer;
@@ -44,7 +45,7 @@ const MyName = styled.p`
 
 const MyPoint = styled.p`
   margin: 1%;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   cursor: pointer;
 `;
 
@@ -79,7 +80,7 @@ const SideMenu = () => {
   const [imageUrls, setImageUrls] = useState([]);
 
   // 로그인시 회원 번호
-  const { userNum } = useContext(UserContext);
+  const { userNum, userName } = useContext(UserContext);
 
   // 파이어베이스 스토리지 이미지 로딩
   useEffect(() => {
@@ -101,7 +102,7 @@ const SideMenu = () => {
     <Side>
       <ProfileBox>
         <img className="profileImg" src={imageUrls[0]} alt="프로필 이미지" onClick={()=>navigate("/mypage")}/>
-        <MyName onClick={()=>navigate("/mypage/blog")}>~~~님 블로그 이동</MyName>
+        <MyName onClick={()=>navigate("/mypage/blog")}>{userName}님 블로그 이동</MyName>
         <MyPoint onClick={()=>navigate("/mypage/point")}>~~~ point</MyPoint>
       </ProfileBox>
       <NaviButton onClick={()=>navigate("/mypage/review")}>작성 리뷰</NaviButton>

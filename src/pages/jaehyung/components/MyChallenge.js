@@ -24,12 +24,13 @@ const Container = styled.div`
 // 세부 페이지
 const Detail = styled.div`
   width: 100%;
+  max-width: 1000px;
   /* height: 1000px; */
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  border: 2px solid yellow;
+  /* border: 2px solid yellow; */
 `;
 
 // 세부 페이지 윗쪽 부분
@@ -58,7 +59,7 @@ const ContentBox = styled.div`
 `;
 // 세부 페이지 가로 박스
 const ContentRowbox = styled.div`
-  border: 1px solid red;
+  /* border: 1px solid red; */
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -97,26 +98,20 @@ const More = styled.p`
   margin-right: 1%;
   cursor: pointer;
 `;
-// 길드 카테고리
-const GuildCategory = styled.p`
+// 챌린지 카운트
+const CahllengeCount = styled.p`
   margin-right: auto; 
   margin-bottom: -5px;
   margin-left: 5%;
 `;
-// 길드 지역
-const GuildRegion = styled.p`
+// 챌린지 내용
+const ChallengeDetail = styled.p`
   margin-right: auto;
   margin-bottom: -5px;
   margin-left: 5%;
 `;
-// 길드 인원수
-const GuildMemberNum = styled.p`
-  margin-right: auto;
-  margin-bottom: -5px;
-  margin-left: 5%;
-`;
-// 길드 소개
-const GuildIntro = styled.p`
+// 챌린지 만료 날짜
+const ChallengeExpired = styled.p`
   margin-right: auto;
   margin-left: 5%;
 `;
@@ -168,23 +163,60 @@ const MyChallenge = () => {
                   <ChallengeName>챌린지 이름1</ChallengeName>
                   <More onClick={()=>navigate("/mypage/challenge")}>더 보기</More>
                 </RowBox>
-                <GuildCategory>카테고리: 친목</GuildCategory>
-                <GuildRegion>지역: 서울특별시 강남구</GuildRegion>
-                <GuildMemberNum>인원수: 20</GuildMemberNum>
-                <GuildIntro>소개: 슈르릅 옴뇸뇸</GuildIntro>  
+                <CahllengeCount>카운트: 5</CahllengeCount>
+                <ChallengeDetail>내용: 1식1케이크 도전</ChallengeDetail>
+                <ChallengeExpired>만료날짜: 2023-07</ChallengeExpired>
               </SpecificBox>
               <SpecificBox>
                 <RowBox>
                   <ChallengeName>챌린지 이름1</ChallengeName>
                   <More onClick={()=>navigate("/mypage/challenge")}>더 보기</More>
                 </RowBox>
-                <GuildCategory>카테고리: 친목</GuildCategory>
-                <GuildRegion>지역: 서울특별시 강남구</GuildRegion>
-                <GuildMemberNum>인원수: 20</GuildMemberNum>
-                <GuildIntro>소개: 슈르릅 옴뇸뇸</GuildIntro>  
+                <CahllengeCount>카운트: 5</CahllengeCount>
+                <ChallengeDetail>내용: 1식1케이크 도전</ChallengeDetail>
+                <ChallengeExpired>만료날짜: 2023-07</ChallengeExpired>
               </SpecificBox>
             </ContentRowbox>
-
+            <ContentRowbox>
+              <SpecificBox>
+                <RowBox>
+                  <ChallengeName>챌린지 이름1</ChallengeName>
+                  <More onClick={()=>navigate("/mypage/challenge")}>더 보기</More>
+                </RowBox>
+                <CahllengeCount>카운트: 5</CahllengeCount>
+                <ChallengeDetail>내용: 1식1케이크 도전</ChallengeDetail>
+                <ChallengeExpired>만료날짜: 2023-07</ChallengeExpired>
+              </SpecificBox>
+              <SpecificBox>
+                <RowBox>
+                  <ChallengeName>챌린지 이름1</ChallengeName>
+                  <More onClick={()=>navigate("/mypage/challenge")}>더 보기</More>
+                </RowBox>
+                <CahllengeCount>카운트: 5</CahllengeCount>
+                <ChallengeDetail>내용: 1식1케이크 도전</ChallengeDetail>
+                <ChallengeExpired>만료날짜: 2023-07</ChallengeExpired>
+              </SpecificBox>
+            </ContentRowbox>
+            <ContentRowbox>
+              <SpecificBox>
+                <RowBox>
+                  <ChallengeName>챌린지 이름1</ChallengeName>
+                  <More onClick={()=>navigate("/mypage/challenge")}>더 보기</More>
+                </RowBox>
+                <CahllengeCount>카운트: 5</CahllengeCount>
+                <ChallengeDetail>내용: 1식1케이크 도전</ChallengeDetail>
+                <ChallengeExpired>만료날짜: 2023-07</ChallengeExpired>
+              </SpecificBox>
+              <SpecificBox>
+                <RowBox>
+                  <ChallengeName>챌린지 이름1</ChallengeName>
+                  <More onClick={()=>navigate("/mypage/challenge")}>더 보기</More>
+                </RowBox>
+                <CahllengeCount>카운트: 5</CahllengeCount>
+                <ChallengeDetail>내용: 1식1케이크 도전</ChallengeDetail>
+                <ChallengeExpired>만료날짜: 2023-07</ChallengeExpired>
+              </SpecificBox>
+            </ContentRowbox>
 
 
           </ContentBox>
