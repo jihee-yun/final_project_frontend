@@ -46,6 +46,7 @@ import CouponPayment from './pages/yeabin/CouponPayment';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import ServiceCenter from './pages/now/ServiceCenter';
 import ScrollToTop from './pages/jihee/ScrollToTop';
+import AdminReg from './pages/taehoon/AdminReg';
 
 function App() {
   return (
@@ -97,6 +98,7 @@ function App() {
         <Route path='/payComplete' element={<PayComplete/>}/>
         <Route path='/couponPayment' element={<CouponPayment/>}/>
         <Route path='/servicecenter' element={<ServiceCenter/>}/>
+        <Route path='/admin/register' element={<AdminReg/>}/>
       </Routes>
     </BrowserRouter>
     </UserStore>
