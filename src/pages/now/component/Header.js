@@ -131,8 +131,8 @@ const Header = () => {
         </div>
         <Rightbox>
         <div className="member">
-                <Link to="/login" style={{marginRight: "10px"}}>로그인</Link>
-                <Link to="/signup">회원가입</Link>
+                <Link to="/memberlogin" style={{marginRight: "10px"}}>로그인</Link>
+                <Link to="/membersignup">회원가입</Link>
         </div>
         <HamburgerBtn
           className="HamburgerBtn" onClick={() => setIsSidebar("0")}>

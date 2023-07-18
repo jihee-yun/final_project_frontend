@@ -20,7 +20,6 @@ const Container = styled.div`
   
   display: flex;
   justify-content: center;
-  align-items: center;
 `;
 // 세부 페이지
 const Detail = styled.div`
@@ -86,7 +85,7 @@ const RowBox = styled.div`
   flex-direction: row;
 `;
 // 길드 이름
-const GuildName = styled.p`
+const ChallengeName = styled.p`
 
 `;
 // 더보기 버튼
@@ -166,8 +165,8 @@ const MyChallenge = () => {
             <ContentRowbox>
               <SpecificBox>
                 <RowBox>
-                  <GuildName>챌린지 이름1</GuildName>
-                  <More onClick={()=>navigate("/mypage/guild")}>더 보기</More>
+                  <ChallengeName>챌린지 이름1</ChallengeName>
+                  <More onClick={()=>navigate("/mypage/challenge")}>더 보기</More>
                 </RowBox>
                 <GuildCategory>카테고리: 친목</GuildCategory>
                 <GuildRegion>지역: 서울특별시 강남구</GuildRegion>
@@ -176,8 +175,8 @@ const MyChallenge = () => {
               </SpecificBox>
               <SpecificBox>
                 <RowBox>
-                  <GuildName>길드 이름1</GuildName>
-                  <More onClick={()=>navigate("/mypage/guild")}>더 보기</More>
+                  <ChallengeName>챌린지 이름1</ChallengeName>
+                  <More onClick={()=>navigate("/mypage/challenge")}>더 보기</More>
                 </RowBox>
                 <GuildCategory>카테고리: 친목</GuildCategory>
                 <GuildRegion>지역: 서울특별시 강남구</GuildRegion>
@@ -185,50 +184,7 @@ const MyChallenge = () => {
                 <GuildIntro>소개: 슈르릅 옴뇸뇸</GuildIntro>  
               </SpecificBox>
             </ContentRowbox>
-            <ContentRowbox>
-              <SpecificBox>
-                <RowBox>
-                  <GuildName>길드 이름1</GuildName>
-                  <More onClick={()=>navigate("/mypage/guild")}>더 보기</More>
-                </RowBox>
-                <GuildCategory>카테고리: 친목</GuildCategory>
-                <GuildRegion>지역: 서울특별시 강남구</GuildRegion>
-                <GuildMemberNum>인원수: 20</GuildMemberNum>
-                <GuildIntro>소개: 슈르릅 옴뇸뇸</GuildIntro>  
-              </SpecificBox>
-              <SpecificBox>
-                <RowBox>
-                  <GuildName>길드 이름1</GuildName>
-                  <More onClick={()=>navigate("/mypage/guild")}>더 보기</More>
-                </RowBox>
-                <GuildCategory>카테고리: 친목</GuildCategory>
-                <GuildRegion>지역: 서울특별시 강남구</GuildRegion>
-                <GuildMemberNum>인원수: 20</GuildMemberNum>
-                <GuildIntro>소개: 슈르릅 옴뇸뇸</GuildIntro>  
-              </SpecificBox>
-            </ContentRowbox>
-            <ContentRowbox>
-              <SpecificBox>
-                <RowBox>
-                  <GuildName>길드 이름1</GuildName>
-                  <More onClick={()=>navigate("/mypage/guild")}>더 보기</More>
-                </RowBox>
-                <GuildCategory>카테고리: 친목</GuildCategory>
-                <GuildRegion>지역: 서울특별시 강남구</GuildRegion>
-                <GuildMemberNum>인원수: 20</GuildMemberNum>
-                <GuildIntro>소개: 슈르릅 옴뇸뇸</GuildIntro>  
-              </SpecificBox>
-              <SpecificBox>
-                <RowBox>
-                  <GuildName>길드 이름1</GuildName>
-                  <More onClick={()=>navigate("/mypage/guild")}>더 보기</More>
-                </RowBox>
-                <GuildCategory>카테고리: 친목</GuildCategory>
-                <GuildRegion>지역: 서울특별시 강남구</GuildRegion>
-                <GuildMemberNum>인원수: 20</GuildMemberNum>
-                <GuildIntro>소개: 슈르릅 옴뇸뇸</GuildIntro>  
-              </SpecificBox>
-            </ContentRowbox>
+
 
 
           </ContentBox>

@@ -20,7 +20,6 @@ const Container = styled.div`
   
   display: flex;
   justify-content: center;
-  align-items: center;
 `;
 // 세부 페이지
 const Detail = styled.div`
