@@ -403,7 +403,6 @@ const AdminReport = () => {
                     <h3>내용</h3>
                 <ContentBox>
                     <p>{selectedReport.content}</p>
-
                 </ContentBox>
                 </ModalContent>
             </div>

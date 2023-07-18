@@ -4,6 +4,8 @@ import logo from "../../images/logo.png";
 import { useNavigate } from "react-router-dom";
 import AxiosApi from "./Api/AxiosApi";
 import DatePicker from "react-datepicker";
+import like from "../jihee/images/like.png";
+import star from "../taehoon/images/star.png";
 
 const ManageReviewBlock = styled.div`
     position: relative;
@@ -410,8 +412,26 @@ const ContentBox = styled.div`
                     <h3>내용</h3>
                 <ContentBox>
                     <p>{selectedReview.reviewContent}</p>
-
                 </ContentBox>
+                    <h3>사진</h3>
+                    <img src={selectedReview.reviewImgUrl1} alt="" className="image" style={{ width: "400px", height: "250px"}}/>
+                    <br/>
+                    <br/>
+                    <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                        <img
+                            src={like}
+                            alt=""
+                            className="like"
+                            style={{ width: "50px", height: "30px"}}
+                        />
+                        <span style={{ fontSize: "25px", fontWeight: "bold" }}>{selectedReview.likeCount}</span>
+                    </div>
+                    <br/>
+                    <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                        <img src={star} alt="" className="star" style={{width:"60px", height:"50px", marginBottom:"5px"}}/>
+                        <span style={{ fontSize: "25px", fontWeight: "bold" }}>{selectedReview.score} / 5</span>
+                    </div>
+                    
                 </ModalContent>
             </div>
         );
