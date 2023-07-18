@@ -23,6 +23,26 @@ const AxiosApi = {
         Authorization: `${grantType} ${accessToken}`
       }
     });
-  }
+  },
+
+    // 유저 번호로 챌린지 관련 정보 전체 조회
+    getMemberChallengeInfo: async (userNum, grantType, accessToken) => {
+      return await axios.get(`${DOMAIN}/review/getbynum?usernum=${userNum}`, {
+        headers: {
+          Authorization: `${grantType} ${accessToken}`
+        }
+      });
+    },
+
+
+
+
+
+
+
+
+
+
+
 };
 export default AxiosApi;

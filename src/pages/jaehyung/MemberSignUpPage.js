@@ -116,7 +116,7 @@ const MemberSignUpPage = () => {
     try {
       let rsp;
       if (authorityGet === "ROLE_USER") {
-        rsp = await MemberApi.userSignup(memberId, password, name, phone, email, birth, genderGet, authorityGet);
+        rsp = await MemberApi.memberSignup(memberId, password, name, phone, email, birth, genderGet, authorityGet);
       } else if (authorityGet === "ROLE_MEMBER") {
         rsp = await MemberApi.memberSignup(memberId, password, name, phone, email, birth, genderGet, authorityGet);
       }

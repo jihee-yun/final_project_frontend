@@ -133,7 +133,7 @@ const MemberLoginPage = () => {
     try {
       let rsp;
       if (authorityGet === "ROLE_USER") {
-        rsp = await MemberApi.userLogin(memberId, password);
+        rsp = await MemberApi.memberLogin(memberId, password);
       } else if (authorityGet === "ROLE_MEMBER") {
         rsp = await MemberApi.memberLogin(memberId, password);
       }
