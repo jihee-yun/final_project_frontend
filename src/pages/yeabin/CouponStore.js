@@ -141,13 +141,13 @@ const CouponStore = () => {
     couponInfo();
   }, []);
 
-  useEffect(() => {
-    const myinfo = async() => {
-      const response = await AxiosApi.myInfoGet("ALL");
-      if(response.status === 200) setMyInfo(response.data);
-    };
-    myinfo();
-  }, []);
+  // useEffect(() => {
+  //   const myinfo = async() => {
+  //     const response = await AxiosApi.myInfoGet("ALL");
+  //     if(response.status === 200) setMyInfo(response.data);
+  //   };
+  //   myinfo();
+  // }, []);
 
   const navigatePay = (id) => {
     const filterCoupon = couponInfo.filter(coupon => coupon.id === id);
@@ -160,13 +160,11 @@ const CouponStore = () => {
     <Header />
     <Container>
       <MyPoint>
-          {myinfo && myinfo.map(item => (
-            <InfoList key={item.userNum}>
-              <Name>{item.name}님 현재 보유 포인트 : </Name> 
-              {/* 로그인 한 회원만 보이게 수정 */}
-              {/* 포인트 불러오기 */}
+          {/* {myinfo && myinfo.map(item => ( */}
+            <InfoList>
+              <Name>님 현재 보유 포인트 : </Name> 
             </InfoList>
-          ))}
+          {/* ))} */}
         <div className="goEvent">
           <Link to='/event' className="link_style">받을 수 있는 포인트 확인하기</Link>
         </div>

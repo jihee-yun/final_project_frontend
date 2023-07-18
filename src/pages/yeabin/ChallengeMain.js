@@ -147,14 +147,14 @@ const ChallengeMain = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const location = useLocation();
   const info = location.state && location.state.editedInfo;
-  const {challengeId, userId} = location.state;
+  const {challengeId, userId} = location.state; // 아직 수정 전
 
   console.log(info);
 
   const applyChallenge = async() => {
     const response = await AxiosApi.challengeApply(challengeId, userId);
     if(response.status === 200 && response.data === true) {
-      setModalOpen(true);
+      setModalOpen(true); 
     }
   };
 
