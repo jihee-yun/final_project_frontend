@@ -25,7 +25,7 @@ const Container = styled.div`
 // 세부 페이지
 const Detail = styled.div`
   width: 100%;
-  height: 1000px;
+  /* height: 1000px; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -50,12 +50,24 @@ const TextBox = styled.p`
 // 세부 페이지 중앙 부분
 const ContentBox = styled.div`
   width: 90%;
-  height: 780px;
+  min-width: 500px;
   margin-top: 3%;
   border: 1px solid #F3E1E1;
   border-radius: 15px;
-
+  display: flex;
+  flex-direction: column;
 `;
+// 세부 정보들 나열해주는 박스
+const SpecificBox = styled.div`
+  margin: 20px;
+  border: 1px solid #F3E1E1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+`;
+
 
 const MyChallenge = () => {
 
@@ -69,10 +81,12 @@ const MyChallenge = () => {
             <TextBox>참여중인 챌린지 조회</TextBox>
           </SelectBox>
           <ContentBox>
+            <SpecificBox>
+
+            </SpecificBox>
+
 
           </ContentBox>
-
-
         </Detail>
       </Container>
       <Footer />

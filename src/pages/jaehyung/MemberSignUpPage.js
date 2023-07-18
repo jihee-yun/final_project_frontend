@@ -104,12 +104,12 @@ const MemberSignUpPage = () => {
   };
 
   const handleSignup = async () => {
-    const memberId = document.getElementByName("memberId").value;
-    const password = document.getElementByName("password").value;
-    const name = document.getElementByName("name").value;
-    const phone = document.getElementByName("phone").value;
-    const email = document.getElementByName("email").value;
-    const birth = document.getElementByName("birth").value;
+    const memberId = document.getElementById("memberId").value;
+    const password = document.getElementById("password").value;
+    const name = document.getElementById("name").value;
+    const phone = document.getElementById("phone").value;
+    const email = document.getElementById("email").value;
+    const birth = document.getElementById("birth").value;
     const genderGet = gender;
     const authorityGet = authority;
 
@@ -142,34 +142,34 @@ const MemberSignUpPage = () => {
         <TextBox>회원가입 테스트</TextBox>
         <div>
           <InputLabel htmlFor="memberId">아이디</InputLabel>
-          <Input name="memberId" type="text" />
+          <Input id="memberId" type="text" />
         </div>
         <div>
           <InputLabel htmlFor="password">비밀번호</InputLabel>
-          <Input name="password" type="password" />    
+          <Input id="password" type="password" />    
         </div>
         <div>
           <InputLabel htmlFor="name">이름</InputLabel>
-          <Input name="name" type="text"></Input>
+          <Input id="name" type="text"></Input>
         </div>
         <div>
           <InputLabel htmlFor="phone">핸드폰</InputLabel>
-          <Input name="phone" type="text"></Input>
+          <Input id="phone" type="text"></Input>
         </div>
         <div>
           <InputLabel htmlFor="email">이메일</InputLabel>
-          <Input name="email" type="text"></Input>
+          <Input id="email" type="text"></Input>
         </div>
         <div>
           <InputLabel htmlFor="birth">생년월일</InputLabel>
-          <Input name="birth" type="text" placeholder="ex)2000-01-01"></Input>
+          <Input id="birth" type="text" placeholder="ex)2000-01-01"></Input>
         </div>
         <RadioSelect>
           성별
           <RadioLabel>
             <RadioButton
               type="radio"
-              name="gender"
+              id="gender"
               value="MALE"
               checked={gender === "MALE"}
               onChange={handleGenderChange}
@@ -179,7 +179,7 @@ const MemberSignUpPage = () => {
           <RadioLabel>
             <RadioButton
               type="radio"
-              name="gender"
+              id="gender"
               value="FEMALE"
               checked={gender === "FEMALE"}
               onChange={handleGenderChange}
@@ -192,7 +192,7 @@ const MemberSignUpPage = () => {
           <RadioLabel>
             <RadioButton
               type="radio"
-              name="authority"
+              id="authority"
               value="ROLE_USER"
               checked={authority === "ROLE_USER"}
               onChange={handleAuthTypeChange}
@@ -202,7 +202,7 @@ const MemberSignUpPage = () => {
           <RadioLabel>
             <RadioButton
               type="radio"
-              name="authority"
+              id="authority"
               value="ROLE_MEMBER"
               checked={authority === "ROLE_MEMBER"}
               onChange={handleAuthTypeChange}

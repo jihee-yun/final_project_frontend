@@ -103,8 +103,8 @@ const MemberLoginPage = () => {
 
   // // 로그인 성공시 조회용 회원 번호 받아오기
   // const handleGetNum = async () => {
-  //   const memberId = document.getElementsByName("memberId").value;
-  //   const password = document.getElementsByName("password").value;
+  //   const memberId = document.getElementById("memberId").value;
+  //   const password = document.getElementById("password").value;
   //   const authorityGet = authority;
   //   try {
   //     let rsp2;
@@ -181,7 +181,7 @@ const MemberLoginPage = () => {
             <RadioLabel>
               <RadioButton
                 type="radio"
-                name="authority"
+                id="authority"
                 value="ROLE_USER"
                 checked={authority === "ROLE_USER"}
                 onChange={handleAuthTypeChange}
@@ -191,7 +191,7 @@ const MemberLoginPage = () => {
             <RadioLabel>
               <RadioButton
                 type="radio"
-                name="authority"
+                id="authority"
                 value="ROLE_MEMBER"
                 checked={authority === "ROLE_MEMBER"}
                 onChange={handleAuthTypeChange}
