@@ -2,7 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../../context/UserStore";
 import styled from "styled-components";
 import Logo from "../images/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
 
@@ -31,6 +31,11 @@ const HeaderContainer = styled.header`
     .logo {
       padding-left: 60px;
     }
+
+  .mypage {
+    margin-left: 10px;
+    cursor: pointer;
+  }
     `;
 
 const Rightbox = styled.div`
@@ -44,6 +49,7 @@ const Rightbox = styled.div`
   margin-bottom: 10px;
   font-weight: bold;
   font-size: 13px;
+  display: flex;
 
   a {
         text-decoration: none;
@@ -66,8 +72,8 @@ const HamburgerBtn = styled.button`
   border:none;
 `;
 
-    const NavContainer = styled.nav `
-        width: 100%;
+const NavContainer = styled.nav `
+  width: 100%;
     
     a {
         text-decoration: none;
@@ -117,8 +123,8 @@ const Navlink = styled(Link) `
 
 
 const Header = () => {
-  const { isSidebar, setIsSidebar } = useContext(UserContext);
-
+  const { isSidebar, setIsSidebar, isLogin, userName } = useContext(UserContext);
+  const navigate = useNavigate();
 
   
     return(
@@ -130,10 +136,18 @@ const Header = () => {
           </Link>
         </div>
         <Rightbox>
-        <div className="member">
-                <Link to="/memberlogin" style={{marginRight: "10px"}}>로그인</Link>
-                <Link to="/membersignup">회원가입</Link>
-        </div>
+        {isLogin ? (
+            <div className="member">
+              <p>{userName}님</p>
+              <p className="mypage" onClick={() => navigate("/mypage")}>회원정보</p>
+            </div>
+          ) : (
+            <div className="member">
+              <Link to="/memberlogin" style={{ marginRight: "10px" }}>로그인</Link>
+              <Link to="/membersignup">회원가입</Link>
+            </div>
+          )}
+
         <HamburgerBtn
           className="HamburgerBtn" onClick={() => setIsSidebar("0")}>
           <MenuIcon  style={{fontSize: 30, marginRight: 10,}} />
@@ -144,7 +158,7 @@ const Header = () => {
                 <ul className="Nav">
                     <Navlink to="/cafe">카페 찾기</Navlink>
                     <Navlink to="/guild">길드</Navlink>
-                    <Navlink to="/event">퀘스트</Navlink>
+                    <Navlink to="/event">이벤트</Navlink>
                     <Navlink to="/couponStore">상점</Navlink>
         <div className="search">
         <input

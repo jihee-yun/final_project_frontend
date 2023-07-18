@@ -72,7 +72,7 @@ const MemberLoginPage = () => {
   // 일반 회원, 사업자 회원 구분
   const [authority, setAuthority] = useState("ROLE_MEMBER");
   // useContext 토큰 저장
-  const {setGrantType, setAccessToken, setRefreshToken, setUserNum, setUserName, setUserAuthoruty } = useContext(UserContext);
+  const {setGrantType, setAccessToken, setRefreshToken, setUserNum, setUserName, setUserAuthoruty, setIsLogin } = useContext(UserContext);
 
   // 파이어베이스 스토리지 이미지 로딩
   useEffect(() => {
@@ -159,7 +159,8 @@ const MemberLoginPage = () => {
         setUserNum(userNum);
         setUserName(userName);
         setUserAuthoruty(userAuthority);
-        navigate("/mypage");
+        setIsLogin(true);
+        navigate("/");
         // handleGetNum();
       }
     } catch (error) {
