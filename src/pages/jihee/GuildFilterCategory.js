@@ -4,6 +4,10 @@ import social from "./images/small-talk.png";
 import quest from "./images/target.png";
 
 const CategoryBar = styled.div`
+   @media (max-width: 768px) {
+    gap: 30px;
+  }
+
   width: 100%;
   color: #585858;
   display: flex;
@@ -11,8 +15,14 @@ const CategoryBar = styled.div`
   gap: 80px;
   margin-top: 80px;
   margin-bottom: 30px;
+  box-sizing: border-box;
 
   .category {
+    @media (max-width: 768px) {
+    height: 30px;
+    font-size: .9rem;
+    }
+
     height: 55px;
     display: flex;
     align-items: center;
@@ -21,6 +31,10 @@ const CategoryBar = styled.div`
     cursor: pointer;
 
     img{
+      @media (max-width: 768px) {
+      width: 20px;
+      height: 20px;
+      }
       padding-right: 10px;
       width: 35px;
       height: 35px;

@@ -50,7 +50,9 @@ const CafeReviewModal = ({id, reviewInfo, cafeNum, isModalOpen}) => {
     const response = await AxiosApi.deleteReview(id, cafeNum);
     console.log(response.data);
     if(response.data === true) {
+      if(selectInfo[0].url1 && selectInfo[0].url2){
       deleteImage(selectInfo[0].url1, selectInfo[0].url2);
+    }
       isModalOpen(true);
     }
   };

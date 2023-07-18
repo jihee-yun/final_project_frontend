@@ -20,6 +20,7 @@ const RegBox = styled.div`
   width: 100%;
   text-align: center;
   background-color: #FAFAFA;
+  box-sizing: border-box;
 
   .context{
     @media (max-width: 768px) {
