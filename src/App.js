@@ -37,6 +37,7 @@ import MyReport from './pages/jaehyung/components/MyReport';
 import MyBlog from './pages/jaehyung/MyBlog';
 import MemberLoginPage from './pages/jaehyung/MemberLoginPage';
 import MemberSignUpPage from './pages/jaehyung/MemberSignUpPage';
+import PaymentPage from './pages/jaehyung/PaymentPage';
 import Report from './pages/taehoon/Report';
 import ChallengeMain from './pages/yeabin/ChallengeMain';
 import ManageReview from './pages/taehoon/ManageReview';
@@ -88,6 +89,7 @@ function App() {
         <Route path='/mypage/ranking' element={<MyRanking/>}/>
         <Route path='/mypage/information' element={<MyInformation/>}/>
         <Route path='/mypage/report' element={<MyReport/>}/>
+        <Route path='/mypage/payment' element={<PaymentPage/>}/>
         <Route path='/blog' element={<MyBlog/>}/>
         <Route path='/memberlogin' element={<MemberLoginPage/>}/>
         <Route path='/membersignup' element={<MemberSignUpPage/>}/>
