@@ -7,7 +7,7 @@ import Recommend from "./component/Recommend"
 import { styled } from "styled-components";
 import Sidebar from "./component/Sidebar";
 import { UserContext } from "../../context/UserStore";
-
+import PopUp from "../jihee/PopUp";
 
 const Container = styled.div`
 width: 100%;
@@ -30,6 +30,7 @@ const Main = () => {
     }, []);
     return(
         <>
+        <PopUp />
         <Container>
         <Header/>
         <Map/>
