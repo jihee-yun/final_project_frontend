@@ -67,6 +67,7 @@ const SignUpBlock = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    margin-bottom: 20px;
   }
 
   .row {
@@ -403,14 +404,10 @@ const SignUp = () => {
     }
   }
   
-    
-    
-
   const LogoClick = () => {
         navigate('/');
   }
   
-
   const handleSubmit = async() => {
       const signUp = await AxiosApi.userReg(userID, passWord, name, phoneNum, email, birthday, gender, authority);
       console.log(signUp);

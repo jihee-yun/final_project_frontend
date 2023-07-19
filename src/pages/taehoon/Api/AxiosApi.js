@@ -62,6 +62,29 @@ const AxiosApi = {
         // 리뷰 전체 조회
         reviewGetAll : async() => {
           return await axios.get(KH_DOMAIN + `/admin/review/all`);
+        },
+
+        // 관리자 로그인
+        adminLogin : async(adminId, password) => {
+          const adminData = {
+            adminId : adminId,
+            password : password
+          }
+          return await axios.post(KH_DOMAIN + `/admin/login`, adminData);
+        },
+
+        // 관리자 등록
+        adminReg : async(adminId, password, name, birthday, phone, gender) => {
+          const admin = {
+              adminId : adminId,
+              password : password,
+              name : name,
+              birthday : birthday,
+              phone : phone,
+              gender : gender
+          };
+
+          return await axios.post(KH_DOMAIN + `/admin/register`, admin);
         }
 
 

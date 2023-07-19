@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../jihee/images/logo.png";
+import AxiosApi from "./Api/AxiosApi";
+import Modal from "./Modal";
 
 const AdminRegBlock = styled.div`
   text-align: center;
@@ -43,8 +45,36 @@ const AdminRegBlock = styled.div`
     }
 
     input[type="radio"] {
-        margin-left: 60px;
+        margin-left: 20px;
     }
+
+   /* CSS 스타일 */
+    .gender-group {
+        display: flex;
+        align-items: center;
+    }
+
+    .gender-label {
+        margin-right: 10px;
+        font-size: 18px;
+    }
+
+    .radio-buttons {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .radio-buttons span {
+        margin-right: 20px;
+        font-size: 18px;
+    }
+
+    .radio-buttons input[type="radio"] {
+        margin-right: 5px;
+        margin-top: 1px;
+    }
+
 
 
     input[type="text"],
@@ -57,7 +87,8 @@ const AdminRegBlock = styled.div`
         border-radius: 4px;
     }
 
-   button {
+   .button[type="submit"] {
+        width: 200px;
         margin-top: 20px;
         padding: 10px 20px;
         background-color: #007bff;
@@ -68,25 +99,63 @@ const AdminRegBlock = styled.div`
     }
 `;
 
+const SubmitButton = styled.button`
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+`;
+
 const AdminReg = () => {
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
-  const [adminId, setAdminId] = useState("");
-  const [adminPw, setAdminPw] = useState("");
-  const [name, setName] = useState("");
-  const [birth, setBirth] = useState("");
-  const [phone, setPhone] = useState("");
-  const [gender, setGender] = useState("");
-  const [authority, setAuthority] = useState("");
+    const [adminId, setAdminId] = useState("");
+    const [password, setPassword] = useState("");
+    const [name, setName] = useState("");
+    const [birthday, setBirthday] = useState("");
+    const [phone, setPhone] = useState("");
+    const [gender, setGender] = useState("");
 
-  const LogoClick = () => {
-    navigate("/");
-  };
+    // 팝업
+    const [modalOpen, setModalOpen] = useState(false);
+    const [modalText, setModalText] = useState("");
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (
+          adminId.trim() !== "" &&
+          password.trim() !== "" &&
+          name.trim() !== "" &&
+          birthday.trim() !== "" &&
+          phone.trim() !== "" &&
+          gender.trim() !== ""
+        ) {
+          const adminSignUp = await AxiosApi.adminReg(
+            adminId,
+            password,
+            name,
+            birthday,
+            phone,
+            gender
+          );
+          console.log(adminSignUp);
+          setModalText("등록이 완료되었습니다.");
+          setModalOpen(true);
+          navigate('/admin');
+        } else {
+          setModalText("모든 필드를 입력해주세요.");
+          setModalOpen(true);
+        }
+      };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+    const LogoClick = () => {
+        navigate("/admin");
+    };
+
 
   return (
     <AdminRegBlock>
@@ -109,8 +178,8 @@ const AdminReg = () => {
         <label>
           <input
             type="password"
-            value={adminPw}
-            onChange={(e) => setAdminPw(e.target.value)}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             required placeholder="비밀번호"
           />
         </label>
@@ -127,8 +196,8 @@ const AdminReg = () => {
         <label>
           <input
             type="text"
-            value={birth}
-            onChange={(e) => setBirth(e.target.value)}
+            value={birthday}
+            onChange={(e) => setBirthday(e.target.value)}
             required placeholder="생년월일"
           />
         </label>
@@ -146,10 +215,48 @@ const AdminReg = () => {
 
         <br/>
 
+        <div className="gender-group">
+            <label className="gender-label">성별</label>
+                <div className="radio-buttons">
+                    <input
+                    type="radio"
+                    name="gender"
+                    value="MALE"
+                    onChange={(e) => setGender(e.target.value)}
+                    checked={gender === 'MALE'}
+                    required
+                    />
+                    <span>남성</span>
+                    <input
+                    type="radio"
+                    name="gender"
+                    value="FEMALE"
+                    checked={gender === 'FEMALE'}
+                    onChange={(e) => setGender(e.target.value)}
+                    required
+                    />
+                    <span>여성</span>
+            </div>
+        </div>
 
         <br />
-        <button type="submit">등록</button>
-      </form>
+
+        <SubmitButton type="submit" onClick={handleSubmit}>
+            등록
+        </SubmitButton>
+        </form>
+        {/* 모달 창 */}
+        <Modal>
+        {modalOpen && (
+            <div>
+            <div>{modalText}</div>
+            <button type="button" onClick={() => setModalOpen(false)}>
+                닫기
+            </button>
+            </div>
+        )}
+        </Modal>
+        
     </AdminRegBlock>
   );
 };

@@ -5,6 +5,7 @@ import admin from "../../images/admin.png";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Modal from "../jihee/Modal";
+import AxiosApi from "./Api/AxiosApi";
 
 
 const AdminBlock = styled.div`
@@ -139,6 +140,25 @@ const Admin = () => {
         setInputPw(passwordCurrent);
     }
 
+    const onClickLogin = async() => {
+        const response = await AxiosApi.adminLogin(inputId, inputPw);
+        if(response.status) {
+            handleLoginSuccess();
+        }
+        else handleLoginFail();
+    }
+
+    const handleLoginSuccess = () => {
+        console.log('로그인 성공');
+        navigate('/');
+    }
+
+      
+    const handleLoginFail = () => {
+        console.log('로그인 실패');
+        setModalopen(true);
+    };
+
     const LogoClick = () => {
         navigate('/');
     }
@@ -167,7 +187,7 @@ const Admin = () => {
                     </div>
 
                     <div className="item2">
-                        <button className="log_btn">로그인</button>
+                        <button className="log_btn" onClick={onClickLogin}>로그인</button>
                     </div>
 
                     <Modal open={modalOpen} close={closeModal} header="Sweet Kingdom">
