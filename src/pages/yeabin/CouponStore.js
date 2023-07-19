@@ -120,16 +120,14 @@ const Notice = styled.div`
 `;
 
 
-const InfoList = styled.div`
-  margin-top: 60px;
-`;
+// const InfoList = styled.div`
+//   margin-top: 60px;
+// `;
 
 const CouponStore = () => {
   const [couponInfo, setCouponInfo] = useState("");
-  const [myinfo, setMyInfo] = useState("");
+  // const [myPoint, setMyPoint] = useState("");
   const navigate = useNavigate();
-  // const context = useContext(UserContext);
-  // const {setCouponNum} = context;
 
   console.log(couponInfo);
 
@@ -142,11 +140,11 @@ const CouponStore = () => {
   }, []);
 
   // useEffect(() => {
-  //   const myinfo = async() => {
-  //     const response = await AxiosApi.myInfoGet("ALL");
-  //     if(response.status === 200) setMyInfo(response.data);
+  //   const myPoint = async() => {
+  //     const response = await AxiosApi.myPointGet("ALL");
+  //     if(response.status === 200) setMyPoint(response.data);
   //   };
-  //   myinfo();
+  //   myPoint();
   // }, []);
 
   const navigatePay = (id) => {
@@ -160,11 +158,11 @@ const CouponStore = () => {
     <Header />
     <Container>
       <MyPoint>
-          {/* {myinfo && myinfo.map(item => ( */}
-            <InfoList>
-              <Name>님 현재 보유 포인트 : </Name> 
+          {/* {myPoint && myPoint.map(item => (
+            <InfoList key={item.id}>
+              <Name>{item.memberName}님 현재 보유 포인트 : {item.totalPoint}</Name> 
             </InfoList>
-          {/* ))} */}
+          ))} */}
         <div className="goEvent">
           <Link to='/event' className="link_style">받을 수 있는 포인트 확인하기</Link>
         </div>

@@ -17,13 +17,13 @@ const AxiosApi = {
     const points = {
       totalPoint: winning
     };
-    return await axios.post(KH_DOMAIN + "/roulette/pointadd", points);
+    return await axios.post(KH_DOMAIN + "/point/pointadd", points);
   },
   
   // 내 포인트 조회
-  myPointGet: async(mypoint) => {
-    return await axios.get(KH_DOMAIN + `/point/mypoint?mypoint=${mypoint}`);
-  },
+  // myPointGet: async(userNum) => {
+  //   return await axios.get(KH_DOMAIN + `/point/mypoint?userNum=${userNum}`);
+  // },
 
   // 내 정보 조회
   // myInfoGet: async(myinfo) => {
