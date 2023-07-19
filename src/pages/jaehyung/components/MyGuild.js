@@ -158,21 +158,20 @@ const MyGuild = () => {
     fetchMemberInfo();
   }, [userNum]);
 
-    // 파이어베이스 스토리지 이미지 로딩
-    useEffect(() => {
-      const storageIconRef = ref(storage, "images");
-  
-      Promise.all([
-        getDownloadURL(ref(storageIconRef, "cake.jpeg")),
-      ])
-        .then((urls) => {
-          setImageUrls(urls);
-          // console.log(imageUrls);
-        })
-        .catch((error) => {
-          console.error("아이콘 이미지 로딩 실패!!", error);
-        });
-    }, []);
+  // 파이어베이스 스토리지 이미지 로딩
+  useEffect(() => {
+    const storageIconRef = ref(storage, "images"); 
+    Promise.all([
+      getDownloadURL(ref(storageIconRef, "cake.jpeg")),
+    ])
+    .then((urls) => {
+      setImageUrls(urls);
+      // console.log(imageUrls);
+    })
+    .catch((error) => {
+      console.error("아이콘 이미지 로딩 실패!!", error);
+    });
+  }, []);
 
 
 
@@ -234,8 +233,6 @@ const MyGuild = () => {
                 <GuildIntro>소개: 슈르릅 옴뇸뇸</GuildIntro>  
               </SpecificBox>
             </ContentRowbox>
-
-
           </ContentBox>
         </Detail>
       </Container>
