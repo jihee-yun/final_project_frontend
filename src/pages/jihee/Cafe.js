@@ -6,7 +6,6 @@ import { StyleSheetManager } from "styled-components";
 import seoul from "./images/seoul.jpeg";
 import Header from "../now/component/Header";
 
-
 const Container = styled.div`
   @media (max-width: 768px) {
     width: 100%;
