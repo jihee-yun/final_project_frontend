@@ -9,8 +9,8 @@ const Container = styled.div`
   height: 400px;
   z-index: 99;
   position: absolute;
-  top: ${({ top }) => top}px;
-  left: ${({ left }) => left}px;
+  top: 50%;
+  left: 25%;
   transform: translate(-50%, -50%);
   background-color: white;
   border: 1px solid lightgray;
@@ -25,6 +25,7 @@ const ImgContainer = styled.div`
   background-image: url(${props => props.imageurl});
   background-size: cover;
   background-position: center;
+  cursor: pointer;
 `;
 
 const NoShowButton = styled.div`
@@ -39,6 +40,7 @@ const GeneralClose = styled.div`
   position: absolute;
   top: 3px;
   right: 3px;
+  cursor: pointer;
 `;
 
 
@@ -47,9 +49,9 @@ const PopUp = () => {
   const [isPopUp, setIsPopUp] = useState(true);
 
   // 마우스로 위치 옮기기(넣을까 말까...)
-  const [position, setPosition] = useState({ top: 400, left: 400 });
-  const [dragging, setDragging] = useState(false);
-  const [offset, setOffset] = useState({ x: 0, y: 0 });
+  // const [position, setPosition] = useState({ top: 400, left: 400 });
+  // const [dragging, setDragging] = useState(false);
+  // const [offset, setOffset] = useState({ x: 0, y: 0 });
 
   const closePopUp = (expireDays) => {
     let expire = new Date();
@@ -85,36 +87,31 @@ const PopUp = () => {
   }
 
   // 마우스로 위치 옮기기
-  const handleMouseDown = (event) => {
-    setDragging(true);
-    setOffset({
-      x: event.clientX - position.left,
-      y: event.clientY - position.top
-    });
-  };
+  // const handleMouseDown = (event) => {
+  //   setDragging(true);
+  //   setOffset({
+  //     x: event.clientX - position.left,
+  //     y: event.clientY - position.top
+  //   });
+  // };
 
-  const handleMouseUp = () => {
-    setDragging(false);
-  };
+  // const handleMouseUp = () => {
+  //   setDragging(false);
+  // };
 
-  const handleMouseMove = (event) => {
-    if (dragging) {
-      const newLeft = event.clientX - offset.x;
-      const newTop = event.clientY - offset.y;
-      setPosition({ left: newLeft, top: newTop });
-    }
-  };
+  // const handleMouseMove = (event) => {
+  //   if (dragging) {
+  //     const newLeft = event.clientX - offset.x;
+  //     const newTop = event.clientY - offset.y;
+  //     setPosition({ left: newLeft, top: newTop });
+  //   }
+  // };
 
   return(
     <>
     <StyleSheetManager shouldForwardProp={(prop) => prop !== 'imageurl'}>
     {isPopUp && (
-    <Container
-    top={position.top}
-    left={position.left}
-    onMouseDown={handleMouseDown}
-    onMouseUp={handleMouseUp}
-    onMouseMove={handleMouseMove}>
+    <Container>
       <ImgContainer onClick={moveToEventPage} imageurl={img}/>
       <NoShowButton onClick={closeToday}>
         <input type="checkbox" id="check" />
