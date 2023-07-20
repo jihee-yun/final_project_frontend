@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import like from "../jihee/images/like1.png";
 import AxiosApi from "./api/AxiosApi";
+import Modal from "./Modal2";
+import CompleteModal from "./CompleteModal";
 
 const Like = styled.div`
   margin-top: 20px;
@@ -27,24 +30,41 @@ const Like = styled.div`
 `;
 
 const CafeReviewLike = ({memNum, reviewId, likeCount}) => {
-
+  const navigate = useNavigate("");
   const [currentLikeCount, setCurrentLikeCount] = useState(likeCount);
 
+  const [isModalOpen, setModalOpen] = useState(false);
+
   const changeLikeCount = async(memNum, id) => {
-    const response = await AxiosApi.reviewLike(memNum, id);
-    console.log(response.data);
-    if(response.data === true) {
-      setCurrentLikeCount(prevCount => prevCount + 1);
-    } else if(response.data === false) {
-      setCurrentLikeCount(prevCount => prevCount - 1);
+    if(memNum !== 0) {
+      const response = await AxiosApi.reviewLike(memNum, id);
+      console.log(response.data);
+      if(response.data === true) {
+        setCurrentLikeCount(prevCount => prevCount + 1);
+      } else if(response.data === false) {
+        setCurrentLikeCount(prevCount => prevCount - 1);
+      }
+    } else {
+      setModalOpen(true);
     }
   }
 
+  const complete = () => {
+    navigate("/memberlogin");
+  }
+
+  const closeModal = () => {
+    setModalOpen(false);
+  }
+  
   return(
     <>
     <Like onClick={() => changeLikeCount(memNum, reviewId)}>
       <button><img src={like} alt="좋아요" /><p>{currentLikeCount}</p></button>
     </Like>
+    <Modal move={true} header="완료" open={isModalOpen} confirm={complete} close={closeModal}>
+        <CompleteModal content={"로그인이 필요합니다. 로그인 페이지로 이동할까요?"} maxCharacters={11}/>
+    </Modal>
     </>
   );
 };

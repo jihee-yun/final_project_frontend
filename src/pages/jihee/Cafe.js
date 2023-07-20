@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { StyleSheetManager } from "styled-components";
 import seoul from "./images/seoul.jpeg";
 import Header from "../now/component/Header";
+import Footer from "../now/component/Footer";
 
 const Container = styled.div`
   @media (max-width: 768px) {
@@ -81,6 +82,7 @@ const Cafe = () => {
       </Box>
     </Container>
     </StyleSheetManager>
+    <Footer />
     </>
   );
 };

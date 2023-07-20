@@ -5,7 +5,12 @@ import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
 import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
-  width: 20%;
+   @media (max-width: 768px) {
+    width: 220px;
+    height: 300px;
+    left: 50%;
+  }
+  width: 280px;
   height: 400px;
   z-index: 99;
   position: absolute;

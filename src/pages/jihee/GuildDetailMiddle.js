@@ -178,11 +178,13 @@ const GuildDetailMiddle = ({guildNum, guildInfo}) => {
     const response = await AxiosApi.joinGuild(guildNum, userNum);
     if(response.data === true) {
       openModal("complete");
-    }
+    } 
   }
 
   const complete = () => {
-    navigate(-1);
+    if(userNum !== 0) {
+      navigate(-1);
+    } else navigate('/memberlogin')
   }
 
   const openModal = (type) => {
@@ -240,7 +242,7 @@ const GuildDetailMiddle = ({guildNum, guildInfo}) => {
           : !isJoinable ? (
             <button className="limit-member">인원 마감</button>
           ) : (
-            <button className="join" onClick={() => openModal("join")}>가입하기</button>
+            <button className="join" onClick={userNum !==0 ? () => openModal("join") : () => openModal("complete")}>가입하기</button>
           )}
         </div>
         <Modal move={modalOpen === "complete" ? true : false} open={modalOpen !== null} type={modalOpen === "join" ? true : false} confirm={modalOpen === "join" ? joinGuild : complete} close={closeModal} header={modalOpen === "join" ? "길드 가입" : modalOpen === "complete" ? "완료" : "전체 멤버"}>
@@ -249,7 +251,7 @@ const GuildDetailMiddle = ({guildNum, guildInfo}) => {
           ) : modalOpen === "join" ? (
             <GuildJoinModal />
           ) : modalOpen === "complete" ? (
-            <CompleteModal content={"가입이 완료되었습니다"}/>
+            <CompleteModal content={userNum !== 0 ? "가입이 완료되었습니다": "로그인이 필요합니다. 로그인 페이지로 이동할까요?"} maxCharacters={userNum !== 0 ? 0 : 11}/>
           ) : null}
         </Modal>
       </Middle>

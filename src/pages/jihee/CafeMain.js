@@ -7,6 +7,7 @@ import AxiosApi from "./api/AxiosApi";
 import Header from "../now/component/Header";
 import Modal from "./Modal2";
 import CafeFilterModal from "./CafeFilterModal";
+import Footer from "../now/component/Footer";
 
 const Container = styled.div`
   width: 80%;
@@ -187,6 +188,7 @@ const CafeMain = () => {
     ))}
     </Box>
     </Container>
+    <Footer />
     <Modal open={modalOpen} type={true} close={closeModal} confirm={() => confirm(selectOption)} header="필터">
     <CafeFilterModal 
     selectRegion={selectRegion} setSelectRegion={setSelectRegion}

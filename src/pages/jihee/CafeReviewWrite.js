@@ -121,41 +121,49 @@ const CafeReviewWrite = () => {
 
   // 후기 작성
   const writeReview = async() => {  
-    try{
-      let imageUrl1 = null;
-      let imageUrl2 = null;
+    if(userNum){
+      try{
+        let imageUrl1 = null;
+        let imageUrl2 = null;
 
-      if (uploadedImage1) {
-        const storageRef1 = ref(storage, `reviewImg/${uploadedImage1.name}`);
-        const uploadTask1 = uploadBytes(storageRef1, uploadedImage1);
-        const snapshot1 = await uploadTask1;
-        imageUrl1 = await getDownloadURL(snapshot1.ref);
-      }
+        if (uploadedImage1) {
+          const storageRef1 = ref(storage, `reviewImg/${uploadedImage1.name}`);
+          const uploadTask1 = uploadBytes(storageRef1, uploadedImage1);
+          const snapshot1 = await uploadTask1;
+          imageUrl1 = await getDownloadURL(snapshot1.ref);
+        }
 
-      if (uploadedImage2) {
-        const storageRef2 = ref(storage, `reviewImg/${uploadedImage2.name}`);
-        const uploadTask2 = uploadBytes(storageRef2, uploadedImage2);
-        const snapshot2 = await uploadTask2;
-        imageUrl2 = await getDownloadURL(snapshot2.ref);
-      }
+        if (uploadedImage2) {
+          const storageRef2 = ref(storage, `reviewImg/${uploadedImage2.name}`);
+          const uploadTask2 = uploadBytes(storageRef2, uploadedImage2);
+          const snapshot2 = await uploadTask2;
+          imageUrl2 = await getDownloadURL(snapshot2.ref);
+        }
 
-      console.log("url 경로 1: " + imageUrl1);
-      console.log("url 경로 2: " + imageUrl2);
-  
-      const response = await AxiosApi.createNewReview(
-        userNum, cafeNum, content, score, imageUrl1, imageUrl2
-      );
-      console.log(response.data);
-      if(response.data === true) {
-        setModalOpen(true);
+        console.log("url 경로 1: " + imageUrl1);
+        console.log("url 경로 2: " + imageUrl2);
+    
+        const response = await AxiosApi.createNewReview(
+          userNum, cafeNum, content, score, imageUrl1, imageUrl2
+        );
+        console.log(response.data);
+        if(response.data === true) {
+          setModalOpen(true);
+        }
+      } catch(error) {
+        console.log(error);
       }
-    } catch(error) {
-      console.log(error);
+    } else {
+      setModalOpen(true);
     }
   };
   
   const complete = () => {
     navigate(-1);
+  }
+
+  const closeModal = () => {
+    setModalOpen(false);
   }
 
   return(
@@ -174,7 +182,7 @@ const CafeReviewWrite = () => {
       </div>
       {score && content && (<div className="send" onClick={writeReview}><button>작성하기</button></div>)}
     </Container>
-    <Modal move={true} header="완료" open={isModalOpen} confirm={complete}>
+    <Modal move={true} header="완료" open={isModalOpen} confirm={complete} close={closeModal}>
       <CompleteModal content={"리뷰가 등록되었습니다"}/>
     </Modal>
     </>

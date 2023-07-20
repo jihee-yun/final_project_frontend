@@ -3,23 +3,39 @@ import styled from "styled-components";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import AxiosApi from "./api/AxiosApi";
+import Modal from "./Modal2";
+import CompleteModal from "./CompleteModal";
+import { useNavigate } from "react-router-dom";
 
 const LikeBox = styled.div`
   padding-top: 3px;
 `;
 
 const CafeLike = ({cafeNum, memNum}) => {
+  const navigate = useNavigate("");
+
+  const [isModalOpen, setModalOpen] = useState(false);
 
   const [currentState, setCurrentState] = useState("false")
 
   const changeLike = async(cafeNum, memNum) => {
-    const response = await AxiosApi.cafeLike(cafeNum, memNum);
-    console.log(response.data);
-    if(response.data === true) {
-      setCurrentState("true");
-    } else if(response.data === false) {
-      setCurrentState("false");
-    }
+    if(memNum !== 0){
+      const response = await AxiosApi.cafeLike(cafeNum, memNum);
+      console.log(response.data);
+      if(response.data === true) {
+        setCurrentState("true");
+      } else if(response.data === false) {
+        setCurrentState("false");
+      }
+    } else setModalOpen(true);
+  }
+
+  const complete = () => {
+    navigate('/memberlogin');
+  }
+
+  const closeModal = () => {
+    setModalOpen(false);
   }
   
   return(
@@ -30,6 +46,9 @@ const CafeLike = ({cafeNum, memNum}) => {
       : <FavoriteBorderIcon style={{color:"#BDBDBD", width:"28px", height:"28px", cursor:"pointer"}}/>
       }
       </LikeBox>
+      <Modal move={true} header="완료" open={isModalOpen} confirm={complete} close={closeModal}>
+        <CompleteModal content={"로그인이 필요합니다. 로그인 페이지로 이동할까요?"} maxCharacters={11}/>
+      </Modal>
     </>
   );
 };

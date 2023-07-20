@@ -11,10 +11,13 @@ const ModalBox = styled.div`
 const Box = styled.div`
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: space-around;
+  align-items: center;
   gap: 10px;
 
   .logo img {
+    margin: 0;
     width: 100px;
     height: 100px;
   }
@@ -24,6 +27,7 @@ const Box = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
 
     p {
       padding-top: 20px;
@@ -35,7 +39,22 @@ const Box = styled.div`
   }
 `;
 
-const CompleteModal = ({content}) => {
+const CompleteModal = ({content, maxCharacters}) => {
+
+  const splitContent = (content) => {
+    if (content.length > maxCharacters) {
+      const firstLine = content.substring(0, maxCharacters);
+      const remainingContent = content.substring(maxCharacters);
+      return (
+        <p>
+          {firstLine}
+          <br />
+          {remainingContent}
+        </p>
+      );
+    }
+    return <p>{content}</p>;
+  };
 
   return(
     <>
@@ -43,7 +62,7 @@ const CompleteModal = ({content}) => {
       <Box>
       <div className="content">
         <div className="logo"><img src={logo} alt="로고" /></div>
-        <p>{content}</p>
+        {splitContent(content)}
       </div>
       </Box>
     </ModalBox>

@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import Header from "../now/component/Header";
 import AxiosApi from "./api/AxiosApi";
 import GuildSection from "./GuildSection";
 import GuildFilterCategory from "./GuildFilterCategory";
+import { UserContext } from "../../context/UserStore";
+import Modal from "./Modal2";
+import CompleteModal from "./CompleteModal";
 
 const Container = styled.div`
   @media (max-width: 768px) {
@@ -76,9 +79,12 @@ const GuildBox = styled.div`
 
 const Guild = () => {
   const navigate = useNavigate();
-
+  const context = useContext(UserContext);
+  const { userNum } = context;
   const [guildInfo, setGuildInfo ] = useState("");
   const [category, setCategory] = useState("All");
+
+  const [isModalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     const guildInfo = async() => {
@@ -89,11 +95,21 @@ const Guild = () => {
   },[category]);
 
   const moveToNewGuild = () => {
-    navigate('/createguild');
+    if(userNum === 0) {
+      setModalOpen(true);
+    } else navigate('/createguild');
   }
 
   const categoryChange = (e) => {
     setCategory(e);
+  }
+
+  const complete = () => {
+    navigate('/memberlogin');
+  }
+
+  const closeModal = () => {
+    setModalOpen(false);
   }
 
   return(
@@ -114,6 +130,9 @@ const Guild = () => {
       <GuildBox>
       <GuildSection guildInfo={guildInfo}/>
       </GuildBox>
+      <Modal move={true} header="완료" open={isModalOpen} confirm={complete} close={closeModal}>
+        <CompleteModal content={"로그인이 필요합니다. 로그인 페이지로 이동할까요?"} maxCharacters={11}/>
+      </Modal>
     </Container>
     </>
   );

@@ -27,7 +27,7 @@ const AxiosApi = {
     return await axios.get(KH_DOMAIN + `/guild/detail?guildNum=${guildNum}`)
   },
   // 새로운 길드 생성
-  createNewGuild: async(memNum, guildName, guildIntro, guildDetailIntro, meetDay, category, member, region, url) => {
+  createNewGuild: async(grantType, accessToken, memNum, guildName, guildIntro, guildDetailIntro, meetDay, category, member, region, url) => {
     const guildData = {
       memNum : memNum,
       guildName : guildName,
@@ -39,7 +39,11 @@ const AxiosApi = {
       region : region,
       thumbnail : url
     };
-    return await axios.post(KH_DOMAIN + "/guild/newGuild", guildData);
+    return await axios.post(KH_DOMAIN + "/guild/newGuild", guildData, {
+      headers: {
+        Authorization: `${grantType} ${accessToken}`
+      }
+    });
   },
   // 길드 가입 회원 확인하기
   isMemberGet: async(guildNum, userNum) => {

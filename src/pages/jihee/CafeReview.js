@@ -163,6 +163,7 @@ const CafeReview = () => {
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 
   console.log(cafeReviewInfo);
+  console.log(userNum);
 
   useEffect(() => {
     const cafeReview = async() => {
@@ -181,7 +182,11 @@ const CafeReview = () => {
   };
 
   const sendCafeNum = () => {
-    navigate('/cafe/review/write', {state : {cafeNum}});
+    if(userNum !== 0) {
+      navigate('/cafe/review/write', {state : {cafeNum}});
+    } else {
+      completeModal(true);
+    }
   };
 
   const modalOpen = (id) => {
@@ -191,14 +196,17 @@ const CafeReview = () => {
 
   const closeModal = () => {
     setOpenReviewId(null);
+    completeModal(false);
   };
   
   const completeModal = (isOpen) => {
     setDeleteModalOpen(isOpen);
   };
 
-  const complete = () => {
-    navigate(-1);
+  const complete = (index) => {
+    if(index === 1) {
+      navigate(-1);
+    } else navigate('/memberlogin')
   }
 
   return(
@@ -238,8 +246,8 @@ const CafeReview = () => {
     </ReviewBox>
      ))}
     </Box>
-    <Modal move={true} header="완료" open={isDeleteModalOpen} confirm={complete}>
-      <CompleteModal content={"리뷰가 삭제되었습니다"}/>
+    <Modal move={true} header="완료" open={isDeleteModalOpen} confirm={userNum !== 0 ? () => complete(1) : () => complete(2)} close={closeModal}>
+      <CompleteModal content={userNum !== 0 ? "리뷰가 삭제되었습니다" : "로그인이 필요합니다. 로그인 페이지로 이동할까요?"} maxCharacters={userNum !== 0 ? 0 : 11}/>
     </Modal>
     </Container>
     </>
