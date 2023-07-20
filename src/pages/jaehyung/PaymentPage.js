@@ -163,24 +163,24 @@ const PaymentPage = () => {
           <ContentBox>
             <ContentRowbox>
               <SpecificBox>
-                <PointImg src={imageUrls[0]} alt="GuildImg"></PointImg>
+                <PointImg src={imageUrls[0]} alt="PointImg"></PointImg>
                 <PointName>5,000 Point</PointName>
                 <PointChargeButton onClick={()=>handlePayment(5000)}>충전하기</PointChargeButton>
               </SpecificBox>
               <SpecificBox onClick={()=>navigate("/mypage/payment")}>
-                <PointImg src={imageUrls[0]} alt="GuildImg"></PointImg>
+                <PointImg src={imageUrls[0]} alt="PointImg"></PointImg>
                 <PointName>10,000 Point</PointName>
                 <PointChargeButton onClick={()=>handlePayment(10000)}>충전하기</PointChargeButton>
               </SpecificBox>
             </ContentRowbox>
             <ContentRowbox>
               <SpecificBox onClick={()=>navigate("/mypage/payment")}>
-                <PointImg src={imageUrls[0]} alt="GuildImg"></PointImg>
+                <PointImg src={imageUrls[0]} alt="PointImg"></PointImg>
                 <PointName>50,000 Point</PointName>
                 <PointChargeButton onClick={()=>handlePayment(50000)}>충전하기</PointChargeButton>
               </SpecificBox>
               <SpecificBox onClick={()=>navigate("/mypage/payment")}>
-                <PointImg src={imageUrls[0]} alt="GuildImg"></PointImg>
+                <PointImg src={imageUrls[0]} alt="PointImg"></PointImg>
                 <PointName>100,000 Points</PointName>
                 <PointChargeButton onClick={()=>handlePayment(100000)}>충전하기</PointChargeButton>
               </SpecificBox>

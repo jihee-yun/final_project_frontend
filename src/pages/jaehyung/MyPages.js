@@ -3,8 +3,6 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import AxiosApi from "./api/AxiosApi";
 import { UserContext } from "../../context/UserStore";
-import { storage } from "../../utils/Firebase";
-import { ref, getDownloadURL } from "firebase/storage";
 import Header from "../now/component/Header";
 import Footer from "../now/component/Footer";
 import SideMenu from "./components/SideMenu";
@@ -99,26 +97,10 @@ const MyPage = () => {
   const navigate = useNavigate();
 
   const [userInfo, setUserInfo] = useState([]);
-  const [imageUrls, setImageUrls] = useState([]);
 
-  // 로그인시 회원 번호
-  const { userNum } = useContext(UserContext);
+  // useContext 저장값 불러오기
+  const {grantType, accessToken, refreshToken, userNum, userName, userAuthority} = useContext(UserContext);
 
-  // 파이어베이스 스토리지 이미지 로딩
-  // useEffect(() => {
-  //   const storageIconRef = ref(storage, "essential");
-
-  //   Promise.all([
-  //     getDownloadURL(ref(storageIconRef, "logo.png")),
-  //   ])
-  //     .then((urls) => {
-  //       setImageUrls(urls);
-  //       // console.log(imageUrls);
-  //     })
-  //     .catch((error) => {
-  //       console.error("아이콘 이미지 로딩 실패!!", error);
-  //     });
-  // }, []);
 
   return(
     <OutBox>

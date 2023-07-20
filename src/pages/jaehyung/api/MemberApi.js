@@ -112,6 +112,18 @@ const MemberApi = {
         Authorization: `${grantType} ${accessToken}`
       }
     });
+  },
+  // 이메일 업데이트
+  emailUpdate: async(memberNum, email, grantType, accessToken) => {
+    const emailData = {
+      memberNum : memberNum,
+      email : email
+    }
+    return await axios.post(`${DOMAIN}/info/emailchange`, emailData, {
+      headers: {
+        Authorization: `${grantType} ${accessToken}`
+      }
+    });
   }
 
 };

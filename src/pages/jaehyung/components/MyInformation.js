@@ -98,8 +98,8 @@ const Introinput = styled.input`
   margin-bottom: 10px;
   padding-left: 5px;
 `;
-// 한 줄 소개 수정 버튼
-const IntroButton = styled.button`
+// 회원 정보 수정 버튼
+const InfoChangeButton = styled.button`
   width: 150px;
   height: 40px;
   margin: 5px;
@@ -109,7 +109,7 @@ const IntroButton = styled.button`
   cursor: pointer;
 `;
 
-// 핸드폰 번호 수정 input
+// 회색 바탕의 수정 input
 const GrayInput = styled.input`
   width: 80%;
   min-width: 200px;
@@ -123,16 +123,6 @@ const GrayInput = styled.input`
     outline: none;
   }
 `;
-// 핸드폰 정보 수정 버튼
-const PhoneChangeButton = styled.button`
-  width: 150px;
-  height: 40px;
-  margin: 5px;
-  color: white;
-  background-color: #F1D1D1;
-  border: 0;
-  cursor: pointer;
-`;
 
 
 const MyInformation = () => {
@@ -141,6 +131,8 @@ const MyInformation = () => {
 
   // 유저 정보 상태 관리
   const [memberInfo, setMemberInfo] = useState(null);
+  // 기존 비밀번호 상태 추가
+  const [oldPassword, setOldPassword] = useState("");
   // 비밀 번호 변경시 비교용
   const [newPassword, setNewPassword] = useState("");
   const [newPasswordCheck, setNewPasswordCheck] = useState("");
@@ -243,6 +235,23 @@ const MyInformation = () => {
     }
   };
 
+  // 이메일 변경 함수
+const handleEmailChange = async () => {
+  const email = document.getElementById("email").value;
+  try {
+    const rsp = await MemberApi.emailUpdate(userNum, email, grantType, accessToken);
+    if (rsp.status) {
+      if(rsp.data = "true") {
+        console.log("이메일 업데이트 성공: ", rsp.data);
+      } else {
+        console.log("통신은 성공, 이메일 업데이트 실패", rsp.data);
+      }
+    }
+  } catch (error) {
+    console.log("이메일 업데이트 실패: ", error);
+  }
+};
+
   // memberInfo가 로딩 중일 때 표시할 로딩 스피너 등의 UI를 추가할 수 있습니다.
   if (!memberInfo) {
     return <div>회원 정보 로딩중...</div>;
@@ -273,6 +282,8 @@ const MyInformation = () => {
                 id="password"
                 type="password"
                 placeholder={"기존 비밀번호"}
+                value={oldPassword}
+                onChange={e => setOldPassword(e.target.value)}
               />
               <GrayInput
                 id="newPassword"
@@ -297,27 +308,29 @@ const MyInformation = () => {
               <ValidationMessage isValid={newPassword === newPasswordCheck}>
                 {newPasswordCheckMessage}
               </ValidationMessage>
-              <PhoneChangeButton
-                disabled={newPassword !== newPasswordCheck}
+              <InfoChangeButton
+                disabled={newPassword !== newPasswordCheck || !isValidPassword || oldPassword === ''}
                 onClick={handlePasswordChange}
               >
                 변경하기
-              </PhoneChangeButton>
+              </InfoChangeButton>
             </SpecificBox>
 
 
             <SpecificBox>
               <InfoType>한 줄 소개(255자 제한)</InfoType>
               <Introinput id="intro" type="text" defaultValue={memberInfo ? memberInfo.intro : ''}></Introinput>
-              <IntroButton onClick={handleIntroChange}>변경하기</IntroButton>
+              <InfoChangeButton onClick={handleIntroChange}>변경하기</InfoChangeButton>
             </SpecificBox>
             <SpecificBox>
               <InfoType>전화번호 변경(-포함하여 입력)</InfoType>
               <GrayInput id="phone" type="text" defaultValue={memberInfo ? memberInfo.phone : ''} />
-              <PhoneChangeButton onClick={handlePhoneChange}>변경하기</PhoneChangeButton>
+              <InfoChangeButton onClick={handlePhoneChange}>변경하기</InfoChangeButton>
             </SpecificBox>
             <SpecificBox>
-
+              <InfoType>이메일 변경</InfoType>
+              <GrayInput id="email" type="text" defaultValue={memberInfo ? memberInfo.email : ''} />
+              <InfoChangeButton onClick={handleEmailChange}>변경하기</InfoChangeButton>
             </SpecificBox>
           </ContentBox>
 
