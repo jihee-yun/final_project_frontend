@@ -190,7 +190,7 @@ const MyInformation = () => {
 
   // 비밀번호 수정
   const handlePasswordChange = async () => {
-    const password = document.getElementByName("password").value;
+    const password = document.getElementById("password").value;
     if (newPassword !== newPasswordCheck) {
       alert("비밀번호가 일치하지 않습니다!");
       return;
@@ -211,7 +211,7 @@ const MyInformation = () => {
 
   // 한줄 소개 수정
   const handleIntroChange = async () => {
-    const intro = document.getElementByName("intro").value;
+    const intro = document.getElementById("intro").value;
     try {
       const rsp = await MemberApi.introUpdate(userNum, intro, grantType, accessToken);
       if(rsp.status) {
@@ -228,7 +228,7 @@ const MyInformation = () => {
 
   // 전화번호 변경
   const handlePhoneChange = async () => {
-    const phone = document.getElementByName("phone").value;
+    const phone = document.getElementById("phone").value;
     try {
       const rsp = await MemberApi.phoneUpdate(userNum, phone, grantType, accessToken);
       if (rsp.status) {
@@ -270,12 +270,12 @@ const MyInformation = () => {
             <SpecificBox>
               <InfoType>회원 비밀번호</InfoType>
               <GrayInput
-                name="password"
+                id="password"
                 type="password"
                 placeholder={"기존 비밀번호"}
               />
               <GrayInput
-                name="newPassword"
+                id="newPassword"
                 type="password"
                 placeholder={"새로운 비밀번호(영문자, 숫자, 특수기호 포함 8자리 이상)"}
                 value={newPassword}
@@ -288,7 +288,7 @@ const MyInformation = () => {
                 {passwordValidationMessage}
               </ValidationMessage>
               <GrayInput
-                name="newPasswordCheck"
+                id="newPasswordCheck"
                 type="password"
                 placeholder={"새로운 비밀번호 확인"}
                 value={newPasswordCheck}
@@ -308,12 +308,12 @@ const MyInformation = () => {
 
             <SpecificBox>
               <InfoType>한 줄 소개(255자 제한)</InfoType>
-              <Introinput name="intro" type="text" defaultValue={memberInfo ? memberInfo.intro : ''}></Introinput>
+              <Introinput id="intro" type="text" defaultValue={memberInfo ? memberInfo.intro : ''}></Introinput>
               <IntroButton onClick={handleIntroChange}>변경하기</IntroButton>
             </SpecificBox>
             <SpecificBox>
               <InfoType>전화번호 변경(-포함하여 입력)</InfoType>
-              <GrayInput name="phone" type="text" defaultValue={memberInfo ? memberInfo.phone : ''} />
+              <GrayInput id="phone" type="text" defaultValue={memberInfo ? memberInfo.phone : ''} />
               <PhoneChangeButton onClick={handlePhoneChange}>변경하기</PhoneChangeButton>
             </SpecificBox>
             <SpecificBox>

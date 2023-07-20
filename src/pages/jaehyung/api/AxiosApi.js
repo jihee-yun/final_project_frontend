@@ -43,9 +43,9 @@ const AxiosApi = {
 
 
   // 포인트 충전
-  chargePoint: async (membernum, point, grantType, accessToken) => {
+  chargePoint: async (userNum, point, grantType, accessToken) => {
     const pointData = {
-      membernum : membernum,
+      userNum : userNum,
       point : point
     }
     return await axios.post(`${DOMAIN}/point/chargepoint`, pointData, {
