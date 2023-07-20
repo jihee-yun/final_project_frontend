@@ -129,6 +129,7 @@ const Report = () => {
 
     const handleSubmit = () => {
         setReportText('');
+        navigate('/');
     }
 
     const LogoClick = () => {

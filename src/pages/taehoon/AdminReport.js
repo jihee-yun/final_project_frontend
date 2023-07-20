@@ -5,7 +5,8 @@ import logo from "../../images/logo.png";
 import { useNavigate } from "react-router-dom";
 import AxiosApi from "./Api/AxiosApi";
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import "react-datepicker/dist/react-datepicker.css"
+import report from "../taehoon/images/report.png";
 
 
 
@@ -325,6 +326,7 @@ const AdminReport = () => {
             <div className="modal">
                 <ModalContent>
                 <CloseButtonHover onClick={closeModal}>&times;</CloseButtonHover>
+                <img src={report} alt="" className="report" width="150px" height="100px" style={{ margin: '0 -20px' }}/>
                     <h2>제목 : {selectedReport.title}</h2>
                     <p>글번호 : {selectedReport.reportNum}</p>
                     <p>작성자 : {selectedReport.userId}</p>
@@ -346,6 +348,8 @@ const AdminReport = () => {
             <div className="logo">
                 <img src={logo} alt="logo" className="logo" onClick={LogoClick}/>
             </div>
+
+            <h2>신고 내역</h2>
 
             <table className="board">
                 <thead>

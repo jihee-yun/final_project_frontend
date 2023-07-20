@@ -203,6 +203,14 @@ const CloseButtonHover = styled.span`
   }
 `;
 
+const Image = styled.div`
+  width: 200px;
+  height: 180px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+`;
+
 const UserManage = () => {
     const navigate = useNavigate("");
     const LogoClick = () => {
@@ -226,11 +234,11 @@ const UserManage = () => {
     const [selectedUserInfo, setSelectedUserInfo] = useState(null);
 
         // 클릭 이벤트를 처리할 함수
-        const handleRowClick = (userNum) => {
-          const selectedUserInfoData = getCurrentItems().find(userInfo => userInfo.userNum === userNum);
+        const handleRowClick = (memberNum) => {
+          const selectedUserInfoData = getCurrentItems().find(userInfo => userInfo.memberNum === memberNum);
           setSelectedUserInfo(selectedUserInfoData);
           setShowModal(true); // 모달 팝업 보여주기
-          navigate(`/admin/userManage?userNum=${userNum}`);
+          navigate(`/admin/userManage?memberNum=${memberNum}`);
       };
   
       // 모달 닫기 처리
@@ -250,7 +258,7 @@ const UserManage = () => {
       const getCurrentItems = () => {
           // userNum를 기준으로 내림차순으로 userInfo를 정렬합니다.
           const sortedUserInfo = userInfo.sort(
-            (a, b) => b.userNum - a.userNum
+            (a, b) => b.memberNum - a.memberNum
           );
         
           const startIndex = (pageNumber - 1) * perPage;
@@ -307,18 +315,19 @@ const UserManage = () => {
     if(showModal && selectedUserInfo) {
       return(
         <div className="modal">
-          <div className="image">
-            {selectedUserInfo.authority === 'ROLE_USER' && <img src={user} alt="" className="user"/>}
-            {selectedUserInfo.authority === 'ROLE_MEMBER' && <img src={businessman} alt="" className="businessman"/>}
-          </div>
 
           <ModalContent>
             <CloseButtonHover onClick={closeModal}>&times;</CloseButtonHover>
-                <h2>번호 : {selectedUserInfo.userNum}</h2>
+            <Image>
+                {selectedUserInfo.authority === 'ROLE_USER' && <img src={user} alt="" className="user" width="150px" height="150px" style={{margin : "0 -20px"}}/>}
+                {selectedUserInfo.authority === 'ROLE_MEMBER' && <img src={businessman} alt="" className="businessman" width="250px" height="150px" style={{margin : "0 -20px"}}/>}
+            </Image>
+                <h2>번호 : {selectedUserInfo.memberNum}</h2>
                 <p>이름 : {selectedUserInfo.name}</p>
                 <p>생년월일 : {selectedUserInfo.birthday}</p>
                 <p>성별 : {selectedUserInfo.gender}</p>
                 <p>권한 : {selectedUserInfo.authority}</p>
+                <p>보유 포인트 : {selectedUserInfo.totalPoint}</p>
           </ModalContent>
         </div>
       )
@@ -346,8 +355,8 @@ const UserManage = () => {
               </thead>
               <tbody>
                   {getCurrentItems().map((userInfo) => (
-                      <tr key={userInfo.userNum}>
-                          <td className="number" onClick={() => handleRowClick(userInfo.userNum)} style={{ cursor: 'pointer' }}>{userInfo.userNum}</td>
+                      <tr key={userInfo.memberNum}>
+                          <td className="number" onClick={() => handleRowClick(userInfo.memberNum)} style={{ cursor: 'pointer' }}>{userInfo.memberNum}</td>
                           <td className="name">{userInfo.name}</td>
                           <td className="birthday">{userInfo.birthday}</td>
                           <td className="gender">{userInfo.gender}</td>
