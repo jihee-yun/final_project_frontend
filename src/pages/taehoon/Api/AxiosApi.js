@@ -8,7 +8,7 @@ const AxiosApi = {
       },
       
         // 회원가입
-        userReg : async(userId, password, name, phone, email, birthday, gender, authority) => {
+        userReg : async(userId, password, name, phone, email, birthday, signUpTime, gender, authority) => {
             const member ={
                 userId : userId,
                 password: password,
@@ -16,6 +16,7 @@ const AxiosApi = {
                 phone : phone,
                 email : email,
                 birthday : birthday,
+                signUpTime : signUpTime,
                 gender : gender,
                 authority : authority
         };
@@ -62,6 +63,11 @@ const AxiosApi = {
         // 리뷰 전체 조회
         reviewGetAll : async() => {
           return await axios.get(KH_DOMAIN + `/admin/review/all`);
+        },
+
+        // 사용자 조회
+        userGetAll : async() => {
+          return await axios.get(KH_DOMAIN + `/admin/usermanage`);
         },
 
         // 관리자 로그인

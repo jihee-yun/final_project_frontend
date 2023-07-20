@@ -110,21 +110,6 @@ const AdminReportBlock = styled.div`
     }
 `;
 
-const DateSelected = styled.p`
-  cursor: pointer;
-`;
-
-const DatePick = styled.div`
-  min-width: 100px;
-  margin-left: auto;
-  margin-right: 1%;
-  padding-left: 1%;
-  padding-right: 1%;
-  border: 1px solid #f3e1e1;
-  border-radius: 10px;
-`;
-
-
 // 하단 페이지 숫자 표시 박스
 const NumberSelectBox = styled.div`
   height: 30px;
@@ -234,13 +219,6 @@ const ContentBox = styled.div`
 const AdminReport = () => {
     const navigate = useNavigate("");
 
-
-    // 날짜 선택 state
-    const [showDatePicker, setShowDatePicker] = useState(false);
-    const [showDate, setShowDate] = useState(false);
-    const [startDate, setStartDate] = useState("");
-    const [endDate, setEndDate] = useState("");
-
     const [reportInfo, setReportInfo] = useState([]);
     const [pageNumber, setPageNumber] = useState("");
     const perPage = 10;
@@ -256,23 +234,6 @@ const AdminReport = () => {
 
     // 모달 팝업을 보여주기 위한 상태
     const [showModal, setShowModal] = useState(false);
-
-    const handleDateChange = (date) => {
-        setStartDate(date[0]);
-        setEndDate(date[1]);
-
-    // startDate와 endDate가 설정되면 DatePicker를 숨김
-        if (date[0] && date[1]) {
-            setShowDatePicker(false);
-            setShowDate(true);
-        }
-    };
-
-     // 날짜 선택 누르면 달력 표시, 제거
-    const handleButtonClick = () => {
-        setShowDatePicker(!showDatePicker);
-        setShowDate(!showDate);
-    };
 
     useEffect(() => {
         // 신고 데이터 받기
@@ -351,39 +312,8 @@ const AdminReport = () => {
     return pageNumbers;
   };
 
+  const pageNumbers = getPageNumbers();
 
-    const pageNumbers = getPageNumbers();
-
-    // 조회 기간을 전체로 설정
-    const handleDateAll = () => {
-        setStartDate(new Date(2019, 11, 31));
-        setEndDate(new Date());
-        setPageNumber(1);
-    };
-    // 조회 기간을 일주일로 설정
-    const handleDateWeek = () => {
-        const today = new Date();
-        const oneWeekAgo = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 6);
-        setStartDate(oneWeekAgo);
-        setEndDate(today);
-        setPageNumber(1);
-    };
-    // 조회 기간을 한 달로 설정
-    const handleDateMonth = () => {
-        const today = new Date();
-        const oneMonthAgo = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate() -1);
-        setStartDate(oneMonthAgo);
-        setEndDate(today);
-        setPageNumber(1);
-    };
-    // 조회 기간을 일 년으로 설정
-    const handleDateYear = () => {
-        const today = new Date();
-        const oneYearAgo = new Date(today.getFullYear() - 1, today.getMonth(), today.getDate());
-        setStartDate(oneYearAgo);
-        setEndDate(today);
-        setPageNumber(1);
-    };
 
     const LogoClick = () => {
         navigate('/admininfo');
@@ -416,41 +346,6 @@ const AdminReport = () => {
             <div className="logo">
                 <img src={logo} alt="logo" className="logo" onClick={LogoClick}/>
             </div>
-
-            
-            <div className="report">
-                <h2>신고 내역</h2>
-            </div>
-
-            <div className="selectBtn">
-                <button className="btn" onClick={handleDateAll}>전체</button>
-                <span>|</span>
-                <button className="btn" onClick={handleDateWeek}>일주일</button>
-                <span>|</span>
-                <button className="btn" onClick={handleDateMonth}>한 달</button>
-                <span>|</span>
-                <button className="btn" onClick={handleDateYear}>일 년</button>
-            </div>
-
-            <DatePick>
-              {showDate && (
-                <DateSelected onClick={handleButtonClick}>
-                  {startDate && endDate
-                    ? `${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}`
-                    : "Show DatePicker"}
-                </DateSelected>
-              )}
-              {showDatePicker && (
-                <DatePicker
-                  selected={startDate}
-                  onChange={handleDateChange}
-                  startDate={startDate}
-                  endDate={endDate}
-                  selectsRange
-                  inline
-                />
-              )}
-            </DatePick>
 
             <table className="board">
                 <thead>

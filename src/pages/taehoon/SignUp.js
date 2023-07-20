@@ -253,6 +253,7 @@ const SignUp = () => {
   const [birthday, setBirthDay] = useState("");
   const [gender, setGender] = useState("");
   const [authority, setAuthority] = useState("");
+  const [signUpTime, setSignUpTime] = useState("");
   
 
   // 오류 메세지
@@ -409,7 +410,7 @@ const SignUp = () => {
   }
   
   const handleSubmit = async() => {
-      const signUp = await AxiosApi.userReg(userID, passWord, name, phoneNum, email, birthday, gender, authority);
+      const signUp = await AxiosApi.userReg(userID, passWord, name, phoneNum, email, birthday, signUpTime, gender, authority);
       console.log(signUp);
       setModalText("회원가입이 완료되었습니다.");
       setModalOpen(true);

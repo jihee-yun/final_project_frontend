@@ -119,20 +119,6 @@ const ManageReviewBlock = styled.div`
     }
 `;
 
-const DateSelected = styled.p`
-  cursor: pointer;
-`;
-
-const DatePick = styled.div`
-  min-width: 100px;
-  margin-left: auto;
-  margin-right: 1%;
-  padding-left: 1%;
-  padding-right: 1%;
-  border: 1px solid #f3e1e1;
-  border-radius: 10px;
-`;
-
 
 // 하단 페이지 숫자 표시 박스
 const NumberSelectBox = styled.div`
@@ -245,12 +231,6 @@ const ContentBox = styled.div`
     const ManageReview = () => {
         const navigate = useNavigate("");
 
-        // 날짜 선택 state
-        const [showDatePicker, setShowDatePicker] = useState("");
-        const [showDate, setShowDate] = useState("");
-        const [startDate, setStartDate] = useState("");
-        const [endDate, setEndDate] = useState("");
-
         const [reviewInfo, setReviewInfo] = useState([]);
         const [pageNumber, setPageNumber] = useState("");
         const perPage = 10;
@@ -270,23 +250,7 @@ const ContentBox = styled.div`
 
     // 모달 팝업을 보여주기 위한 상태
     const [showModal, setShowModal] = useState(false);
- 
-     const handleDateChange = (date) => {
-         setStartDate(date[0]);
-         setEndDate(date[1]);
- 
-     // startDate와 endDate가 설정되면 DatePicker를 숨김
-         if (date[0] && date[1]) {
-             setShowDatePicker(false);
-             setShowDate(true);
-         }
-     };
- 
-      // 날짜 선택 누르면 달력 표시, 제거
-     const handleButtonClick = () => {
-         setShowDatePicker(!showDatePicker);
-         setShowDate(!showDate);
-     };
+
 
      useEffect(()=> {
         const getReviewInfo = async() => {
@@ -365,40 +329,6 @@ const ContentBox = styled.div`
 
     const pageNumbers = getPageNumbers();
 
-    // 조회 기간을 전체로 설정
-    const handleDateAll = () => {
-        setStartDate(new Date(2019, 11, 31));
-        setEndDate(new Date());
-        setPageNumber(1);
-    };
-
-    // 조회 기간을 일주일로 설정
-    const handleDateWeek = () => {
-        const today = new Date();
-        const oneWeekAgo = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 6);
-        setStartDate(oneWeekAgo);
-        setEndDate(today);
-        setPageNumber(1);
-    };
-
-    // 조회 기간을 한 달로 설정
-    const handleDateMonth = () => {
-        const today = new Date();
-        const oneMonthAgo = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate() -1);
-        setStartDate(oneMonthAgo);
-        setEndDate(today);
-        setPageNumber(1);
-    };
-
-    // 조회 기간을 일 년으로 설정
-    const handleDateYear = () => {
-        const today = new Date();
-        const oneYearAgo = new Date(today.getFullYear() - 1, today.getMonth(), today.getDate());
-        setStartDate(oneYearAgo);
-        setEndDate(today);
-        setPageNumber(1);
-    };
-
     // 모달 팝업을 보여줄 때, 조건부 렌더링을 통해 해당 모달 컨텐츠가 보여지도록 해야 합니다.
     if (showModal && selectedReview) {
         return (
@@ -413,7 +343,7 @@ const ContentBox = styled.div`
                 <ContentBox>
                     <p>{selectedReview.reviewContent}</p>
                 </ContentBox>
-                    <h3>사진</h3>
+                    <br/>
                     <img src={selectedReview.reviewImgUrl1} alt="" className="image" style={{ width: "400px", height: "250px"}}/>
                     <br/>
                     <br/>
@@ -424,12 +354,12 @@ const ContentBox = styled.div`
                             className="like"
                             style={{ width: "50px", height: "30px"}}
                         />
-                        <span style={{ fontSize: "25px", fontWeight: "bold" }}>{selectedReview.likeCount}</span>
+                        <span style={{ fontSize: "25px", fontWeight: "bold", color: "#FFCFDA"}}>{selectedReview.likeCount}</span>
                     </div>
                     <br/>
-                    <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                    <div style={{ display: "flex", alignItems: "center"}}>
                         <img src={star} alt="" className="star" style={{width:"60px", height:"50px", marginBottom:"5px"}}/>
-                        <span style={{ fontSize: "25px", fontWeight: "bold" }}>{selectedReview.score} / 5</span>
+                        <span style={{ fontSize: "25px", fontWeight: "bold", color: "#FFCFDA"}}>{selectedReview.score} / 5</span>
                     </div>
                     
                 </ModalContent>
@@ -447,36 +377,6 @@ const ContentBox = styled.div`
             <div className="review">
                 <h2>리뷰 관리</h2>
             </div>
-
-            <div className="selectBtn">
-                <button className="btn" onClick={handleDateAll}>전체</button>
-                <span>|</span>
-                <button className="btn" onClick={handleDateWeek}>일주일</button>
-                <span>|</span>
-                <button className="btn" onClick={handleDateMonth}>한 달</button>
-                <span>|</span>
-                <button className="btn" onClick={handleDateYear}>일 년</button>
-            </div>
-
-            <DatePick>
-              {showDate && (
-                <DateSelected onClick={handleButtonClick}>
-                  {startDate && endDate
-                    ? `${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}`
-                    : "Show DatePicker"}
-                </DateSelected>
-              )}
-              {showDatePicker && (
-                <DatePicker
-                  selected={startDate}
-                  onChange={handleDateChange}
-                  startDate={startDate}
-                  endDate={endDate}
-                  selectsRange
-                  inline
-                />
-              )}
-            </DatePick>
 
             <table className="board">
                 <thead>

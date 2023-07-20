@@ -128,29 +128,38 @@ const Admin = () => {
     const onChangeId = (e) => {
         setInputId(e.target.value);
     }
+    
+    const onChangePw = (e) => {
+        // const passwordCurrent = e.target.value;
+        // setInputPw(passwordCurrent);
+        setInputPw(e.target.value);
+    }
+
+    const handleKeyPress = (event) => {
+        if (event.key === "Enter") {
+          event.preventDefault(); // 기본 엔터 키 동작 방지
+          onClickLogin(); // 로그인 함수 호출
+        }
+      };
 
     //팝업 처리
     const [modalOpen, setModalopen] = useState(false);
     const closeModal = () => {
         setModalopen(false);
     }
-    
-    const onChangePw = (e) => {
-        const passwordCurrent = e.target.value;
-        setInputPw(passwordCurrent);
-    }
 
     const onClickLogin = async() => {
         const response = await AxiosApi.adminLogin(inputId, inputPw);
-        if(response.status) {
+        if(response.status === 200) {
             handleLoginSuccess();
+        }else {
+            handleLoginFail();
         }
-        else handleLoginFail();
     }
 
     const handleLoginSuccess = () => {
         console.log('로그인 성공');
-        navigate('/');
+        navigate('/admininfo');
     }
 
       
@@ -179,11 +188,11 @@ const Admin = () => {
                 <br/>
 
                     <div className="item2">
-                        <Input placeholder="아이디" value={inputId} onChange={onChangeId}/>
+                        <Input placeholder="아이디" value={inputId} onChange={onChangeId} onKeyPress={handleKeyPress}/>
                     </div>
 
                     <div className="item2">
-                        <Input type="password" placeholder="비밀번호" value={inputPw} onChange={onChangePw}/>
+                        <Input type="password" placeholder="비밀번호" value={inputPw} onChange={onChangePw} onKeyPress={handleKeyPress}/>
                     </div>
 
                     <div className="item2">
