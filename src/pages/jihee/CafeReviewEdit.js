@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import RatingStar from "../jihee/RatingStar";
@@ -9,6 +9,7 @@ import { deleteObject, getDownloadURL, ref, uploadBytes } from "firebase/storage
 import CafeImageUploader from "./CafeImageUploader";
 import Modal from "./Modal2";
 import CompleteModal from "./CompleteModal";
+import { UserContext } from "../../context/UserStore";
 
 const Container = styled.div`
   @media (max-width: 768px) { 
@@ -82,6 +83,8 @@ const Detail = styled.textarea`
 `;
 
 const CafeReviewEdit = () => {
+  const context = useContext(UserContext);
+  const { grantType, accessToken } = context;
   const navigate = useNavigate();
   const location = useLocation();
   const selectInfo = location.state && location.state.selectInfo;
@@ -114,7 +117,7 @@ const CafeReviewEdit = () => {
   const reviewNum = selectInfo[0].id;
   const editScore = score ? score : selectInfo[0].score;
 
-  // 후기 작성
+  // 후기 수정
   const updateReview = async() => {  
     try{
       let imageUrl1 = selectInfo[0].url1;
@@ -151,7 +154,7 @@ const CafeReviewEdit = () => {
       console.log("url 경로 2: " + imageUrl2);
 
       const response = await AxiosApi.editReview(
-        cafeNum, reviewNum, content, editScore, imageUrl1, imageUrl2
+        cafeNum, reviewNum, content, editScore, imageUrl1, imageUrl2, grantType, accessToken
       );
 
       console.log(response.data);

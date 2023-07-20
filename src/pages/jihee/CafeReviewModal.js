@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import CreateIcon from '@mui/icons-material/Create';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -6,6 +6,7 @@ import AxiosApi from "./api/AxiosApi";
 import { useNavigate } from "react-router-dom";
 import { storage } from "../../context/Firebase";
 import { deleteObject, ref } from "firebase/storage";
+import { UserContext } from "../../context/UserStore";
 
 const Box = styled.div`
   position: absolute;
@@ -37,6 +38,8 @@ const Box = styled.div`
 `;
 
 const CafeReviewModal = ({id, reviewInfo, cafeNum, isModalOpen}) => {
+  const context = useContext(UserContext);
+  const { grantType, accessToken } = context;
   const navigate = useNavigate();
   const selectInfo = reviewInfo.filter(review => review.id === id);
   
@@ -47,7 +50,7 @@ const CafeReviewModal = ({id, reviewInfo, cafeNum, isModalOpen}) => {
   console.log(selectInfo[0].url1, selectInfo[0].url2);
 
   const deleteReview = async() => {
-    const response = await AxiosApi.deleteReview(id, cafeNum);
+    const response = await AxiosApi.deleteReview(id, cafeNum, grantType, accessToken);
     console.log(response.data);
     if(response.data === true) {
       if(selectInfo[0].url1 && selectInfo[0].url2){

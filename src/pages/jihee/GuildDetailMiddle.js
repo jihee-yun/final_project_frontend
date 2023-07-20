@@ -156,7 +156,7 @@ const Middle = styled.div`
 
 const GuildDetailMiddle = ({guildNum, guildInfo}) => {
   const context = useContext(UserContext);
-  const { userNum } = context;
+  const { userNum, grantType, accessToken } = context;
   const navigate = useNavigate("");
   const [modalOpen, setModalOpen] = useState(null);
   const [isTrue, setIsTrue] = useState("");
@@ -175,7 +175,7 @@ const GuildDetailMiddle = ({guildNum, guildInfo}) => {
   },[]);
 
   const joinGuild = async() => {
-    const response = await AxiosApi.joinGuild(guildNum, userNum);
+    const response = await AxiosApi.joinGuild(guildNum, userNum, grantType, accessToken);
     if(response.data === true) {
       openModal("complete");
     } 

@@ -85,7 +85,7 @@ const Detail = styled.textarea`
 
 const CafeReviewWrite = () => {
   const context = useContext(UserContext);
-  const { userNum } = context;
+  const { userNum, grantType, accessToken } = context;
   const navigate = useNavigate();
   const location = useLocation();
   const cafeNum = location.state && location.state.cafeNum;
@@ -144,7 +144,7 @@ const CafeReviewWrite = () => {
         console.log("url 경로 2: " + imageUrl2);
     
         const response = await AxiosApi.createNewReview(
-          userNum, cafeNum, content, score, imageUrl1, imageUrl2
+          userNum, cafeNum, content, score, imageUrl1, imageUrl2, grantType, accessToken
         );
         console.log(response.data);
         if(response.data === true) {

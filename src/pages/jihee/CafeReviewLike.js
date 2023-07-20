@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import like from "../jihee/images/like1.png";
 import AxiosApi from "./api/AxiosApi";
 import Modal from "./Modal2";
 import CompleteModal from "./CompleteModal";
+import { UserContext } from "../../context/UserStore";
 
 const Like = styled.div`
   margin-top: 20px;
@@ -30,6 +31,8 @@ const Like = styled.div`
 `;
 
 const CafeReviewLike = ({memNum, reviewId, likeCount}) => {
+  const context = useContext(UserContext);
+  const { grantType, accessToken } = context;
   const navigate = useNavigate("");
   const [currentLikeCount, setCurrentLikeCount] = useState(likeCount);
 
@@ -37,7 +40,7 @@ const CafeReviewLike = ({memNum, reviewId, likeCount}) => {
 
   const changeLikeCount = async(memNum, id) => {
     if(memNum !== 0) {
-      const response = await AxiosApi.reviewLike(memNum, id);
+      const response = await AxiosApi.reviewLike(memNum, id, grantType, accessToken );
       console.log(response.data);
       if(response.data === true) {
         setCurrentLikeCount(prevCount => prevCount + 1);

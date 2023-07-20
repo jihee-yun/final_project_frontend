@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -6,12 +6,15 @@ import AxiosApi from "./api/AxiosApi";
 import Modal from "./Modal2";
 import CompleteModal from "./CompleteModal";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/UserStore";
 
 const LikeBox = styled.div`
   padding-top: 3px;
 `;
 
 const CafeLike = ({cafeNum, memNum}) => {
+  const context = useContext(UserContext);
+  const { grantType, accessToken } = context;
   const navigate = useNavigate("");
 
   const [isModalOpen, setModalOpen] = useState(false);
@@ -20,7 +23,7 @@ const CafeLike = ({cafeNum, memNum}) => {
 
   const changeLike = async(cafeNum, memNum) => {
     if(memNum !== 0){
-      const response = await AxiosApi.cafeLike(cafeNum, memNum);
+      const response = await AxiosApi.cafeLike(cafeNum, memNum, grantType, accessToken);
       console.log(response.data);
       if(response.data === true) {
         setCurrentState("true");
@@ -29,6 +32,18 @@ const CafeLike = ({cafeNum, memNum}) => {
       }
     } else setModalOpen(true);
   }
+
+  useEffect(() => {
+    const likeState = async() => {
+      if(memNum !== 0) {
+        const response = await AxiosApi.getLikeState(cafeNum, memNum, grantType, accessToken)
+        if(response.data === true) {
+          setCurrentState("true");
+        }
+      }
+    }
+    likeState();
+  }, [cafeNum, memNum, grantType, accessToken])
 
   const complete = () => {
     navigate('/memberlogin');

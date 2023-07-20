@@ -50,15 +50,19 @@ const AxiosApi = {
     return await axios.get(KH_DOMAIN + `/guild/isMember?guildNum=${guildNum}&userNum=${userNum}`)
   },
   //길드 가입하기
-  joinGuild: async(guildNum, userNum) => {
+  joinGuild: async(guildNum, userNum, grantType, accessToken) => {
     const data = {
       guildNum: guildNum,
       userNum: userNum
     }
-    return await axios.post(KH_DOMAIN + `/guild/join`, data);
+    return await axios.post(KH_DOMAIN + `/guild/join`, data, {
+      headers: {
+        Authorization: `${grantType} ${accessToken}`
+      }
+    });
   },
   // 새로운 리뷰 작성
-  createNewReview: async(memNum, cafeNum, content, score, url1, url2) => {
+  createNewReview: async(memNum, cafeNum, content, score, url1, url2, grantType, accessToken) => {
     const reviewData = {
       memNum: memNum,
       cafeNum: cafeNum,
@@ -67,14 +71,18 @@ const AxiosApi = {
       url1: url1,
       url2: url2
     }
-    return await axios.post(KH_DOMAIN + `/review/newReview`, reviewData);
+    return await axios.post(KH_DOMAIN + `/review/newReview`, reviewData, {
+      headers: {
+        Authorization: `${grantType} ${accessToken}`
+      }
+    });
   },
   // 특정 카페 리뷰 조회
   cafeReviewGet: async(cafeNum) => {
     return await axios.get(KH_DOMAIN  + `/review/cafeReview?cafeNum=${cafeNum}`);
   },
   // 리뷰 수정
-  editReview: async(cafeNum, reviewNum, content, editScore, url1, url2) => {
+  editReview: async(cafeNum, reviewNum, content, editScore, url1, url2, grantType, accessToken) => {
     const data = {
       cafeNum: cafeNum,
       reviewNum: reviewNum,
@@ -83,31 +91,55 @@ const AxiosApi = {
       url1: url1,
       url2: url2 
     }
-    return await axios.post(KH_DOMAIN + `/review/edit`, data);
+    return await axios.post(KH_DOMAIN + `/review/edit`, data, {
+      headers: {
+        Authorization: `${grantType} ${accessToken}`
+      }
+    });
   },
   // 리뷰 삭제
-  deleteReview: async(id, cafeNum) => {
+  deleteReview: async(id, cafeNum, grantType, accessToken) => {
     const data = {
       reviewId: id,
       cafeNum: cafeNum
     }
-    return await axios.post(KH_DOMAIN + `/review/delete`, data);
+    return await axios.post(KH_DOMAIN + `/review/delete`, data, {
+      headers: {
+        Authorization: `${grantType} ${accessToken}`
+      }
+    });
   },
   // 리뷰 좋아요
-  reviewLike: async(memNum, id) => {
+  reviewLike: async(memNum, id, grantType, accessToken) => {
     const data = {
       memNum: memNum,
       reviewId: id
     }
-    return await axios.post(KH_DOMAIN + `/review/like`, data);
+    return await axios.post(KH_DOMAIN + `/review/like`, data, {
+      headers: {
+        Authorization: `${grantType} ${accessToken}`
+      }
+    });
   },
   // 카페 좋아요 
-  cafeLike: async(cafeNum, memNum) => {
+  cafeLike: async(cafeNum, memNum, grantType, accessToken) => {
     const data = {
       cafeNum: cafeNum,
       memNum: memNum
     }
-    return await axios.post(KH_DOMAIN + `/cafe/like`, data);
+    return await axios.post(KH_DOMAIN + `/cafe/like`, data, {
+      headers: {
+        Authorization: `${grantType} ${accessToken}`
+      }
+    });
+  },
+  // 카페 좋아요 상태값 관리
+  getLikeState: async(cafeNum, memNum, grantType, accessToken) => {
+    return await axios.get(KH_DOMAIN + `/cafe/getLike?cafeNum=${cafeNum}&memNum=${memNum}`, {
+      headers: {
+        Authorization: `${grantType} ${accessToken}`
+      }
+    });
   }
 };
 
