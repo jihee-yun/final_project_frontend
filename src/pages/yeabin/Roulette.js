@@ -114,8 +114,28 @@ const Roulette = () => {
   const [canSpin, setCanSpin] = useState(true);
   let amount = 0;
 
+  useEffect(() => {
+    // 이전에 저장된 룰렛 돌린 시간을 확인하고 조건에 따라 룰렛 돌릴 수 있도록 설정
+    const lastSpinTime = localStorage.getItem('lastSpinTime');
+    if (lastSpinTime) {
+      const now = new Date();
+      const lastSpinTimeInMillis = Number(lastSpinTime);
+
+      if (now.getTime() < lastSpinTimeInMillis) {
+        setCanSpin(false);
+        const timeUntilNextSpin = lastSpinTimeInMillis - now.getTime();
+        setTimeout(() => {
+          setCanSpin(true);
+        }, timeUntilNextSpin);
+      }
+    }
+  }, []);
+
   const handleStartClick = () => {
-    if (!canSpin) return;
+    if (!canSpin) {
+      alert('룰렛은 하루에 한번만 돌릴 수 있어요. 내일 다시 도전해주세요!');
+      return;
+    }
     setIsSpinning(true); // 회전 시작
     setCanSpin(false);
   

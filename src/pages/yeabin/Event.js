@@ -226,7 +226,7 @@ const Event = () => {
   const [challengeInfo, setChallengeInfo] = useState("");
   const [isQuizDone, setIsQuizDone] = useState(false);
   const context = useContext(UserContext);
-  const { isLogin } = context
+  const { isLogin } = context;
 
   useEffect(() => {
     const quizDone = localStorage.getItem('quizDone');
@@ -235,7 +235,7 @@ const Event = () => {
 
   const quizOpen = () => {
     if (isQuizDone) {
-      alert('이미 퀴즈를 푸셨습니다. 내일 다시 도전해주세요.');
+      alert('퀴즈는 하루에 한번만 가능해요. 내일 다시 도전해주세요!');
     } else {
       navigate('/quizMain');
     }
@@ -249,7 +249,6 @@ const Event = () => {
     challengeInfo();
   }, []);
 
-  // console.log(challengeInfo);
 
   const navigateCh = (id) => {
     const editedInfo = challengeInfo.filter(item => item.id === id);
@@ -259,10 +258,6 @@ const Event = () => {
   const navigatePoint = () => {
     navigate('/couponStore');
   };
-
-  // const quizOpen = () => {
-  //   navigate('/quizMain');
-  // };
 
   if (!isLogin) {
     navigate('/memberlogin');

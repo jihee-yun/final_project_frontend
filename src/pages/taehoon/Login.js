@@ -2,9 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import {Link, useNavigate} from "react-router-dom";
 import logo from "../../images/logo.png";
-// import kakao from "../../images/kakao.png";
-// import naver from "../../images/naver.png";
-// import google from "../../images/google.png";
 import { UserContext } from "../../context/UserStore";
 import AxiosApi from "./Api/AxiosApi";
 import Modal from "../jihee/Modal";
@@ -187,14 +184,6 @@ const Input = styled.input`
 
 
 const Login = () => {
-
-    // 카카오
-    const LoginKakao = () => {
-        const REDIRECT_URI = `http://localhost:8111/login/oauth/kakao`;
-        const CLIENT_ID = `6d3f2009d780565597964da82299382f`;
-        const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
-        window.location.href = KAKAO_AUTH_URL;
-    }
 
     const context = useContext(UserContext);
     const {setGrantType, setAccessToken, setRefreshToken, setUserNum, setUserName, setUserAuthoruty } = useContext(UserContext);
