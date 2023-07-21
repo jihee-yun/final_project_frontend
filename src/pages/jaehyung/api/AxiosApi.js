@@ -34,8 +34,19 @@ const AxiosApi = {
     });
   },
 
-
-
+  // 회원 번호로 날짜 내의 이벤트 내역 조회
+  getEventByDate : async (userNum, startDate, endDate, grantType, accessToken) => {
+    const checkData = {
+      userNum : userNum,
+      startDate : startDate,
+      endDate : endDate
+    }
+    return await axios.post(`${DOMAIN}/event/getbynumdate`, checkData, {
+      headers: {
+        Authorization: `${grantType} ${accessToken}`
+      }
+    });
+  },
 
 
 

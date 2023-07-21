@@ -24,35 +24,43 @@ const Detail = styled.div`
   width: 100%;
   max-width: 1000px;
   min-width: 400px;
-  min-height: 1000px;
+  min-height: 600px;
   display: flex;
   /* border: 2px solid yellow; */
-  flex-direction: column;
-  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-around;
 `;
 
 // 가로 정렬 박스
-const LineBox = styled.div`
-  width: 100%;
-  height: 300px;
-  /* border: 1px solid black; */
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin-top: 3%;
-  margin-bottom: -1%;
-`;
+// const LineBox = styled.div`
+//   width: 100%;
+//   height: 300px;
+//   /* border: 1px solid black; */
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: center;
+//   margin-top: 3%;
+//   margin-bottom: -1%;
+// `;
 // 각 메뉴별 외부 박스
 const SquareBox = styled.div`
   width: 25%;
-  min-width:200px;
-  height: 98%;
+  min-width: 220px;
+  height: 250px;
+  margin-top: 2%;
+  margin-bottom: -2%;
   border: 2px solid #F3E1E1;
   border-radius: 15px;
-  margin-right: 3%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media (max-width: 1000px) {
+    width: calc(45% - 20px); // 2개를 한 줄에 배치
+  }
+
+  @media (max-width: 768px) {
+    width: calc(90% - 20px); // 1개를 한 줄에 배치
+  }
 `;
 // 캘린더용 외부 박스
 // const LongBox = styled.div`
@@ -131,7 +139,7 @@ const MyPage = () => {
     <Container>
       <SideMenu />
       <Detail>
-        <LineBox>
+        {/* <LineBox> */}
           <SquareBox>
             <BoxTitle>
               <Title>작성 리뷰</Title>
@@ -153,8 +161,8 @@ const MyPage = () => {
             </BoxTitle>
             <BoxContent></BoxContent>
           </SquareBox>
-        </LineBox>
-        <LineBox>
+        {/* </LineBox> */}
+        {/* <LineBox> */}
           <SquareBox>
             <BoxTitle>
               <Title>참여 이벤트</Title>
@@ -176,7 +184,7 @@ const MyPage = () => {
             </BoxTitle>
             <BoxContent></BoxContent>
           </SquareBox>
-        </LineBox>
+        {/* </LineBox> */}
         {/* <LineBox>
           <LongBox>
             <BoxTitle>

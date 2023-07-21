@@ -67,7 +67,7 @@ const DateSelected = styled.p`
 
 const ContentBox = styled.div`
   width: 90%;
-  min-width: 400px;
+  min-width: 600px;
   height: 780px;
   margin-top: 3%;
   border: 1px solid #f3e1e1;
@@ -111,10 +111,11 @@ const ContentDetail = styled.div`
 `;
 const ContentLists = styled.p`
   display: flex;
-  border-bottom: 1px solid #f3e1e1;
+  /* border-bottom: 1px solid #f3e1e1; */
   margin-top: -1%;
   margin-left: 1%;
   margin-right: 1%;
+  margin-bottom: -1%;
 `;
 const ListNum = styled.p`
   width: 10%;

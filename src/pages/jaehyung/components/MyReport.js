@@ -27,7 +27,7 @@ const Detail = styled.div`
   flex-direction: column;
   align-items: center;
 
-  border: 2px solid yellow;
+  /* border: 2px solid yellow; */
 `;
 
 const SelectBox = styled.div`
@@ -36,6 +36,8 @@ const SelectBox = styled.div`
   margin-top: 3%;
   border: 1px solid #F3E1E1;
   border-radius: 15px;
+  display: flex;
+  align-items: center;
 `;
 const ContentBox = styled.div`
   width: 90%;
@@ -55,7 +57,7 @@ const MyReport = () => {
         <SideMenu />
         <Detail>
           <SelectBox>
-
+            <p>1:1 문의 / 신고내역</p>
           </SelectBox>
           <ContentBox>
 
