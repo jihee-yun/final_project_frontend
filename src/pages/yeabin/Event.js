@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import Roulette from "./Roulette";
 import quiz from "./images/quiz.png";
@@ -8,6 +8,7 @@ import AxiosApi from "./Api/AxiosApi";
 import ad from "./images/event-ad.png";
 import ad2 from "./images/ad-media.png";
 import Header from "../now/component/Header";
+import { UserContext } from "../../context/UserStore";
 
 const Box = styled.div`
   @media (max-width: 768px) {
@@ -223,7 +224,22 @@ const Thumb = styled.div`
 const Event = () => {
   const navigate = useNavigate();
   const [challengeInfo, setChallengeInfo] = useState("");
+  const [isQuizDone, setIsQuizDone] = useState(false);
+  const context = useContext(UserContext);
+  const { isLogin } = context
 
+  useEffect(() => {
+    const quizDone = localStorage.getItem('quizDone');
+    setIsQuizDone(quizDone === 'true');
+  }, []);
+
+  const quizOpen = () => {
+    if (isQuizDone) {
+      alert('이미 퀴즈를 푸셨습니다. 내일 다시 도전해주세요.');
+    } else {
+      navigate('/quizMain');
+    }
+  };
 
   useEffect(() => {
     const challengeInfo = async() => {
@@ -244,11 +260,14 @@ const Event = () => {
     navigate('/couponStore');
   };
 
-  const quizOpen = () => {
-    navigate('/quizMain');
-  };
+  // const quizOpen = () => {
+  //   navigate('/quizMain');
+  // };
 
-  
+  if (!isLogin) {
+    navigate('/memberlogin');
+    return null;
+  }
 
   return(
     <>

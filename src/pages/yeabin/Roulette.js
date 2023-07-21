@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import start from "./images/start.png"
 import pin from "./images/pin.png"
@@ -109,36 +109,48 @@ const WinBox = styled.div`
 
 
 const Roulette = () => {
-  const [isSpinning, setIsSpinning] = useState(false); 
+  const [isSpinning, setIsSpinning] = useState(false);
   const [winning, setWinning] = useState(0);
+  const [canSpin, setCanSpin] = useState(true);
   let amount = 0;
-  
 
   const handleStartClick = () => {
+    if (!canSpin) return;
     setIsSpinning(true); // 회전 시작
+    setCanSpin(false);
   
     const stopTime = Math.floor(Math.random() * 4) + 3; // 3 ~ 6초 사이 정수값 랜덤으로 멈춤
   
     setTimeout(async() => {
       setIsSpinning(false);
       showWinning(stopTime); // 당첨 금액 보여줌
-
       AxiosApi.pointGet(amount);
+
+      const now = new Date();
+      const tomorrow = new Date(now);
+      tomorrow.setDate(now.getDate() + 1);
+      tomorrow.setHours(0, 0, 0, 0);
+      localStorage.setItem('lastSpinTime', tomorrow.getTime().toString());
+
+      const timeUntilTomorrow = tomorrow.getTime() - now.getTime(); // 다음 날 자정부터 다시 룰렛 돌릴 수 있음
+      setTimeout(() => {
+        setCanSpin(true);
+      }, timeUntilTomorrow);
 
     }, stopTime * 1000); // 랜덤 멈추기
   };
 
+
   const showWinning = (stopTime) => {
-    
-  if (stopTime === 3) {
-    amount = 50;
-  } else if (stopTime === 4) {
-    amount = 100;
-  } else if (stopTime === 5) {
-    amount = 30;
-  } else if (stopTime === 6) {
-    amount = 500;
-  }
+    if (stopTime === 3) {
+      amount = 50;
+    } else if (stopTime === 4) {
+      amount = 100;
+    } else if (stopTime === 5) {
+      amount = 30;
+    } else if (stopTime === 6) {
+      amount = 500;
+    }
 
     setWinning(amount);
   };

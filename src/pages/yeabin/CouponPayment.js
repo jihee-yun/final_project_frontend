@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useLocation } from "react-router-dom";
+import Header from "../now/component/Header";
 
 const Box = styled.div`
   margin-top: 100px;
@@ -65,6 +66,8 @@ const CouponPayment = () => {
   console.log(info);
 
   return(
+    <>
+    <Header />
     <Box>
     <Container>
       <h2>쿠폰 결제</h2>
@@ -74,12 +77,13 @@ const CouponPayment = () => {
             <Name>{coupon.couponName}</Name>
             <MyPoint>보유 포인트 : </MyPoint>
             <Price>차감 포인트 : {coupon.price}</Price>
-            <button className="payBtn">결제 하기</button>
+            <button className="payBtn">결제하기</button>
           </CouponList>
         ))}
       </CouponBox>
     </Container>
     </Box>
+    </>
   );
 };
 

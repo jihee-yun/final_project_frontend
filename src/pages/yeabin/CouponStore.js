@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import AxiosApi from "./Api/AxiosApi";
 import Header from "../now/component/Header";
+import { UserContext } from "../../context/UserStore";
 
 // 포인트로 카페 쿠폰 결제하는 상점
 
@@ -67,50 +68,50 @@ const Price = styled.div`
   cursor: pointer;
 `;
 
-const CafeAll = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+// const CafeAll = styled.div`
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: space-between;
 
-  @media (max-width: 768px) {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-  }
-`;
+//   @media (max-width: 768px) {
+//     display: flex;
+//     flex-direction: row;
+//     flex-wrap: wrap;
+//     justify-content: center;
+//     align-items: center;
+//   }
+// `;
 
-const CafeBox = styled.div`
-  border-radius: 20px;
-  width: 220px;
-  height: 220px;
-  margin: 30px;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+// const CafeBox = styled.div`
+//   border-radius: 20px;
+//   width: 220px;
+//   height: 220px;
+//   margin: 30px;
+//   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 
-  .cafeName {
-    border-radius: 20px;
-    position: relative;
-  }
+//   .cafeName {
+//     border-radius: 20px;
+//     position: relative;
+//   }
 
-  img {
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    border-radius: 20px;
-  }
+//   img {
+//     width: 100%;
+//     height: 100%;
+//     background-size: cover;
+//     border-radius: 20px;
+//   }
 
-  p {
-    color: white;
-    margin-left: 20px;
-    font-weight: bolder;
-    position: absolute;
-    top: -55px;
-    bottom: 0;
-    text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.8);
-  }
+//   p {
+//     color: white;
+//     margin-left: 20px;
+//     font-weight: bolder;
+//     position: absolute;
+//     top: -55px;
+//     bottom: 0;
+//     text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.8);
+//   }
 
-`;
+// `;
 
 const Notice = styled.div`
   color: grey;
@@ -120,13 +121,15 @@ const Notice = styled.div`
 `;
 
 
-// const InfoList = styled.div`
-//   margin-top: 60px;
-// `;
+const InfoList = styled.div`
+  margin-top: 60px;
+`;
 
 const CouponStore = () => {
   const [couponInfo, setCouponInfo] = useState("");
-  // const [myPoint, setMyPoint] = useState("");
+  const [pointInfo, setPointInfo] = useState("");
+  const context = useContext(UserContext);
+  const { userNum, isLogin } = context
   const navigate = useNavigate();
 
   console.log(couponInfo);
@@ -139,30 +142,36 @@ const CouponStore = () => {
     couponInfo();
   }, []);
 
-  // useEffect(() => {
-  //   const myPoint = async() => {
-  //     const response = await AxiosApi.myPointGet("ALL");
-  //     if(response.status === 200) setMyPoint(response.data);
-  //   };
-  //   myPoint();
-  // }, []);
+  useEffect(() => {
+    const pointInfo = async() => {
+      if(isLogin && userNum) {
+        const rsp = await AxiosApi.myInfoGet(userNum);
+        if(rsp.status === 200) setPointInfo(rsp.data);
+      }
+    };
+    pointInfo();
+  }, [isLogin, userNum]);
 
   const navigatePay = (id) => {
     const filterCoupon = couponInfo.filter(coupon => coupon.id === id);
     navigate('/couponPayment', {state : {filterCoupon}});
   };
 
+  if (!isLogin) {
+    navigate('/memberlogin');
+    return null;
+  }
 
   return(
     <>
     <Header />
     <Container>
       <MyPoint>
-          {/* {myPoint && myPoint.map(item => (
-            <InfoList key={item.id}>
-              <Name>{item.memberName}님 현재 보유 포인트 : {item.totalPoint}</Name> 
+          {pointInfo && pointInfo.map(item => (
+            <InfoList key={item.memberNum}>
+              <Name>{item.name}님 현재 보유 포인트 : {item.totalPoint} 포인트</Name> 
             </InfoList>
-          ))} */}
+          ))}
         <div className="goEvent">
           <Link to='/event' className="link_style">받을 수 있는 포인트 확인하기</Link>
         </div>
@@ -176,13 +185,13 @@ const CouponStore = () => {
             </CouponList>
           ))}
       </CouponBox>
-      <h3>지역 별 포인트 사용 가능 매장 확인하기</h3>
+      {/* <h3>포인트 사용 가능 매장 확인하기</h3>
       <CafeAll>
         <CafeBox></CafeBox>
         <CafeBox></CafeBox>
         <CafeBox></CafeBox>
         <CafeBox></CafeBox>
-      </CafeAll>
+      </CafeAll> */}
       <Notice>
         <div>
           <p><b>포인트 유의사항</b></p>

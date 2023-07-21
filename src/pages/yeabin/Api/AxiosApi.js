@@ -13,22 +13,19 @@ const AxiosApi = {
   },
 
   // 이벤트 포인트 적립
-  pointGet: async(winning) => {
+  pointGet: async(memberNum, winning, pointType) => {
     const points = {
-      totalPoint: winning
+      memberNum: memberNum,
+      point: winning,
+      pointType: pointType
     };
     return await axios.post(KH_DOMAIN + "/point/pointadd", points);
   },
-  
-  // 내 포인트 조회
-  // myPointGet: async(userNum) => {
-  //   return await axios.get(KH_DOMAIN + `/point/mypoint?userNum=${userNum}`);
-  // },
 
   // 내 정보 조회
-  // myInfoGet: async(myinfo) => {
-  //   return await axios.get(KH_DOMAIN + `/couponstore/myinfo?myinfo=${myinfo}`);
-  // },
+  myInfoGet: async(memberNum) => {
+    return await axios.get(KH_DOMAIN + `/member/myinfo?memberNum=${memberNum}`);
+  },
 
   // 챌린지 신청
   challengeApply: async(challengeId, userId) => {
