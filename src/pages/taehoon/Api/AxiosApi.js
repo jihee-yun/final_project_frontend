@@ -48,6 +48,11 @@ const AxiosApi = {
       };
       return await axios.post(KH_DOMAIN + "/findId", data);
     },
+
+    // 사용자 삭제
+    deleteUsers : async(memberNum) => {
+        return await axios.delete(KH_DOMAIN + `/admin/usermanage/delete/${memberNum}`);
+    },
          
         
         // 신고 전체 조회

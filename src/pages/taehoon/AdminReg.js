@@ -198,7 +198,7 @@ const AdminReg = () => {
             type="text"
             value={birthday}
             onChange={(e) => setBirthday(e.target.value)}
-            required placeholder="생년월일"
+            required placeholder="생년월일 ex)2000-01-01"
           />
         </label>
 
@@ -209,7 +209,7 @@ const AdminReg = () => {
             type="text"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            required placeholder="전화번호"
+            required placeholder="전화번호 ex)010-1111-1111"
           />
         </label>
 

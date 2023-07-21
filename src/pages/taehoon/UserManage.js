@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import AxiosApi from "./Api/AxiosApi";
 import user from "../taehoon/images/user.png";
 import businessman from "../taehoon/images/business.png";
+import ConfirmModal from "./ConfirmModal";
 
 const UserManageBlock = styled.div`
     position: relative;
@@ -211,6 +212,19 @@ const Image = styled.div`
   margin-bottom: 40px;
 `;
 
+// 삭제 버튼 스타일링
+const DeleteButton = styled.button`
+  background-color: #dc3545;
+  color: white;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+`;
+
+
 const UserManage = () => {
     const navigate = useNavigate("");
     const LogoClick = () => {
@@ -230,8 +244,33 @@ const UserManage = () => {
     // 모달 팝업을 보여주기 위한 상태
     const [showModal, setShowModal] = useState(false);
 
+    // 삭제 확인 모달을 띄우기 위한 상태
+    const [showConfirmModal, setShowConfirmModal] = useState(false);
+
+    // 삭제할 사용자의 정보를 저장할 상태
+    const [userToDelete, setUserToDelete] = useState(null);
+
     // 사용자관리 클릭에 대한 상태를 저장할 state를 생성
     const [selectedUserInfo, setSelectedUserInfo] = useState(null);
+
+    // 사용자 삭제 버튼을 클릭할 때 실행될 함수
+    const handleDeleteUserClick = (memberNum) => {
+      const user = getCurrentItems().find((userInfo) => userInfo.memberNum === memberNum);
+      setUserToDelete(user);
+      setShowConfirmModal(true);
+    };
+
+    // 삭제 확인 모달에서 '확인' 버튼을 클릭할 때 실행될 함수
+    const handleConfirmDelete = () => {
+      if (userToDelete) {
+        // 사용자 삭제 처리
+        deleteUsers(userToDelete.memberNum);
+
+        // 모달 닫기 및 사용자 정보 초기화
+        setShowConfirmModal(false);
+        setUserToDelete(null);
+      }
+    };
 
         // 클릭 이벤트를 처리할 함수
         const handleRowClick = (memberNum) => {
@@ -252,7 +291,6 @@ const UserManage = () => {
       const handlePageChange = (page) => {
           setPageNumber(page);
       };
-  
   
       // 현재 페이지에 해당하는 아이템 가져오기
       const getCurrentItems = () => {
@@ -299,17 +337,38 @@ const UserManage = () => {
       return pageNumbers;
     };
   
-  
-      const pageNumbers = getPageNumbers();
+  const pageNumbers = getPageNumbers();
 
+    // 서버에서 사용자 정보를 가져오는 함수
+  const getUserInfo = async () => {
+    try {
+      const rsp = await AxiosApi.userGetAll();
+      if (rsp.status === 200) setUserInfo(rsp.data);
+    } catch (error) {
+      console.error('Error fetching users:', error);
+    }
+  };
 
-    useEffect(()=> {
-        const getUserInfo = async() => {
-          const rsp = await AxiosApi.userGetAll();
-          if(rsp.status === 200) setUserInfo(rsp.data);
-        };
+  // 사용자 삭제 함수
+  const deleteUsers = async (memberNum) => {
+    try {
+      const rsp = await AxiosApi.deleteUsers(memberNum);
+      if (rsp.status === 200) {
+        // 사용자가 성공적으로 삭제되었다면, 다시 사용자 정보를 가져온다.
         getUserInfo();
-    },[]);
+        setShowModal(false);
+      }
+    } catch (error) {
+      console.error('Error deleting user:', error);
+    }
+  };
+
+  // 페이지가 처음 로딩될 때 사용자 정보를 가져오기 위해 useEffect 사용
+  useEffect(() => {
+    getUserInfo();
+  }, []);
+
+    
 
     // 모달 팝업을 보여줄 때, 조건부 렌더링을 통해 해당 모달 컨텐츠가 보여지도록 해야 합니다.
     if(showModal && selectedUserInfo) {
@@ -322,6 +381,15 @@ const UserManage = () => {
                 {selectedUserInfo.authority === 'ROLE_USER' && <img src={user} alt="" className="user" width="150px" height="150px" style={{margin : "0 -20px"}}/>}
                 {selectedUserInfo.authority === 'ROLE_MEMBER' && <img src={businessman} alt="" className="businessman" width="250px" height="150px" style={{margin : "0 -20px"}}/>}
             </Image>
+            <DeleteButton onClick={() => handleDeleteUserClick(selectedUserInfo.memberNum)}>삭제</DeleteButton>
+
+              {showConfirmModal && (
+                  <ConfirmModal
+                    message="삭제하시겠습니까?"
+                    onClose={() => setShowConfirmModal(false)}
+                    onConfirm={handleConfirmDelete}
+                  />
+                )}
                 <h2>번호 : {selectedUserInfo.memberNum}</h2>
                 <p>이름 : {selectedUserInfo.name}</p>
                 <p>생년월일 : {selectedUserInfo.birthday}</p>
