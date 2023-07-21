@@ -143,7 +143,7 @@ const Header = () => {
     setGrantType("");
     setAccessToken("");
     setRefreshToken("");
-    setUserNum("");
+    setUserNum(0);
     setUserName("");
     setUserAuthoruty("");
     setIsLogin(false);
