@@ -155,7 +155,7 @@ const ChallengeMain = () => {
     const response = await AxiosApi.challengeApply(challengeId, userId);
     if(response.status === 200 && response.data === true) {
       setModalOpen(true); 
-    }
+    } // 수정 전
   };
 
   const closeModal = () => {

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import AxiosApi from "./Api/AxiosApi";
+import Header from "../now/component/Header";
 
 const Container = styled.div`
   text-align: center;
@@ -60,13 +61,16 @@ const QuizMain = () => {
       setIsAnswered(true);
       setIsCorrect(option === answer);
 
-      if (option === answer && option === answer) {
+      if (option === answer) {
         AxiosApi.pointGet(amount);
+        localStorage.setItem('quizDone', 'true');
       }
     }
   };
   
   return (
+    <>
+    <Header />
     <Container>
       <QuizBox>
         <div>
@@ -84,7 +88,8 @@ const QuizMain = () => {
           )}
         </div>
       </QuizBox>
-    </Container>    
+    </Container> 
+    </>   
   );
 };
 
