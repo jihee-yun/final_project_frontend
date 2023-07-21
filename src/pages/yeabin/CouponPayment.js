@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Header from "../now/component/Header";
+import AxiosApi from "./Api/AxiosApi";
+import { UserContext } from "../../context/UserStore";
 
 const Box = styled.div`
   margin-top: 100px;
@@ -59,11 +61,32 @@ const Price = styled.div`
 `;
 
 const CouponPayment = () => {
-
   const location = useLocation();
   const info = location.state && location.state.filterCoupon;
+  const navigate = useNavigate();
+  const context = useContext(UserContext);
+  const { userNum, isLogin } = context
+  const [pointInfo, setPointInfo] = useState([]);
 
-  console.log(info);
+  useEffect(() => {
+    const getPointInfo = async () => {
+      if (isLogin && userNum) {
+        const rsp = await AxiosApi.myInfoGet(userNum);
+        if(rsp.status === 200) setPointInfo(rsp.data);
+      }
+    };
+    getPointInfo();
+  }, [userNum, isLogin]);
+
+  if (!isLogin) {
+    navigate('/memberlogin');
+    return null;
+  };
+
+  const handlePayClick = () => {
+    // 결제 성공 시에만 넘어가게 수정 필요
+    navigate('/payComplete');
+  };
 
   return(
     <>
@@ -75,9 +98,9 @@ const CouponPayment = () => {
         {info && info.map(coupon => (
           <CouponList key={coupon.id} >
             <Name>{coupon.couponName}</Name>
-            <MyPoint>보유 포인트 : </MyPoint>
+            <MyPoint>보유 포인트 : {pointInfo[0]?.totalPoint || 0} </MyPoint>
             <Price>차감 포인트 : {coupon.price}</Price>
-            <button className="payBtn">결제하기</button>
+            <button className="payBtn" onClick={handlePayClick}>결제하기</button>
           </CouponList>
         ))}
       </CouponBox>
