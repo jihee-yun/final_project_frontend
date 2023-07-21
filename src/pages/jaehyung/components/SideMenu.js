@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import AxiosApi from "../api/AxiosApi";
+import MemberApi from "../api/MemberApi";
 import { UserContext } from "../../../context/UserStore";
 import { storage } from "../../../utils/Firebase";
 import { ref, getDownloadURL } from "firebase/storage";
 
 const Side = styled.div`
-  width: 300px;
+  width: 250px;
   min-width: 200px;
   height: 700px;
   display: flex;
@@ -76,11 +76,27 @@ const NaviButton = styled.button`
 const SideMenu = () => {
   const navigate = useNavigate();
 
-  const [userInfo, setUserInfo] = useState([]);
+  const [memberInfo, setMemberInfo] = useState([]);
   const [imageUrls, setImageUrls] = useState([]);
 
-  // 로그인시 회원 번호
-  const { userNum, userName } = useContext(UserContext);
+  // 로그인시 회원 정보
+  const {grantType, accessToken, refreshToken, userNum, userName, userAuthority} = useContext(UserContext);
+
+  // 유저 정보 가져오기
+  useEffect(() => {
+    const fetchMemberInfo = async () => {
+      try {
+        const rsp = await MemberApi.getMemberInfo(userNum, grantType, accessToken);
+        if (rsp.status) {
+          setMemberInfo(rsp.data[0]);
+          console.log("사이드 메뉴 유저 정보 가져오기 성공: ", rsp.data[0])
+        }
+      } catch (error) {
+        console.log("사이드 메뉴유저 정보 가져오기 실패: ", error);
+      }
+    };
+    fetchMemberInfo();
+  }, [userNum]);
 
   // 파이어베이스 스토리지 이미지 로딩
   useEffect(() => {
@@ -103,7 +119,7 @@ const SideMenu = () => {
       <ProfileBox>
         <img className="profileImg" src={imageUrls[0]} alt="프로필 이미지" onClick={()=>navigate("/mypage")}/>
         <MyName onClick={()=>navigate("/blog")}>{userName}님 블로그 이동</MyName>
-        <MyPoint onClick={()=>navigate("/mypage/point")}>~~~ point</MyPoint>
+        <MyPoint onClick={()=>navigate("/mypage/point")}>{memberInfo.totalPoint} point</MyPoint>
       </ProfileBox>
       <NaviButton onClick={()=>navigate("/mypage/review")}>작성 리뷰</NaviButton>
       <NaviButton onClick={()=>navigate("/mypage/guild")}>참여 길드</NaviButton>

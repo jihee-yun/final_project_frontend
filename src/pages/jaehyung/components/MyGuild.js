@@ -149,10 +149,10 @@ const MyGuild = () => {
         const rsp = await AxiosApi.getMemberGuildInfo(userNum, grantType, accessToken);
         if (rsp.status) {
           setMemberInfo(rsp.data[0]);
-          console.log("유저 정보 가져오기 성공: ", rsp.data[0])
+          console.log("길드 정보 가져오기 성공: ", rsp.data[0])
         }
       } catch (error) {
-        console.log("유저 정보 가져오기 실패: ", error);
+        console.log("길드 정보 가져오기 실패: ", error);
       }
     };
     fetchMemberInfo();
