@@ -136,6 +136,7 @@ const GuildSection = ({guildInfo}) => {
 
   const selectGuild = (guildNum) => {
     setGuildNum(guildNum);
+    localStorage.setItem("guildNum", guildNum);
     navigate('/guild/detail');
   }
 

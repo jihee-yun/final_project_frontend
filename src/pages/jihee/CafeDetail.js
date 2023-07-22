@@ -12,6 +12,8 @@ import AxiosApi from "./api/AxiosApi";
 import KaKaoMap from "./KaKaoMap";
 import AvgStar from "./AvgStar";
 import CafeLike from "./CafeLike";
+// import Header from "../now/component/Header";
+// import Footer from "../now/component/Footer";
 
 const Container = styled.div`
   @media (max-width: 768px) {
@@ -139,7 +141,9 @@ const Container = styled.div`
 const CafeDetail = () => {
   const navigate = useNavigate();
   const context = useContext(UserContext);
-  const { userNum, cafeNum } = context; 
+  const { userNum } = context; 
+
+  const cafeNum = localStorage.getItem("cafeNum");
 
   // 카페 디테일 정보 받아오기
   const [detailInfo, setDetailInfo] = useState("");
@@ -152,15 +156,13 @@ const CafeDetail = () => {
     detailInfo();
   }, [cafeNum]);
 
-  console.log(cafeNum);
-  console.log(detailInfo);
-
   const sendDetailInfo = () => {
     navigate("/cafe/review", {state: detailInfo});
   }
 
   return(
     <>
+    {/* <Header /> */}
     {detailInfo && detailInfo.map(cafe =>(
     <Container key={cafe.id}>
     <Link to="/cafe/main" style={{ textDecoration: "none", color: "inherit"}}><img src={logo} alt="스위트킹덤로고" /></Link>
@@ -202,6 +204,7 @@ const CafeDetail = () => {
     </div>
     </Container>
     ))}
+    {/* <Footer /> */}
     </>
   );
 };

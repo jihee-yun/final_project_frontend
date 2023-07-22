@@ -114,7 +114,10 @@ const Thumb = styled.div`
 const CafeMain = () => {
   const navigate = useNavigate();
   const context = useContext(UserContext);
-  const { region, setRegion, setCafeNum } = context; // cafeNum 유저스토어에 저장하기
+  const { setRegion, setCafeNum } = context; // cafeNum 유저스토어에 저장하기
+
+  const getRegion = localStorage.getItem("region");
+  const getOption = localStorage.getItem("option");
 
   // 전체 카페 정보
   const [allCafeInfo, setAllCafeInfo] = useState([]);
@@ -131,15 +134,15 @@ const CafeMain = () => {
   useEffect(() => {
     const cafeInfo = async() => {
       let response;
-      if(sortingOption === "인기순") {
-        response = await AxiosApi.cafeInfoGet(region, "인기순");
-      } else if(sortingOption === "별점순") {
-        response = await AxiosApi.cafeInfoGet(region, "별점순");
-      } else response = await AxiosApi.cafeInfoGet(region);
+      if(getOption === "인기순") {
+        response = await AxiosApi.cafeInfoGet(getRegion, "인기순");
+      } else if(getOption === "별점순") {
+        response = await AxiosApi.cafeInfoGet(getRegion, "별점순");
+      } else response = await AxiosApi.cafeInfoGet(getRegion);
       if(response.status === 200) setAllCafeInfo(response.data);
     };
     cafeInfo();
-  }, [region, sortingOption]);
+  }, [getRegion, getOption]);
 
   // 무한 스크롤 이벤트 처리
   const handleScroll = () => {
@@ -177,13 +180,16 @@ const CafeMain = () => {
   // 필터 값으로 결과 조회
   const confirm = () => {
     setRegion(selectRegion);
+    localStorage.setItem("region", selectRegion);
     setSortingOption(selectOption);
+    localStorage.setItem("option", selectOption);
     console.log("필터 선택 값 : " + selectOption);
     setModalOpen(false);
   }
 
   const selectCafe = (cafeNum) => {
     setCafeNum(cafeNum);
+    localStorage.setItem("cafeNum", cafeNum);
     navigate('/cafe/detail');
   }
 

@@ -90,8 +90,7 @@ const HostProfile = styled.div`
 `;
 
 const GuildDetail = () => {
-  const context = useContext(UserContext);
-  const { guildNum } = context;
+  const guildNum = localStorage.getItem("guildNum");
 
   const [detailInfo, setDetailInfo] = useState("");
 

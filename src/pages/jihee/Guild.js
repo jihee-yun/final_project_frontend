@@ -87,15 +87,17 @@ const Guild = () => {
   const [guildInfo, setGuildInfo ] = useState([]);
   const [category, setCategory] = useState("All");
 
+  const selectCategory = localStorage.getItem("guildCategory");
+
   const [isModalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     const guildInfo = async() => {
-      const response = await AxiosApi.guildInfoGet(category);
+      const response = await AxiosApi.guildInfoGet(selectCategory);
       if(response.status === 200) setAllGuildInfo(response.data);
     }
     guildInfo();
-  },[category]);
+  },[selectCategory]);
 
   // 무한 스크롤 이벤트 처리
   const handleScroll = () => {
@@ -127,6 +129,7 @@ const Guild = () => {
 
   const categoryChange = (e) => {
     setCategory(e);
+    localStorage.setItem("guildCategory", e);
   }
 
   const complete = () => {
