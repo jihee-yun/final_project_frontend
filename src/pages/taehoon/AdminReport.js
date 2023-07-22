@@ -4,8 +4,7 @@ import { useState, useEffect } from "react";
 import logo from "../../images/logo.png";
 import { useNavigate } from "react-router-dom";
 import AxiosApi from "./Api/AxiosApi";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css"
+import ConfirmModal from "./ConfirmModal";
 import report from "../taehoon/images/report.png";
 
 
@@ -217,6 +216,18 @@ const ContentBox = styled.div`
   border-radius: 8px;
 `;
 
+// 삭제 버튼 스타일링
+const DeleteButton = styled.button`
+  background-color: #dc3545;
+  color: white;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+`;
+
 const AdminReport = () => {
     const navigate = useNavigate("");
 
@@ -236,16 +247,57 @@ const AdminReport = () => {
     // 모달 팝업을 보여주기 위한 상태
     const [showModal, setShowModal] = useState(false);
 
-    useEffect(() => {
-        // 신고 데이터 받기
-        const getReportInfo = async () => {
-          const rsp = await AxiosApi.reportGetAll();
-          if (rsp.status === 200) setReportInfo(rsp.data);
-        };
-      
-        // getReportInfo 함수 호출
-        getReportInfo();
-      }, []);
+    // 삭제 확인 모달을 띄우기 위한 상태
+    const [showConfirmModal, setShowConfirmModal] = useState(false);
+
+    // 삭제할 신고 내역 정보를 저장할 상태
+    const [reportToDelete, setReportToDelete] = useState(null);
+
+    const getReportInfo = async() => {
+      try {
+        const rsp = await AxiosApi.reportGetAll();
+        if(rsp.status === 200) setReportInfo(rsp.data);
+      }catch(error) {
+        console.error('Error fetching reviews : ', error);
+      }
+    }
+
+    // 삭제 확인 모달에서 '확인' 버튼을 클릭할 때 실행될 함수
+    const handleConfirmDelete = () => {
+      if(reportToDelete) {
+        // 신고 내역 삭제 처리
+        deleteReports(reportToDelete.reportNum);
+
+        // 모달 닫기 및 신고 내역 초기화
+        setShowConfirmModal(false);
+        setReportToDelete(null);
+      }
+    }
+
+    // 신고 삭제 버튼을 클릭할 때 실행될 함수
+    const deleteReportClick = async(reportNum) => {
+      const report = getCurrentItems().find((reportInfo) => reportInfo.reportNum === reportNum);
+      setReportToDelete(report);
+      setShowConfirmModal(true);
+    }
+
+    // 신고 삭제 함수
+    const deleteReports = async(reportNum) => {
+      try {
+        const rsp = await AxiosApi.deleteReports(reportNum);
+        if(rsp.status === 200) {
+          // 신고정보가 성공적으로 삭제되었다면, 다시 신고 정보를 가져온다.
+          getReportInfo();
+          setShowModal(false);
+        } 
+      }catch(error) {
+        console.error('신고 삭제 오류 : ', error);
+      }
+    };
+
+    useEffect(()=> {
+      getReportInfo();
+    },[]);
 
     // 클릭 이벤트를 처리할 함수
     const handleRowClick = (reportNum) => {
@@ -336,6 +388,15 @@ const AdminReport = () => {
                 <ContentBox>
                     <p>{selectedReport.content}</p>
                 </ContentBox>
+                <br/>
+                <DeleteButton onClick={()=>deleteReportClick(selectedReport.reportNum)}>삭제</DeleteButton>
+                {showConfirmModal && (
+                    <ConfirmModal
+                      message="삭제하시겠습니까?"
+                      onClose={()=> setShowConfirmModal(false)}
+                      onConfirm={handleConfirmDelete}
+                      />
+                  )}
                 </ModalContent>
             </div>
         );

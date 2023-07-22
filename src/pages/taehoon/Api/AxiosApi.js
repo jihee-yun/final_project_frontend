@@ -53,6 +53,16 @@ const AxiosApi = {
     deleteUsers : async(memberNum) => {
         return await axios.delete(KH_DOMAIN + `/admin/usermanage/delete/${memberNum}`);
     },
+
+    // 리뷰 삭제
+    deleteReviews : async(reviewNum) => {
+        return await axios.delete(KH_DOMAIN + `/admin/review/delete/${reviewNum}`);
+    },
+
+    // 신고 삭제
+    deleteReports : async(reportNum) => {
+      return await axios.delete(KH_DOMAIN + `/admin/report/delete/${reportNum}`);
+    },
          
         
         // 신고 전체 조회

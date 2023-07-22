@@ -3,9 +3,9 @@ import styled from "styled-components";
 import logo from "../../images/logo.png";
 import { useNavigate } from "react-router-dom";
 import AxiosApi from "./Api/AxiosApi";
-import DatePicker from "react-datepicker";
 import like from "../jihee/images/like.png";
 import star from "../taehoon/images/star.png";
+import ConfirmModal from "./ConfirmModal";
 
 const ManageReviewBlock = styled.div`
     position: relative;
@@ -226,6 +226,17 @@ const ContentBox = styled.div`
   border-radius: 8px;
 `;
 
+// 삭제 버튼 스타일링
+const DeleteButton = styled.button`
+  background-color: #dc3545;
+  color: white;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+`;
 
 
     const ManageReview = () => {
@@ -251,15 +262,60 @@ const ContentBox = styled.div`
     // 모달 팝업을 보여주기 위한 상태
     const [showModal, setShowModal] = useState(false);
 
+    // 삭제할 리뷰 정보를 저장할 상태
+    const [reviewToDelete, setReviewToDelete] = useState(null);
 
-     useEffect(()=> {
-        const getReviewInfo = async() => {
-            const rsp = await AxiosApi.reviewGetAll();
-            if(rsp.status===200) setReviewInfo(rsp.data);
-        };
-        getReviewInfo();
-    },[]);
+    // 삭제 확인 모달을 띄우기 위한 상태
+    const [showConfirmModal, setShowConfirmModal] = useState(false);
 
+    const getReviewInfo = async() => {
+      try {
+        const rsp = await AxiosApi.reviewGetAll();
+        if(rsp.status === 200) setReviewInfo(rsp.data);
+      }catch(error) {
+        console.error('Error fetching reviews : ', error);
+      }
+    }
+
+    // 리뷰 삭제 버튼을 클릭할 때 실행될 함수
+    const deleteReviewClick = (reviewNum) => {
+      const review = getCurrentItems().find((reviewInfo) => reviewInfo.reviewNum === reviewNum);
+      setReviewToDelete(review);
+      setShowConfirmModal(true);
+    } 
+
+    // 리뷰 삭제 함수
+    const deleteReviews = async (reviewNum) => {
+      try {
+        const rsp = await AxiosApi.deleteReviews(reviewNum);
+        if (rsp.status === 200) {
+          // 리뷰가 성공적으로 삭제되었다면, 다시 리뷰 정보를 가져온다.
+          getReviewInfo();
+          setShowModal(false);
+        }
+      } catch (error) {
+        console.error('리뷰 삭제 오류:', error);
+      }
+    };
+
+    // 삭제 확인 모달에서 '확인' 버튼을 클릭할 때 실행될 함수
+    const handleConfirmDelete = () => {
+      if(reviewToDelete) {
+        // 리뷰 삭제 처리
+        deleteReviews(reviewToDelete.reviewNum);
+
+
+        // 모달 닫기 및 리뷰 정보 초기화
+        setShowConfirmModal(false);
+        setReviewToDelete(null);
+      }
+    }
+
+    useEffect(() => {
+      // 페이지가 처음 로딩될 때 리뷰 정보를 가져오기 위해 호출합니다.
+      getReviewInfo();
+    }, []);
+    
     // 클릭 이벤트를 처리할 함수
     const handleRowClick = (reviewNum) => {
         const selectedReviewData = getCurrentItems().find(review => review.reviewNum === reviewNum);
@@ -335,6 +391,14 @@ const ContentBox = styled.div`
             <div className="modal">
                 <ModalContent>
                 <CloseButtonHover onClick={closeModal}>&times;</CloseButtonHover>
+                <DeleteButton onClick={()=>deleteReviewClick(selectedReview.reviewNum)}>삭제</DeleteButton>
+                  {showConfirmModal && (
+                    <ConfirmModal
+                      message="삭제하시겠습니까?"
+                      onClose={()=> setShowConfirmModal(false)}
+                      onConfirm={handleConfirmDelete}
+                      />
+                  )}
                     <h2>리뷰번호 : {selectedReview.reviewNum}</h2>
                     <p>카페번호 : {selectedReview.cafeNum}</p>
                     <p>날짜 : {selectedReview.writtenTime}</p>
@@ -361,7 +425,6 @@ const ContentBox = styled.div`
                         <img src={star} alt="" className="star" style={{width:"60px", height:"50px", marginBottom:"5px"}}/>
                         <span style={{ fontSize: "25px", fontWeight: "bold", color: "#FFCFDA"}}>{selectedReview.score} / 5</span>
                     </div>
-                    
                 </ModalContent>
             </div>
         );
