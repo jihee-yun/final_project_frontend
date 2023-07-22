@@ -218,128 +218,222 @@ const DeleteButton = styled.button`
   color: white;
   font-size: 16px;
   padding: 10px 20px;
+  margin-right: 10px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   margin-top: 10px;
 `;
 
+const EditButton = styled.button`
+  background-color: #2196F3;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+
+  &:hover {
+    background-color: #0d8bf2;
+  }
+`;
+
+// EditForm 스타일 적용
+const EditForm = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+`;
+
+// Label 스타일을 적용합니다.
+const Label = styled.label`
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  margin-bottom: 10px;
+`;
+
+// Input 스타일을 적용합니다.
+const Input = styled.input`
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+`;
+
+// SaveButton 스타일 적용
+const SaveButton = styled.button`
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 16px;
+  width: 250px;
+
+  &:hover {
+    background-color: #45a049;
+  }
+`;
+
+// CancelButton 스타일 적용
+const CancelButton = styled.button`
+  background-color: #f44336;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 16px;
+  width: 250px;
+
+  &:hover {
+    background-color: #d32f2f;
+  }
+`;
+
+
 
 const UserManage = () => {
-    const navigate = useNavigate("");
-    const LogoClick = () => {
-        navigate('/admininfo');
+  const navigate = useNavigate();
+
+  const [userInfo, setUserInfo] = useState([]);
+  const [pageNumber, setPageNumber] = useState(1);
+  const perPage = 10;
+
+   // 첫번째 페이지
+   const firstPage = pageNumber === 1;
+
+   // 마지막 페이지
+   const lastPage = Math.ceil(userInfo.length / perPage);
+
+  const [showModal, setShowModal] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [userToDelete, setUserToDelete] = useState(null);
+  const [userInfoToSave, setUserInfoToSave] = useState(null);
+  const [selectedUserInfo, setSelectedUserInfo] = useState(null);
+
+  const LogoClick = () => {
+    navigate('/admininfo');
+  }
+
+  const handleDeleteUserClick = (memberNum) => {
+    const user = getCurrentItems().find((userInfo) => userInfo.memberNum === memberNum);
+    setUserToDelete(user);
+    setShowConfirmModal(true);
+  };
+
+  const handleConfirmDelete = () => {
+    if (userToDelete) {
+      deleteUsers(userToDelete.memberNum);
+      setUserToDelete(null);
+    }
+    setShowConfirmModal(false);
+  };
+
+  const handleSaveClick = () => {
+    setUserInfoToSave(selectedUserInfo);
+    setShowConfirmModal(true); // 저장 버튼을 누르면 모달창 띄우기
+  };
+
+  // 수정된 정보를 서버에 저장하고, 화면에 반영
+  const handleConfirmSave = async () => {
+    if (selectedUserInfo) {
+      try {
+        await saveUserInfo(selectedUserInfo); // 서버에 데이터 저장
+        setIsEditing(false); // 수정 모드 종료
+        setShowConfirmModal(false);
+      } catch (error) {
+        console.error('Error saving user info:', error);
+        // 저장에 실패한 경우에 대한 처리를 추가할 수 있다.
+        // 이 경우, 상태를 원래대로 초기화하는 작업이 필요하다.
+      setSelectedUserInfo(null);
+      }
+    }
+  };
+
+  const handleCancelSave = () => {
+    setShowConfirmModal(false);
+    setUserInfoToSave(null);
+  };
+
+  const handleRowClick = (memberNum) => {
+    const selectedUserInfoData = getCurrentItems().find(userInfo => userInfo.memberNum === memberNum);
+    setSelectedUserInfo(selectedUserInfoData);
+    setShowModal(true);
+    navigate(`/admin/userManage?memberNum=${memberNum}`);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setSelectedUserInfo(null);
+    navigate(`/admin/userManage`);
+  };
+
+  const handlePageChange = (page) => {
+    setPageNumber(page);
+  };
+
+  const getCurrentItems = () => {
+    const sortedUserInfo = userInfo.sort((a, b) => b.memberNum - a.memberNum);
+    const startIndex = (pageNumber - 1) * perPage;
+    const endIndex = startIndex + perPage;
+    return sortedUserInfo.slice(startIndex, endIndex);
+  };
+
+  const getPageNumbers = () => {
+    const totalPageCount = Math.ceil(userInfo.length / perPage);
+    const currentPage = pageNumber;
+    const pageNumbers = [];
+
+    if (currentPage <= 10) {
+      for (let i = 1; i <= Math.min(10, totalPageCount); i++) {
+        pageNumbers.push(i);
+      }
+      if (totalPageCount > 10) {
+        pageNumbers.push("...");
+        pageNumbers.push(totalPageCount);
+      }
+    } else {
+      pageNumbers.push(1);
+      pageNumbers.push("...");
+      const startPage = Math.floor((currentPage - 1) / 10) * 10 + 1;
+      const endPage = Math.min(startPage + 9, totalPageCount);
+      for (let i = startPage; i <= endPage; i++) {
+        pageNumbers.push(i);
+      }
+      if (endPage < totalPageCount) {
+        pageNumbers.push("...");
+        pageNumbers.push(totalPageCount);
+      }
     }
 
-    const [userInfo, setUserInfo] = useState([]);
-    const [pageNumber, setPageNumber] = useState("");
-    const perPage = 10;
+    return pageNumbers;
+  };
 
-    // 첫번째 페이지
-    const firstPage = pageNumber === 1;
-
-    // 마지막 페이지
-    const lastPage = Math.ceil(userInfo.length / perPage);
-
-    // 모달 팝업을 보여주기 위한 상태
-    const [showModal, setShowModal] = useState(false);
-
-    // 삭제 확인 모달을 띄우기 위한 상태
-    const [showConfirmModal, setShowConfirmModal] = useState(false);
-
-    // 삭제할 사용자의 정보를 저장할 상태
-    const [userToDelete, setUserToDelete] = useState(null);
-
-    // 사용자관리 클릭에 대한 상태를 저장할 state를 생성
-    const [selectedUserInfo, setSelectedUserInfo] = useState(null);
-
-    // 사용자 삭제 버튼을 클릭할 때 실행될 함수
-    const handleDeleteUserClick = (memberNum) => {
-      const user = getCurrentItems().find((userInfo) => userInfo.memberNum === memberNum);
-      setUserToDelete(user);
-      setShowConfirmModal(true);
-    };
-
-    // 삭제 확인 모달에서 '확인' 버튼을 클릭할 때 실행될 함수
-    const handleConfirmDelete = () => {
-      if (userToDelete) {
-        // 사용자 삭제 처리
-        deleteUsers(userToDelete.memberNum);
-
-        // 모달 닫기 및 사용자 정보 초기화
-        setShowConfirmModal(false);
-        setUserToDelete(null);
-      }
-    };
-
-        // 클릭 이벤트를 처리할 함수
-        const handleRowClick = (memberNum) => {
-          const selectedUserInfoData = getCurrentItems().find(userInfo => userInfo.memberNum === memberNum);
-          setSelectedUserInfo(selectedUserInfoData);
-          setShowModal(true); // 모달 팝업 보여주기
-          navigate(`/admin/userManage?memberNum=${memberNum}`);
-      };
-  
-      // 모달 닫기 처리
-      const closeModal = () => {
-          setShowModal(false);
-          setSelectedUserInfo(null); // 선택한 신고내역 초기화
-          navigate(`/admin/userManage`);
-      };
-  
-      // 페이지 변경 시 아이템 표시
-      const handlePageChange = (page) => {
-          setPageNumber(page);
-      };
-  
-      // 현재 페이지에 해당하는 아이템 가져오기
-      const getCurrentItems = () => {
-          // userNum를 기준으로 내림차순으로 userInfo를 정렬합니다.
-          const sortedUserInfo = userInfo.sort(
-            (a, b) => b.memberNum - a.memberNum
-          );
-        
-          const startIndex = (pageNumber - 1) * perPage;
-          const endIndex = startIndex + perPage;
-        
-          return sortedUserInfo.slice(startIndex, endIndex);
-        };
-  
-    // 페이지 10개씩 나누어 표시하기
-    const getPageNumbers = () => {
-      const totalPageCount = Math.ceil(userInfo.length / perPage);
-      const currentPage = pageNumber;
-  
-      const pageNumbers = [];
-  
-      if (currentPage <= 10) { // 현재 페이지가 10 이하인 경우
-        for (let i = 1; i <= Math.min(10, totalPageCount); i++) {
-          pageNumbers.push(i);
-        }
-        if (totalPageCount > 10) {
-          pageNumbers.push("...");
-          pageNumbers.push(totalPageCount);
-        }
-      } else { // 현재 페이지가 11 이상인 경우
-        pageNumbers.push(1);
-        pageNumbers.push("...");
-        const startPage = Math.floor((currentPage - 1) / 10) * 10 + 1;
-        const endPage = Math.min(startPage + 9, totalPageCount);
-        for (let i = startPage; i <= endPage; i++) {
-          pageNumbers.push(i);
-        }
-        if (endPage < totalPageCount) {
-          pageNumbers.push("...");
-          pageNumbers.push(totalPageCount);
-        }
-      }
-  
-      return pageNumbers;
-    };
-  
   const pageNumbers = getPageNumbers();
 
-    // 서버에서 사용자 정보를 가져오는 함수
+  const saveUserInfo = async (userInfoToSave) => {
+    try {
+      console.log('userInfoToSave:', userInfoToSave); // 로그 추가
+      const rsp = await AxiosApi.saveUserInfo(userInfoToSave);
+      if (rsp.status === 200) {
+        // 변경된 사용자 데이터로 userInfo 상태를 업데이트한다.
+        setUserInfo((prevUserInfo) =>
+          prevUserInfo.map((user) =>
+            user.memberNum === userInfoToSave.memberNum ? { ...user, ...userInfoToSave } : user
+          )
+        );
+        setIsEditing(false); // 수정이 성공하면 수정 모드를 종료한다.
+      }
+    } catch (error) {
+      console.error('사용자 정보 저장 오류:', error);
+    }
+  };
+
   const getUserInfo = async () => {
     try {
       const rsp = await AxiosApi.userGetAll();
@@ -349,12 +443,10 @@ const UserManage = () => {
     }
   };
 
-  // 사용자 삭제 함수
   const deleteUsers = async (memberNum) => {
     try {
       const rsp = await AxiosApi.deleteUsers(memberNum);
       if (rsp.status === 200) {
-        // 사용자가 성공적으로 삭제되었다면, 다시 사용자 정보를 가져온다.
         getUserInfo();
         setShowModal(false);
       }
@@ -363,7 +455,6 @@ const UserManage = () => {
     }
   };
 
-  // 페이지가 처음 로딩될 때 사용자 정보를 가져오기 위해 useEffect 사용
   useEffect(() => {
     getUserInfo();
   }, []);
@@ -381,21 +472,74 @@ const UserManage = () => {
                 {selectedUserInfo.authority === 'ROLE_USER' && <img src={user} alt="" className="user" width="150px" height="150px" style={{margin : "0 -20px"}}/>}
                 {selectedUserInfo.authority === 'ROLE_MEMBER' && <img src={businessman} alt="" className="businessman" width="250px" height="150px" style={{margin : "0 -20px"}}/>}
             </Image>
-            <DeleteButton onClick={() => handleDeleteUserClick(selectedUserInfo.memberNum)}>삭제</DeleteButton>
 
-              {showConfirmModal && (
-                  <ConfirmModal
-                    message="삭제하시겠습니까?"
-                    onClose={() => setShowConfirmModal(false)}
-                    onConfirm={handleConfirmDelete}
-                  />
-                )}
-                <h2>번호 : {selectedUserInfo.memberNum}</h2>
-                <p>이름 : {selectedUserInfo.name}</p>
-                <p>생년월일 : {selectedUserInfo.birthday}</p>
-                <p>성별 : {selectedUserInfo.gender}</p>
-                <p>권한 : {selectedUserInfo.authority}</p>
-                <p>보유 포인트 : {selectedUserInfo.totalPoint}</p>
+        {isEditing ? (
+          <EditForm>
+            <Label>
+              이름
+              <Input
+                type="text"
+                value={selectedUserInfo.name}
+                onChange={(e) => setSelectedUserInfo({ ...selectedUserInfo, name: e.target.value })}
+              />
+            </Label>
+            <Label>
+              생년월일
+              <Input
+                type="text"
+                value={selectedUserInfo.birthday}
+                onChange={(e) => setSelectedUserInfo({ ...selectedUserInfo, birthday: e.target.value })}
+              />
+            </Label>
+            <Label>
+              권한
+              <Input
+                type="text"
+                value={selectedUserInfo.authority}
+                onChange={(e) => setSelectedUserInfo({ ...selectedUserInfo, authority: e.target.value })}
+              />
+            </Label>
+            <Label>
+              보유 포인트
+              <Input
+                type="text"
+                value={selectedUserInfo.totalPoint}
+                onChange={(e) => setSelectedUserInfo({ ...selectedUserInfo, totalPoint: e.target.value })}
+              />
+            </Label>
+            <SaveButton onClick={handleSaveClick}>저장</SaveButton>
+            {showConfirmModal && (
+            <ConfirmModal
+              message="저장하시겠습니까?" // 모달 창에 보여줄 메시지
+              onClose={handleCancelSave} // 취소 버튼을 눌렀을 때 실행될 함수
+              onConfirm={handleConfirmSave} // 확인 버튼을 눌렀을 때 실행될 함수
+            />
+          )}
+
+            <CancelButton onClick={() => setIsEditing(false)}>취소</CancelButton>
+          </EditForm>
+        ) : (
+          <>
+            <h2>번호 : {selectedUserInfo.memberNum}</h2>
+            <p>이름 : {selectedUserInfo.name}</p>
+            <p>생년월일 : {selectedUserInfo.birthday}</p>
+            <p>성별 : {selectedUserInfo.gender}</p>
+            <p>권한 : {selectedUserInfo.authority}</p>
+            <p>보유 포인트 : {selectedUserInfo.totalPoint}</p>
+          
+          <DeleteButton onClick={() => handleDeleteUserClick(selectedUserInfo.memberNum)}>삭제</DeleteButton>
+
+            {showConfirmModal && (
+                <ConfirmModal
+                  message="삭제하시겠습니까?"
+                  onClose={() => setShowConfirmModal(false)}
+                  onConfirm={handleConfirmDelete}
+                />
+              )}
+            <EditButton onClick={() => setIsEditing(true)}>수정</EditButton>
+            </>
+        )}
+        
           </ModalContent>
         </div>
       )

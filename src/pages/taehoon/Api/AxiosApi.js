@@ -63,6 +63,17 @@ const AxiosApi = {
     deleteReports : async(reportNum) => {
       return await axios.delete(KH_DOMAIN + `/admin/report/delete/${reportNum}`);
     },
+
+    // 사용자 정보 수정
+    saveUserInfo : async(userInfoToSave) => {
+      const {memberNum} = userInfoToSave;
+      try {
+        return await axios.put(KH_DOMAIN + `/admin/usermanage/modify/${memberNum}`, userInfoToSave);
+      } catch(error) {
+        throw error;
+      }
+      
+    }, 
          
         
         // 신고 전체 조회
