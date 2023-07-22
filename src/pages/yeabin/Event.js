@@ -234,7 +234,9 @@ const Event = () => {
   }, []);
 
   const quizOpen = () => {
-    if (isQuizDone) {
+    if (!isLogin) {
+      navigate('/memberlogin')
+    } else if (isQuizDone) {
       alert('퀴즈는 하루에 한번만 가능해요. 내일 다시 도전해주세요!');
     } else {
       navigate('/quizMain');
@@ -259,10 +261,10 @@ const Event = () => {
     navigate('/couponStore');
   };
 
-  if (!isLogin) {
-    navigate('/memberlogin');
-    return null;
-  }
+  // if (!isLogin) {
+  //   navigate('/memberlogin');
+  //   return null;
+  // }
 
   return(
     <>

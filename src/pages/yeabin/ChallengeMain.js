@@ -147,16 +147,16 @@ const ChallengeMain = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const location = useLocation();
   const info = location.state && location.state.editedInfo;
-  const {challengeId, userId} = location.state; // 아직 수정 전
+  const {challengeId, userNum} = location.state; // 아직 수정 전
 
   console.log(info);
 
-  const applyChallenge = async() => {
-    const response = await AxiosApi.challengeApply(challengeId, userId);
-    if(response.status === 200 && response.data === true) {
-      setModalOpen(true); 
-    } // 수정 전
-  };
+  // const applyChallenge = async() => {
+  //   const response = await AxiosApi.challengeApply(challengeId, userNum);
+  //   if(response.status === 200 && response.data === true) {
+  //     setModalOpen(true); 
+  //   } // 수정 전
+  // };
 
   const closeModal = () => {
     setModalOpen(false);
@@ -198,7 +198,7 @@ const ChallengeMain = () => {
           </Confirm>
           <Btn>
             <div>
-              <button onClick={applyChallenge}>오늘부터 시작하기</button>
+              <button >오늘부터 시작하기</button>
               <ChallnegeModal type={true} open={modalOpen} close={closeModal}>퀘스트 신청이 완료되었습니다.</ChallnegeModal>
             </div>
           </Btn>

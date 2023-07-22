@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import start from "./images/start.png"
 import pin from "./images/pin.png"
@@ -6,6 +6,8 @@ import roulettePan from "./images/roulettePan.png";
 import celebration1 from "./images/celebration1.png";
 import celebration2 from "./images/celebration2.png";
 import AxiosApi from "./Api/AxiosApi";
+import { UserContext } from "../../context/UserStore";
+import { useNavigate } from "react-router-dom";
 
 
 const Container = styled.h3`
@@ -109,10 +111,14 @@ const WinBox = styled.div`
 
 
 const Roulette = () => {
+  const navigate = useNavigate();
+  const context = useContext(UserContext);
+  const { isLogin } = context;
   const [isSpinning, setIsSpinning] = useState(false);
   const [winning, setWinning] = useState(0);
   const [canSpin, setCanSpin] = useState(true);
   let amount = 0;
+
 
   useEffect(() => {
     // 이전에 저장된 룰렛 돌린 시간을 확인하고 조건에 따라 룰렛 돌릴 수 있도록 설정
@@ -132,7 +138,9 @@ const Roulette = () => {
   }, []);
 
   const handleStartClick = () => {
-    if (!canSpin) {
+    if (!isLogin) {
+      navigate('/memberlogin')
+    } else if (!canSpin) {
       alert('룰렛은 하루에 한번만 돌릴 수 있어요. 내일 다시 도전해주세요!');
       return;
     }
