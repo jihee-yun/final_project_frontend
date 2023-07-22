@@ -81,7 +81,10 @@ const Guild = () => {
   const navigate = useNavigate();
   const context = useContext(UserContext);
   const { userNum } = context;
-  const [guildInfo, setGuildInfo ] = useState("");
+
+  const [allGuildInfo, setAllGuildInfo] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [guildInfo, setGuildInfo ] = useState([]);
   const [category, setCategory] = useState("All");
 
   const [isModalOpen, setModalOpen] = useState(false);
@@ -89,10 +92,32 @@ const Guild = () => {
   useEffect(() => {
     const guildInfo = async() => {
       const response = await AxiosApi.guildInfoGet(category);
-      if(response.status === 200) setGuildInfo(response.data);
+      if(response.status === 200) setAllGuildInfo(response.data);
     }
     guildInfo();
   },[category]);
+
+  // 무한 스크롤 이벤트 처리
+  const handleScroll = () => {
+    const isAtBottom =
+      window.innerHeight + window.scrollY >= document.body.offsetHeight;
+    if (isAtBottom) {
+      setCurrentPage((prevPage) => prevPage + 1);
+    }
+  };
+
+  useEffect(() => {
+    const startIndex = (currentPage - 1) * 8;
+    const endIndex = startIndex + 8;
+    setGuildInfo(allGuildInfo.slice(0, endIndex));
+  }, [currentPage, allGuildInfo]);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const moveToNewGuild = () => {
     if(userNum === 0) {

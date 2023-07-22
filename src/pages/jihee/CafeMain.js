@@ -30,12 +30,6 @@ const Container = styled.div`
     font-weight: 600;
     color: black;
     cursor: pointer;
-
-    /* &:hover{
-      border: none;
-      color: white;
-      background-color: #FFCFDA;
-    } */
   }
 
   img{
@@ -50,17 +44,15 @@ const Box = styled.div`
   }
   position: relative;
   width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid; 
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* 열 크기를 자동으로 조정하되 최소 250px 크기를 유지합니다. */
+  grid-gap: 25px;
   align-items: center;
   padding-top: 50px;
   margin-top: 100px;
-  /* gap: 10px; */
 `;
 
 const CafeBox = styled.div`
-  width: 250px;
   height: 300px;
   margin: 30px 15px;
   position: relative;
@@ -87,6 +79,10 @@ const CafeBox = styled.div`
     padding: 20px;
     bottom: -20px;
     color: white;
+
+    .intro{
+      height: 45px;
+    }
     
     p {
       font-weight: bold;
@@ -120,30 +116,52 @@ const CafeMain = () => {
   const context = useContext(UserContext);
   const { region, setRegion, setCafeNum } = context; // cafeNum 유저스토어에 저장하기
 
-    // 카페 정보 받아오기
-    const [cafeInfo, setCafeInfo] = useState("");
-    // 인기순, 별점순 정렬
-    const [sortingOption, setSortingOption] = useState("");
-    // 필터 값 저장
-    const [selectRegion, setSelectRegion] = useState("");
-    const [selectOption, setSelectOption] = useState("");
+  // 전체 카페 정보
+  const [allCafeInfo, setAllCafeInfo] = useState([]);
+  // 무한 스크롤을 위한 현재 페이지 번호
+  const [currentPage, setCurrentPage] = useState(1);
+  // 무한 스크롤을 위한 
+  const [cafeInfo, setCafeInfo] = useState([]);
+  // 인기순, 별점순 정렬
+  const [sortingOption, setSortingOption] = useState("");
+  // 필터 값 저장
+  const [selectRegion, setSelectRegion] = useState("");
+  const [selectOption, setSelectOption] = useState("");
 
-    useEffect(() => {
-      const cafeInfo = async() => {
-        let response;
-        if(sortingOption === "인기순") {
-          response = await AxiosApi.cafeInfoGet(region, "인기순");
-        } else if(sortingOption === "별점순") {
-          response = await AxiosApi.cafeInfoGet(region, "별점순");
-        } else response = await AxiosApi.cafeInfoGet(region);
-        if(response.status === 200) setCafeInfo(response.data);
-      };
-      cafeInfo();
-    }, [region, sortingOption]);
+  useEffect(() => {
+    const cafeInfo = async() => {
+      let response;
+      if(sortingOption === "인기순") {
+        response = await AxiosApi.cafeInfoGet(region, "인기순");
+      } else if(sortingOption === "별점순") {
+        response = await AxiosApi.cafeInfoGet(region, "별점순");
+      } else response = await AxiosApi.cafeInfoGet(region);
+      if(response.status === 200) setAllCafeInfo(response.data);
+    };
+    cafeInfo();
+  }, [region, sortingOption]);
 
-  console.log(cafeInfo);
-  console.log(region);
-  console.log(sortingOption);
+  // 무한 스크롤 이벤트 처리
+  const handleScroll = () => {
+    const isAtBottom =
+      window.innerHeight + window.scrollY >= document.body.offsetHeight;
+    if (isAtBottom) {
+      setCurrentPage((prevPage) => prevPage + 1);
+    }
+  };
+
+  useEffect(() => {
+    const startIndex = (currentPage - 1) * 8;
+    const endIndex = startIndex + 8;
+    setCafeInfo(allCafeInfo.slice(0, endIndex));
+  }, [currentPage, allCafeInfo]);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   // 모달창
   const [modalOpen, setModalOpen] = useState(false);
@@ -182,7 +200,7 @@ const CafeMain = () => {
       <div className="content">
         <p>{cafe.region}</p>
         <p>{cafe.cafeName}</p>
-        <p>{cafe.intro}</p> 
+        <p className="intro">{cafe.intro}</p> 
       </div>
     </CafeBox>
     ))}
