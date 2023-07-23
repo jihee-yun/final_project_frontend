@@ -28,10 +28,10 @@ const AxiosApi = {
   },
 
   // 챌린지 신청
-  challengeApply: async(challengeId, userId) => {
+  challengeApply: async(challengeId, memberId) => {
     const data = {
       challengeId: challengeId,
-      userId: userId
+      memberId: memberId
     };
     return await axios.post(KH_DOMAIN + "/mychallenge/apply", data)
   },
@@ -40,5 +40,14 @@ const AxiosApi = {
   mychallengeGet: async(userNum, challengeId) => {
     return await axios.get(KH_DOMAIN + `/mychallenge/get?userNum=${userNum}&challengeId=${challengeId}`);
   },
+
+  // 쿠폰 결제
+  couponPayment: async(memberNum, couponId) => {
+    const data = {
+      memberNum: memberNum,
+      couponId: couponId
+    };
+    return await axios.post(KH_DOMAIN + "/couponstore/couponpay", data)
+  }
 };
 export default AxiosApi;
