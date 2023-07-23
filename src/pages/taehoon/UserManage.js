@@ -363,6 +363,10 @@ const UserManage = () => {
   const handleRowClick = (memberNum) => {
     const selectedUserInfoData = getCurrentItems().find(userInfo => userInfo.memberNum === memberNum);
     setSelectedUserInfo(selectedUserInfoData);
+    
+    // 모달이 열릴 때마다 수정 모드를 종료합니다.
+    setIsEditing(false);
+
     setShowModal(true);
     navigate(`/admin/userManage?memberNum=${memberNum}`);
   };

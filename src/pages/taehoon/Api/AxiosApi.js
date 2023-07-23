@@ -34,20 +34,23 @@ const AxiosApi = {
       },
 
       // 비밀번호 찾기
-      findPw: async(email) => {
+      findPw: async(findPwdId, findPwdEmail) => {
         const data = {
-            email: email
+            findPwdId : findPwdId,
+            findPwdEmail : findPwdEmail
         };
         return await axios.post(KH_DOMAIN + "/findpw", data);
     },
 
     // 아이디 찾기
-    findId : async(email) => {
+    findId : async(findIdName, findIdEmail) => {
       const data = {
-        email : email
+        findIdName : findIdName,
+        findIdEmail : findIdEmail
       };
       return await axios.post(KH_DOMAIN + "/findId", data);
     },
+
 
     // 사용자 삭제
     deleteUsers : async(memberNum) => {
@@ -72,7 +75,6 @@ const AxiosApi = {
       } catch(error) {
         throw error;
       }
-      
     }, 
          
         
