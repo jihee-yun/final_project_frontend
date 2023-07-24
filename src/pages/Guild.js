@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import Header from "./now/component/Header";
-import Footer from "./now/component/Footer";
+import Header from "../component/Header";
+import Footer from "../component/Footer";
 import AxiosApi from "../api/AxiosApi";
 import GuildSection from "../component/GuildSection";
 import GuildFilterCategory from "../component/GuildFilterCategory";

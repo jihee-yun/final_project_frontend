@@ -4,10 +4,10 @@ import styled from "styled-components";
 import { UserContext } from "../context/UserStore";
 import filterimg from "../images/filter.png";
 import AxiosApi from "../api/AxiosApi";
-import Header from "./now/component/Header";
+import Header from "../component/Header";
 import Modal from "../utils/Modal2";
 import CafeFilterModal from "../component/CafeFilterModal";
-import Footer from "./now/component/Footer";
+import Footer from "../component/Footer";
 
 const Container = styled.div`
   width: 80%;

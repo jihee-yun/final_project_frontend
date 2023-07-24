@@ -8,7 +8,7 @@ import { ref, getDownloadURL } from "firebase/storage";
 import SideMenu from "./components/SideMenu";
 import Header from "../now/component/Header";
 import Footer from "../now/component/Footer";
-import ChatBot from "./components/ChatBot";
+import ChatBot from "../../component/ChatBot";
 
 
 

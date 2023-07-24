@@ -306,6 +306,182 @@ const AxiosApi = {
       couponId: couponId
     };
     return await axios.post(KH_DOMAIN + "/couponstore/couponpay", data)
+  },
+
+  // 랭킹정보 불러오기
+    MainInfoGet: async(rankingcard) => {
+        return await axios.get(KH_DOMAIN + `/main/rankingcard`)
+    },
+
+    // 자주묻는 질문 불러오기
+    QnaGet: async(category) => {
+      return await axios.get(KH_DOMAIN + `/auth/qnalist/get-qna?category=${category}`)
+  },
+
+   // 리뷰 전체 다 불러오기(테스트용)
+   reviewGet: async (userNum, grantType, accessToken) => {
+    return await axios.get(`http://localhost:8111/review/getbynum?usernum=${userNum}`, {
+      headers: {
+        Authorization: `${grantType} ${accessToken}`
+      }
+    });
+  },
+
+  // 회원 번호로 날짜 내의 리뷰 조회
+  reviewGetByDate : async (userNum, startDate, endDate, grantType, accessToken) => {
+    const checkData = {
+      userNum : userNum,
+      startDate : startDate,
+      endDate : endDate
+    }
+    return await axios.post(`${KH_DOMAIN}/review/getbynumdate`, checkData, {
+      headers: {
+        Authorization: `${grantType} ${accessToken}`
+      }
+    });
+  },
+
+  // 유저 번호로 챌린지 관련 정보 전체 조회
+  getMemberChallengeInfo: async (userNum, grantType, accessToken) => {
+    return await axios.get(`${KH_DOMAIN}/event/getbynum?usernum=${userNum}`, {
+      headers: {
+        Authorization: `${grantType} ${accessToken}`
+      }
+    });
+  },
+
+  // 회원 번호로 날짜 내의 이벤트 내역 조회
+  getEventByDate : async (userNum, startDate, endDate, grantType, accessToken) => {
+    const checkData = {
+      userNum : userNum,
+      startDate : startDate,
+      endDate : endDate
+    }
+    return await axios.post(`${KH_DOMAIN}/event/getbynumdate`, checkData, {
+      headers: {
+        Authorization: `${grantType} ${accessToken}`
+      }
+    });
+  },
+  // 포인트 충전
+  chargePoint: async (userNum, point, grantType, accessToken) => {
+    const pointData = {
+      userNum : userNum,
+      point : point
+    }
+    return await axios.post(`${KH_DOMAIN}/point/chargepoint`, pointData, {
+      headers: {
+        Authorization: `${grantType} ${accessToken}`
+      }
+    });
+
+  },
+
+   // 일반 회원 가입
+   userSignup : async (userId, password, name, phone, email, birthday, gender, authority) => {
+    const signupData = {
+      userId : userId,
+      password : password,
+      name : name,
+      phone : phone,
+      email : email,
+      birthday : birthday,
+      gender : gender,
+      authority : authority
+    }
+    return await axios.post(`${KH_DOMAIN}/user/signup`, signupData);
+  },
+
+  // 사업자 회원 가입
+  memberSignup : async (memberId, password, name, phone, email, birthday, gender, authority) => {
+    const signupData = {
+      memberId : memberId,
+      password : password,
+      name : name,
+      phone : phone,
+      email : email,
+      birthday : birthday,
+      gender : gender,
+      authority : authority
+    }
+    return await axios.post(`${KH_DOMAIN}/member/signup`, signupData);
+  },
+
+  // 일반 회원 로그인
+  userLogin : async (userId, password) => {
+    const loginData = {
+      userId : userId,
+      password : password
+    }
+    return await axios.post(`${KH_DOMAIN}/user/login`, loginData);
+  },
+  // 사업자 회원 로그인
+  memberLogin : async (memberId, password) => {
+    const loginData = {
+      memberId : memberId,
+      password : password
+    }
+    return await axios.post(`${KH_DOMAIN}/member/login`, loginData);
+  },
+
+  // 마이페이지 정보수정을 위한 회원 정보 조회
+  getMemberInfo: async (memberNum, grantType, accessToken) => {
+    return await axios.get(`${KH_DOMAIN}/info/memberinfo?membernum=${memberNum}`, {
+      headers: {
+        Authorization: `${grantType} ${accessToken}`
+      }
+    });
+  },
+
+  // 비밀번호 업데이트
+  passwordUpdate: async (memberNum, password, newPassword, grantType, accessToken) => {
+    const passwordData = {
+      memberNum : memberNum,
+      password : password,
+      newPassword : newPassword
+    }
+    return await axios.post(`${KH_DOMAIN}/info/passwordchange`, passwordData, {
+      headers: {
+        Authorization: `${grantType} ${accessToken}`
+      }
+    });
+  },
+
+  // 한줄소개 업데이트
+  introUpdate: async (memberNum, intro, grantType, accessToken) => {
+    const introData = {
+      memberNum : memberNum,
+      intro : intro
+    }
+    return await axios.post(`${KH_DOMAIN}/info/introchange`, introData, {
+      headers: {
+        Authorization: `${grantType} ${accessToken}`
+      }
+    });
+  },
+  // 전화 번호 업데이트
+  phoneUpdate: async(memberNum, phone, grantType, accessToken) => {
+    const phoneData = {
+      memberNum : memberNum,
+      phone : phone
+    }
+    return await axios.post(`${KH_DOMAIN}/info/phonechange`, phoneData, {
+      headers: {
+        Authorization: `${grantType} ${accessToken}`
+      }
+    });
+  },
+  // 이메일 업데이트
+  emailUpdate: async(memberNum, email, grantType, accessToken) => {
+    const emailData = {
+      memberNum : memberNum,
+      email : email
+    }
+    return await axios.post(`${KH_DOMAIN}/info/emailchange`, emailData, {
+      headers: {
+        Authorization: `${grantType} ${accessToken}`
+      }
+    });
   }
 };
 

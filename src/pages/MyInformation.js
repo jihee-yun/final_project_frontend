@@ -6,7 +6,7 @@ import { UserContext } from "../../../context/UserStore";
 import Header from "../../now/component/Header";
 import Footer from "../../now/component/Footer";
 import SideMenu from "./SideMenu";
-import ChatBot from "./ChatBot";
+import ChatBot from "../../../component/ChatBot";
 import { Password } from "@mui/icons-material";
 
 const OutBox = styled.div`

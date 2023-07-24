@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from "react";
-import { UserContext } from "../../../context/UserStore";
+import { UserContext } from "../context/UserStore";
 import styled from "styled-components";
 import Logo from "../images/logo.png";
 import { Link, useNavigate } from "react-router-dom";

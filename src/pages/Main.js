@@ -1,13 +1,13 @@
 import {useContext, useState , useEffect} from "react";
-import Header from "./component/Header";
-import Footer from "./component/Footer";
-import Map from "./component/Map";
-import Ranking from "./component/Ranking";
-import Recommend from "./component/Recommend"
+import Header from "../component/Header";
+import Footer from "../component/Footer";
+import Map from "../component/Map";
+import Ranking from "../component/Ranking";
+import Recommend from "../component/Recommend"
 import { styled } from "styled-components";
-import Sidebar from "./component/Sidebar";
-import { UserContext } from "../../context/UserStore";
-import PopUp from "../../utils/PopUp";
+import Sidebar from "../component/Sidebar";
+import { UserContext } from "../context/UserStore";
+import PopUp from "../utils/PopUp";
 
 const Container = styled.div`
 width: 100%;

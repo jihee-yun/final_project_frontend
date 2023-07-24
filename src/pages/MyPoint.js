@@ -8,7 +8,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import Header from "../../now/component/Header";
 import Footer from "../../now/component/Footer";
 import SideMenu from "./SideMenu";
-import ChatBot from "./ChatBot";
+import ChatBot from "../../../component/ChatBot";
 
 const OutBox = styled.div`
   display: flex;

@@ -4,7 +4,7 @@ import PublicIcon from '@mui/icons-material/Public';
 import { Link } from "react-router-dom";
 
 const FooterContainer = styled.footer`
-width: 100%;
+  width: 100%;
   background-color: #eee;
   color: #616161;
   margin-top: 80px;

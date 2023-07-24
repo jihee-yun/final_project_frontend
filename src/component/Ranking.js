@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { styled } from "styled-components";
 import cafe from "../images/cafe.jpg";
-import MainAxiosApi from "../api/AxiosApi";
+import AxiosApi from "../api/AxiosApi";
 
 
 const Container = styled.div`
@@ -86,7 +86,7 @@ const Ranking = () => {
     useEffect(() => {
         const cafeInfo = async () => {
           try {
-            const rsp = await MainAxiosApi.MainInfoGet();
+            const rsp = await AxiosApi.MainInfoGet();
             if (rsp.status) {
               setCafeRankingInfo(rsp.data.slice(0, 6));
               console.log("카페 정보 가져오기 성공: ", rsp.data)
@@ -132,6 +132,6 @@ const Ranking = () => {
         </>
 
     );
-}
+};
 
 export default Ranking;
