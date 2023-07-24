@@ -41,31 +41,49 @@ const TextBox = styled.p`
 `;
 const InputLabel = styled.label`
   margin-bottom: 5px;
+  width: 70px;
 `;
 const Input = styled.input`
   margin-left: 10px;
   margin-bottom: 10px;
+  width: 300px;
+  height: 30px;
+  border: none;
+  border-bottom: 1.5px solid darkgray;
 `;
+
+const InputGroup = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 10px;
+`;
+
 const RadioSelect = styled.div`
-  display: felx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   margin-top: 5px;
 `;
 const RadioLabel = styled.label`
   margin-right: 10px;
+  width: 100px;
 `;
 const RadioButton = styled.input`
   margin-right: 5px;
 `;
 const SignupButton = styled.button`
-  margin-top: 10px;
+  border: none;
+  width: 300px;
+  height: 30px;
+  border-radius: 20px;
+  background-color: lightgray;
+  margin-top: 30px;
   margin-bottom: 10px;
-  color: brown;
-  background: #f1d1d1;
-  border: 1px solid #7d5a5a;
-  border-radius: 5px;
+  color: white;
   cursor: pointer;
   &:active {
-    background-color: #F3E1E1;
+    background-color: #FFCFDA;
     color: white;
     border-color: #F1D1D1;
   }
@@ -136,36 +154,36 @@ const MemberSignUpPage = () => {
 
 
 
-  return(
+  return (
     <Container>
-      <Logo src={imageUrls[0]} alt="반전 로고 이미지" onClick={()=>navigate("/")}></Logo>
-      <GoToSignUp onClick={()=>navigate("/memberlogin")}>로그인 테스트로 이동</GoToSignUp>
+      <Logo src={imageUrls[0]} alt="반전 로고 이미지" onClick={() => navigate("/")} />
+      <GoToSignUp onClick={() => navigate("/memberlogin")}>로그인 테스트로 이동</GoToSignUp>
       <SignupBox>
-        <TextBox>회원가입 테스트</TextBox>
-        <div>
+        <TextBox><h2>SWEET KINGDOM 회원가입</h2></TextBox>
+        <InputGroup>
           <InputLabel htmlFor="memberId">아이디</InputLabel>
           <Input id="memberId" type="text" />
-        </div>
-        <div>
+        </InputGroup>
+        <InputGroup>
           <InputLabel htmlFor="password">비밀번호</InputLabel>
-          <Input id="password" type="password" />    
-        </div>
-        <div>
+          <Input id="password" type="password" />
+        </InputGroup>
+        <InputGroup>
           <InputLabel htmlFor="name">이름</InputLabel>
-          <Input id="name" type="text"></Input>
-        </div>
-        <div>
+          <Input id="name" type="text" />
+        </InputGroup>
+        <InputGroup>
           <InputLabel htmlFor="phone">핸드폰</InputLabel>
-          <Input id="phone" type="text"></Input>
-        </div>
-        <div>
+          <Input id="phone" type="text" />
+        </InputGroup>
+        <InputGroup>
           <InputLabel htmlFor="email">이메일</InputLabel>
-          <Input id="email" type="text"></Input>
-        </div>
-        <div>
+          <Input id="email" type="text" />
+        </InputGroup>
+        <InputGroup>
           <InputLabel htmlFor="birth">생년월일</InputLabel>
-          <Input id="birth" type="text" placeholder="ex)2000-01-01"></Input>
-        </div>
+          <Input id="birth" type="text" placeholder="ex)2000-01-01" />
+        </InputGroup>
         <RadioSelect>
           성별
           <RadioLabel>
@@ -218,4 +236,5 @@ const MemberSignUpPage = () => {
     </Container>
   );
 };
+
 export default MemberSignUpPage;

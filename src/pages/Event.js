@@ -142,24 +142,22 @@ const Thumb = styled.div`
 const Event = () => {
   const navigate = useNavigate();
   const [challengeInfo, setChallengeInfo] = useState("");
-  const [isQuizDone, setIsQuizDone] = useState(false);
+  const [quizClick, setQuizClick] = useState(0);
   const context = useContext(UserContext);
   const { isLogin } = context;
+  const isClicked = localStorage.getItem("isClicked");
 
-  useEffect(() => {
-    const quizDone = localStorage.getItem('quizDone');
-    setIsQuizDone(quizDone === 'true');
-  }, []);
+  console.log(isClicked);
 
   const quizOpen = () => {
-    navigate('/quizMain');
-    // if (!isLogin) {
-    //   navigate('/memberlogin')
-    // } else if (isQuizDone) {
-    //   alert('퀴즈는 하루에 한번만 가능해요. 내일 다시 도전해주세요!');
-    // } else {
-    //   navigate('/quizMain');
-    // }
+    if (!isLogin) {
+      navigate('/memberlogin')
+    } else if (isLogin && isClicked !== 0) {
+      alert('퀴즈는 하루에 한번만 가능해요. 내일 다시 도전해주세요!');
+      
+    } else {
+      navigate('/quizMain');
+    }
   };
 
   useEffect(() => {

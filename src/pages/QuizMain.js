@@ -50,6 +50,9 @@ const QuizMain = () => {
   const [isAnswered, setIsAnswered] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
   const {userNum} = useContext(UserContext);
+  const [quizClick, setQuizClick] = useState(0);
+
+  localStorage.setItem("isClicked", quizClick);
 
   const question = '세계 최초로 카페를 연 나라는 어디일까요?';
   const options = ['이탈리아', '콜롬비아', '터키', '프랑스'];
@@ -61,10 +64,10 @@ const QuizMain = () => {
       setSelectedOption(option);
       setIsAnswered(true);
       setIsCorrect(option === answer);
+      setQuizClick(1);
 
       if (option === answer) {
         AxiosApi.pointGet(userNum, amount, "quiz");
-        localStorage.setItem('quizDone', 'true');
       }
     }
   };

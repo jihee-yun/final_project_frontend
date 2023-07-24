@@ -82,10 +82,22 @@ const CouponPayment = () => {
     return null;
   };
 
-  const handlePayClick = () => {
-    // 결제 성공 시에만 넘어가게 수정 필요
-    navigate('/payComplete');
+  const coupon = info[0];
+  const couponPrice = coupon.price;
+  const couponId = coupon.id;
+
+  const handlePayClick = async () => {
+    const response = await AxiosApi.couponPayment(userNum, coupon.id);
+    console.log(response.data);
+    if(response.data === true) {
+      navigate('/payComplete'); // 결제 성공 시 payComplete 페이지로 이동
+    } else {
+      alert('쿠폰 결제에 실패했습니다.'); // 실패 시 알림 창 띄우기
+    }
   };
+
+  console.log(userNum);
+  console.log(couponId);
 
   return(
     <>

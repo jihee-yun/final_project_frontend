@@ -268,7 +268,7 @@ const AxiosApi = {
     },
     // 챌린지 조회
   challengeGet: async(chList) => {
-    return await axios.get(KH_DOMAIN + `/event/chList?chList=${chList}`);
+    return await axios.get(KH_DOMAIN + `/challenge/chList?chList=${chList}`);
   },
 
   // 쿠폰 조회
