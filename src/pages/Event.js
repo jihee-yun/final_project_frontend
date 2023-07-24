@@ -9,6 +9,7 @@ import ad from "../images/event-ad.png";
 import ad2 from "../images/ad-media.png";
 import Header from "./now/component/Header";
 import { UserContext } from "../context/UserStore";
+import MenuBox from "../utils/MenuBox";
 
 const Box = styled.div`
   @media (max-width: 768px) {
@@ -64,48 +65,6 @@ const EventFooter = styled.div`
  }
 `;
 
-const QuizBox = styled.div`
-  width: 260px;
-  height: 330px;
-  border-radius: 20px;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-  margin: 50px;
-
-  img {
-    width: 30%;
-    margin: 40px 0 10px 20px;
-  }
-  
-  h3 {
-    margin-left: 20px;
-    line-height: 10%;
-  }
-
-  p {
-    margin-left: 20px;
-    color: gray;
-    font-size: 1rem;
-  }
-
-  .quizButton{
-    width: 50%;
-    height: 50px;
-    margin: 0 auto;
-  }
-  button {
-    margin-top: 45px;
-    width: 100%;
-    height: 35px;
-    border: none;
-    border-radius: 20px;
-    color: white;
-    background-color: #7D5A5A;
-    font-size: 1.1rem;
-    font-weight: bolder;
-    cursor: pointer;
-  }
-`;
-
 const AdBox = styled.div`
   .adImg {
     width: 260px;
@@ -134,48 +93,6 @@ const MediaBox = styled.div`
     }
   }
 
-`;
-
-const LuckyBox = styled.div`
-  width: 260px;
-  height: 330px;
-  border-radius: 20px;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-  margin: 50px;
-
-  img {
-    width: 30%;
-    margin: 40px 0 10px 20px;
-  }
-  
-  h3 {
-    margin-left: 20px;
-    line-height: 10%;
-  }
-
-  p {
-    margin-left: 20px;
-    color: gray;
-    font-size: 1rem;
-  }
-
-  .shoppingButton{
-    width: 50%;
-    height: 50px;
-    margin: 0 auto;
-  }
-  button {
-    margin-top: 45px;
-    width: 100%;
-    height: 35px;
-    border: none;
-    border-radius: 20px;
-    color: white;
-    background-color: #7D5A5A;
-    font-size: 1.1rem;
-    font-weight: bolder;
-    cursor: pointer;
-  }
 `;
 
 const ChallengeTitle = styled.div`
@@ -293,16 +210,16 @@ const Event = () => {
                 <img className="ad" src={ad2} alt="광고2" />
               </a>
             </MediaBox>
-            <QuizBox>
+            <MenuBox>
               <div>
                 <img src={quiz} alt="퀴즈" />
                 <h3 className="quizTitle">깜짝 퀴즈</h3>
                 <p>퀴즈 풀고 포인트 받기</p>
-                <div className="quizButton">
+                <div className="menuButton">
                   <button onClick={quizOpen}>퀴즈 풀기</button>
                 </div>
               </div>
-            </QuizBox>
+            </MenuBox>
             <AdBox>
               <div>
                 <a href="https://www.coca-cola.co.kr/" target="_blank" rel="noopener noreferrer">
@@ -310,16 +227,16 @@ const Event = () => {
                 </a>
               </div>
             </AdBox>
-            <LuckyBox>
+            <MenuBox>
               <div>
               <img src={shopping} alt="퀴즈" />
                 <h3 className="shoppingTitle">포인트샵</h3>
                 <p>쌓인 포인트로 구매하세요!</p>
-                <div className="shoppingButton">
+                <div className="menuButton">
                 <button onClick={navigatePoint}>바로 가기</button>
                 </div>
               </div>
-          </LuckyBox>
+          </MenuBox>
           </div>
         </EventFooter>
       </Box>
