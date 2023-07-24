@@ -179,7 +179,7 @@ const AxiosApi = {
         findPwdId : findPwdId,
         findPwdEmail : findPwdEmail
     };
-    return await axios.post(KH_DOMAIN + "/findpw", data);
+    return await axios.post(KH_DOMAIN + "/user/findpw", data);
   },
 
     // 아이디 찾기
@@ -188,7 +188,7 @@ const AxiosApi = {
         findIdName : findIdName,
         findIdEmail : findIdEmail
       };
-      return await axios.post(KH_DOMAIN + "/findId", data);
+      return await axios.post(KH_DOMAIN + "/user/findId", data);
     },
 
 
