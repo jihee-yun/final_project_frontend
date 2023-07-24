@@ -182,7 +182,10 @@ const MemberLoginPage = () => {
 
       if(rsp.status){
         const { grantType, accessToken, refreshToken } = rsp.data;
-        console.log("로그인 성공:", rsp.data);
+        console.log("로그인 성공:");
+        console.log(grantType);
+        console.log(accessToken);
+        console.log(refreshToken);
 
         // 토큰 디코딩하여 클레임 값을 추출
         const [headerBase64, payloadBase64] = accessToken.split('.');

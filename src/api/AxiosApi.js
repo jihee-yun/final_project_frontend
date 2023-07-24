@@ -221,8 +221,7 @@ const AxiosApi = {
       } catch(error) {
         throw error;
       }
-    }, 
-     
+    },
     
     // 신고 전체 조회
     reportGetAll: async () => {
@@ -324,8 +323,8 @@ const AxiosApi = {
       return await axios.get(KH_DOMAIN + `/auth/qnalist/get-qna?category=${category}`)
   },
 
-   // 리뷰 전체 다 불러오기(테스트용)
-   reviewGet: async (userNum, grantType, accessToken) => {
+  // 리뷰 전체 다 불러오기(테스트용)
+  reviewGet: async (userNum, grantType, accessToken) => {
     return await axios.get(`http://localhost:8111/review/getbynum?usernum=${userNum}`, {
       headers: {
         Authorization: `${grantType} ${accessToken}`
@@ -383,8 +382,8 @@ const AxiosApi = {
 
   },
 
-   // 일반 회원 가입
-   userSignup : async (userId, password, name, phone, email, birthday, gender, authority) => {
+  // 일반 회원 가입
+  userSignup : async (userId, password, name, phone, email, birthday, gender, authority) => {
     const signupData = {
       userId : userId,
       password : password,
@@ -428,6 +427,15 @@ const AxiosApi = {
       password : password
     }
     return await axios.post(`${KH_DOMAIN}/member/login`, loginData);
+  },
+
+  // 마이페이지 회원 번호로 길드 정보 조회
+  getMemberGuildInfo: async (memberNum, grantType, accessToken) => {
+    return await axios.get(`${KH_DOMAIN}/guild/guildinfo?membernum=${memberNum}`, {
+      headers: {
+        Authorization: `${grantType} ${accessToken}`
+      }
+    });
   },
 
   // 마이페이지 정보수정을 위한 회원 정보 조회

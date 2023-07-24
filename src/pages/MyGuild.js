@@ -3,8 +3,6 @@ import styled from "styled-components";
 import { Navigate, useNavigate } from "react-router-dom";
 import AxiosApi from "../api/AxiosApi";
 import { UserContext } from "../context/UserStore";
-import { storage } from "../utils/Firebase";
-import { ref, getDownloadURL } from "firebase/storage";
 import Header from "../component/Header";
 import Footer from "../component/Footer";
 import SideMenu from "../component/SideMenu";
@@ -19,7 +17,6 @@ const OutBox = styled.div`
 // 사이드 메뉴 + 세부 페이지
 const Container = styled.div`
   width: 80%;
-  
   display: flex;
   justify-content: center;
 `;
@@ -48,6 +45,9 @@ const SelectBox = styled.div`
 `;
 const TextBox = styled.p`
   margin-left: 10px;
+  @media (max-width: 768px) {
+    text-align: center;
+  }
 `;
 // 세부 페이지 중앙 부분
 const ContentBox = styled.div`
@@ -98,6 +98,7 @@ const RowBox = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  margin-top: 5px;
   margin-bottom: -10px;
 `;
 // 길드 이름
@@ -145,14 +146,19 @@ const MyGuild = () => {
   const [memberInfo, setMemberInfo] = useState(null);
   const [imageUrls, setImageUrls] = useState([]);
 
+  const categoryNames = {
+    1: "친목",
+    2: "퀘스트"
+  };
+
   // 유저 정보 가져오기
   useEffect(() => {
     const fetchMemberInfo = async () => {
       try {
         const rsp = await AxiosApi.getMemberGuildInfo(userNum, grantType, accessToken);
         if (rsp.status) {
-          setMemberInfo(rsp.data[0]);
-          console.log("길드 정보 가져오기 성공: ", rsp.data[0])
+          setMemberInfo(rsp.data);
+          console.log("길드 정보 가져오기 성공: ", rsp.data)
         }
       } catch (error) {
         console.log("길드 정보 가져오기 실패: ", error);
@@ -160,21 +166,6 @@ const MyGuild = () => {
     };
     fetchMemberInfo();
   }, [userNum]);
-
-  // 파이어베이스 스토리지 이미지 로딩
-  useEffect(() => {
-    const storageIconRef = ref(storage, "images"); 
-    Promise.all([
-      getDownloadURL(ref(storageIconRef, "cake.jpeg")),
-    ])
-    .then((urls) => {
-      setImageUrls(urls);
-      // console.log(imageUrls);
-    })
-    .catch((error) => {
-      console.error("아이콘 이미지 로딩 실패!!", error);
-    });
-  }, []);
 
 
 
@@ -188,54 +179,18 @@ const MyGuild = () => {
             <TextBox>참여중인 길드 조회</TextBox>
           </SelectBox>
           <ContentBox>
-            {/* <ContentRowbox> */}
-              <SpecificBox>
-                <GuildImg src={imageUrls[0]} alt="GuildImg"></GuildImg>
+            {memberInfo && memberInfo.map((guild, index) => (
+              <SpecificBox key={index}>
+                <GuildImg src={guild.thumbnail} alt="GuildImg"></GuildImg>
                 <RowBox>
-                  <GuildName>길드 이름1</GuildName>
+                  <GuildName>{guild.guildName}</GuildName>
                   <More onClick={()=>navigate("/mypage/guild")}>자세히 보기</More>
                 </RowBox>
-                <GuildCategory>카테고리: 친목</GuildCategory>
-                <GuildRegion>지역: 서울특별시 강남구</GuildRegion>
-                <GuildMemberNum>인원수: 20</GuildMemberNum>
-                <GuildIntro>소개: 슈르릅 옴뇸뇸</GuildIntro>  
+                <GuildCategory>카테고리: {categoryNames[guild.category]}</GuildCategory>
+                <GuildRegion>지역: {guild.region}</GuildRegion>
+                <GuildIntro>소개: {guild.intro}</GuildIntro>  
               </SpecificBox>
-              <SpecificBox>
-                <GuildImg src={imageUrls[0]} alt="GuildImg"></GuildImg>
-                <RowBox>
-                  <GuildName>길드 이름1</GuildName>
-                  <More onClick={()=>navigate("/mypage/guild")}>자세히 보기</More>
-                </RowBox>
-                <GuildCategory>카테고리: 친목</GuildCategory>
-                <GuildRegion>지역: 서울특별시 강남구</GuildRegion>
-                <GuildMemberNum>인원수: 20</GuildMemberNum>
-                <GuildIntro>소개: 슈르릅 옴뇸뇸</GuildIntro>  
-              </SpecificBox>
-            {/* </ContentRowbox> */}
-            {/* <ContentRowbox> */}
-              <SpecificBox>
-                <GuildImg src={imageUrls[0]} alt="GuildImg"></GuildImg>
-                <RowBox>
-                  <GuildName>길드 이름1</GuildName>
-                  <More onClick={()=>navigate("/mypage/guild")}>자세히 보기</More>
-                </RowBox>
-                <GuildCategory>카테고리: 친목</GuildCategory>
-                <GuildRegion>지역: 서울특별시 강남구</GuildRegion>
-                <GuildMemberNum>인원수: 20</GuildMemberNum>
-                <GuildIntro>소개: 슈르릅 옴뇸뇸</GuildIntro>  
-              </SpecificBox>
-              <SpecificBox>
-                <GuildImg src={imageUrls[0]} alt="GuildImg"></GuildImg>
-                <RowBox>
-                  <GuildName>길드 이름1</GuildName>
-                  <More onClick={()=>navigate("/mypage/guild")}>자세히 보기</More>
-                </RowBox>
-                <GuildCategory>카테고리: 친목</GuildCategory>
-                <GuildRegion>지역: 서울특별시 강남구</GuildRegion>
-                <GuildMemberNum>인원수: 20</GuildMemberNum>
-                <GuildIntro>소개: 슈르릅 옴뇸뇸</GuildIntro>  
-              </SpecificBox>
-            {/* </ContentRowbox> */}
+            ))}
           </ContentBox>
         </Detail>
       </Container>

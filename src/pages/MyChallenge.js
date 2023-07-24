@@ -17,7 +17,6 @@ const OutBox = styled.div`
 // 사이드 메뉴 + 세부 페이지
 const Container = styled.div`
   width: 80%;
-  
   display: flex;
   justify-content: center;
 `;
@@ -92,7 +91,7 @@ const RowBox = styled.div`
   display: flex;
   flex-direction: row;
 `;
-// 길드 이름
+// 챌린지 이름
 const ChallengeName = styled.p`
 
 `;
