@@ -1,9 +1,8 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import challengePin from "../images/challengePin.png"
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import ChallnegeModal from "../component/ChallengeModal";
-import Header from "./now/component/Header";
 // import AxiosApi from "../images/yeabin/Api/AxiosApi";
 import AxiosApi from "../api/AxiosApi";
 import { UserContext } from "../context/UserStore";
@@ -146,15 +145,22 @@ const CafeIntro = styled.div`
 `;
 
 const ChallengeMain = () => {
+  const context = useContext(UserContext);
+  const {userNum} = context;
+  const { isLogin } = context;
   const [modalOpen, setModalOpen] = useState(false);
   const location = useLocation();
   const info = location.state && location.state.editedInfo[0].id;
-  const {userNum} = useContext(UserContext);
+  const navigate = useNavigate;
 
   console.log(info);
   console.log(userNum);
 
   const applyChallenge = async() => {
+    if (!isLogin) {
+      navigate('/memberlogin');
+      return;
+    }
     const response = await AxiosApi.challengeApply(info, userNum);
     if(response.status === 200 && response.data === true) {
       setModalOpen(true); 
@@ -167,7 +173,6 @@ const ChallengeMain = () => {
 
   return(
     <>
-    <Header />
     <Container>
       <Box>
         <div>

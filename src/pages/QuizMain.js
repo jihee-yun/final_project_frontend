@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import AxiosApi from "../api/AxiosApi";
-import Header from "./now/component/Header";
+import { UserContext } from "../context/UserStore";
 
 const Container = styled.div`
   text-align: center;
@@ -49,6 +49,7 @@ const QuizMain = () => {
   const [selectedOption, setSelectedOption] = useState('');
   const [isAnswered, setIsAnswered] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
+  const {userNum} = useContext(UserContext);
 
   const question = '세계 최초로 카페를 연 나라는 어디일까요?';
   const options = ['이탈리아', '콜롬비아', '터키', '프랑스'];
@@ -62,7 +63,7 @@ const QuizMain = () => {
       setIsCorrect(option === answer);
 
       if (option === answer) {
-        AxiosApi.pointGet(amount);
+        AxiosApi.pointGet(userNum, amount, "quiz");
         localStorage.setItem('quizDone', 'true');
       }
     }
@@ -70,7 +71,6 @@ const QuizMain = () => {
   
   return (
     <>
-    <Header />
     <Container>
       <QuizBox>
         <div>

@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useLocation, useNavigate } from "react-router-dom";
-import Header from "./now/component/Header";
 import AxiosApi from "../api/AxiosApi";
 import { UserContext } from "../context/UserStore";
 
@@ -90,7 +89,6 @@ const CouponPayment = () => {
 
   return(
     <>
-    <Header />
     <Box>
     <Container>
       <h2>쿠폰 결제</h2>

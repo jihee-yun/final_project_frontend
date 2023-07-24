@@ -117,6 +117,7 @@ const Roulette = () => {
   const [isSpinning, setIsSpinning] = useState(false);
   const [winning, setWinning] = useState(0);
   const [canSpin, setCanSpin] = useState(true);
+  const {userNum} = context;
   let amount = 0;
 
 
@@ -152,7 +153,7 @@ const Roulette = () => {
     setTimeout(async() => {
       setIsSpinning(false);
       showWinning(stopTime); // 당첨 금액 보여줌
-      AxiosApi.pointGet(amount);
+      AxiosApi.pointGet(userNum, amount, "roulette");
 
       const now = new Date();
       const tomorrow = new Date(now);
@@ -179,7 +180,6 @@ const Roulette = () => {
     } else if (stopTime === 6) {
       amount = 500;
     }
-
     setWinning(amount);
   };
    

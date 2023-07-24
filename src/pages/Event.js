@@ -7,9 +7,10 @@ import { useNavigate } from "react-router-dom";
 import AxiosApi from "../api/AxiosApi";
 import ad from "../images/event-ad.png";
 import ad2 from "../images/ad-media.png";
-import Header from "./now/component/Header";
 import { UserContext } from "../context/UserStore";
 import MenuBox from "../utils/MenuBox";
+import Header from "../component/Header";
+import Footer from "../component/Footer";
 
 const Box = styled.div`
   @media (max-width: 768px) {
@@ -151,13 +152,14 @@ const Event = () => {
   }, []);
 
   const quizOpen = () => {
-    if (!isLogin) {
-      navigate('/memberlogin')
-    } else if (isQuizDone) {
-      alert('퀴즈는 하루에 한번만 가능해요. 내일 다시 도전해주세요!');
-    } else {
-      navigate('/quizMain');
-    }
+    navigate('/quizMain');
+    // if (!isLogin) {
+    //   navigate('/memberlogin')
+    // } else if (isQuizDone) {
+    //   alert('퀴즈는 하루에 한번만 가능해요. 내일 다시 도전해주세요!');
+    // } else {
+    //   navigate('/quizMain');
+    // }
   };
 
   useEffect(() => {
@@ -240,6 +242,7 @@ const Event = () => {
           </div>
         </EventFooter>
       </Box>
+      <Footer />
     </>
   );
 };
