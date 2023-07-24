@@ -43,7 +43,8 @@ const Rightbox = styled.div`
 
   .member {
     align-self: flex-start;
-    padding-right: 40px;
+    padding-top: 30px;
+    padding-right: 70px;
     margin-bottom: 10px;
     font-weight: bold;
     font-size: 13px;
