@@ -52,22 +52,22 @@ const TextBox = styled.p`
 // 세부 페이지 중앙 부분
 const ContentBox = styled.div`
   width: 90%;
-  min-width: 500px;
+  /* min-width: 500px; */
   margin-top: 3%;
   border: 1px solid #F3E1E1;
   border-radius: 15px;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-around;
 `;
 // 세부 페이지 가로 박스
-const ContentRowbox = styled.div`
-  /* border: 1px solid red; */
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-
-`;
+// const ContentRowbox = styled.div`
+//   /* border: 1px solid red; */
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: center;
+//   align-items: center;
+// `;
 // 세부 정보들 나열해주는 박스
 const SpecificBox = styled.div`
   margin: 20px;
@@ -79,6 +79,9 @@ const SpecificBox = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 15px;
+  @media (max-width: 670px) {
+    width: calc(80% - 20px); // 1개를 한 줄에 배치
+  }
 `;
 // 길드 이미지(썸네일)
 const GuildImg = styled.img`
@@ -185,7 +188,7 @@ const MyGuild = () => {
             <TextBox>참여중인 길드 조회</TextBox>
           </SelectBox>
           <ContentBox>
-            <ContentRowbox>
+            {/* <ContentRowbox> */}
               <SpecificBox>
                 <GuildImg src={imageUrls[0]} alt="GuildImg"></GuildImg>
                 <RowBox>
@@ -208,8 +211,8 @@ const MyGuild = () => {
                 <GuildMemberNum>인원수: 20</GuildMemberNum>
                 <GuildIntro>소개: 슈르릅 옴뇸뇸</GuildIntro>  
               </SpecificBox>
-            </ContentRowbox>
-            <ContentRowbox>
+            {/* </ContentRowbox> */}
+            {/* <ContentRowbox> */}
               <SpecificBox>
                 <GuildImg src={imageUrls[0]} alt="GuildImg"></GuildImg>
                 <RowBox>
@@ -232,7 +235,7 @@ const MyGuild = () => {
                 <GuildMemberNum>인원수: 20</GuildMemberNum>
                 <GuildIntro>소개: 슈르릅 옴뇸뇸</GuildIntro>  
               </SpecificBox>
-            </ContentRowbox>
+            {/* </ContentRowbox> */}
           </ContentBox>
         </Detail>
       </Container>

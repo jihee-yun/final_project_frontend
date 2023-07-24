@@ -36,6 +36,7 @@ const Detail = styled.div`
 // 세부 페이지 윗쪽 부분
 const SelectBox = styled.div`
   width: 90%;
+  min-width: 300px;
   height: 80px;
   margin-top: 3%;
   border: 1px solid #F3E1E1;
@@ -46,11 +47,14 @@ const SelectBox = styled.div`
 `;
 const TextBox = styled.p`
   margin-left: 10px;
+  @media (max-width: 768px) {
+    text-align: center;
+  }
 `;
 // 세부 페이지 중앙 부분
 const ContentBox = styled.div`
   width: 90%;
-  min-width: 500px;
+  min-width: 300px;
   margin-top: 3%;
   border: 1px solid #F3E1E1;
   border-radius: 15px;
@@ -61,22 +65,25 @@ const ContentBox = styled.div`
 const ContentRowbox = styled.div`
   /* border: 1px solid red; */
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-
+  flex-wrap: wrap;
+  justify-content: space-around;
 `;
 // 세부 정보들 나열해주는 박스
 const SpecificBox = styled.div`
-  margin: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   width: 40%;
   min-width: 200px;
+  max-width: 300px;
   border: 1px solid #F3E1E1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   border-radius: 15px;
+  @media (max-width: 500px) {
+    width: calc(80% - 20px); // 1개를 한 줄에 배치
+  }
 `;
 // 그냥 가로 박스
 const RowBox = styled.div`

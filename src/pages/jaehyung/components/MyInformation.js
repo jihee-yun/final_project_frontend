@@ -32,7 +32,7 @@ const Detail = styled.div`
 // 상세 페이지 상단 선택 박스(회원 정보 수정, 알림 설정)
 const SelectBox = styled.div`
   width: 90%;
-  min-width: 500px;
+  min-width: 350px;
   height: 50px;
   margin-top: 3%;
   border: 1px solid #F3E1E1;
@@ -43,7 +43,7 @@ const SelectBox = styled.div`
 `;
 const ContentBox = styled.div`
   width: 90%;
-  min-width: 500px;
+  min-width: 350px;
   margin-top: 3%;
   border: 1px solid #F3E1E1;
   border-radius: 15px;

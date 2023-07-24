@@ -18,13 +18,12 @@ const OutBox = styled.div`
 
 const Container = styled.div`
   width: 80%;
-
   display: flex;
   justify-content: center;
 `;
 const Detail = styled.div`
   width: 100%;
-  height: 1000px;
+  min-height: 1000px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -218,6 +217,7 @@ const SuperRightButton = styled.button`
   cursor: pointer;
 `;
 
+
 const MyEvent = () => {
   // useContext 저장값 불러오기
   const {grantType, accessToken, refreshToken, userNum, userName, userAuthority} = useContext(UserContext);
@@ -253,7 +253,7 @@ const MyEvent = () => {
     setShowDate(!showDate);
   };
 
-  // 리뷰 데이터 받기
+  // 이벤트(포인트) 데이터 받기
   useEffect(() => {
     const getEventInfo = async () => {
       const rsp = await AxiosApi.getEventByDate(userNum, startDate, endDate, grantType, accessToken);

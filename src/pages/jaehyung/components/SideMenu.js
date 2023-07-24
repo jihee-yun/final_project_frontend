@@ -15,6 +15,9 @@ const Side = styled.div`
   align-items: center;
   border: 1px solid #7D5A5A;
   border-radius: 3px;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const ProfileBox = styled.div`

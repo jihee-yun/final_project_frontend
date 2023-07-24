@@ -44,9 +44,9 @@ const Detail = styled.div`
 // `;
 // 각 메뉴별 외부 박스
 const SquareBox = styled.div`
-  width: 25%;
+  width: 30%;
   min-width: 220px;
-  height: 250px;
+  height: 300px;
   margin-top: 2%;
   margin-bottom: -2%;
   border: 2px solid #F3E1E1;

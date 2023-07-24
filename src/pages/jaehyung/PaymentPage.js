@@ -48,6 +48,9 @@ const SelectBox = styled.div`
 `;
 const TextBox = styled.p`
   margin-left: 10px;
+  @media (max-width: 768px) {
+    text-align: center;
+  }
 `;
 // 세부 페이지 중앙 부분
 const ContentBox = styled.div`
@@ -63,10 +66,8 @@ const ContentBox = styled.div`
 const ContentRowbox = styled.div`
   /* border: 1px solid red; */
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-
+  flex-wrap: wrap;
+  justify-content: space-around;
 `;
 // 세부 정보들 나열해주는 박스
 const SpecificBox = styled.div`
@@ -79,6 +80,9 @@ const SpecificBox = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 15px;
+  @media (max-width: 500px) {
+    width: calc(80% - 20px); // 1개를 한 줄에 배치
+  }
 `;
 // 포인트 이미지
 const PointImg = styled.img`
@@ -86,16 +90,6 @@ const PointImg = styled.img`
   height: 200px;
   border-radius: 15px 15px 0 0;
   overflow: hidden;
-`;
-// 그냥 가로 박스
-const RowBox = styled.div`
-  width: 90%;
-  height: 30px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: -10px;
 `;
 // 포인트 종류
 const PointName = styled.p`
