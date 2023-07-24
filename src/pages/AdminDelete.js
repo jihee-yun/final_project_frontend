@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useState } from "react";
-import logo from "../../images/logo.png";
+import logo from "../images/logo.png";
 import { useNavigate } from "react-router-dom";
 
 const AdminDeleteBlock = styled.div`
@@ -99,59 +99,7 @@ const AdminDelete = () => {
         </div>
 
 
-        <div class="form-container">
-            <form action="#" method="text">
-                <fieldset>
-                    <legend>리뷰 내역</legend>
-                    <ul>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                    </ul>
-                </fieldset>
-            </form>
 
-            <form action="#" method="text">
-                <fieldset>
-                    <legend>신고 내역</legend>
-                    <ul>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                    </ul>
-                </fieldset>
-            </form>
-
-            <form action="#" method="text">
-                <fieldset>
-                    <legend>사용자</legend>
-                    <ul>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                    </ul>
-                </fieldset>
-            </form>
-
-            <form action="#" method="text">
-                <fieldset>
-                    <legend>이벤트</legend>
-                    <ul>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                    </ul>
-                </fieldset>
-            </form>
-
-            <div className="delBtn">
-                <button>삭제</button>
-            </div>
-        </div>
         </AdminDeleteBlock>
     );
   };

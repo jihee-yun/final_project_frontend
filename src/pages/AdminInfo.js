@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import logo from "../../images/logo.png";
-import report from "./images/report.png";
-import review from "./images/review.png";
-import Delete from "./images/Delete.png";
-import userManage from "./images/userManage.png";
+import logo from "../images/logo.png";
+import report from "../images/report.png";
+import review from "../images/review.png";
+import Delete from "../images/Delete.png";
+import userManage from "../images/userManage.png";
 
 
 

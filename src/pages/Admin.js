@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import logo from "../../images/logo.png";
-import admin from "../../images/admin.png";
+import logo from "../images/logo.png";
+import admin from "../images/admin.png";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import Modal from "../../utils/Modal";
-import AxiosApi from "./Api/AxiosApi";
+import Modal from "../utils/Modal";
+import AxiosApi from "../api/AxiosApi";
 
 
 const AdminBlock = styled.div`

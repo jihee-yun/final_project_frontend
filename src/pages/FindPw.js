@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import logo from "../../images/logo.png";
-import AxiosApi from "./Api/AxiosApi";
+import logo from "../images/logo.png";
+import AxiosApi from "../api/AxiosApi";
 
 
 const FindPwBlock = styled.div`
@@ -228,8 +228,10 @@ const [findPwdServerCode, setFindPwdServerCode] = useState('');
 
 const [isFindPwdId, setIsFindPwdId] = useState(false);
 const [isFindPwdEmail, setIsFindPwdEmail] = useState(false); 
+
 //확인 버튼 유효성
 const [isFindPwdVerifyCode, setIsFindPwdVerifyCode] = useState(false);
+
 //확인 에러 메시지 유효성
 const [isFindPwdBtnErr, setIsFindPwdBtnErr] = useState(false);
 
@@ -326,16 +328,16 @@ const onChangeFindPwdCodeInput = (e) => {
 }
 
 //확인 버튼
-const onClickFindPwdOkBtn = () => {   
-  // if(isFindPwdVerifyCode) navigate('/resetpwd');
-  if(findPwdCodeInput === findPwdServerCode) {
-    setChangeResetPwd(true);
-  } else {
-    setIsFindPwdVerifyCode(false);
-    setIsFindPwdBtnErr(false);
-    setFindPwdBtnErrMsg("인증번호가 일치하지 않습니다.");
-  }
-}
+// const onClickFindPwdOkBtn = () => {   
+//   // if(isFindPwdVerifyCode) navigate('/resetpwd');
+//   if(findPwdCodeInput === findPwdServerCode) {
+//     setChangeResetPwd(true);
+//   } else {
+//     setIsFindPwdVerifyCode(false);
+//     setIsFindPwdBtnErr(false);
+//     setFindPwdBtnErrMsg("인증번호가 일치하지 않습니다.");
+//   }
+// }
 
 const onClickLogo = () => {
     navigate('/');
@@ -417,7 +419,7 @@ const onClickLogo = () => {
                     </div>
                     </div>
                     <div>
-                    <ConfirmButtonWrapper>
+                    {/* <ConfirmButtonWrapper>
                         <button
                             id="pwdSearchButton"
                             className={isFindPwdVerifyCode ? 'pwdSearchOkBtn' : 'pwdSearchNotBtn'}
@@ -425,7 +427,7 @@ const onClickLogo = () => {
                         >
                             확인
                         </button>
-                        </ConfirmButtonWrapper>
+                        </ConfirmButtonWrapper> */}
                     </div>
                 </>
                 )}

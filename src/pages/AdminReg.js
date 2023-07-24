@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import logo from "../../images/logo.png";
-import AxiosApi from "./Api/AxiosApi";
+import logo from "../images/logo.png";
+import AxiosApi from "../api/AxiosApi";
 import Modal from "./Modal";
 
 const AdminRegBlock = styled.div`

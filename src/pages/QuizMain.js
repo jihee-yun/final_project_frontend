@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import AxiosApi from "./Api/AxiosApi";
-import Header from "../now/component/Header";
+import AxiosApi from "../api/AxiosApi";
+import Header from "./now/component/Header";
 
 const Container = styled.div`
   text-align: center;

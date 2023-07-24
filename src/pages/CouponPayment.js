@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useLocation, useNavigate } from "react-router-dom";
-import Header from "../now/component/Header";
-import AxiosApi from "./Api/AxiosApi";
-import { UserContext } from "../../context/UserStore";
+import Header from "./now/component/Header";
+import AxiosApi from "../api/AxiosApi";
+import { UserContext } from "../context/UserStore";
 
 const Box = styled.div`
   margin-top: 100px;

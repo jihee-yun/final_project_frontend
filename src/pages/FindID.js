@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import logo from "../../images/logo.png";
-import AxiosApi from "./Api/AxiosApi";
+import logo from "../images/logo.png";
+import AxiosApi from "../api/AxiosApi";
 
 const FindIdBlock = styled.div`
     justify-content: center;

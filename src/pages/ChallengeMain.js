@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import challengePin from "./images/challengePin.png"
+import challengePin from "../images/challengePin.png"
 import { Link, useLocation } from "react-router-dom";
-import ChallnegeModal from "./ChallengeModal";
-import Header from "../now/component/Header";
-import AxiosApi from "./Api/AxiosApi";
+import ChallnegeModal from "../component/ChallengeModal";
+import Header from "./now/component/Header";
+// import AxiosApi from "../images/yeabin/Api/AxiosApi";
 
 const Container = styled.div`
   width: 80%;

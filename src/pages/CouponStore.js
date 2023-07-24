@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
-import AxiosApi from "./Api/AxiosApi";
-import Header from "../now/component/Header";
-import { UserContext } from "../../context/UserStore";
+import AxiosApi from "../api/AxiosApi";
+import Header from "./now/component/Header";
+import { UserContext } from "../context/UserStore";
 
 // 포인트로 카페 쿠폰 결제하는 상점
 

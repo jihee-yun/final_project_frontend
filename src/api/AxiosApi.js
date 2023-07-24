@@ -140,6 +140,172 @@ const AxiosApi = {
         Authorization: `${grantType} ${accessToken}`
       }
     });
+  },
+
+  // 회원가입 여부 
+  checkId : async(userId) => {
+    return await axios.get(KH_DOMAIN + `/user/check?userId=${userId}`);
+  },
+  
+    // 회원가입
+    userReg : async(userId, password, name, phone, email, birthday, signUpTime, gender, authority) => {
+        const member ={
+            userId : userId,
+            password: password,
+            name : name,
+            phone : phone,
+            email : email,
+            birthday : birthday,
+            signUpTime : signUpTime,
+            gender : gender,
+            authority : authority
+    };
+        return await axios.post(KH_DOMAIN + "/user/new", member);
+    },
+
+    // 로그인
+    userLogin: async (userId, password, grantType, accessToken) => {
+      const loginData = {
+        userId: userId,
+        password: password
+      };
+
+    return await axios.post(KH_DOMAIN + "/user/login", loginData)
+  },
+
+  // 비밀번호 찾기
+  findPw: async(findPwdId, findPwdEmail) => {
+    const data = {
+        findPwdId : findPwdId,
+        findPwdEmail : findPwdEmail
+    };
+    return await axios.post(KH_DOMAIN + "/findpw", data);
+  },
+
+    // 아이디 찾기
+    findId : async(findIdName, findIdEmail) => {
+      const data = {
+        findIdName : findIdName,
+        findIdEmail : findIdEmail
+      };
+      return await axios.post(KH_DOMAIN + "/findId", data);
+    },
+
+
+    // 사용자 삭제
+    deleteUsers : async(memberNum) => {
+        return await axios.delete(KH_DOMAIN + `/admin/usermanage/delete/${memberNum}`);
+    },
+
+    // 리뷰 삭제
+    deleteReviews : async(reviewNum) => {
+        return await axios.delete(KH_DOMAIN + `/admin/review/delete/${reviewNum}`);
+    },
+
+    // 신고 삭제
+    deleteReports : async(reportNum) => {
+      return await axios.delete(KH_DOMAIN + `/admin/report/delete/${reportNum}`);
+    },
+
+    // 사용자 정보 수정
+    saveUserInfo : async(userInfoToSave) => {
+      const {memberNum} = userInfoToSave;
+      try {
+        return await axios.put(KH_DOMAIN + `/admin/usermanage/modify/${memberNum}`, userInfoToSave);
+      } catch(error) {
+        throw error;
+      }
+    }, 
+     
+    
+    // 신고 전체 조회
+    reportGetAll: async () => {
+      return await axios.get(KH_DOMAIN + '/admin/report/all');
+    },
+
+    // 신고 내용 조회
+    reportGetContents : async(reportNum) => {
+      return await axios.get(KH_DOMAIN + `/admin/report/getContents?reportNum=${reportNum}`)
+    },
+
+    // 리뷰 전체 조회
+    reviewGetAll : async() => {
+      return await axios.get(KH_DOMAIN + `/admin/review/all`);
+    },
+
+    // 사용자 조회
+    userGetAll : async() => {
+      return await axios.get(KH_DOMAIN + `/admin/usermanage`);
+    },
+
+    // 관리자 로그인
+    adminLogin : async(adminId, password) => {
+      const adminData = {
+        adminId : adminId,
+        password : password
+      }
+      return await axios.post(KH_DOMAIN + `/admin/login`, adminData);
+    },
+
+    // 관리자 등록
+    adminReg : async(adminId, password, name, birthday, phone, gender) => {
+      const admin = {
+          adminId : adminId,
+          password : password,
+          name : name,
+          birthday : birthday,
+          phone : phone,
+          gender : gender
+      };
+
+      return await axios.post(KH_DOMAIN + `/admin/register`, admin);
+    },
+    // 챌린지 조회
+  challengeGet: async(chList) => {
+    return await axios.get(KH_DOMAIN + `/event/chList?chList=${chList}`);
+  },
+
+  // 쿠폰 조회
+  getCoupon: async(couponget) => {
+    return await axios.get(KH_DOMAIN + `/couponstore/couponget?couponget=${couponget}`);
+  },
+
+  // 이벤트 포인트 적립
+  pointGet: async(memberNum, winning, pointType) => {
+    const points = {
+      memberNum: memberNum,
+      point: winning,
+      pointType: pointType
+    };
+    return await axios.post(KH_DOMAIN + "/point/pointadd", points);
+  },
+
+  // 내 정보 조회
+  myInfoGet: async(memberNum) => {
+    return await axios.get(KH_DOMAIN + `/member/myinfo?memberNum=${memberNum}`);
+  },
+
+  // 챌린지 신청
+  challengeApply: async(challengeId, memberId) => {
+    const data = {
+      challengeId: challengeId,
+      memberId: memberId
+    };
+    return await axios.post(KH_DOMAIN + "/mychallenge/apply", data)
+  },
+
+  // 마이챌린지 조회
+  mychallengeGet: async(userNum, challengeId) => {
+    return await axios.get(KH_DOMAIN + `/mychallenge/get?userNum=${userNum}&challengeId=${challengeId}`);
+  },
+
+  // 쿠폰 결제
+  couponPayment: async(memberNum, couponId) => {
+    const data = {
+      memberNum: memberNum,
+      couponId: couponId
+    };
+    return await axios.post(KH_DOMAIN + "/couponstore/couponpay", data)
   }
 };
 

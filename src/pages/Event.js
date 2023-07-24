@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import Roulette from "./Roulette";
-import quiz from "./images/quiz.png";
-import shopping from "./images/shopping.png";
+import quiz from "../images/quiz.png";
+import shopping from "../images/shopping.png";
 import { useNavigate } from "react-router-dom";
-import AxiosApi from "./Api/AxiosApi";
-import ad from "./images/event-ad.png";
-import ad2 from "./images/ad-media.png";
-import Header from "../now/component/Header";
-import { UserContext } from "../../context/UserStore";
+import AxiosApi from "../api/AxiosApi";
+import ad from "../images/event-ad.png";
+import ad2 from "../images/ad-media.png";
+import Header from "./now/component/Header";
+import { UserContext } from "../context/UserStore";
 
 const Box = styled.div`
   @media (max-width: 768px) {

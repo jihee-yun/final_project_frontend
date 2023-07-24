@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useState } from "react";
-import logo from "../../images/logo.png";
+import logo from "../images/logo.png";
 import { useNavigate } from "react-router-dom";
 
 const AdminDeclarationBlock = styled.div`

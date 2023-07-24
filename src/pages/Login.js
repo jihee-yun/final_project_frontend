@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import {Link, useNavigate} from "react-router-dom";
-import logo from "../../images/logo.png";
-import { UserContext } from "../../context/UserStore";
-import AxiosApi from "./Api/AxiosApi";
-import Modal from "../../utils/Modal";
+import logo from "../images/logo.png";
+import { UserContext } from "../context/UserStore";
+import AxiosApi from "../api/AxiosApi";
+import Modal from "../utils/Modal";
 
 
 const LoginBlock = styled.div`

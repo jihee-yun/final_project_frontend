@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import AxiosApi from "./Api/AxiosApi";
-import logo from "../../images/logo.png";
+import AxiosApi from "../api/AxiosApi";
+import logo from "../images/logo.png";
 import Modal from "./Modal";
 
 const SignUpBlock = styled.div`

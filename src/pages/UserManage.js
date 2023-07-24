@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import logo from "../../images/logo.png";
+import logo from "../images/logo.png";
 import { useNavigate } from "react-router-dom";
-import AxiosApi from "./Api/AxiosApi";
-import user from "../taehoon/images/user.png";
-import businessman from "../taehoon/images/business.png";
+import AxiosApi from "../api/AxiosApi";
+import user from "../images/user.png";
+import businessman from "../images/business.png";
 import ConfirmModal from "./ConfirmModal";
 
 const UserManageBlock = styled.div`
@@ -363,7 +363,7 @@ const UserManage = () => {
   const handleRowClick = (memberNum) => {
     const selectedUserInfoData = getCurrentItems().find(userInfo => userInfo.memberNum === memberNum);
     setSelectedUserInfo(selectedUserInfoData);
-    
+
     // 모달이 열릴 때마다 수정 모드를 종료합니다.
     setIsEditing(false);
 

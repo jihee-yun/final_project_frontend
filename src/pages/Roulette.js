@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
-import start from "./images/start.png"
-import pin from "./images/pin.png"
-import roulettePan from "./images/roulettePan.png";
-import celebration1 from "./images/celebration1.png";
-import celebration2 from "./images/celebration2.png";
-import AxiosApi from "./Api/AxiosApi";
-import { UserContext } from "../../context/UserStore";
+import start from "../images/start.png"
+import pin from "../images/pin.png"
+import roulettePan from "../images/roulettePan.png";
+import celebration1 from "../images/celebration1.png";
+import celebration2 from "../images/celebration2.png";
+import AxiosApi from "../api/AxiosApi";
+import { UserContext } from "../context/UserStore";
 import { useNavigate } from "react-router-dom";
 
 
