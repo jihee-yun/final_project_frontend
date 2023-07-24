@@ -27,14 +27,16 @@ const KakaoMap = (props) => {
   
   // const map = useMap()
 
+  const [isOpenList, setIsOpenList] = useState(locations.map(() => false));
   const [isOpen, setIsOpen] = useState(false);
   const [selectedMarker, setSeleteMarker] = useState();
 
 
-  // const isOpen = (index) => {
-  //   setSeleteMarker(index);
-  //   isClicked(selectedMarker === index);
-  // }
+  const isCafeOpen = (index) => {
+    setSeleteMarker(index);
+    const updatedIsOpenList = isOpenList.map((state, i) => i === index);
+    setIsOpenList(updatedIsOpenList);
+  }
 
   return(
     <>
@@ -52,20 +54,19 @@ const KakaoMap = (props) => {
           src: Maker,
           size: { width: 35, height: 35 },
         }}
-        // onClick={() => isOpen(index)}
+        onClick={() => isCafeOpen(index)}
         >
 
-     { isOpen &&  (
-      <CustomOverlayMap	// 커스텀 오버레이를 표시할 Container
+        {isOpenList[index] &&  (
+            <CustomOverlayMap	// 커스텀 오버레이를 표시할 Container
 
-          	position={loc.latlng}	// 커스텀 오버레이가 표시될 위치
-          	
-		>
-    		<Grid>
-         		... 
-         	</Grid>
-     	</CustomOverlayMap>
-	)}
+                  position={loc.latlng}	// 커스텀 오버레이가 표시될 위치
+            >
+              <Grid>
+                  ... 
+              </Grid>
+            </CustomOverlayMap>
+        )}
         </MapMarker>
         ))}
 
