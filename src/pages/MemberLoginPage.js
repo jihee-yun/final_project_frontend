@@ -1,9 +1,9 @@
 import React, {useEffect, useState, useContext} from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import MemberApi from "./api/MemberApi";
-import { UserContext } from "../../context/UserStore";
-import { storage } from "../../utils/Firebase";
+import AxiosApi from "./api/AxiosApi";
+import { UserContext } from "../context/UserStore";
+import { storage } from "../utils/Firebase";
 import { ref, getDownloadURL } from "firebase/storage";
 
 const Container = styled.div`
@@ -133,9 +133,9 @@ const MemberLoginPage = () => {
     try {
       let rsp;
       if (authorityGet === "ROLE_USER") {
-        rsp = await MemberApi.memberLogin(memberId, password);
+        rsp = await AxiosApi.memberLogin(memberId, password);
       } else if (authorityGet === "ROLE_MEMBER") {
-        rsp = await MemberApi.memberLogin(memberId, password);
+        rsp = await AxiosApi.memberLogin(memberId, password);
       }
 
       if(rsp.status){

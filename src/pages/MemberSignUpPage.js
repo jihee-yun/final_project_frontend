@@ -1,9 +1,9 @@
 import React, {useEffect, useState, useContext} from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import MemberApi from "./api/MemberApi";
-import { UserStore } from "../../context/UserStore";
-import { storage } from "../../utils/Firebase";
+import AxiosApi from "../api/AxiosApi";
+import { UserStore } from "../context/UserStore";
+import { storage } from "../utils/Firebase";
 import { ref, getDownloadURL } from "firebase/storage";
 
 const Container = styled.div`
@@ -116,9 +116,9 @@ const MemberSignUpPage = () => {
     try {
       let rsp;
       if (authorityGet === "ROLE_USER") {
-        rsp = await MemberApi.memberSignup(memberId, password, name, phone, email, birth, genderGet, authorityGet);
+        rsp = await AxiosApi.memberSignup(memberId, password, name, phone, email, birth, genderGet, authorityGet);
       } else if (authorityGet === "ROLE_MEMBER") {
-        rsp = await MemberApi.memberSignup(memberId, password, name, phone, email, birth, genderGet, authorityGet);
+        rsp = await AxiosApi.memberSignup(memberId, password, name, phone, email, birth, genderGet, authorityGet);
       }
       if(rsp.status){
         //const { memberId } = rsp.data;

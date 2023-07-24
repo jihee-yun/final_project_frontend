@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import MemberApi from "../api/MemberApi";
-import { UserContext } from "../../../context/UserStore";
-import { storage } from "../../../utils/Firebase";
+import AxiosApi from "../api/MemberApi";
+import { UserContext } from "../context/UserStore";
+import { storage } from "../utils/Firebase";
 import { ref, getDownloadURL } from "firebase/storage";
 
 const Side = styled.div`
@@ -89,7 +89,7 @@ const SideMenu = () => {
   useEffect(() => {
     const fetchMemberInfo = async () => {
       try {
-        const rsp = await MemberApi.getMemberInfo(userNum, grantType, accessToken);
+        const rsp = await AxiosApi.getMemberInfo(userNum, grantType, accessToken);
         if (rsp.status) {
           setMemberInfo(rsp.data[0]);
           console.log("사이드 메뉴 유저 정보 가져오기 성공: ", rsp.data[0])

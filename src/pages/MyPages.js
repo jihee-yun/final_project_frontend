@@ -1,13 +1,12 @@
 import React, {useEffect, useState, useContext} from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import MemberApi from "./api/MemberApi";
-import AxiosApi from "./api/AxiosApi";
-import { UserContext } from "../../context/UserStore";
-import Header from "../now/component/Header";
-import Footer from "../now/component/Footer";
-import SideMenu from "./components/SideMenu";
-import ChatBot from "../../component/ChatBot";
+import AxiosApi from "../api/AxiosApi";
+import { UserContext } from "../context/UserStore";
+import Header from "../component/Header";
+import Footer from "../component/Footer";
+import SideMenu from "../component/SideMenu";
+import ChatBot from "../component/ChatBot";
 
 const OutBox = styled.div`
   display: flex;

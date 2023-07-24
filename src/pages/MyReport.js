@@ -3,12 +3,12 @@ import styled from "styled-components";
 import { Navigate, useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import AxiosApi from ".././api/AxiosApi";
-import { UserContext } from "../../../context/UserStore";
-import Header from "../../now/component/Header";
-import Footer from "../../now/component/Footer";
-import SideMenu from "./SideMenu";
-import ChatBot from "../../../component/ChatBot";
+import AxiosApi from "../api/AxiosApi";
+import { UserContext } from "../context/UserStore";
+import Header from "../component/Header";
+import Footer from "../component/Footer";
+import SideMenu from "../component/SideMenu";
+import ChatBot from "../component/ChatBot";
 
 const OutBox = styled.div`
   display: flex;

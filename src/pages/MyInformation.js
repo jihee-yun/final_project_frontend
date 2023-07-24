@@ -1,13 +1,12 @@
 import React, {useEffect, useState, useContext} from "react";
 import styled from "styled-components";
 import { Navigate, useNavigate } from "react-router-dom";
-import MemberApi from "../api/MemberApi";
-import { UserContext } from "../../../context/UserStore";
-import Header from "../../now/component/Header";
-import Footer from "../../now/component/Footer";
-import SideMenu from "./SideMenu";
-import ChatBot from "../../../component/ChatBot";
-import { Password } from "@mui/icons-material";
+import AxiosApi from "../api/AxiosApi";
+import { UserContext } from "../context/UserStore";
+import Header from "../component/Header";
+import Footer from "../component/Footer";
+import SideMenu from "../component/SideMenu";
+import ChatBot from "../component/ChatBot";
 
 const OutBox = styled.div`
   display: flex;
@@ -147,7 +146,7 @@ const MyInformation = () => {
   useEffect(() => {
     const fetchMemberInfo = async () => {
       try {
-        const rsp = await MemberApi.getMemberInfo(userNum, grantType, accessToken);
+        const rsp = await AxiosApi.getMemberInfo(userNum, grantType, accessToken);
         if (rsp.status) {
           setMemberInfo(rsp.data[0]);
           console.log("유저 정보 가져오기 성공: ", rsp.data[0])
@@ -188,7 +187,7 @@ const MyInformation = () => {
       return;
     }
     try {
-      const rsp = await MemberApi.passwordUpdate(userNum, password, newPassword, grantType, accessToken);
+      const rsp = await AxiosApi.passwordUpdate(userNum, password, newPassword, grantType, accessToken);
       if(rsp.status) {
         if(rsp.data = "true") {
           console.log("비밀번호 업데이트 성공: ", rsp.data);
@@ -205,7 +204,7 @@ const MyInformation = () => {
   const handleIntroChange = async () => {
     const intro = document.getElementById("intro").value;
     try {
-      const rsp = await MemberApi.introUpdate(userNum, intro, grantType, accessToken);
+      const rsp = await AxiosApi.introUpdate(userNum, intro, grantType, accessToken);
       if(rsp.status) {
         if(rsp.data = "true") {
           console.log("한 줄 소개 업데이트 성공: ", rsp.data);
@@ -222,7 +221,7 @@ const MyInformation = () => {
   const handlePhoneChange = async () => {
     const phone = document.getElementById("phone").value;
     try {
-      const rsp = await MemberApi.phoneUpdate(userNum, phone, grantType, accessToken);
+      const rsp = await AxiosApi.phoneUpdate(userNum, phone, grantType, accessToken);
       if (rsp.status) {
         if(rsp.data = "true") {
           console.log("전화번호 업데이트 성공: ", rsp.data);
@@ -239,7 +238,7 @@ const MyInformation = () => {
 const handleEmailChange = async () => {
   const email = document.getElementById("email").value;
   try {
-    const rsp = await MemberApi.emailUpdate(userNum, email, grantType, accessToken);
+    const rsp = await AxiosApi.emailUpdate(userNum, email, grantType, accessToken);
     if (rsp.status) {
       if(rsp.data = "true") {
         console.log("이메일 업데이트 성공: ", rsp.data);
