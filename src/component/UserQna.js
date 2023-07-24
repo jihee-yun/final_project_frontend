@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { styled } from "styled-components";
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import {QnaAxiosApi} from "../pages/now/api/AxiosApi";
+import AxiosApi from "../api/AxiosApi";
 
 const Box = styled.div`
 margin-top: 2rem;
@@ -55,7 +55,7 @@ const UserQna = () => {
 
     useEffect(() => {
         const qna = async () => {
-            const rsp = await QnaAxiosApi.QnaGet("USER")
+            const rsp = await AxiosApi.QnaGet("USER")
             .then((rsp) => {
               setQnaList(rsp.data);
               console.log("qna 정보 가져오기 성공: ", rsp.data)

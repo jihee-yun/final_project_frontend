@@ -1,10 +1,10 @@
 import { useState, useRef } from "react";
 import { styled } from "styled-components";
-import Header from "./component/Header";
-import ServiceHome from "./component/ServiceHome";
-import Footer from "./component/Footer";
-import Request from "./component/Request";
-import ServiceQuestion from "./component/ServiceQuestion";
+import Header from "../component/Header";
+import ServiceHome from "../component/ServiceHome";
+import Footer from "../component/Footer";
+import Request from "../component/Request";
+import ServiceQuestion from "../component/ServiceQuestion";
 
 const Container = styled.div`
 display: flex;
