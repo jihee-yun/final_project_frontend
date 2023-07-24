@@ -4,7 +4,7 @@ import logo from "../../images/logo.png";
 import admin from "../../images/admin.png";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import Modal from "../jihee/Modal";
+import Modal from "../../utils/Modal";
 import AxiosApi from "./Api/AxiosApi";
 
 

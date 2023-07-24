@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import social from "./images/small-talk.png";
-import quest from "./images/target.png";
+import social from "../images/small-talk.png";
+import quest from "../images/target.png";
 
 const CategoryBar = styled.div`
    @media (max-width: 768px) {

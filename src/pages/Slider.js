@@ -1,9 +1,8 @@
-
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { StyleSheetManager } from 'styled-components';
-import DotPageNation from "./DotPageNation";
-import AxiosApi from "./api/AxiosApi";
+import DotPageNation from "../utils/DotPageNation";
+import AxiosApi from "../api/AxiosApi";
 
 const CarouselWrapper = styled.div`
   width: 100%;

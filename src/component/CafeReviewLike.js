@@ -1,11 +1,11 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import like from "../jihee/images/like1.png";
-import AxiosApi from "./api/AxiosApi";
-import Modal from "./Modal2";
-import CompleteModal from "./CompleteModal";
-import { UserContext } from "../../context/UserStore";
+import like from "../images/like1.png";
+import AxiosApi from "../api/AxiosApi";
+import Modal from "../utils/Modal2";
+import CompleteModal from "../utils/CompleteModal";
+import { UserContext } from "../context/UserStore";
 
 const Like = styled.div`
   margin-top: 20px;

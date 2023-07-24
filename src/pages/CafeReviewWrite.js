@@ -1,15 +1,15 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import RatingStar from "../jihee/RatingStar";
+import RatingStar from "../component/RatingStar";
 import { useLocation, useNavigate } from "react-router-dom";
-import AxiosApi from "./api/AxiosApi";
-import { storage } from "../../context/Firebase";
+import AxiosApi from "../api/AxiosApi";
+import { storage } from "../context/Firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import Modal from "./Modal2";
-import CompleteModal from "./CompleteModal";
-import CafeImageUploader from "./CafeImageUploader";
-import { UserContext } from "../../context/UserStore";
+import Modal from "../utils/Modal2";
+import CompleteModal from "../utils/CompleteModal";
+import CafeImageUploader from "../component/CafeImageUploader";
+import { UserContext } from "../context/UserStore";
 
 const Container = styled.div`
   @media (max-width: 768px) { 

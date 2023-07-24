@@ -3,7 +3,7 @@ import styled from "styled-components";
 import logo from "../../images/logo.png";
 import { useNavigate } from "react-router-dom";
 import AxiosApi from "./Api/AxiosApi";
-import like from "../jihee/images/like.png";
+import like from "../../images/like.png";
 import star from "../taehoon/images/star.png";
 import ConfirmModal from "./ConfirmModal";
 

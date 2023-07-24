@@ -2,11 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import AxiosApi from "./api/AxiosApi";
-import Modal from "./Modal2";
-import CompleteModal from "./CompleteModal";
+import AxiosApi from "../api/AxiosApi";
+import Modal from "../utils/Modal2";
+import CompleteModal from "../utils/CompleteModal";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../../context/UserStore";
+import { UserContext } from "../context/UserStore";
 
 const LikeBox = styled.div`
   padding-top: 3px;

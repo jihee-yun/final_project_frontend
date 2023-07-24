@@ -1,15 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import logo from "./images/logo.png";
+import logo from "../images/logo.png";
 import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
-import img from "./images/upload.png";
-import { storage } from "../../context/Firebase";
+import img from "../images/upload.png";
+import { storage } from "../context/Firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import AxiosApi from "./api/AxiosApi";
-import Modal from "./Modal2";
-import CompleteModal from "./CompleteModal";
-import { UserContext } from "../../context/UserStore";
+import AxiosApi from "../api/AxiosApi";
+import Modal from "../utils/Modal2";
+import CompleteModal from "../utils/CompleteModal";
+import { UserContext } from "../context/UserStore";
 
 const Container = styled.div`
   @media (max-width: 430px) {

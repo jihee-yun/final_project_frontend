@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { UserContext } from "../../context/UserStore";
-import filterimg from "./images/filter.png";
-import AxiosApi from "./api/AxiosApi";
-import Header from "../now/component/Header";
-import Modal from "./Modal2";
-import CafeFilterModal from "./CafeFilterModal";
-import Footer from "../now/component/Footer";
+import { UserContext } from "../context/UserStore";
+import filterimg from "../images/filter.png";
+import AxiosApi from "../api/AxiosApi";
+import Header from "./now/component/Header";
+import Modal from "../utils/Modal2";
+import CafeFilterModal from "../component/CafeFilterModal";
+import Footer from "./now/component/Footer";
 
 const Container = styled.div`
   width: 80%;

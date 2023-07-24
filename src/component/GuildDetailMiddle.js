@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
-import location from "./images/location.png";
-import member from "./images/member.png";
-import Modal from "./Modal2";
+import location from "../images/location.png";
+import member from "../images/member.png";
+import Modal from "../utils/Modal2";
 import GuildMemberModal from "./GuildMemberModal";
 import GuildJoinModal from "./GuildJoinModal";
-import CompleteModal from "./CompleteModal";
-import AxiosApi from "./api/AxiosApi";
+import CompleteModal from "../utils/CompleteModal";
+import AxiosApi from "../api/AxiosApi";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../../context/UserStore";
+import { UserContext } from "../context/UserStore";
 
 const Middle = styled.div`
   position: absolute;

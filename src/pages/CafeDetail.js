@@ -1,17 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
-import { UserContext } from "../../context/UserStore";
-import logo from "./images/logo.png";
-import address from "./images/location.png";
-import time from "./images/clock.png";
-import phone from "./images/mobile-phone.png";
-import menu from "./images/restaurant-menu.png";
+import { UserContext } from "../context/UserStore";
+import logo from "../images/logo.png";
+import address from "../images/location.png";
+import time from "../images/clock.png";
+import phone from "../images/mobile-phone.png";
+import menu from "../images/restaurant-menu.png";
 import Slider from "./Slider";
-import AxiosApi from "./api/AxiosApi";
-import KaKaoMap from "./KaKaoMap";
-import AvgStar from "./AvgStar";
-import CafeLike from "./CafeLike";
+import AxiosApi from "../api/AxiosApi";
+import KaKaoMap from "../utils/KaKaoMap";
+import AvgStar from "../component/AvgStar";
+import CafeLike from "../component/CafeLike";
 // import Header from "../now/component/Header";
 // import Footer from "../now/component/Footer";
 

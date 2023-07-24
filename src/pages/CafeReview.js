@@ -1,16 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import AvgStar from "./AvgStar";
-import Star from "./Star";
+import AvgStar from "../component/AvgStar";
+import Star from "../component/Star";
 import { useLocation, useNavigate } from "react-router-dom";
-import AxiosApi from "./api/AxiosApi";
-import dot from "../jihee/images/dots.png";
-import CafeReviewModal from "./CafeReviewModal";
-import CafeReviewLike from "./CafeReviewLike";
-import Modal from "./Modal2";
-import CompleteModal from "./CompleteModal";
-import { UserContext } from "../../context/UserStore";
+import AxiosApi from "../api/AxiosApi";
+import dot from "../images/dots.png";
+import CafeReviewModal from "../component/CafeReviewModal";
+import CafeReviewLike from "../component/CafeReviewLike";
+import Modal from "../utils/Modal2";
+import CompleteModal from "../utils/CompleteModal";
+import { UserContext } from "../context/UserStore";
 
 const Container = styled.div`
   @media (max-width: 768px) {

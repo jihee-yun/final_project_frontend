@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import upload from "./images/upload.png";
-import upload2 from "./images/upload.png";
+import upload from "../images/upload.png";
+import upload2 from "../images/upload.png";
 import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
 
 const UploadContainer = styled.div`

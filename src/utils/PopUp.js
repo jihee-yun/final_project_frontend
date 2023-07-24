@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled, { StyleSheetManager } from "styled-components";
-import img from "./images/challenge.jpeg";
+import img from "../images/challenge.jpeg";
 import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
 import { useNavigate } from "react-router-dom";
 

@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { UserContext } from "../../context/UserStore";
-import member from "./images/team.png";
+import { UserContext } from "../context/UserStore";
+import member from "../images/team.png";
 
 const GuildSectionBox = styled.div`
   @media (max-width: 768px) {

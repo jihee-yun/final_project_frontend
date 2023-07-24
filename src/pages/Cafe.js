@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import { UserContext } from "../../context/UserStore";
+import { UserContext } from "../context/UserStore";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { StyleSheetManager } from "styled-components";
-import seoul from "./images/seoul.jpeg";
-import Header from "../now/component/Header";
-import Footer from "../now/component/Footer";
+import seoul from "../images/seoul.jpeg";
+import Header from "./now/component/Header";
+import Footer from "./now/component/Footer";
 
 const Container = styled.div`
   @media (max-width: 768px) {

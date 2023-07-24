@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import logo from "../jihee/images/logo.png";
+import logo from "../images/logo.png";
 
 const ModalBox = styled.div`
   width: 90%;

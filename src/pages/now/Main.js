@@ -7,7 +7,7 @@ import Recommend from "./component/Recommend"
 import { styled } from "styled-components";
 import Sidebar from "./component/Sidebar";
 import { UserContext } from "../../context/UserStore";
-import PopUp from "../jihee/PopUp";
+import PopUp from "../../utils/PopUp";
 
 const Container = styled.div`
 width: 100%;

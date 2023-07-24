@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { UserContext } from "../../context/UserStore";
-import GuildDetailMiddle from "./GuildDetailMiddle";
-import AxiosApi from "./api/AxiosApi";
-import logo from "./images/logo.png";
+import { UserContext } from "../context/UserStore";
+import GuildDetailMiddle from "../component/GuildDetailMiddle";
+import AxiosApi from "../api/AxiosApi";
+import logo from "../images/logo.png";
 
 const Container = styled.div`
   @media (max-width: 768px) {

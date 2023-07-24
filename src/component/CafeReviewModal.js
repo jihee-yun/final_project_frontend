@@ -2,11 +2,11 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import CreateIcon from '@mui/icons-material/Create';
 import DeleteIcon from '@mui/icons-material/Delete';
-import AxiosApi from "./api/AxiosApi";
+import AxiosApi from "../api/AxiosApi";
 import { useNavigate } from "react-router-dom";
-import { storage } from "../../context/Firebase";
+import { storage } from "../context/Firebase";
 import { deleteObject, ref } from "firebase/storage";
-import { UserContext } from "../../context/UserStore";
+import { UserContext } from "../context/UserStore";
 
 const Box = styled.div`
   position: absolute;

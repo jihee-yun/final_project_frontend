@@ -4,7 +4,7 @@ import {Link, useNavigate} from "react-router-dom";
 import logo from "../../images/logo.png";
 import { UserContext } from "../../context/UserStore";
 import AxiosApi from "./Api/AxiosApi";
-import Modal from "../jihee/Modal";
+import Modal from "../../utils/Modal";
 
 
 const LoginBlock = styled.div`
