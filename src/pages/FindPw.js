@@ -10,6 +10,8 @@ const FindPwBlock = styled.div`
   .logo {
     width: 200px;
     height: 150px;
+    margin-left: 10px;
+    margin-top: 10px;
     img {
       cursor: pointer;
     }
@@ -235,10 +237,11 @@ const [isFindPwdVerifyCode, setIsFindPwdVerifyCode] = useState(false);
 //확인 에러 메시지 유효성
 const [isFindPwdBtnErr, setIsFindPwdBtnErr] = useState(false);
 
-//에러 메시지
+// 아이디 에러 메시지
 const [findPwdIdOkMsg, setFindPwdIdOkMsg] = useState('');
 const [findPwdIdMsg, setFindPwdIdMsg] = useState('');
 
+// 이메일 에러 메시지
 const [findPwdEmailOkMsg, setFindPwdEmailOkMsg] = useState('');
 const [findPwdEmailMsg, setFindPwdEmailMsg] = useState('');
 
@@ -280,41 +283,44 @@ const onChangeFindPwdEmail = (e) => {
   };
 }
 
-//인증번호 받기 버튼
-const onClickFindPwdCode = () => {
-  const findPwdCodeInput = document.getElementById('findPwdCodeInput');
-  const idEmailFetchData = async () => {
-    try {
-      const response = await AxiosApi.findPw(findPwdId, findPwdEmail);
-      if(response.data === true) {                  
-        const emailfetchData = async () => {
-          try {
-            const emailRes = await AxiosApi.verifyCodeEmailSend(findPwdEmail);
-            // console.log(emailRes.data);
-            setFindPwdServerCode(emailRes.data);              
-            if(emailRes.data){
-              findPwdCodeInput.style.display = 'block';
-              setIsFindPwdEmail(true);
-              setFindPwdEmailOkMsg("가입하신 이메일로 인증번호를 보내드렸습니다.")                               
-            } else {
-              setIsFindPwdEmail(false);
-              setFindPwdEmailMsg("인증번호 전송에 실패했습니다.")
-            }                
-          } catch (e) {
-            console.log(e)
-          }
-        }
-        emailfetchData();
-      } else if(response.data === false) {
-        setIsFindPwdEmail(false);
-        setFindPwdEmailMsg("가입하신 이름과 이메일을 찾을 수 없습니다.")
-      }
-    } catch (e) {
-        console.log(e);        
+// 이메일로 인증번호 전송하는 함수
+const sendVerificationCodeEmail = async (email) => {
+  try {
+    const emailRes = await AxiosApi.verifyCodeEmailSend(email);
+    if (emailRes.data) {
+      setIsFindPwdEmail(true);
+      setFindPwdServerCode(emailRes.data);
+      setFindPwdEmailOkMsg("가입하신 이메일로 인증번호를 보내드렸습니다.");
+    } else {
+      setIsFindPwdEmail(false);
+      setFindPwdEmailMsg("인증번호 전송에 실패했습니다.");
     }
+  } catch (e) {
+    console.log(e);
+    setIsFindPwdEmail(false);
+    setFindPwdEmailMsg("인증번호 전송에 실패했습니다.");
   }
-  idEmailFetchData();
-}
+};
+
+// 인증번호 받기 버튼 클릭 이벤트 핸들러
+const onClickFindPwdCode = async () => {
+  const findPwdCodeInput = document.getElementById('findPwdCodeInput');
+  try {
+    const response = await AxiosApi.findPw(findPwdId, findPwdEmail);
+    if (response.data === true) {
+      findPwdCodeInput.style.display = 'block';
+      setFindPwdEmailOkMsg("가입하신 이메일로 인증번호를 보내드렸습니다.");
+      await sendVerificationCodeEmail(findPwdEmail);
+    } else if (response.data === false) {
+      setIsFindPwdEmail(false);
+      setFindPwdEmailMsg("가입하신 이름과 이메일을 찾을 수 없습니다.");
+    }
+  } catch (e) {
+    console.log(e);
+    setIsFindPwdEmail(false);
+    setFindPwdEmailMsg("가입하신 이름과 이메일을 찾을 수 없습니다.");
+  }
+};
 
 
 const onChangeFindPwdCodeInput = (e) => {
@@ -328,16 +334,16 @@ const onChangeFindPwdCodeInput = (e) => {
 }
 
 //확인 버튼
-// const onClickFindPwdOkBtn = () => {   
-//   // if(isFindPwdVerifyCode) navigate('/resetpwd');
-//   if(findPwdCodeInput === findPwdServerCode) {
-//     setChangeResetPwd(true);
-//   } else {
-//     setIsFindPwdVerifyCode(false);
-//     setIsFindPwdBtnErr(false);
-//     setFindPwdBtnErrMsg("인증번호가 일치하지 않습니다.");
-//   }
-// }
+const onClickFindPwdOkBtn = () => {   
+  // if(isFindPwdVerifyCode) navigate('/resetpwd');
+  if(findPwdCodeInput === findPwdServerCode) {
+    setChangeResetPwd(true);
+  } else {
+    setIsFindPwdVerifyCode(false);
+    setIsFindPwdBtnErr(false);
+    setFindPwdBtnErrMsg("인증번호가 일치하지 않습니다.");
+  }
+}
 
 const onClickLogo = () => {
     navigate('/');
@@ -396,18 +402,20 @@ const onClickLogo = () => {
                             onClick={onClickFindPwdCode}
                             >
                             인증번호 받기
-                        </FindPwdCodeButton>
-                    <div className="findPwdSmallBox">
+                      </FindPwdCodeButton>
+
+                      {isFindPwdEmail && (
+                      <div className="findPwdSmallBox">
                         <input
-                        type="text"
-                        value={findPwdCodeInput}
-                        id="findPwdCodeInput"
-                        className="findPwdCodeInput"
-                        placeholder="인증번호 입력"
-                        style={{ display: 'none' }}
-                        onChange={onChangeFindPwdCodeInput}
-                        ></input>
-                    </div>
+                          type="text"
+                          value={findPwdCodeInput}
+                          id="findPwdCodeInput"
+                          className="findPwdCodeInput"
+                          placeholder="인증번호 입력"
+                          onChange={onChangeFindPwdCodeInput}
+                        />
+                      </div>
+                    )}
 
                     <div className="findPwdErrMsg">
                         {!isFindPwdBtnErr && (
@@ -419,7 +427,7 @@ const onClickLogo = () => {
                     </div>
                     </div>
                     <div>
-                    {/* <ConfirmButtonWrapper>
+                    <ConfirmButtonWrapper>
                         <button
                             id="pwdSearchButton"
                             className={isFindPwdVerifyCode ? 'pwdSearchOkBtn' : 'pwdSearchNotBtn'}
@@ -427,7 +435,7 @@ const onClickLogo = () => {
                         >
                             확인
                         </button>
-                        </ConfirmButtonWrapper> */}
+                        </ConfirmButtonWrapper>
                     </div>
                 </>
                 )}

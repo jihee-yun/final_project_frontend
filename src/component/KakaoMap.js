@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Maker from "../images/maker.png";
-import { Map, MapInfoWindow, MapMarker, CustomOverlayMap, useMap } from 'react-kakao-maps-sdk';
+import { Map, MapInfoWindow, MapMarker, CustomOverlayMap } from 'react-kakao-maps-sdk';
 import { styled } from "styled-components";
 
 

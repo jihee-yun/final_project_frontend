@@ -5,12 +5,19 @@ import AxiosApi from "../api/AxiosApi";
 import { UserContext } from "../context/UserStore";
 import { storage } from "../utils/Firebase";
 import { ref, getDownloadURL } from "firebase/storage";
+import Header from "../component/Header";
+import Footer from "../component/Footer";
+import user from "../images/user1.png"
+import password from "../images/padlock.png"
 
 const Container = styled.div`
+  width: 80%;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 150px;
+  padding-top: 80px;
+  padding-bottom: 30px;
 `;
 
 const Logo = styled.img`
@@ -19,8 +26,10 @@ const Logo = styled.img`
   border-radius: 50%;
   cursor: pointer;
 `;
+
 const TextBox = styled.p`
-  font-size: 2rem;
+  font-size: 1.8rem;
+  font-weight: bold;
 `;
 
 const LoginBox = styled.div`
@@ -30,40 +39,73 @@ const InputBox = styled.div`
   display: flex;
   flex-direction: column;
   margin: 20px;
-`;
-const IdInputLabel = styled.label`
-  margin-bottom: 5px;
-`;
-const IdInput = styled.input`
-  margin-bottom: 10px;
-`;
-const PasswordInputLabel = styled.label`
-  margin-bottom: 5px;
-`;
-const PasswordInput = styled.input`
-  margin-bottom: 10px;
-`;
-const AuthSelect = styled.div`
-  display: felx;
-`;
-const RadioLabel = styled.label`
-  margin-right: 10px;
-`;
-const RadioButton = styled.input`
-  margin-right: 5px;
-`;
-const LoginButton = styled.button`
-  margin-top: 10px;
-  margin-bottom: 10px;
+  width: 300px;
+
+  .memberId{
+    margin-bottom: 20px;
+  }
 `;
 
-const SignUpButton = styled.button`
+const Input = styled.input`
+  height: 20px;
+  border: none;
+  border-bottom: 1.5px solid darkgray;
+  margin-bottom: 20px;
+  background-image: url(${props => props.image});
+  background-size: 20px 20px; 
+  background-repeat: no-repeat;
+  padding-left: 30px; 
+  outline: none;
+`;
+
+const PasswordInput = styled.input`
+  height: 20px;
+  border: none;
+  border-bottom: 1.5px solid darkgray;
+  margin-bottom: 10px;
+  background-image: url(${props => props.image});
+  background-size: 20px 20px; 
+  background-repeat: no-repeat;
+  padding-left: 30px; 
+  outline: none;
+`;
+
+const LoginButton = styled.button`
+  width: 300px;
+  height: 30px;
+  margin-bottom: 30px;
+  background-color: #FFCFDA;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  
+  cursor: pointer;
+
+  &:hover{
+    color: white;
+  }
+`;
+
+const BottomButton = styled.div`
+  width: 300px;
+  display: flex;
+  justify-content: center;
+`;
+
+const Button = styled.button`
+  height: 20px;
   background-color: white;
   border: 0px;
   font-weight: bold;
+  color: darkgray;
   cursor: pointer;
 
+  &:hover{
+    color: #FFCFDA;
+  }
 `;
+
+
 
 const MemberLoginPage = () => {
   const navigate = useNavigate();
@@ -169,42 +211,28 @@ const MemberLoginPage = () => {
   };
 
   return(
+    <>
+    <Header />
     <Container>
-      <Logo src={imageUrls[0]} alt="반전 로고 이미지" onClick={()=>navigate("/")}></Logo>
-      <TextBox>로그인 테스트</TextBox>
+      {/* <Logo src={imageUrls[0]} alt="반전 로고 이미지" onClick={()=>navigate("/")}></Logo> */}
+      <TextBox>SWEETKINGDOM</TextBox>
       <LoginBox>
         <InputBox>
-          <IdInputLabel htmlFor="memberId">아이디</IdInputLabel>
-          <IdInput id="memberId" type="text" onKeyDown={handleKeyDown}/>
-          <PasswordInputLabel htmlFor="password">비밀번호</PasswordInputLabel>
-          <PasswordInput id="password" type="password" onKeyDown={handleKeyDown}/>          
-          <AuthSelect>
-            <RadioLabel>
-              <RadioButton
-                type="radio"
-                id="authority"
-                value="ROLE_USER"
-                checked={authority === "ROLE_USER"}
-                onChange={handleAuthTypeChange}
-              />
-              일반 회원(미적용 기능)
-            </RadioLabel>
-            <RadioLabel>
-              <RadioButton
-                type="radio"
-                id="authority"
-                value="ROLE_MEMBER"
-                checked={authority === "ROLE_MEMBER"}
-                onChange={handleAuthTypeChange}
-              />
-              사업자 회원(미적용 기능)
-            </RadioLabel>
-          </AuthSelect>
+          {/* <InputLabel htmlFor="memberId">아이디</InputLabel> */}
+          <Input id="memberId" type="text" placeholder="아이디" onKeyDown={handleKeyDown} image={user}/>
+          {/* <InputLabel htmlFor="password">비밀번호</InputLabel> */}
+          <PasswordInput id="password" type="password" placeholder="비밀번호" onKeyDown={handleKeyDown} image={password}/>          
         </InputBox>
-        <LoginButton onClick={handleLogin}>로그인</LoginButton>
       </LoginBox>
-      <SignUpButton onClick={()=>navigate("/membersignup")}>회원가입 테스트로 이동</SignUpButton>
+      <LoginButton onClick={handleLogin}>로그인</LoginButton>
+      <BottomButton>
+      <Button className="find-id">아이디 찾기</Button>
+      <Button className="find-pw">패스워드 찾기</Button>
+      <Button className="signup" onClick={()=>navigate("/membersignup")}>회원가입</Button>
+      </BottomButton>
     </Container>
+    <Footer />
+    </>
   );
 };
 export default MemberLoginPage;
