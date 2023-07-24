@@ -191,10 +191,10 @@ const AxiosApi = {
 
     // 이메일 인증번호 전송
     verifyCodeEmailSend : async(findPwdEmail) => {
-      const findPwdCodeSend = {
+      const data = {
         findPwdEmail : findPwdEmail
       }
-      return await axios.post(KH_DOMAIN + "/user/findPwEmail", findPwdCodeSend);
+      return await axios.post(KH_DOMAIN + "/user/findPwEmail", data);
     },
 
 
