@@ -191,6 +191,14 @@ const AxiosApi = {
       return await axios.post(KH_DOMAIN + "/user/findId", data);
     },
 
+    // 이메일 인증번호 전송
+    verifyCodeEmailSend : async(findPwdEmail) => {
+      const findPwdCodeSend = {
+        findPwdEmail : findPwdEmail
+      }
+      return await axios.post(KH_DOMAIN + "/user/findPwEmail", findPwdCodeSend);
+    },
+
 
     // 사용자 삭제
     deleteUsers : async(memberNum) => {

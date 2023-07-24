@@ -13,6 +13,8 @@ const FindIdBlock = styled.div`
     .logo {
         width: 200px;
         height: 150px;
+        margin-top: 10px;
+        margin-left: 10px;
     img {
         cursor: pointer;
     }
@@ -205,6 +207,7 @@ const FindID = () => {
       const fetchData = async () => {
         try {
           const response = await AxiosApi.findId(findIdName, findIdEmail);
+          console.log("Response:", response.data);
           if(response.data === true) {
             setChangeFindIdComplete(true);
           } else if(response.data === false){
