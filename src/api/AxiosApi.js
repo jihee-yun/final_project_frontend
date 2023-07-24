@@ -174,18 +174,16 @@ const AxiosApi = {
   },
 
   // 비밀번호 찾기
-  findPw: async(findPwdId, findPwdEmail) => {
+  findPw: async(findPwdEmail) => {
     const data = {
-        findPwdId : findPwdId,
         findPwdEmail : findPwdEmail
     };
     return await axios.post(KH_DOMAIN + "/user/findPw", data);
   },
 
     // 아이디 찾기
-    findId : async(findIdName, findIdEmail) => {
+    findId : async(findIdEmail) => {
       const data = {
-        findIdName : findIdName,
         findIdEmail : findIdEmail
       };
       return await axios.post(KH_DOMAIN + "/user/findId", data);
