@@ -5,6 +5,8 @@ import AxiosApi from "../api/AxiosApi";
 import { UserStore } from "../context/UserStore";
 import { storage } from "../utils/Firebase";
 import { ref, getDownloadURL } from "firebase/storage";
+import Header from "../component/Header";
+import Footer from "../component/Footer";
 
 const Container = styled.div`
   display: flex;
@@ -31,7 +33,7 @@ const SignupBox = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 10px;
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
   width: 400px;
 `;
 const TextBox = styled.p`
