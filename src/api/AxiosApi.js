@@ -182,9 +182,10 @@ const AxiosApi = {
   },
 
     // 아이디 찾기
-    findId : async(findIdEmail) => {
+    findId : async(name, email) => {
       const data = {
-        findIdEmail : findIdEmail
+        name : name,
+        email : email
       };
       return await axios.post(KH_DOMAIN + "/user/findId", data);
     },
