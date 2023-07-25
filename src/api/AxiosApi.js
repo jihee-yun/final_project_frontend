@@ -174,12 +174,13 @@ const AxiosApi = {
   },
 
   // 비밀번호 찾기
-  findPw: async(userId, email) => {
-    const data = {
-        userId : userId, 
-        email : email
+  findPw: async(email, phone, name) => {
+    const data = { 
+        email : email,
+        phone : phone,
+        name : name
     };
-    return await axios.post(KH_DOMAIN + "/user/findPw", data);
+    return await axios.post(KH_DOMAIN + "/member/findPw", data);
   },
 
     // 아이디 찾기
@@ -189,14 +190,6 @@ const AxiosApi = {
         email : email
       };
       return await axios.post(KH_DOMAIN + "/member/findId", data);
-    },
-
-    // 이메일 인증번호 전송
-    verifyCodeEmailSend : async(email) => {
-      const data = {
-        email : email
-      }
-      return await axios.post(KH_DOMAIN + "/user/findPwEmail", data);
     },
 
     // 사용자 삭제
