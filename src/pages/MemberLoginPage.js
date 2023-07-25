@@ -131,9 +131,7 @@ const MemberLoginPage = () => {
       });
   }, []);
 
-  const handleAuthTypeChange = (event) => {
-    setAuthority(event.target.value);
-  };
+
 
   // 엔터키로 로그인 버튼 동작
   const handleKeyDown = (event) => {
@@ -142,29 +140,6 @@ const MemberLoginPage = () => {
       handleLogin(); // 로그인 버튼 클릭 함수 호출
     }
   };
-
-  // // 로그인 성공시 조회용 회원 번호 받아오기
-  // const handleGetNum = async () => {
-  //   const memberId = document.getElementById("memberId").value;
-  //   const password = document.getElementById("password").value;
-  //   const authorityGet = authority;
-  //   try {
-  //     let rsp2;
-  //     if (authorityGet === "ROLE_USER") {
-  //       rsp2 = await MemberApi.userNumGet(memberId);
-  //     } else if (authorityGet === "ROLE_MEMBER") {
-  //       rsp2 = await MemberApi.memberNumGet(memberId);
-  //     }
-  //     if(rsp2.status) {
-  //       const { userNum } = rsp2.data;
-  //       console.log("번호 수신 성공: ", rsp2.data);
-  //       setUserNum(userNum);
-  //       navigate("/mypage");
-  //     }
-  //   } catch(error) {
-  //     console.error("번호 수신 실패: ", error);
-  //   }
-  // }
 
   // 로그인 함수
   const handleLogin = async () => {
@@ -205,6 +180,18 @@ const MemberLoginPage = () => {
         setUserName(userName);
         setUserAuthoruty(userAuthority);
         setIsLogin(true);
+
+        // 로컬 스토리지 저장...
+        localStorage.setItem("grantType", grantType);
+        localStorage.setItem("accessToken", accessToken);
+        localStorage.setItem("refreshToken", refreshToken);
+        localStorage.setItem("userNum", userNum);
+        localStorage.setItem("userName", userName);
+        localStorage.setItem("userAuthority", userAuthority);
+        // 로컬 스토리지는 '문자열'만 저장이 가능하므로 나중에 필요시 타입 변환하여 사용해야함
+        localStorage.setItem("isLogin", "true");
+
+
         navigate("/");
         // handleGetNum();
       }

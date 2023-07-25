@@ -109,42 +109,43 @@ const BusinessPage = () => {
     <OutBox>
     <Header />
     <Container>
-      {/* <SideMenu /> */}
+      <SideMenuForBusiness />
       <Detail>
         <SquareBox>
           <BoxTitle>
             <Title>리뷰 관리</Title>
             <More onClick={()=>navigate("/businesspage/review")}>더 보기</More>
           </BoxTitle>
-          </SquareBox>
-          <SquareBox>
-            <BoxTitle>
-              <Title>카페 챌린지</Title>
-              <More onClick={()=>navigate("/businesspage/challenge")}>더 보기</More>
-            </BoxTitle>
-            <BoxContent></BoxContent>
-          </SquareBox>
-          <SquareBox>
-            <BoxTitle>
-              <Title>참여 이벤트</Title>
-              <More onClick={()=>navigate("/businesspage/event")}>더 보기</More>
-            </BoxTitle>
-            <BoxContent></BoxContent>
-          </SquareBox>
-          <SquareBox>
-            <BoxTitle>
-              <Title>결제/포인트</Title>
-              <More onClick={()=>navigate("/businesspage/point")}>더 보기</More>
-            </BoxTitle>
-            <BoxContent></BoxContent>
-          </SquareBox>
-          <SquareBox>
-            <BoxTitle>
-              <Title>문의/신고</Title>
-              <More onClick={()=>navigate("/businesspage/report")}>더 보기</More>
-            </BoxTitle>
-            <BoxContent></BoxContent>
-          </SquareBox>
+          <BoxContent></BoxContent>
+        </SquareBox>
+        <SquareBox>
+          <BoxTitle>
+            <Title>카페 챌린지</Title>
+            <More onClick={()=>navigate("/businesspage/challenge")}>더 보기</More>
+          </BoxTitle>
+          <BoxContent></BoxContent>
+        </SquareBox>
+        <SquareBox>
+          <BoxTitle>
+            <Title>참여 이벤트</Title>
+            <More onClick={()=>navigate("/businesspage/event")}>더 보기</More>
+          </BoxTitle>
+          <BoxContent></BoxContent>
+        </SquareBox>
+        <SquareBox>
+          <BoxTitle>
+            <Title>결제/포인트</Title>
+            <More onClick={()=>navigate("/businesspage/point")}>더 보기</More>
+          </BoxTitle>
+          <BoxContent></BoxContent>
+        </SquareBox>
+        <SquareBox>
+          <BoxTitle>
+            <Title>문의/신고</Title>
+            <More onClick={()=>navigate("/businesspage/report")}>더 보기</More>
+          </BoxTitle>
+          <BoxContent></BoxContent>
+        </SquareBox>
       </Detail>
     </Container>
     <Footer />

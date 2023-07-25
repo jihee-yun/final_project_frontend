@@ -404,95 +404,95 @@ const MyPoint = () => {
             </TypeButton>
           </RowBox>
           {selectedButton === "point" ? (
-              <>
-              <SelectBox>
-                <SelectButton onClick={handleDateAll}>전체</SelectButton>
-                <SelectButton onClick={handleDateWeek}>일주일</SelectButton>
-                <SelectButton onClick={handleDateMonth}>한 달</SelectButton>
-                <SelectButton onClick={handleDateYear}>일 년</SelectButton>
-                <DatePick>
-                  {showDate && (
-                    <DateSelected onClick={handleButtonClick}>
-                      {startDate && endDate
-                        ? `${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}`
-                        : "Show DatePicker"}
-                    </DateSelected>
-                  )}
-                  {showDatePicker && (
-                    <DatePicker
-                      selected={startDate}
-                      onChange={handleDateChange}
-                      startDate={startDate}
-                      endDate={endDate}
-                      selectsRange
-                      inline
-                    />
-                  )}
-                </DatePick>
-              </SelectBox>
-              <ContentBox>
-                <ContentTop>
-                  <ContentNum>번호</ContentNum>
-                  <ContentTitle>포인트 상세 내역</ContentTitle>
-                  <ContentCafe>포인트</ContentCafe>
-                  <ContentDate>날짜</ContentDate>
-                </ContentTop>
-                <hr style={{ margin: "1%" }} />
-                <ContentDetail>
-                  {getCurrentItems().map((item, index) => (
-                    <ContentLists key={index}>
-                      <ListNum>{item.eventNum}</ListNum>
-                      <ListTitle>{item.eventContent}</ListTitle>
-                      <ListCafe>{item.eventPoint}</ListCafe>
-                      <ListDate>
-                        {new Date(item.writtenTime)
-                          .toISOString()
-                          .split("T")[0]}
-                      </ListDate>
-                    </ContentLists>
-                  ))}
-                </ContentDetail>
-                <NumberSelectBox>
-                  <SuperLeftButton
-                    onClick={() => setPageNumber(1)}
-                    disabled={isFirstPage}
+          <>
+            <SelectBox>
+              <SelectButton onClick={handleDateAll}>전체</SelectButton>
+              <SelectButton onClick={handleDateWeek}>일주일</SelectButton>
+              <SelectButton onClick={handleDateMonth}>한 달</SelectButton>
+              <SelectButton onClick={handleDateYear}>일 년</SelectButton>
+              <DatePick>
+                {showDate && (
+                  <DateSelected onClick={handleButtonClick}>
+                    {startDate && endDate
+                      ? `${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}`
+                      : "Show DatePicker"}
+                  </DateSelected>
+                )}
+                {showDatePicker && (
+                  <DatePicker
+                    selected={startDate}
+                    onChange={handleDateChange}
+                    startDate={startDate}
+                    endDate={endDate}
+                    selectsRange
+                    inline
+                  />
+                )}
+              </DatePick>
+            </SelectBox>
+            <ContentBox>
+              <ContentTop>
+                <ContentNum>번호</ContentNum>
+                <ContentTitle>포인트 상세 내역</ContentTitle>
+                <ContentCafe>포인트</ContentCafe>
+                <ContentDate>날짜</ContentDate>
+              </ContentTop>
+              <hr style={{ margin: "1%" }} />
+              <ContentDetail>
+                {getCurrentItems().map((item, index) => (
+                  <ContentLists key={index}>
+                    <ListNum>{item.eventNum}</ListNum>
+                    <ListTitle>{item.eventContent}</ListTitle>
+                    <ListCafe>{item.eventPoint}</ListCafe>
+                    <ListDate>
+                      {new Date(item.writtenTime)
+                        .toISOString()
+                        .split("T")[0]}
+                    </ListDate>
+                  </ContentLists>
+                ))}
+              </ContentDetail>
+              <NumberSelectBox>
+                <SuperLeftButton
+                  onClick={() => setPageNumber(1)}
+                  disabled={isFirstPage}
+                >
+                  {"<<"}
+                </SuperLeftButton>
+                <LeftButton
+                  onClick={() => handlePageChange(pageNumber - 1)}
+                  disabled={isFirstPage}
+                >
+                  {"<"}
+                </LeftButton>
+                {pageNumbers.map((page, index) => (
+                  <PageNumber
+                    key={index}
+                    onClick={() => handlePageChange(page)}
+                    active={pageNumber === page}
+                    disabled={page === "..."}
                   >
-                    {"<<"}
-                  </SuperLeftButton>
-                  <LeftButton
-                    onClick={() => handlePageChange(pageNumber - 1)}
-                    disabled={isFirstPage}
-                  >
-                    {"<"}
-                  </LeftButton>
-                  {pageNumbers.map((page, index) => (
-                    <PageNumber
-                      key={index}
-                      onClick={() => handlePageChange(page)}
-                      active={pageNumber === page}
-                      disabled={page === "..."}
-                    >
-                      {page}
-                    </PageNumber>
-                  ))}
-                  <RightButton
-                    onClick={() => handlePageChange(pageNumber + 1)}
-                    disabled={isLastPage}
-                  >
-                    {">"}
-                  </RightButton>
-                  <SuperRightButton
-                    onClick={() => setPageNumber(Math.ceil(eventInfo.length / itemsPerPage))}
-                    disabled={isLastPage}
-                  >
-                    {">>"}
-                  </SuperRightButton>
-                </NumberSelectBox>
-              </ContentBox>
-              </>
-              ) : (
-              <>
-              <SelectBox>
+                    {page}
+                  </PageNumber>
+                ))}
+                <RightButton
+                  onClick={() => handlePageChange(pageNumber + 1)}
+                  disabled={isLastPage}
+                >
+                  {">"}
+                </RightButton>
+                <SuperRightButton
+                  onClick={() => setPageNumber(Math.ceil(eventInfo.length / itemsPerPage))}
+                  disabled={isLastPage}
+                >
+                  {">>"}
+                </SuperRightButton>
+              </NumberSelectBox>
+            </ContentBox>
+            </>
+            ) : (
+            <>
+            <SelectBox>
                 <SelectButton onClick={handleDateAll}>전체</SelectButton>
                 <SelectButton onClick={handleDateWeek}>일주일</SelectButton>
                 <SelectButton onClick={handleDateMonth}>한 달</SelectButton>

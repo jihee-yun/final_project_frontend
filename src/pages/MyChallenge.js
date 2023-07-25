@@ -223,8 +223,6 @@ const MyChallenge = () => {
                 <ChallengeExpired>만료날짜: 2023-07</ChallengeExpired>
               </SpecificBox>
             </ContentRowbox>
-
-
           </ContentBox>
         </Detail>
       </Container>

@@ -182,6 +182,16 @@ const Header = () => {
     setUserName("");
     setUserAuthoruty("");
     setIsLogin(false);
+
+    // 로컬스토리지에서 제거
+    localStorage.removeItem("grantType");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("userNum");
+    localStorage.removeItem("userName");
+    localStorage.removeItem("userAuthority");
+    localStorage.removeItem("isLogin");
+    
     navigate("/");
   }
   
