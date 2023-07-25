@@ -256,7 +256,7 @@ const MyReview = () => {
   // 리뷰 데이터 받기
   useEffect(() => {
     const getReviewInfo = async () => {
-      const rsp = await AxiosApi.reviewGetByDate(10000001, startDate, endDate, grantType, accessToken);
+      const rsp = await AxiosApi.reviewGetByDate(userNum, startDate, endDate, grantType, accessToken);
       if (rsp.status === 200) setReviewInfo(rsp.data);
     };
     getReviewInfo();
