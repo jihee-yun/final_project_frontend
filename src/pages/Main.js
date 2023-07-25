@@ -2,6 +2,7 @@ import {useContext, useState , useEffect} from "react";
 import Header from "../component/Header";
 import Footer from "../component/Footer";
 import Map from "../component/Map";
+import Weather from "../component/Weather";
 import Ranking from "../component/Ranking";
 import Recommend from "../component/Recommend"
 import { styled } from "styled-components";
@@ -33,6 +34,7 @@ const Main = () => {
         <PopUp />
         <Container>
         <Header/>
+        <Weather />
         <Map/>
         <Ranking/>
         <Recommend/>
