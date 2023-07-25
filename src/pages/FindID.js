@@ -6,221 +6,150 @@ import logo from "../images/logo.png";
 import AxiosApi from "../api/AxiosApi";
 
 const FindIdBlock = styled.div`
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 
-    .logo {
-        width: 200px;
-        height: 150px;
-        margin-top: 10px;
-        margin-left: 10px;
+  .logo {
+    width: 200px;
+    height: 150px;
+    margin-bottom: 120px;
     img {
-        cursor: pointer;
+      cursor: pointer;
     }
   }
 
-  .wrapper {
-    display: flex;
-    justify-content: center;
-    min-height: 100vh;
-    padding-top: 30px;
-  }
-
-  .findIdWrapper {
-    width: 400px;
-    height: 400px;
-    padding: 20px;
-    background-color: #f5f5f5;
-    border-radius: 10px;
-  }
-
-  .findId {
-    h2 {
-      text-align: center;
-      font-size: 40px;
-      margin-bottom: 40px;
-    }
-  }
-
-  .findIdSmallBox {
-    width : 90%;
-    margin-top: 8px;
-    margin-bottom: 8px;
-  }
-
-  .findIdName,
-  .findIdEmail {
-    /* 스타일 변경 없음 */
-    border: 1px solid #d4d4d4;
-    border-radius: 10px;
-    display: block;
-    width: 100%;
-    height: 48px;
-    padding: 0 14px;
-    font-size: 14px;
-    font-weight: 500;
-    color: #1a1a1a;
+  input {
+    width: 350px;
+    height: 30px;
+    margin-bottom: 30px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
     outline: none;
   }
 
-  .findIdErrMsg {
-    /* 스타일 변경 없음 */
-    text-align: left;
-    margin-left: 10px;
-    font-size: 12px;
-    color: rgb(156, 156, 156);
-    margin-bottom: 10px;
+  h2 {
+    margin-bottom: 80px;
+    margin-top : -100px;
+    color: #FFCFDA;
+    font-size: 25px;
   }
 
-  .findIdNameOk,
-  .findIdEmailOk {
-    /* 추가적인 스타일을 적용하려면 여기에 작성 */
-    color: #1a1a1a;
-    font-weight: bold;
-  }
-
-  .findIdNameErr,
-  .findIdEmailErr {
-    /* 추가적인 스타일을 적용하려면 여기에 작성 */
-    color: #ff4242;
-    font-weight: bold;
-  }
-
-  .findIdComplete button {
-    width: 250px;
-    height: 50px;
-    margin-top: 50px;
-  }
-
-  .findIdNotCompleteBut {
-    /* 추가적인 스타일을 적용하려면 여기에 작성 */
-    background-color: #b8b8b8;
-    color: #ffffff;
-    font-size: 16px;
-    font-weight: 600;
+  button {
+    width: 200px;
+    height: 40px;
+    margin-top: 20px;
+    background-color: #FFCFDA;
+    color: #fff;
     border: none;
-    border-radius: 10px;
-    margin: 20px 0;
-  }
-
-  .findIdCompleteBut {
-    /* 추가적인 스타일을 적용하려면 여기에 작성 */
-    background-color: #8679d9;
-    color: #ffffff;
+    border-radius: 4px;
     font-size: 16px;
-    font-weight: 600;
-    border: none;
-    border-radius: 10px;
-    margin: 20px 0;
     cursor: pointer;
   }
 
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .modal-header {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #FFCFDA;
+  }
+
+  .modal-heading {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .modal-message {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+
+  .close-btn {
+    padding: 8px 16px;
+    background-color: #FFCFDA;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+  }
 `;
-
-const FindIdComplete = styled.div`
-    .findIdCompleteMain {
-        margin-top: 50px;
-        text-align: center;
-        font-size: 18px;
-        font-weight: 600;
-    }
-    .findIdCompleteDt {
-        line-height: 24px;
-        margin: 40px;
-        text-align: center;
-        font-size: 18px;
-    }
-    .findIdCompleteLogin {
-        display: inline-flex;
-        width: 100%;
-        justify-content: center;
-        margin-top: 40px;
-
-    button {
-        width: 200px;
-        height: 46px;
-        background-color: #8679D9;
-        border: none;
-        color: white;
-        border-radius: 10px;
-        font-weight: 600;
-        cursor: pointer;
-    }
-}
-`
 
 const FindID = () => {
     const navigate = useNavigate("");
 
-    const [changeFindIdComplete, setChangeFindIdComplete] = useState(false);
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
 
-    const [findIdName, setFindIdName] = useState('');
-    const [findIdEmail, setFindIdEmail] = useState('');
-  
-    const [isFindIdName, setIsFindIdName] = useState(false);
-    const [isFindIdEmail, setIsFindIdEmail] = useState(false);
-  
-    //에러 메시지
-    const [findIdNameOkMsg, setFindIdNameOkMsg] = useState('');
-    const [findIdNameMsg, setFindIdNameMsg] = useState('');
-  
-    const [findIdEmailOkMsg, setFindIdEmailOkMsg] = useState('');
-    const [findIdEmailMsg, setFindIdEmailMsg] = useState('');
-  
-    //정규식
-    const nameRegEx = /^[가-힣|a-z|A-Z|]+$/;
-    const emailRegEx = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-  
-    const onChangeFindIdName = (e) => {
-      const inputFindIdName = e.target.value;
-      setFindIdName(inputFindIdName);
-      if(inputFindIdName.length === 0) {
-        setIsFindIdName(false);
-        setFindIdNameMsg("가입 시 등록한 이름을 입력해주세요.")
-      } else if(!nameRegEx.test(inputFindIdName) && !(inputFindIdName.length === 0)) {
-        setIsFindIdName(false);
-        setFindIdNameMsg("이름 형식에 맞지 않습니다.")
-      } else {
-        setIsFindIdName(true);
-        setFindIdNameMsg("");
+    // 팝업
+    const [findIdSuccess, setFindIdSuccess] = useState(false);
+    const [findIdFail, setFindIdFail] = useState(false);
+
+    // 모달창 닫기
+    const onClickClose = () => {
+      setFindIdSuccess(false);
+      setFindIdFail(false);
+    }
+
+    // 아이다 찾은 값 입력
+    const [findId, setFindId] = useState("");
+
+    const onChangeName = (e) => {
+      const nameNow = e.target.value;
+      setName(nameNow);
+    }
+
+    const onChangeEmail = (e) => {
+      const emailNow = e.target.value;
+      setEmail(emailNow);
+    }
+
+    // 이름과 메일 입력 값을 Axios
+    const onClickFindId = async() => {
+      try {
+        const rsp = await AxiosApi.findId(name, email);
+        if(rsp) {
+          setFindId(rsp.data);
+          setFindIdSuccess(true);
+          console.log(rsp.data);
+        }
+      }catch(e) {
+        console.log("일치하는 회원정보가 없습니다.");
+        setFindIdFail(true);
       }
     }
-  
-    const onChangeFindIdEmail = (e) => {
-      const inputFindIdEmail = e.target.value;
-      setFindIdEmail(inputFindIdEmail);
-      if(inputFindIdEmail.length === 0) {
-        setIsFindIdEmail(false);
-        setFindIdEmailMsg("가입 시 등록한 이메일을 입력해주세요.")
-      } else if(!emailRegEx.test(inputFindIdEmail) && !(inputFindIdEmail.length === 0)) {
-        setIsFindIdEmail(false);
-        setFindIdEmailMsg("이메일 형식에 맞지 않습니다.")
-      } else {
-        setIsFindIdEmail(true);
-        setFindIdEmailMsg("올바른 형식입니다.");
+
+    const handleOnKeyPress = (e) => {
+      if(e.key === 'Enter') {
+        onClickFindId();
       }
     }
-  
-    //아이디 찾기 완료 버튼
-    const onClickFindIdComplete = () => {
-      const fetchData = async () => {
-        try {
-          const response = await AxiosApi.findId(findIdName, findIdEmail);
-          console.log("Response:", response.data);
-          if(response.data === true) {
-            setChangeFindIdComplete(true);
-          } else if(response.data === false){
-            // setIsFindIdEmail(false);
-            setFindIdEmailMsg("가입하신 이름과 이메일을 찾을 수 없습니다.")
-            setChangeFindIdComplete(false);         
-          }
-        } catch (e) {
-          console.log(e);
-        }    
-      }
-      fetchData();    
-    }
+
 
     const LogoClick = () => {
         navigate('/');
@@ -232,51 +161,51 @@ const FindID = () => {
                 <img src={logo} alt="logo" className="logo" onClick={LogoClick}/>
             </div>
 
-                    <div className="wrapper">
-            <div className="findIdWrapper">
-                <div className="findId">
-                <h2>아이디 찾기</h2>
-                <div className="findIdMain">
-                    {changeFindIdComplete &&
-                    <FindIdComplete 
-                    findIdEmail={findIdEmail}
-                    />
-                    }              
-                    {!changeFindIdComplete &&
-                    <>
-                <div className="findIdSmallBox">           
-                    <input type="text" value={findIdName} className="findIdName" placeholder="이름"
-                    onChange={onChangeFindIdName}></input> 
-                    </div>
-                <div className="findIdErrMsg">
-                    {!isFindIdName && <span className="findIdNameErr">{findIdNameMsg}</span>}
-                    {isFindIdName && <span className="findIdNameOk">{findIdNameOkMsg}</span>}
-                    </div>
-                <div className="findIdSmallBox">
-                    <input type="text" value={findIdEmail} className="findIdEmail" placeholder="이메일"
-                    onChange={onChangeFindIdEmail}></input>
-                </div> 
-                <div className="findIdErrMsg">
-                    {!isFindIdEmail && <span className="findIdEmailErr">{findIdEmailMsg}</span>}
-                    {isFindIdEmail && <span className="findIdEmailOk">{findIdEmailOkMsg}</span>}
-                    {!changeFindIdComplete && isFindIdEmail && <span className="findIdEmailOk">{findIdEmailMsg}</span>}
-                </div>              
-                <div className="findIdComplete">
-                    {!(isFindIdName && isFindIdEmail)
-                    && <button className="findIdNotCompleteBut">확인</button>}  
+            <h2>아이디 찾기</h2>
 
-                    {(isFindIdName && isFindIdEmail)
-                    && <button className="findIdCompleteBut" 
-                    onClick={onClickFindIdComplete}>확인</button>}  
-                </div>
-                    </>
-                    }
+            <input
+              type="text"
+              value={name}
+              placeholder="이름"
+              onChange={onChangeName}
+            />
+          <input
+            type="text"
+            value={email}
+            placeholder="이메일 주소"
+            onChange={onChangeEmail}
+            onKeyPress={handleOnKeyPress}
+          />
+          <button onClick={onClickFindId}>아이디 찾기</button>
 
-                </div>
-                </div>
+          {/* Modal for success message */}
+          {findIdSuccess && (
+            <div className="modal">
+              <div className="modal-content">
+              <div className="modal-header">Sweet Kingdom</div>
+              <hr/>
+                <div>아이디를 찾았습니다!</div>
+                <div>아이디: {findId}</div>
+                <button className="close-btn" onClick={onClickClose}>
+                  닫기
+                </button>
+              </div>
             </div>
+          )}
+
+        {/* Modal for failure message */}
+        {findIdFail && (
+          <div className="modal">
+            <div className="modal-content">
+              <div>일치하는 회원정보가 없습니다.</div>
+              <button className="close-btn" onClick={onClickClose}>
+                닫기
+              </button>
             </div>
-    </FindIdBlock>
+          </div>
+        )}
+
+      </FindIdBlock>
     );
 }
 
