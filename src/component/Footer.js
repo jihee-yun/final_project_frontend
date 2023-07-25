@@ -48,22 +48,19 @@ const Footer = () => {
     <FooterContainer>
       <Sitemap> 
         <li>
-          <Link to="/">Find Cafe</Link>
+          <Link to="/cafe/main">Find Cafe</Link>
         </li>
         <li>
-          <Link to="/">Infomation Share</Link>
+          <Link to="/guild">Guild</Link>
         </li>
         <li>
-          <Link to="/">Portfolio</Link>
+          <Link to="/event">Event</Link>
         </li>
         <li>
-          <Link to="/">Workers</Link>
+          <Link to="/servicecenter">고객센터</Link>
         </li>
         <li>
-          <Link to="/report">Report</Link>
-        </li>
-        <li>
-          <Link to="/"></Link>
+          <Link to="/">이용약관</Link>
         </li>
       </Sitemap>
       <FooterInfo>

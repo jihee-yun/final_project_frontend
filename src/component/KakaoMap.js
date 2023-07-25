@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Maker from "../images/maker.png";
-import { Map, MapInfoWindow, MapMarker, CustomOverlayMap } from 'react-kakao-maps-sdk';
+import { Map,  MapMarker, CustomOverlayMap } from 'react-kakao-maps-sdk';
 import { styled } from "styled-components";
 
 
@@ -69,9 +69,6 @@ const KakaoMap = (props) => {
         )}
         </MapMarker>
         ))}
-
-
-
       </Map>
 
     </>
