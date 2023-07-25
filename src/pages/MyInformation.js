@@ -101,7 +101,7 @@ const Introinput = styled.input`
 const InfoChangeButton = styled.button`
   width: 150px;
   height: 40px;
-  margin: 5px;
+  margin: 10px;
   color: white;
   background-color: #F1D1D1;
   border: 0;
@@ -266,7 +266,7 @@ const handleEmailChange = async () => {
             회원 정보
           </SelectBox>
           <ContentBox>
-          <TitleBox>회원 정보 수정</TitleBox>
+          {/* <TitleBox>회원 정보 수정</TitleBox> */}
             <SpecificBox>
               <InfoType>프로필 이미지 수정</InfoType>
 

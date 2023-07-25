@@ -257,10 +257,13 @@ const MyReview = () => {
   useEffect(() => {
     const getReviewInfo = async () => {
       const rsp = await AxiosApi.reviewGetByDate(userNum, startDate, endDate, grantType, accessToken);
-      if (rsp.status === 200) setReviewInfo(rsp.data);
+      if (rsp.status === 200) {
+        setReviewInfo(rsp.data);
+        console.log(rsp.data[0]);
+      }
     };
     getReviewInfo();
-  }, [endDate]);
+  }, [startDate, endDate]);
 
   // 최초 날짜 한 달로 설정
   useEffect(() => {
