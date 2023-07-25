@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import logo from "../images/logo.png";
 import AxiosApi from "../api/AxiosApi";
+import MessageModal from "../component/MessageModal";
 
 const FindIdBlock = styled.div`
   display: flex;
@@ -178,32 +179,8 @@ const FindID = () => {
           />
           <button onClick={onClickFindId}>아이디 찾기</button>
 
-          {/* Modal for success message */}
-          {findIdSuccess && (
-            <div className="modal">
-              <div className="modal-content">
-              <div className="modal-header">Sweet Kingdom</div>
-              <hr/>
-                <div>아이디를 찾았습니다!</div>
-                <div>아이디: {findId}</div>
-                <button className="close-btn" onClick={onClickClose}>
-                  닫기
-                </button>
-              </div>
-            </div>
-          )}
-
-        {/* Modal for failure message */}
-        {findIdFail && (
-          <div className="modal">
-            <div className="modal-content">
-              <div>일치하는 회원정보가 없습니다.</div>
-              <button className="close-btn" onClick={onClickClose}>
-                닫기
-              </button>
-            </div>
-          </div>
-        )}
+        {findIdSuccess && (<MessageModal open={findIdSuccess} confirm={onClickClose} close={onClickClose} type="modalType" header="SweetKingdom">아이디 찾기 결과 : {findId}</MessageModal>)}
+        {findIdFail && (<MessageModal open={findIdFail} confirm={onClickClose} close={onClickClose} type="modalType" header="SweetKingdom">아이디를 찾을 수 없습니다.</MessageModal>)}
 
       </FindIdBlock>
     );

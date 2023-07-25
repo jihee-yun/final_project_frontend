@@ -4,447 +4,181 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import logo from "../images/logo.png";
 import AxiosApi from "../api/AxiosApi";
+import MessageModal from "../component/MessageModal";
 
 
 const FindPwBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+  margin-right: 30px;
+
   .logo {
-    width: 200px;
-    height: 150px;
-    margin-left: 10px;
-    margin-top: 10px;
+    margin-bottom: 20px;
     img {
       cursor: pointer;
+      width: 200px;
+      height: 150px;
     }
   }
 
-  .wrapper {
-    display: flex;
-    justify-content: center;
-    min-height: 100vh;
-    padding-top: 30px;
-  }
-
-  .findPwdWrapper {
-    width: 500px;
-    height: 480px;
-    padding: 20px;
-    background-color: #f5f5f5;
-    border-radius: 10px;
-  }
-
-  .findPwd h2 {
-    text-align: center;
-    font-size: 40px;
+  h2 {
+    font-size: 24px;
+    margin-bottom: 50px;
+    color: #FFCFDA;
     font-weight: bolder;
-    margin-bottom: 40px;
   }
 
-  .findPwdId,
-  .findPwdEmail,
-  .findPwdCodeInput {
-    width: 90%;
-    height: 48px;
-    padding: 0 14px;
-    font-size: 14px;
-    font-weight: 500;
-    color: #1a1a1a;
-    border: 1px solid #d4d4d4;
-    border-radius: 10px;
-    outline: none;
-  }
-
-  .findPwdCodeBtn,
-  .pwdSearchOkBtn,
-  .pwdSearchNotBtn {
-    width: 95%;
-    height: 56px;
-    font-size: 16px;
-    font-weight: 600;
-    border: none;
-    border-radius: 10px;
-    margin: 20px 0;
-    cursor: pointer;
-  }
-
-  .findPwdCodeBtn {
-    background-color: ${(props) => (props.isFindPwdId && props.isFindPwdEmail) ? '#8679d9' : 'rgb(184, 184, 184)'};
-    color: #ffffff;
-  }
-
-  .pwdSearchOkBtn {
-    background-color: ${(props) => props.isFindPwdVerifyCode ? '#8679d9' : 'rgb(184, 184, 184)'};
-    color: #ffffff;
-  }
-
-  .pwdSearchNotBtn {
-    background-color: rgb(184, 184, 184);
-    color: #ffffff;
-    cursor: default;
-  }
-  
-
-  .findPwdErrMsg {
-    text-align: left;
-    margin-left: 10px;
-    font-size: 13px;
-    color: rgb(156, 156, 156);
-    margin-bottom: 20px;
-}
-
-  .findPwdIdOk,
-  .findPwdEmailOk,
-  .findPwdBtnOk {
-    color: green;
-  }
-
-  .findPwdIdErr,
-  .findPwdEmailErr,
-  .findPwdBtnErr {
-    color: red;
-  }
-`;
-
-const ResetPwd = styled.div`
-  /* ResetPwd 컴포넌트 스타일 추가 */
-  .resetPwdWrapper {
+  .loginWrapper {
     display: flex;
-    align-items: center;
     justify-content: center;
-    min-height: 250px;
-    padding-top: 150px;
+    align-items: center;
+    height: 100%;
   }
 
-  .resetPwd {
-    width: 400px;
-    height: 600px;
-    margin: 20px;
-    h2 {
-      text-align: center;
-      font-size: 40px;
-      margin-bottom: 40px;
-    }
+  .loginMain {
+    display: flex;
+    flex-direction: column;
   }
 
-  .resetPwdMain {
-    padding-top: 20px;
+  .loginSmallBox {
+    margin-bottom: 15px;
   }
 
-  .resetPwdSmallBox {
-    margin-top: 8px;
-    margin-bottom: 8px;
-  }
-
-  .resetPwdInput {
-    width: 100%;
-    height: 48px;
-    padding: 0 14px;
-    font-size: 14px;
-    font-weight: 500;
-    color: #1a1a1a;
-    border: 1px solid #d4d4d4;
-    border-radius: 10px;
+  .loginInput {
+    width: 350px;
+    height: 30px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
     outline: none;
   }
 
-  .resetPwdErrMsg {
-    text-align: right;
-    font-size: 12px;
-    color: rgb(156, 156, 156);
-    margin-bottom: 10px;
-  }
-
-  .resetPwdNotCompleteBut,
-  .resetPwdCompleteBut {
-    width: 100%;
-    height: 56px;
-    font-size: 16px;
-    font-weight: 600;
+  .loginButton {
+    width: 250px;
+    padding: 10px;
+    background-color: #FFCFDA;
+    margin-left: 60px;
+    margin-top : 30px;
+    font-weight: bolder;
+    color: #fff;
     border: none;
-    border-radius: 10px;
-    margin: 20px 0;
+    border-radius: 4px;
     cursor: pointer;
+    outline: none;
   }
 
-  .resetPwdNotCompleteBut {
-    background-color: rgb(184, 184, 184);
-    color: #ffffff;
+  .loginButton:hover {
+    background-color: greenyellow;
   }
 
-  .resetPwdCompleteBut {
-    background-color: #8679d9;
-    color: #ffffff;
-  }
-
-  .resetPwdCompleteDt {
-    text-align: center;
-    font-size: 1.4em;
-  }
-
-  .resetPwdLoginBtn {
-    text-align: center;
-    padding: 100px;
-
-    button {
-      width: 70%;
-      height: 46px;
-      border: none;
-      background-color: #8679d9;
-      color: #fff;
-      border-radius: 10px;
-      font-weight: 600;
-      cursor: pointer;
-    }
+  .error-message {
+    color: red;
+    margin-top: 5px;
   }
 `;
-
-const FindPwdCodeButton = styled.button`
-  width: 95%;
-  height: 56px;
-  font-size: 16px;
-  font-weight: 600;
-  border: none;
-  border-radius: 10px;
-  margin: 20px 0;
-  cursor: pointer;
-  background-color: ${(props) =>
-    props.isFindPwdId && props.isFindPwdEmail ? '#8679d9' : 'rgb(184, 184, 184)'};
-  color: #ffffff;
-`;
-
-const ConfirmButtonWrapper = styled.div`
-  margin-top: -10px; /* 원하는 만큼 음수 값을 주어 버튼을 위로 올립니다 */
-`;
-
-
 
 const FindPw = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-//재설정 페이지 유효성
-const [changeResetPwd, setChangeResetPwd] = useState(false);
+  const [userId, setUserId] = useState("");
+  const [email, setEmail] = useState("");
 
-const [findPwdId, setFindPwdId] = useState('');
-const [findPwdEmail, setFindPwdEmail] = useState('');
-const [findPwdCodeInput, setFindPwdCodeInput] = useState('');
-const [findPwdServerCode, setFindPwdServerCode] = useState('');
+  // 비밀번호 찾은 값 입력
+  const [findPw, setFindPw] = useState("");
 
-const [isFindPwdId, setIsFindPwdId] = useState(false);
-const [isFindPwdEmail, setIsFindPwdEmail] = useState(false); 
+  // 팝업
+  const [findPwSuccess, setFindPwSuccess] = useState(false);
+  const [findPwFail, setFindPwFail] = useState(false);
 
-//확인 버튼 유효성
-const [isFindPwdVerifyCode, setIsFindPwdVerifyCode] = useState(false);
+  // 모달창 닫기
+  const onClickClose = () => {
+    setFindPwSuccess(false);
+    setFindPwFail(false);
+  }
 
-//확인 에러 메시지 유효성
-const [isFindPwdBtnErr, setIsFindPwdBtnErr] = useState(false);
+  const onChangeUserId = (e) => {
+    const userIdNow = e.target.value;
+    setUserId(userIdNow);
+  }
 
-// 아이디 에러 메시지
-const [findPwdIdOkMsg, setFindPwdIdOkMsg] = useState('');
-const [findPwdIdMsg, setFindPwdIdMsg] = useState('');
+  const onChangeEmail = (e) => {
+    const emailNow = e.target.value;
+    setEmail(emailNow);
+  }
 
-// 이메일 에러 메시지
-const [findPwdEmailOkMsg, setFindPwdEmailOkMsg] = useState('');
-const [findPwdEmailMsg, setFindPwdEmailMsg] = useState('');
-
-const [findPwdBtnErrMsg, setFindPwdBtnErrMsg] = useState('');
-const [findPwdBtnOkMsg, setFindPwdBtnOkMsg] = useState('');
-
-//정규식
-const idRegEx = /^[A-za-z0-9]{3,15}$/g; 
-const emailRegEx = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-const CodeRegEx = /^[0-9]+$/;
-
-const onChangeFindPwdId = (e) => {
-  const inputFindPwdId = e.target.value;
-  setFindPwdId(inputFindPwdId);
-  if(inputFindPwdId.length === 0) {
-    setIsFindPwdId(false);
-    setFindPwdIdMsg("가입 시 등록한 아이디를 입력해주세요.");
-  } else if(!idRegEx.test(inputFindPwdId)) {
-    setIsFindPwdId(false);
-    setFindPwdIdMsg("아이디 형식에 맞지 않습니다.");
-  } else {
-    setIsFindPwdId(true);
-    setFindPwdIdOkMsg("");
-  };
-}
-
-const onChangeFindPwdEmail = (e) => {
-  const inputFindPwdEmail = e.target.value;
-  setFindPwdEmail(inputFindPwdEmail);
-  if(inputFindPwdEmail.length === 0) {
-    setIsFindPwdEmail(false);
-    setFindPwdEmailMsg("가입 시 등록한 이메일주소를 입력해주세요.")
-  } else if(!emailRegEx.test(inputFindPwdEmail)) {
-    setIsFindPwdEmail(false);
-    setFindPwdEmailMsg("이메일 형식에 맞지 않습니다.");
-  } else {
-    setIsFindPwdEmail(true);
-    setFindPwdEmailOkMsg("올바른 형식입니다.");
-  };
-}
-
-// 이메일로 인증번호 전송하는 함수
-const sendVerificationCodeEmail = async (email) => {
-  try {
-    const emailRes = await AxiosApi.verifyCodeEmailSend(email);
-    if (emailRes.data) {
-      setIsFindPwdEmail(true);
-      setFindPwdServerCode(emailRes.data);
-      setFindPwdEmailOkMsg("가입하신 이메일로 인증번호를 보내드렸습니다.");
-    } else {
-      setIsFindPwdEmail(false);
-      setFindPwdEmailMsg("인증번호 전송에 실패했습니다.");
+  // 아이디, 이메일 Axios
+  const onClickFindPw = async() => {
+    try {
+      const rsp = await AxiosApi.findPw(userId, email);
+      if(rsp) {
+        setFindPw(rsp.data);
+        setFindPwSuccess(true);
+        console.log(rsp.data);
+      } else {
+        setFindPwFail(true);
+        console.log(rsp.data);
+      }
+    }catch(e) {
+      console.log("일치하는 회원정보가 없습니다.");
+      console.log(e);
     }
-  } catch (e) {
-    console.log(e);
-    setIsFindPwdEmail(false);
-    setFindPwdEmailMsg("인증번호 전송에 실패했습니다.");
   }
-};
 
-// 인증번호 받기 버튼 클릭 이벤트 핸들러
-const onClickFindPwdCode = async () => {
-  const findPwdCodeInput = document.getElementById('findPwdCodeInput');
-  try {
-    const response = await AxiosApi.findPw(findPwdId, findPwdEmail);
-    if (response.data === true) {
-      findPwdCodeInput.style.display = 'block';
-      setFindPwdEmailOkMsg("가입하신 이메일로 인증번호를 보내드렸습니다.");
-      await sendVerificationCodeEmail(findPwdEmail);
-    } else if (response.data === false) {
-      setIsFindPwdEmail(false);
-      setFindPwdEmailMsg("가입하신 이름과 이메일을 찾을 수 없습니다.");
+  const handleOnKeyPress = (e) => {
+    if(e.key === 'Enter') {
+      onClickFindPw();
     }
-  } catch (e) {
-    console.log(e);
-    setIsFindPwdEmail(false);
-    setFindPwdEmailMsg("가입하신 이름과 이메일을 찾을 수 없습니다.");
   }
-};
 
 
-const onChangeFindPwdCodeInput = (e) => {
-  const findPwdCodeInput = e.target.value;
-  setFindPwdCodeInput(findPwdCodeInput);
-  if(CodeRegEx.test(findPwdCodeInput)) {
-    setIsFindPwdVerifyCode(true);
-  } else {
-    setIsFindPwdVerifyCode(false);
-  }
-}
-
-//확인 버튼
-const onClickFindPwdOkBtn = () => {   
-  // if(isFindPwdVerifyCode) navigate('/resetpwd');
-  if(findPwdCodeInput === findPwdServerCode) {
-    setChangeResetPwd(true);
-  } else {
-    setIsFindPwdVerifyCode(false);
-    setIsFindPwdBtnErr(false);
-    setFindPwdBtnErrMsg("인증번호가 일치하지 않습니다.");
-  }
-}
-
-const onClickLogo = () => {
+  const onClickLogo = () => {
     navigate('/');
-}
-    return(
-        <FindPwBlock>
-        <div className="logo">
-                <img src={logo} alt="logo" className="logo" onClick={onClickLogo}/>
-            </div>
-        <div className="wrapper">
-            <div className="findPwdWrapper">
-            <div className="findPwd">
-                {changeResetPwd && <ResetPwd findPwdId={findPwdId} />}
-                {!changeResetPwd && (
-                <>
-                    <h2>비밀번호 찾기</h2>
-                    <div className="findPwdMain">
-                    <div className="findPwdSmallBox">
-                        <input
-                        type="text"
-                        value={findPwdId}
-                        className="findPwdId"
-                        placeholder="아이디"
-                        onChange={onChangeFindPwdId}
-                        ></input>
-                    </div>
-                    <div className="findPwdErrMsg">
-                        {!isFindPwdId && (
-                        <span className="findPwdIdErr">{findPwdIdMsg}</span>
-                        )}
-                        {isFindPwdId && (
-                        <span className="findPwdIdOk">{findPwdIdOkMsg}</span>
-                        )}
-                    </div>
-                    <div className="findPwdSmallBox">
-                        <input
-                        type="text"
-                        value={findPwdEmail}
-                        className="findPwdEmail"
-                        placeholder="이메일 주소"
-                        onChange={onChangeFindPwdEmail}
-                        ></input>
-                    </div>
-                    <div className="findPwdErrMsg">
-                        {!isFindPwdEmail && (
-                        <span className="findPwdEmailErr">{findPwdEmailMsg}</span>
-                        )}
-                        {isFindPwdEmail && (
-                        <span className="findPwdEmailOk">{findPwdEmailOkMsg}</span>
-                        )}
-                    </div>
-                    <FindPwdCodeButton
-                            id="findPwdCodeBtn"
-                            isFindPwdId={isFindPwdId}
-                            isFindPwdEmail={isFindPwdEmail}
-                            onClick={onClickFindPwdCode}
-                            >
-                            인증번호 받기
-                      </FindPwdCodeButton>
+  }
 
-                      {isFindPwdEmail && (
-                      <div className="findPwdSmallBox">
-                        <input
-                          type="text"
-                          value={findPwdCodeInput}
-                          id="findPwdCodeInput"
-                          className="findPwdCodeInput"
-                          placeholder="인증번호 입력"
-                          onChange={onChangeFindPwdCodeInput}
-                        />
-                      </div>
-                    )}
+  return (
+      <FindPwBlock>
+      <div className="logo">
+        <img src={logo} alt="logo" onClick={onClickLogo} />
+      </div>
 
-                    <div className="findPwdErrMsg">
-                        {!isFindPwdBtnErr && (
-                        <span className="findPwdBtnErr">{findPwdBtnErrMsg}</span>
-                        )}
-                        {isFindPwdBtnErr && (
-                        <span className="findPwdBtnOk">{findPwdBtnOkMsg}</span>
-                        )}
-                    </div>
-                    </div>
-                    <div>
-                    <ConfirmButtonWrapper>
-                        <button
-                            id="pwdSearchButton"
-                            className={isFindPwdVerifyCode ? 'pwdSearchOkBtn' : 'pwdSearchNotBtn'}
-                            onClick={onClickFindPwdOkBtn}
-                        >
-                            확인
-                        </button>
-                        </ConfirmButtonWrapper>
-                    </div>
-                </>
-                )}
+      <h2>비밀번호 찾기</h2>
+
+      <div className="loginWrapper">
+          <div className="loginMain">
+            <div className="loginSmallBox">
+              <input
+                type="text"
+                value={userId}
+                className="loginInput"
+                placeholder="아이디"
+                onChange={onChangeUserId}
+                onKeyUp={handleOnKeyPress}
+              />
             </div>
+            <div className="loginSmallBox">
+              <input
+                type="text"
+                value={email}
+                className="loginInput"
+                placeholder="이메일"
+                onChange={onChangeEmail}
+                onKeyUp={handleOnKeyPress}
+              />
             </div>
+            <button className="loginButton" onClick={onClickFindPw}>비밀번호 찾기</button>
+            {findPwFail && <div className="error-message">일치하는 회원정보가 없습니다.</div>}
+          </div>
         </div>
-        </FindPwBlock>
+      {findPwSuccess && (<MessageModal open={findPwSuccess} confirm={onClickClose} close={onClickClose} type="modalType" header="SweetKingdom">회원님의 이메일로 비밀번호가 발송 되었습니다.</MessageModal>)}
+      {findPwFail && (<MessageModal open={findPwFail} confirm={onClickClose} close={onClickClose} type="modalType" header="SweetKingdom">일치하는 회원 정보가 없습니다.</MessageModal>)}
 
-    );
+    </FindPwBlock>
+
+      
+
+  );
 }
 
 export default FindPw;
