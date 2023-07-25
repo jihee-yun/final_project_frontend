@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import logo from "../images/logo.png";
 import AxiosApi from "../api/AxiosApi";
 import MessageModal from "../component/MessageModal";
 import Header from "../component/Header";
@@ -22,16 +21,6 @@ const FindIdBlock = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* height: 100vh; */
-
-  /* .logo {
-    width: 200px;
-    height: 150px;
-    margin-bottom: 120px;
-    img {
-      cursor: pointer;
-    }
-  } */
 
   input {
     width: 50%;
@@ -167,19 +156,11 @@ const FindID = () => {
       }
     }
 
-
-    const LogoClick = () => {
-        navigate('/');
-    }
-
     return(
       <>
       <Header />
       <Container>
       <FindIdBlock>
-          {/* <div className="logo">
-              <img src={logo} alt="logo" className="logo" onClick={LogoClick}/>
-          </div> */}
           <h2>아이디 찾기</h2>
           <input
             type="text"
