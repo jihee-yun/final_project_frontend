@@ -192,11 +192,20 @@ const AxiosApi = {
     },
 
     // 이메일 인증번호 전송
-    verifyCodeEmailSend : async(findPwdEmail) => {
+    verifyCodeEmailSend : async(email) => {
       const data = {
-        findPwdEmail : findPwdEmail
+        email : email
       }
       return await axios.post(KH_DOMAIN + "/user/findPwEmail", data);
+    },
+
+    // 비밀번호 찾기 시 인증 코드 검증
+    verifyVerificationCode : async(email, verifyCode) => {
+      const data = {
+        email : email,
+        verifyCode : verifyCode
+      }
+      return await axios.post(KH_DOMAIN + "/user/verifyVerificationCode", data);
     },
 
 
