@@ -505,7 +505,29 @@ const AxiosApi = {
   },
   weatherInfoGet: async(regionList) => {
     return await axios.get(KH_DOMAIN + `/weather/get?regionList=${regionList}`);
-  }
+  },
+
+  // 카페 등록
+  cafeCreate: async(userNum, cafeName, selectedRegion, cafeAddress, cafeTime, cafePhone, cafeIntro, cafeDetail, url, grantType, accessToken) => {
+    const cafeData = {
+      memberNum : userNum,
+      cafeName : cafeName,
+      selectedRegion : selectedRegion,
+      cafeAddress : cafeAddress,
+      cafeTime : cafeTime,
+      cafePhone : cafePhone,
+      cafeIntro : cafeIntro,
+      cafeDetail : cafeDetail,
+      url : url
+    }
+    return await axios.post(`${KH_DOMAIN}/cafe/cafecreate`, cafeData, {
+      headers: {
+        Authorization: `${grantType} ${accessToken}`
+      }
+    });
+  },
+
+
 };
 
 export default AxiosApi;

@@ -157,6 +157,10 @@ const BusinessCafe = () => {
   const [cafeDetail, setCafeDetail] = useState("");
   // 라디오 버튼 상태
   const [selectedRegion, setSelectedRegion] = useState('서울특별시');
+  // 이미지 업로드용 상태
+  const [image, setImage] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
+
   // 라디오 버튼 변경 처리 핸들러
   const handleRegionChange = (e) => {
     setSelectedRegion(e.target.value);
@@ -168,24 +172,74 @@ const BusinessCafe = () => {
   const handleCafePhoneChange = (event) => setCafePhone(event.target.value);
   const handleCafeIntroChange = (event) => setCafeIntro(event.target.value);
   const handleCafeDetailChange = (event) => setCafeDetail(event.target.value);
+  const handleImageChange = (e) => {
+    if (e.target.files[0]) {
+      setImage(e.target.files[0]);
+    }
+  };
 
-
-  // 카페 등록 버튼
-  const handleCafeRegister = async() => {
+  // 파이어베이스 스토리지에 이미지 업로드 함수
+  const handleCafeRegister = async () => {
+    try {
+      // 이미지를 Firebase Storage에 업로드
+      const uploadTask = storage.ref(`images/${image.name}`).put(image);
+  
+      // 업로드 상태를 모니터링
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          // 진행 상태를 표시하는 로직이 들어갈 수 있습니다.
+        },
+        (error) => {
+          // 에러 핸들링
+          console.log(error);
+        },
+        () => {
+          // 업로드가 완료되면 이미지 URL을 가져옵니다.
+          storage
+            .ref("images")
+            .child(image.name)
+            .getDownloadURL()
+            .then((url) => {
+              setImageUrl(url);
+              // API에 요청을 보냅니다.
+              handleApiRequest(url);
+            });
+        }
+      );
+    } catch (error) {
+      console.log("카페 생성 실패: ", error);
+    }
+  };
+  // db에 카페 등록 통신
+  const handleApiRequest = async (url) => {
     try {
       const rsp = await AxiosApi.cafeCreate(
-        userNum, cafeName, selectedRegion, cafeAddress, cafeTime, cafePhone, cafeIntro, cafeDetail, grantType, accessToken);
-      if(rsp.status) {
-        if(rsp.data = "true") {
+        userNum,
+        cafeName,
+        selectedRegion,
+        cafeAddress,
+        cafeTime,
+        cafePhone,
+        cafeIntro,
+        cafeDetail,
+        url, // 썸네일 이미지 URL 추가
+        grantType,
+        accessToken
+      );
+  
+      if (rsp.status) {
+        if (rsp.data === "true") {
           console.log("카페 생성 성공: ", rsp.data);
         } else {
           console.log("통신은 성공, 카페 생성 실패", rsp.data);
         }
       }
-    } catch(error) {
+    } catch (error) {
       console.log("카페 생성 실패: ", error);
     }
-  }
+  };
+  
 
 
   return(
@@ -269,7 +323,7 @@ const BusinessCafe = () => {
               </SpecificBox>
               <SpecificBox>
                 <InfoType>카페 썸네일</InfoType>
-
+                <input type="file" onChange={handleImageChange} />
               </SpecificBox>
               <InfoChangeButton onClick={handleCafeRegister}>등록하기</InfoChangeButton>
 
