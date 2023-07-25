@@ -16,7 +16,7 @@ const MyPoint = styled.div`
  .goEvent {
     color: gray;
     font-size : 0.8rem;
-    margin: 10px 0 60px 0;
+    margin: 10px 0 100px 0;
 
     .link_style {
       color: inherit;
@@ -67,50 +67,78 @@ const Price = styled.div`
   cursor: pointer;
 `;
 
-// const CafeAll = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: space-between;
+const CafeContainer = styled.div`
+   @media (max-width: 768px) {
+    justify-content: center;
+  }
+  position: relative;
+  width: 100%;
+  display: grid; 
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* 열 크기를 자동으로 조정하되 최소 250px 크기를 유지합니다. */
+  grid-gap: 25px;
+  align-items: center;
+  padding-top: 20px;
+  /* margin-top: 100px; */
+`;
 
-//   @media (max-width: 768px) {
-//     display: flex;
-//     flex-direction: row;
-//     flex-wrap: wrap;
-//     justify-content: center;
-//     align-items: center;
-//   }
-// `;
+const CafeBox = styled.div`
+  height: 300px;
+  margin: 30px 15px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+  border-radius: 10px;
+  box-shadow: 0 3px 3px #A4A4A4;
+  cursor: pointer;
 
-// const CafeBox = styled.div`
-//   border-radius: 20px;
-//   width: 220px;
-//   height: 220px;
-//   margin: 30px;
-//   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  &:hover{
+    transform: scale(1.02);
+  }
 
-//   .cafeName {
-//     border-radius: 20px;
-//     position: relative;
-//   }
+  .background {
+    width: 100%;
+    height: 50%;
+    position: absolute;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(0,0,0,.7) 50%, rgba(0,0,0,0) 100%);
+  }
 
-//   img {
-//     width: 100%;
-//     height: 100%;
-//     background-size: cover;
-//     border-radius: 20px;
-//   }
+  .content {
+    position: absolute;
+    padding: 20px;
+    bottom: -20px;
+    color: white;
 
-//   p {
-//     color: white;
-//     margin-left: 20px;
-//     font-weight: bolder;
-//     position: absolute;
-//     top: -55px;
-//     bottom: 0;
-//     text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.8);
-//   }
+    .intro{
+      height: 45px;
+    }
+    
+    p {
+      font-weight: bold;
+      &:nth-child(1) {
+        font-size: .7rem;
+        text-decoration: underline #FFCFDA 3px;
+        text-underline-offset: 5px;
+      }
+      &:nth-child(2) {
+        color: #FFCFDA;
+        font-size: .9rem;
+      }
+      &:nth-child(3) {
+        font-size: 1.1rem;
+      }
+    }
+  }
+`;
 
-// `;
+const Thumb = styled.div`
+  width: 100%;
+  height: 100%;
+  object-fit: fit;
+  background-image: url(${props => props.imageurl});
+  background-size: cover;
+  background-position: center;
+`;
 
 const Notice = styled.div`
   color: grey;
@@ -127,6 +155,7 @@ const InfoList = styled.div`
 const CouponStore = () => {
   const [couponInfo, setCouponInfo] = useState("");
   const [pointInfo, setPointInfo] = useState("");
+  const [cafeInfo, setCafeInfo] = useState("");
   const context = useContext(UserContext);
   const { userNum, isLogin } = context
   const navigate = useNavigate();
@@ -150,6 +179,14 @@ const CouponStore = () => {
     };
     pointInfo();
   }, [isLogin, userNum]);
+
+  useEffect(() => {
+    const cafeInfo = async() => {
+      const rsp = await AxiosApi.fourCafeGet("ALL");
+      if(rsp.status === 200) setCafeInfo(rsp.data);
+    };
+    cafeInfo();
+  })
 
   const navigatePay = (id) => {
     const filterCoupon = couponInfo.filter(coupon => coupon.id === id);
@@ -183,13 +220,20 @@ const CouponStore = () => {
             </CouponList>
           ))}
       </CouponBox>
-      {/* <h3>포인트 사용 가능 매장 확인하기</h3>
-      <CafeAll>
-        <CafeBox></CafeBox>
-        <CafeBox></CafeBox>
-        <CafeBox></CafeBox>
-        <CafeBox></CafeBox>
-      </CafeAll> */}
+      <h3>포인트 사용 가능 매장 확인하기</h3>
+      <CafeContainer>
+        {cafeInfo && cafeInfo.map(cafe => (
+        <CafeBox key={cafe.id}>
+          <Thumb className="img" imageurl={cafe.thumbnail}/>
+          <div className="background"></div>
+          <div className="content">
+            <p>{cafe.region}</p>
+            <p>{cafe.cafeName}</p>
+            <p className="intro">{cafe.intro}</p> 
+          </div>
+        </CafeBox>
+        ))}
+        </CafeContainer>
       <Notice>
         <div>
           <p><b>포인트 유의사항</b></p>

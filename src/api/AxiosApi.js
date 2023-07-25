@@ -324,6 +324,11 @@ const AxiosApi = {
     return await axios.post(KH_DOMAIN + "/couponstore/couponpay", data)
   },
 
+  // 인기 카페 4곳 조회
+  fourCafeGet: async(fourCafes) => {
+    return await axios.get(KH_DOMAIN + `/cafe/fourCafes?fourCafes=${fourCafes}`)
+  },
+
   // 랭킹정보 불러오기
     MainInfoGet: async(rankingcard) => {
         return await axios.get(KH_DOMAIN + `/main/rankingcard`)
