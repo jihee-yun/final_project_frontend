@@ -5,25 +5,36 @@ import { useState } from "react";
 import logo from "../images/logo.png";
 import AxiosApi from "../api/AxiosApi";
 import MessageModal from "../component/MessageModal";
+import Header from "../component/Header";
+import Footer from "../component/Footer";
+
+const Container = styled.div`
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+  width: 50%;
+  margin: 0 auto;
+`;
 
 const FindIdBlock = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  /* height: 100vh; */
 
-  .logo {
+  /* .logo {
     width: 200px;
     height: 150px;
     margin-bottom: 120px;
     img {
       cursor: pointer;
     }
-  }
+  } */
 
   input {
-    width: 350px;
+    width: 50%;
     height: 30px;
     margin-bottom: 30px;
     padding: 10px;
@@ -34,10 +45,10 @@ const FindIdBlock = styled.div`
   }
 
   h2 {
-    margin-bottom: 80px;
-    margin-top : -100px;
-    color: #FFCFDA;
-    font-size: 25px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    font-size: 20px;
+    font-weight: bold;
   }
 
   button {
@@ -45,11 +56,16 @@ const FindIdBlock = styled.div`
     height: 40px;
     margin-top: 20px;
     background-color: #FFCFDA;
-    color: #fff;
+    font-size: .9rem;
+    font-weight: bold;
+    color: #585858;
     border: none;
     border-radius: 4px;
-    font-size: 16px;
     cursor: pointer;
+
+    &:hover {
+      color: white;
+    }
   }
 
   .modal {
@@ -157,19 +173,20 @@ const FindID = () => {
     }
 
     return(
-        <FindIdBlock>
-            <div className="logo">
-                <img src={logo} alt="logo" className="logo" onClick={LogoClick}/>
-            </div>
-
-            <h2>아이디 찾기</h2>
-
-            <input
-              type="text"
-              value={name}
-              placeholder="이름"
-              onChange={onChangeName}
-            />
+      <>
+      <Header />
+      <Container>
+      <FindIdBlock>
+          {/* <div className="logo">
+              <img src={logo} alt="logo" className="logo" onClick={LogoClick}/>
+          </div> */}
+          <h2>아이디 찾기</h2>
+          <input
+            type="text"
+            value={name}
+            placeholder="이름"
+            onChange={onChangeName}
+          />
           <input
             type="text"
             value={email}
@@ -181,8 +198,10 @@ const FindID = () => {
 
         {findIdSuccess && (<MessageModal open={findIdSuccess} confirm={onClickClose} close={onClickClose} type="modalType" header="SweetKingdom">아이디 찾기 결과 : {findId}</MessageModal>)}
         {findIdFail && (<MessageModal open={findIdFail} confirm={onClickClose} close={onClickClose} type="modalType" header="SweetKingdom">아이디를 찾을 수 없습니다.</MessageModal>)}
-
       </FindIdBlock>
+      </Container>
+      <Footer />
+      </>
     );
 }
 

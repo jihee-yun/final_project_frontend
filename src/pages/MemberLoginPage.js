@@ -216,8 +216,8 @@ const MemberLoginPage = () => {
       </LoginBox>
       <LoginButton onClick={handleLogin}>로그인</LoginButton>
       <BottomButton>
-      <Button className="find-id">아이디 찾기</Button>
-      <Button className="find-pw">패스워드 찾기</Button>
+      <Button className="find-id" onClick={() => navigate("/findId")}>아이디 찾기</Button>
+      <Button className="find-pw" onClick={() => navigate("/findpw") }>패스워드 찾기</Button>
       <Button className="signup" onClick={()=>navigate("/membersignup")}>회원가입</Button>
       </BottomButton>
     </Container>

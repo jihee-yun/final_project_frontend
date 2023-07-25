@@ -5,6 +5,8 @@ import { useState } from "react";
 import logo from "../images/logo.png";
 import AxiosApi from "../api/AxiosApi";
 import MessageModal from "../component/MessageModal";
+import Header from "../component/Header";
+import Footer from "../component/Footer";
 
 
 const FindPwBlock = styled.div`
@@ -14,20 +16,11 @@ const FindPwBlock = styled.div`
   margin-top: 100px;
   margin-right: 30px;
 
-  .logo {
-    margin-bottom: 20px;
-    img {
-      cursor: pointer;
-      width: 200px;
-      height: 150px;
-    }
-  }
-
   h2 {
-    font-size: 24px;
+    margin-top: 50px;
     margin-bottom: 50px;
-    color: #FFCFDA;
-    font-weight: bolder;
+    font-size: 20px;
+    font-weight: bold;
   }
 
   .loginWrapper {
@@ -56,21 +49,20 @@ const FindPwBlock = styled.div`
   }
 
   .loginButton {
-    width: 250px;
-    padding: 10px;
+    width: 200px;
+    height: 40px;
+    margin-top: 20px;
     background-color: #FFCFDA;
-    margin-left: 60px;
-    margin-top : 30px;
-    font-weight: bolder;
-    color: #fff;
+    font-size: .9rem;
+    font-weight: bold;
+    color: #585858;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    outline: none;
-  }
 
-  .loginButton:hover {
-    background-color: greenyellow;
+    &:hover {
+      color: white;
+    }
   }
 
   .error-message {
@@ -181,13 +173,10 @@ const FindPw = () => {
   }
 
   return (
+    <>
+    <Header />
       <FindPwBlock>
-      <div className="logo">
-        <img src={logo} alt="logo" onClick={onClickLogo} />
-      </div>
-
       <h2>비밀번호 찾기</h2>
-
       <div className="loginWrapper">
           <div className="loginMain">
             <div className="loginSmallBox">
@@ -243,11 +232,9 @@ const FindPw = () => {
       {findPwFail && (<MessageModal open={findPwFail} confirm={onClickClose} close={onClickClose} type="modalType" header="SweetKingdom">일치하는 회원 정보가 없습니다.</MessageModal>)}
       {/* {findPwSuccess && (<MessageModal open={findPwSuccess} confirm={onClickClose} close={onClickClose} type="modalType" header="SweetKingdom">비밀번호 찾기 결과 : {findPw}</MessageModal>)}
         {findPwFail && (<MessageModal open={findPwFail} confirm={onClickClose} close={onClickClose} type="modalType" header="SweetKingdom">아이디를 찾을 수 없습니다.</MessageModal>)} */}
-
     </FindPwBlock>
-
-      
-
+    <Footer />
+    </>
   );
 }
 
