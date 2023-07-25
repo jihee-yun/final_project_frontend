@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { styled } from "styled-components";
 import AxiosApi from "../api/AxiosApi";
 
-
 const Container = styled.div`
     width: 100%;
     margin-top: 20px;
@@ -21,6 +20,7 @@ const Container = styled.div`
         flex-wrap: wrap;
         justify-content: center;
     }
+    
     .RankingItem {
         @media (max-width: 768px) {
          width: 40%;
