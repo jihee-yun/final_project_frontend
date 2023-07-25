@@ -91,7 +91,7 @@ const KakaoMap = (props) => {
                   yAnchor={1.2}
                   zIndex={1}
             >
- <MarkerInfo>
+             <MarkerInfo>
               <Image type="rectangle" />
               <Grid padding="5px 10px 10px">
                 <Text margin="5px 0" bold="600" size="16px">
@@ -101,8 +101,6 @@ const KakaoMap = (props) => {
                   내용
                 </Text>
               </Grid>
-              {/* <div className="close" onClick={()=> setIsVisible(!isVisible)}>X</div> */}
-              {/* <div className="close" onClick={()=> setIsVisible(!isVisible)}>자세히</div> */}
             </MarkerInfo>
             </CustomOverlayMap>
         )}

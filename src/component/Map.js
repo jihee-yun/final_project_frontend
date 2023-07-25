@@ -2,7 +2,6 @@ import React from "react";
 import { styled } from "styled-components";
 import PlaceIcon from '@mui/icons-material/Place';
 import KakaoMap from "./KakaoMap";
-import Detail from "./Detail";
 
 
 const Container = styled.div`

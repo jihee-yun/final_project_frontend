@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import { styled } from "styled-components";
-import cafe from "../images/cafe.jpg";
 import AxiosApi from "../api/AxiosApi";
 
 
