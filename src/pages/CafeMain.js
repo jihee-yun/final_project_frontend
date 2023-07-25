@@ -45,7 +45,7 @@ const Box = styled.div`
   position: relative;
   width: 100%;
   display: grid; 
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* 열 크기를 자동으로 조정하되 최소 250px 크기를 유지합니다. */
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
   grid-gap: 25px;
   align-items: center;
   padding-top: 50px;

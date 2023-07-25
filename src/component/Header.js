@@ -2,11 +2,24 @@ import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../context/UserStore";
 import styled from "styled-components";
 import Logo from "../images/logo.png";
+// import mobileLogo from "../images/.PNG";
 import { Link, useNavigate } from "react-router-dom";
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
 
 const HeaderContainer = styled.header`
+ @media (max-width: 768px) {
+  padding: 0;
+  align-items: center;
+    .logo{
+      display: none;
+    }
+  }
+  @media (min-width: 768px) {
+    .logo2{
+      display: none;
+    }
+  }
   padding: 1.8rem 0;
   display: flex;
   justify-content: space-between;
@@ -29,6 +42,16 @@ const HeaderContainer = styled.header`
   .logo {
     padding-left: 60px;
   }
+  .logo2{
+    padding-left: 20px;
+    color: #FFCFDA;
+    font-size: 1.5rem;
+    font-weight: bold;
+    .logo-box {
+      display: flex;
+      align-items: center;
+    }
+  }
   .mypage {
     margin-left: 10px;
     padding: 0;
@@ -39,6 +62,9 @@ const HeaderContainer = styled.header`
     `;
 
 const Rightbox = styled.div`
+  @media (max-width: 768px) {
+    display: none;
+  }
   display: flex;
 
   .member {
@@ -56,14 +82,22 @@ const Rightbox = styled.div`
   }
 `;
 
+const MobileBox = styled.div`
+  @media (min-width: 768px) {
+    display: none;
+  }
+  width: 99.8%;
+  background-color: #FFCFDA;
+  height: 40px;
+`;
 const HamburgerBtn = styled.button`
-  margin-top: -5px;
-  margin-right: 60px;
-  margin-left: -10px;
+  margin-top: 5px;
+  margin-right: 20px;
+  /* margin-left: -10px; */
   padding: 0;
-  color: black;
+  color: darkgray;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
   background-color: white;
   cursor: pointer;
   border:none;
@@ -153,11 +187,18 @@ const Header = () => {
   
   return(
     <>
+    {/* <MobileBox /> */}
       <HeaderContainer>
         <div className="logo">
           <Link to="/">
             <img src={Logo} alt="로고" style={{width: "150px", height: "150px"}} />
           </Link>
+        </div>
+        <div className="logo2" onClick={() => navigate("/")}>
+          <div className="logo-box">
+            <img src={Logo} alt="로고" style={{width: "80px", height: "80px"}}/>
+            {/* <p>SWEETKINGDOM</p> */}
+          </div>
         </div>
         <Rightbox>
         {isLogin ? (
@@ -172,12 +213,12 @@ const Header = () => {
               <Link to="/membersignup">회원가입</Link>
             </div>
           )}
-          {isMobile && (
+        </Rightbox>
+        {isMobile && (
             <HamburgerBtn className="HamburgerBtn" onClick={() => setIsSidebar("0")}>
               <MenuIcon style={{ fontSize: 30, marginRight: 10 }} />
             </HamburgerBtn>
           )}
-        </Rightbox>
         </HeaderContainer>
         {!isMobile && (
         <NavContainer>

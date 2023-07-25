@@ -37,6 +37,7 @@ import MyReport from './pages/MyReport';
 import MyBlog from './pages/MyBlog';
 import MemberLoginPage from './pages/MemberLoginPage';
 import MemberSignUpPage from './pages/MemberSignUpPage';
+import SignUpForm from './pages/SignUpForm';
 import PaymentPage from './pages/PaymentPage';
 import Report from './pages/Report';
 import ChallengeMain from './pages/ChallengeMain';
@@ -93,6 +94,7 @@ function App() {
         <Route path='/blog' element={<MyBlog/>}/>
         <Route path='/memberlogin' element={<MemberLoginPage/>}/>
         <Route path='/membersignup' element={<MemberSignUpPage/>}/>
+        <Route path='/signupform' element={<SignUpForm/>}/>
         <Route path='/report' element={<Report/>}/>
         <Route path='/challengeMain' element={<ChallengeMain/>}/>
         <Route path='/admin/manageReview' element={<ManageReview/>}/>

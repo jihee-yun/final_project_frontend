@@ -1,8 +1,13 @@
 /*global kakao */
 import React, { useEffect } from "react";
+import Maker from "../images/maker.png";
 const {kakao} = window;
 
 const KaKaoMap = ({addr, name}) => {
+
+  var imageSrc = 'https://firebasestorage.googleapis.com/v0/b/sweetkingdom-703fb.appspot.com/o/maker.png?alt=media&token=062be435-9fd1-4abb-b474-58c2dc6a5465';
+  var imageSize = new kakao.maps.Size(40, 40); 
+  var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
 
   useEffect(()=> {
     const container = document.getElementById('map');
@@ -26,7 +31,8 @@ const KaKaoMap = ({addr, name}) => {
         // 결과값으로 받은 위치를 마커로 표시합니다
         var marker = new kakao.maps.Marker({
             map: map,
-            position: coords
+            position: coords,
+            image: markerImage
         });
 
         // 인포윈도우로 장소에 대한 설명을 표시합니다

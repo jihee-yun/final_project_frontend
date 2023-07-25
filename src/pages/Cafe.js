@@ -30,6 +30,8 @@ const Box = styled.div`
   display: flex;
   justify-content: space-around;
   gap: 30px;
+  padding-top: 120px;
+  padding-bottom: 120px;
 `;
 
 const CategoryBox = styled.div`

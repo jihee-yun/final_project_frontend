@@ -1,239 +1,125 @@
-import React, {useEffect, useState, useContext} from "react";
+import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import AxiosApi from "../api/AxiosApi";
-import { UserStore } from "../context/UserStore";
-import { storage } from "../utils/Firebase";
-import { ref, getDownloadURL } from "firebase/storage";
 import Header from "../component/Header";
 import Footer from "../component/Footer";
+import user from "../images/user1.png";
+import member from "../images/role-member.png";
 
 const Container = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 50px;
+  margin-top: 100px;
+  /* margin: 0 auto; */
 `;
-const Logo = styled.img`
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  cursor: pointer;
+
+const SelectBox = styled.div`
+   @media (max-width: 768px) {
+    width: 90%;
+    margin: 0 auto;
+  }
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  margin-bottom: 50px;
 `;
-const GoToSignUp = styled.button`
-  margin-top: 10px;
-  background-color: white;
-  border: 0px;
+
+const SelectAuth = styled.div`
+ @media (max-width: 768px) {
+    width: 150px;
+    height: 200px;
+    font-size: 1.2rem;
+  }
+
+  margin: 0 auto;
+  width: 230px;
+  height: 300px;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  box-shadow: 1px 0px 3px lightgray;
+  font-size: 1.8rem;
   font-weight: bold;
+  color: darkgray;
   cursor: pointer;
-`;
 
-const SignupBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 10px;
-  /* border: 1px solid blue; */
-  width: 400px;
-`;
-const TextBox = styled.p`
-  font-size: 1rem;
-`;
-const InputLabel = styled.label`
-  margin-bottom: 5px;
-  width: 70px;
-`;
-const Input = styled.input`
-  margin-left: 10px;
-  margin-bottom: 10px;
-  width: 300px;
-  height: 30px;
-  border: none;
-  border-bottom: 1.5px solid darkgray;
-`;
+  img{
+    @media (max-width: 768px) {
+    margin-top: 60px;
+    width: 50px;
+    height: 50px;
+  }
+    margin-top: 80px;
+    width: 100px;
+    height: 100px;
+  }
 
-const InputGroup = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-bottom: 10px;
-`;
-
-const RadioSelect = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-top: 5px;
-`;
-const RadioLabel = styled.label`
-  margin-right: 10px;
-  width: 100px;
-`;
-const RadioButton = styled.input`
-  margin-right: 5px;
-`;
-const SignupButton = styled.button`
-  border: none;
-  width: 300px;
-  height: 30px;
-  border-radius: 20px;
-  background-color: lightgray;
-  margin-top: 30px;
-  margin-bottom: 10px;
-  color: white;
-  cursor: pointer;
-  &:active {
-    background-color: #FFCFDA;
-    color: white;
-    border-color: #F1D1D1;
+  .box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  transition: all 0.3s;
+  &:hover{
+    transform: scale(1.02);
   }
 `;
 
+const TextBox = styled.p`
+  font-size: 1rem;
+  margin: 0;
+  h5{
+    color: darkgray;
+  }
+`;
 
 const MemberSignUpPage = () => {
   const navigate = useNavigate();
-  // 파이어베이스 이미지 로드용
-  const [imageUrls, setImageUrls] = useState([]);
-  // 성별 저장
-  const [gender, setGender] = useState("MALE");
+
   // 일반 회원, 사업자 회원 구분
-  const [authority, setAuthority] = useState("ROLE_MEMBER");
+  const [authority, setAuthority] = useState("");
 
-  // 파이어베이스 스토리지 이미지 로딩
-  useEffect(() => {
-    const storageIconRef = ref(storage, "essential");
+  console.log(authority);
 
-    Promise.all([
-      getDownloadURL(ref(storageIconRef, "logo.png")),
-    ])
-      .then((urls) => {
-        setImageUrls(urls);
-      })
-      .catch((error) => {
-        console.error("아이콘 이미지 로딩 실패!!", error);
-      });
-  }, []);
-
-  // 성별 라디오 버튼
-  const handleGenderChange = (event) => {
-    setGender(event.target.value);
-  };  
-  // 회원 종류 라디오 버튼
-  const handleAuthTypeChange = (event) => {
-    setAuthority(event.target.value);
-  };
-
-  const handleSignup = async () => {
-    const memberId = document.getElementById("memberId").value;
-    const password = document.getElementById("password").value;
-    const name = document.getElementById("name").value;
-    const phone = document.getElementById("phone").value;
-    const email = document.getElementById("email").value;
-    const birth = document.getElementById("birth").value;
-    const genderGet = gender;
-    const authorityGet = authority;
-
-    try {
-      let rsp;
-      if (authorityGet === "ROLE_USER") {
-        rsp = await AxiosApi.memberSignup(memberId, password, name, phone, email, birth, genderGet, authorityGet);
-      } else if (authorityGet === "ROLE_MEMBER") {
-        rsp = await AxiosApi.memberSignup(memberId, password, name, phone, email, birth, genderGet, authorityGet);
-      }
-      if(rsp.status){
-        //const { memberId } = rsp.data;
-        console.log("회원가입 성공:", rsp.data);
-        navigate("/memberlogin");
-      }
-    } catch (error) {
-      console.error("회원가입 실패:", error);
-    }
-
-
+  const selectAuth = (index) => {
+    if(index === 1) {
+      setAuthority("ROLE_USER")
+    } else setAuthority("ROLE_MEMBER");
   }
 
-
+  useEffect(() => {
+    if (authority !== "") {
+      navigate("/signupform", { state: { authority }});
+    }
+  }, [authority]);
 
   return (
+    <>
+    <Header />
     <Container>
-      <Logo src={imageUrls[0]} alt="반전 로고 이미지" onClick={() => navigate("/")} />
-      <GoToSignUp onClick={() => navigate("/memberlogin")}>로그인 테스트로 이동</GoToSignUp>
-      <SignupBox>
-        <TextBox><h2>SWEET KINGDOM 회원가입</h2></TextBox>
-        <InputGroup>
-          <InputLabel htmlFor="memberId">아이디</InputLabel>
-          <Input id="memberId" type="text" />
-        </InputGroup>
-        <InputGroup>
-          <InputLabel htmlFor="password">비밀번호</InputLabel>
-          <Input id="password" type="password" />
-        </InputGroup>
-        <InputGroup>
-          <InputLabel htmlFor="name">이름</InputLabel>
-          <Input id="name" type="text" />
-        </InputGroup>
-        <InputGroup>
-          <InputLabel htmlFor="phone">핸드폰</InputLabel>
-          <Input id="phone" type="text" />
-        </InputGroup>
-        <InputGroup>
-          <InputLabel htmlFor="email">이메일</InputLabel>
-          <Input id="email" type="text" />
-        </InputGroup>
-        <InputGroup>
-          <InputLabel htmlFor="birth">생년월일</InputLabel>
-          <Input id="birth" type="text" placeholder="ex)2000-01-01" />
-        </InputGroup>
-        <RadioSelect>
-          성별
-          <RadioLabel>
-            <RadioButton
-              type="radio"
-              id="gender"
-              value="MALE"
-              checked={gender === "MALE"}
-              onChange={handleGenderChange}
-            />
-            남성
-          </RadioLabel>
-          <RadioLabel>
-            <RadioButton
-              type="radio"
-              id="gender"
-              value="FEMALE"
-              checked={gender === "FEMALE"}
-              onChange={handleGenderChange}
-            />
-            여성
-          </RadioLabel>
-        </RadioSelect>
-        <RadioSelect>
-          회원 종류
-          <RadioLabel>
-            <RadioButton
-              type="radio"
-              id="authority"
-              value="ROLE_USER"
-              checked={authority === "ROLE_USER"}
-              onChange={handleAuthTypeChange}
-            />
-            일반 회원
-          </RadioLabel>
-          <RadioLabel>
-            <RadioButton
-              type="radio"
-              id="authority"
-              value="ROLE_MEMBER"
-              checked={authority === "ROLE_MEMBER"}
-              onChange={handleAuthTypeChange}
-            />
-            사업자 회원
-          </RadioLabel>
-        </RadioSelect>
-        <SignupButton onClick={handleSignup}>회원가입</SignupButton>
-      </SignupBox>
-      <p>cf&#41; 회원 종류 "사업자 회원" 선택하는 것을 추천</p>
+      <TextBox><h2>SWEET KINGDOM 회원가입</h2></TextBox>
+      <TextBox><h5>해당하는 유형을 선택하여 회원가입을 진행해주세요<br />사업자 회원의 경우 최대 1주일의 심사가 진행됩니다</h5></TextBox>
+      <br /><br />
+      <SelectBox>
+        <SelectAuth onClick={() => selectAuth(1)}>
+          <div className="box">
+            <img src={user} alt="일반 유저" />
+            <p>일반 회원</p>
+          </div>
+        </SelectAuth>
+        <SelectAuth onClick={() => selectAuth(2)}>
+        <div className="box">
+            <img src={member} alt="사업자 유저" />
+            <p>사업자 회원</p>
+          </div>
+        </SelectAuth>
+      </SelectBox>
     </Container>
+    <Footer />
+    </>
   );
 };
 
