@@ -5,8 +5,8 @@ import AxiosApi from "../api/AxiosApi";
 
 
 const Container = styled.div`
-width: 90%;
-height: 500px;
+width: 100%;
+/* height: 1000px; */
 margin-top: 20px;
 display: flex;
 align-items: center;
@@ -16,7 +16,7 @@ flex-direction: column;
 .RankingContainer {
     display: flex;
     width: 95%;
-    height: 400px;
+    /* height: 500px; */
     gap: 10px 1%;
     flex-wrap: wrap;
     justify-content: center;
@@ -35,23 +35,13 @@ const ImgContainer = styled.div`
 position: relative;
 background: linear-gradient(to right, #000, #000);
 width: 100%;
+height: 100%;
 overflow: hidden;
 &:hover .innerContent {
     opacity: 1;
     top: 50%;
 }
-.cafe {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    transform: scale(1.1);
-    transition: all 0.25s linear;
 
-    &:hover {
-        opacity: 0.2;
-        transform: scale(1.25);
-    }
-}
 
 .innerContent {
         width: 80%;
@@ -76,7 +66,23 @@ overflow: hidden;
             font-weight: 300;
         }
     }
+`;
 
+const Image = styled.div`
+    background-image: url(${props => props.image});
+    object-fit: fit;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+    /* object-fit: cover; */
+    transform: scale(1.1);
+    transition: all 0.25s linear;
+
+    &:hover {
+        opacity: 0.2;
+        transform: scale(1.25);
+    }
 `;
 
 const Ranking = () => {
@@ -115,7 +121,7 @@ const Ranking = () => {
                 <div className="RankingItem" key={ranking.id}>
             
             <ImgContainer >
-                    <img src={ranking.thumbnail} alt="카페임시" className="cafe"/>
+                    <Image image={ranking.thumbnail} alt="카페임시" className="cafe"/>
                 <div className="innerContent">
                     <span className="cafeTitle" onClick={()=> console.log(ranking)}>{ranking.cafeName}</span>
                     <span className="overview">{ranking.intro}</span>
