@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import AxiosApi from "../api/AxiosApi";
 import Header from "../component/Header";
 import Footer from "../component/Footer";
 import Policy from "../component/Policy";
+import view from "../images/view.png";
+
 
 const Container = styled.div`
   width: 100%;
@@ -163,6 +165,10 @@ const Hint = styled.div`
   padding-left: 90px;
 `;
 
+const FormBox = styled.div`
+  margin-top: 40px;
+`;
+
 const SignUpForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -196,6 +202,72 @@ const SignUpForm = () => {
 
   // 약관 동의
   const [isChecked, setIsChecked] = useState(false);
+
+  // 가입 약관
+  const [allCheck, setAllCheck] = useState(false);
+  const [checkA, setCheckA] = useState(false);
+  const [checkB, setCheckB] = useState(false);
+  const [checkC, setCheckC] = useState(false);
+  const [checkD, setCheckD] = useState(false);
+  const [showPolicy, setShowPolicy] = useState(false);
+
+  const allBtn = () => {
+    if(allCheck === false) {
+      setCheckA(true)
+      setCheckB(true)
+      setCheckC(true)
+      setCheckD(true)
+    } else {
+      setCheckA(false)
+      setCheckB(false)
+      setCheckC(false)
+      setCheckD(false)
+    }
+  };
+
+  useEffect(() => {
+    if(checkA === true && checkB === true && checkC === true && checkD === true) {
+      setAllCheck(true)
+    } else {
+      setAllCheck(false)
+    }
+  }, [checkA, checkB, checkC, checkD]);
+
+  const BtnA = () => {
+    if(checkA === false) {
+      setCheckA(true) 
+    } else {
+      setCheckA(false)
+    }
+  };
+
+  const BtnB = () => {
+    if(checkB === false) {
+      setCheckB(true) 
+    } else {
+      setCheckB(false)
+    }
+  };
+
+  const BtnC = () => {
+    if(checkC === false) {
+      setCheckC(true) 
+    } else {
+      setCheckC(false)
+    }
+  };
+
+  const BtnD = () => {
+    if(checkD === false) {
+      setCheckD(true) 
+    } else {
+      setCheckD(false)
+    }
+  };
+
+  const handleImageClick = () => {
+    setShowPolicy((prevShowPolicy) => !prevShowPolicy);
+  };
 
   const handleCheckBox = () => {
     setIsChecked(!isChecked);
@@ -422,8 +494,39 @@ const SignUpForm = () => {
             />
             여성
           </RadioLabel>
-        </RadioSelect>
-        {(isChecked && isID && isPw && isConPw && isEmail && isBirth && isPhone && name && gender) ? 
+          </RadioSelect>
+          <FormBox>
+          <form action="" method="post" className="terms">
+            <div className="termsBox">
+              <h4>약관 동의</h4>
+              <div className="termItem">
+                <input type="checkbox" id="allCheck" checked={allCheck} onChange={allBtn}/>
+                <label for="allCheck"><b className="allBtn">전체 동의</b></label>
+              </div> 
+              <hr />
+              <div className="termItem">
+                <input type="checkbox" id="checkA" checked={checkA} onChange={BtnA}/>
+                <label for="checkA">(필수) 서비스 이용약관 동의</label>
+                <img src={view} alt="약관설명" style={{width: "14px", height: "14px"} } onClick={handleImageClick}/>
+                {showPolicy && <Policy />}
+              </div>
+              <div className="termItem">
+                <input type="checkbox" id="checkB" checked={checkB} onChange={BtnB}/>
+                <label for="checkB">(필수) 개인정보 수집 및 이용에 대한 동의</label>
+                {/* <img src={view} alt="약관설명" style={{width: "14px", height: "14px"}}/> */}
+              </div>
+              <div className="termItem">
+                <input type="checkbox" id="checkC" checked={checkC} onChange={BtnC}/>
+                <label for="checkC">(필수) 만 14세 이상입니다.</label>
+              </div>
+              <div className="termItem">
+                <input type="checkbox" id="checkD" checked={checkD} onChange={BtnD}/>
+                <label for="checkD">(선택) 마케팅 수신에 동의합니다.</label>
+              </div>
+            </div>
+            </form>
+          </FormBox>
+        {(checkA && checkB && checkC && isChecked && isID && isPw && isConPw && isEmail && isBirth && isPhone && name && gender) ? 
         (<SignupButton className="active" onClick={handleSignup}>회원가입</SignupButton>):
         (<SignupButton className="inactive">회원가입</SignupButton>)}
         </SignupBox>
