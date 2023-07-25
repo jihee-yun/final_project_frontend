@@ -204,10 +204,10 @@ const Header = () => {
         {isLogin ? (
             <div className="member">
               <p>{userName}님</p>
-              {userAuthoruty === 'ROLE_USER' ? (
-                <button className="mypage" onClick={() => navigate("/mypage")}>회원정보</button>
+              {userAuthoruty === 'ROLE_MEMBER' ? (
+                <button className="mypage" onClick={() => navigate("/businesspage")}>회원정보</button>
               ) : (
-                <button className="mypage" onClick={() => navigate("/businessPage")}>회원정보</button>
+                <button className="mypage" onClick={() => navigate("/mypage")}>회원정보</button>
               )}
               <button className="mypage" onClick={handleLogout}>로그아웃</button>
             </div>
