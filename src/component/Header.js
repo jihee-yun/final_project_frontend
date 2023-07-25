@@ -154,7 +154,7 @@ const Navlink = styled(Link) `
 
 const Header = () => {
   const { isSidebar, setIsSidebar, isLogin, setIsLogin,  userName, setUserName, 
-    setGrantType, setAccessToken,setRefreshToken, setUserNum, setUserAuthoruty}  = useContext(UserContext);
+    setGrantType, setAccessToken,setRefreshToken, setUserNum, userAuthoruty, setUserAuthoruty}  = useContext(UserContext);
   const navigate = useNavigate();
   const [isMobile, setIsMobile] = useState(false);
 
@@ -204,7 +204,11 @@ const Header = () => {
         {isLogin ? (
             <div className="member">
               <p>{userName}님</p>
-              <button className="mypage" onClick={() => navigate("/mypage")}>회원정보</button>
+              {userAuthoruty === 'ROLE_USER' ? (
+                <button className="mypage" onClick={() => navigate("/mypage")}>회원정보</button>
+              ) : (
+                <button className="mypage" onClick={() => navigate("/businessPage")}>회원정보</button>
+              )}
               <button className="mypage" onClick={handleLogout}>로그아웃</button>
             </div>
           ) : (
