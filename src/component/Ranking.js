@@ -1,32 +1,36 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { styled } from "styled-components";
 import AxiosApi from "../api/AxiosApi";
 
 
 const Container = styled.div`
-width: 100%;
-/* height: 1000px; */
-margin-top: 20px;
-display: flex;
-align-items: center;
-flex-direction: column;
-
-
-.RankingContainer {
+    width: 100%;
+    margin-top: 20px;
     display: flex;
-    width: 95%;
-    /* height: 500px; */
-    gap: 10px 1%;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-.RankingItem {
-    /* border: solid; */
-    width: 30%;
-    height: 200px;
-    border-radius: 5px;
-    overflow: hidden;
-    box-shadow: 0px 1px 3px black;
+    align-items: center;
+    flex-direction: column;
+
+    .RankingContainer {
+        @media (max-width: 768px) {
+         gap: 20px;
+        }
+        display: flex;
+        width: 95%;
+
+        gap: 10px 1%;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .RankingItem {
+        @media (max-width: 768px) {
+         width: 40%;
+        }
+      
+        width: 30%;
+        height: 200px;
+        border-radius: 5px;
+        overflow: hidden;
+        box-shadow: 0px 1px 3px black;
     }
 `;
 
@@ -74,7 +78,6 @@ const Image = styled.div`
     background-position: center;
     width: 100%;
     height: 100%;
-    /* object-fit: cover; */
     transform: scale(1.1);
     transition: all 0.25s linear;
 
@@ -105,13 +108,9 @@ const Ranking = () => {
         console.log(cafeRankingInfo);
       }, []);
       
-
-    
     return(
         <>
-        
         <Container >
-    
         <div className="title">
             <h2 >실시간 인기 카페 확인하기</h2>
             </div>
@@ -126,16 +125,11 @@ const Ranking = () => {
                     <span className="overview">{ranking.intro}</span>
                 </div>
             </ImgContainer>
-             
                 </div>
                 ))}
             </div>
-            
         </Container>
-       
-         
         </>
-
     );
 };
 
