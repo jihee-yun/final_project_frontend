@@ -188,7 +188,7 @@ const AxiosApi = {
         name : name,
         email : email
       };
-      return await axios.post(KH_DOMAIN + "/user/findId", data);
+      return await axios.post(KH_DOMAIN + "/member/findId", data);
     },
 
     // 이메일 인증번호 전송
