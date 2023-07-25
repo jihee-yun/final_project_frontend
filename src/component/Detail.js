@@ -3,8 +3,8 @@ import { styled } from "styled-components";
 
 
 const Details = styled.div`
-    width: 300px;
-    height: 500px;
+    width: 10rem;
+    height: 20rem;
     background-color: #FFD0E4;
     border-radius: 10px;
     display: flex;
@@ -32,7 +32,7 @@ const Details = styled.div`
 `;
 
 
-const Detail = () => {
+const Detail = (props) => {
 
     return(
         <>
