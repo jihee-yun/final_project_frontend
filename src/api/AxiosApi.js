@@ -199,16 +199,6 @@ const AxiosApi = {
       return await axios.post(KH_DOMAIN + "/user/findPwEmail", data);
     },
 
-    // 비밀번호 찾기 시 인증 코드 검증
-    verifyVerificationCode : async(email, verifyCode) => {
-      const data = {
-        email : email,
-        verifyCode : verifyCode
-      }
-      return await axios.post(KH_DOMAIN + "/user/verifyVerificationCode", data);
-    },
-
-
     // 사용자 삭제
     deleteUsers : async(memberNum) => {
         return await axios.delete(KH_DOMAIN + `/admin/usermanage/delete/${memberNum}`);

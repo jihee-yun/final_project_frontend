@@ -134,22 +134,22 @@ const FindPw = () => {
     }
   };
 
-  const onClickVerifyCode = async () => {
-    try {
-      // 서버로 입력받은 인증번호와 함께 검증 요청
-      const response = await AxiosApi.verifyVerificationCode(email, verifyCode);
-      if (response.data.success) {
-        // 인증번호 검증 성공
-        setIsCodeVerified(true);
-        console.log("인증번호 검증 성공");
-      } else {
-        // 인증번호 검증 실패
-        console.log("인증번호 검증 실패");
-      }
-    } catch (error) {
-      console.log("인증번호 검증 오류:", error);
-    }
-  };
+  // const onClickVerifyCode = async () => {
+  //   try {
+  //     // 서버로 입력받은 인증번호와 함께 검증 요청
+  //     const response = await AxiosApi.verifyVerificationCode(email, verifyCode);
+  //     if (response.data.success) {
+  //       // 인증번호 검증 성공
+  //       setIsCodeVerified(true);
+  //       console.log("인증번호 검증 성공");
+  //     } else {
+  //       // 인증번호 검증 실패
+  //       console.log("인증번호 검증 실패");
+  //     }
+  //   } catch (error) {
+  //     console.log("인증번호 검증 오류:", error);
+  //   }
+  // };
 
   // 아이디, 이메일 Axios
   const onClickFindPw = async() => {
@@ -226,7 +226,7 @@ const FindPw = () => {
                   onKeyUp={handleOnKeyPress}
                 />
               </div>
-              <button className="loginButton" onClick={onClickVerifyCode}>
+              <button className="loginButton" onClick={onClickSendCode}>
                 인증번호 확인
               </button>
             </>
