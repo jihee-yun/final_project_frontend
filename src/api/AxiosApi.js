@@ -512,6 +512,9 @@ const AxiosApi = {
         Authorization: `${grantType} ${accessToken}`
       }
     });
+  },
+  weatherInfoGet: async(regionList) => {
+    return await axios.get(KH_DOMAIN + `/weather/get?regionList=${regionList}`);
   }
 };
 
