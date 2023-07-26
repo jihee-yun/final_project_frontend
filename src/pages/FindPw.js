@@ -12,8 +12,6 @@ const FindPwBlock = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 100px;
-  margin-right: 30px;
 
   h2 {
     margin-top: 50px;
@@ -132,6 +130,7 @@ const FindPw = () => {
       <>
         <Header />
         <FindPwBlock>
+          <h2>비밀번호 찾기</h2>
         <div className="loginWrapper">
           <div className="loginMain">
             <div className="loginSmallBox">
