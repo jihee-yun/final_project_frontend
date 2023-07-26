@@ -318,6 +318,7 @@ const MyInformation = () => {
             <SpecificBox>
               <InfoType>프로필 이미지 수정</InfoType>
 
+              {/* <InfoChangeButton onClick={handleImageChange}>변경하기</InfoChangeButton> */}
             </SpecificBox>
             <SpecificBox>
               <InfoType>회원 아이디</InfoType>
