@@ -55,6 +55,7 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 import ServiceCenter from './pages/ServiceCenter';
 import ScrollToTop from './utils/ScrollToTop';
 import AdminReg from './pages/AdminReg';
+import PrivateRoute from './utils/PrivateRoute';
 
 function App() {
   return (
@@ -69,22 +70,22 @@ function App() {
         <Route path="/cafe/main" element={<CafeMain/>}/>
         <Route path="/cafe/detail" element={<CafeDetail/>}/>
         <Route path="/cafe/review" element={<CafeReview/>}/>
-        <Route path="/cafe/review/write" element={<CafeReviewWrite/>}/>
-        <Route path="/cafe/review/edit" element={<CafeReviewEdit/>}/>
+        <Route path="/cafe/review/write" element={<PrivateRoute element={<CafeReviewWrite />}/>}/>
+        <Route path="/cafe/review/edit" element={<PrivateRoute element={<CafeReviewEdit />}/>}/>
         <Route path="/guild" element={<Guild/>}/>
         <Route path="/guild/detail" element={<GuildDetail/>}/>
-        <Route path="/createguild" element={<NewGuild/>}/>
-        <Route path="/createguild/second" element={<NewGuildSecond/>}/>
+        <Route path="/createguild" element={<PrivateRoute element={<NewGuild />}/>}/>
+        <Route path="/createguild/second" element={<PrivateRoute element={<NewGuildSecond />}/>}/>
         <Route path='/event' element={<Event/>} />
         <Route path='/findpw' element={<FindPw/>}/>
         <Route path='/admin' element={<Admin/>}/>
-        <Route path='/adminInfo' element={<AdminInfo/>}/>
+        <Route path='/adminInfo' element={<PrivateRoute element={<AdminInfo />}/>}/>
         <Route path='/couponStore' element={<CouponStore/>}/>
         <Route path='/pointStore' element={<PointStore/>}/>
         <Route path='/findId' element={<FindID/>}/>
-        <Route path='/admin/report' element={<AdminReport/>}/>
-        <Route path='/admin/userManage' element={<UserManage/>}/>
-        <Route path='/mypage' element={<MyPage/>}/>
+        <Route path='/admin/report' element={<PrivateRoute element={<AdminReport />}/>}/>
+        <Route path='/admin/userManage' element={<PrivateRoute element={<UserManage />}/>}/>
+        <Route path='/mypage' element={<PrivateRoute element={<MyPage />}/>}/>
         <Route path='/mypage/review' element={<MyReview/>}/>
         <Route path='/mypage/challenge' element={<MyChallenge/>}/>
         <Route path='/mypage/guild' element={<MyGuild/>}/>
