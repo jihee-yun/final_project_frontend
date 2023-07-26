@@ -3,6 +3,7 @@ import styled from "styled-components";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import AvgStar from "../component/AvgStar";
 import Star from "../component/Star";
+import CafeReviewFilter from "../component/CafeReviewFilter";
 import { useLocation, useNavigate } from "react-router-dom";
 import AxiosApi from "../api/AxiosApi";
 import dot from "../images/dots.png";
@@ -161,13 +162,14 @@ const CafeReview = () => {
   // 특정 리뷰 값만 모달창 오픈
   const [openReviewId, setOpenReviewId] = useState(null);
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [category, setCategory] = useState("최신순");
 
   console.log(cafeReviewInfo);
   console.log(userNum);
 
   useEffect(() => {
     const cafeReview = async() => {
-      const response = await AxiosApi.cafeReviewGet(cafeNum);
+      const response = await AxiosApi.cafeReviewGet(cafeNum, category);
       if(response.status === 200) setCafeReviewInfo(response.data);
     };
     cafeReview();
@@ -207,6 +209,11 @@ const CafeReview = () => {
     if(index === 1) {
       navigate(-1);
     } else navigate('/memberlogin')
+  };
+
+  const categoryChange = (e) => {
+    setCategory(e);
+    localStorage.setItem("reviewCategory", e);
   }
 
   return(
@@ -220,6 +227,7 @@ const CafeReview = () => {
     <AvgStar avgStar={star}/>
     <button className="write" onClick={sendCafeNum}>후기 작성</button>
     </div>
+    <CafeReviewFilter onClickCategory={categoryChange}/>
     {cafeReviewInfo && cafeReviewInfo.map(review =>(
     <ReviewBox key={review.id}>
       <div className="review-top">

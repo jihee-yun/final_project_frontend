@@ -78,8 +78,8 @@ const AxiosApi = {
     });
   },
   // 특정 카페 리뷰 조회
-  cafeReviewGet: async(cafeNum) => {
-    return await axios.get(KH_DOMAIN  + `/review/cafeReview?cafeNum=${cafeNum}`);
+  cafeReviewGet: async(cafeNum, category) => {
+    return await axios.get(KH_DOMAIN  + `/review/cafeReview?cafeNum=${cafeNum}&category=${category}`);
   },
   // 리뷰 수정
   editReview: async(cafeNum, reviewNum, content, editScore, url1, url2, grantType, accessToken) => {
