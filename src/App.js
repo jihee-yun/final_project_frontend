@@ -117,7 +117,7 @@ function App() {
         <Route path='/couponPayment' element={<PrivateRoute element={<CouponPayment />}/>}/>
         <Route path='/servicecenter' element={<ServiceCenter/>}/>
         <Route path='/admin/register' element={<PrivateRoute element={<AdminReg />}/>}/>
-        <Route path='/cafesearch' element={<PrivateRoute element={<CafeSearch />}/>}/>
+        <Route path='/cafesearch' element={<CafeSearch />}/>
       </Routes>
     </BrowserRouter>
     </UserStore>
