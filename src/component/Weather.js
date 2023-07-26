@@ -20,6 +20,9 @@ const Container = styled.div`
 `;
 
 const Vertical = styled.div`
+  @media (max-width: 768px) {
+    font-size: .7rem;
+  }
   width: 200px;
   display: flex;
   align-items: center;
@@ -44,7 +47,7 @@ const WeatherBox = styled.div`
   height: 100%;
   display: flex;
   justify-content: center;
-  gap: 100px;
+  gap: 50px;
   img{
     width: 30px;
     height: 30px;

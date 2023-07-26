@@ -528,7 +528,21 @@ const AxiosApi = {
       }
     });
   },
-
+  // 이메일 인증
+  emailCheck: async(email) => {
+    const mailData = {
+      mail: email
+    }
+    return await axios.post(KH_DOMAIN + `/mail/confirm`, mailData);
+  },
+  // 인증번호 확인
+  codeCheck: async(email, code) => {
+    const verifyData = {
+      mail: email,
+      code: code
+    }
+    return await axios.post(KH_DOMAIN + `/mail/verify`, verifyData);
+  }
 
 };
 

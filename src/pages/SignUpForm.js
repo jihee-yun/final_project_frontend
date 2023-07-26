@@ -5,7 +5,9 @@ import AxiosApi from "../api/AxiosApi";
 import Header from "../component/Header";
 import Footer from "../component/Footer";
 import Policy from "../component/Policy";
+import PrivacyPolicy from "../component/PrivacyPolicy";
 import view from "../images/view.png";
+import { async } from "@firebase/util";
 
 
 const Container = styled.div`
@@ -41,11 +43,15 @@ const SignupBox = styled.div`
   align-items: center;
   margin-top: 20px;
   margin-bottom: 50px;
-`;
 
-const PolicyCheck = styled.div`
-  display: flex;
-  margin-bottom: 50px;
+  .check-email{
+    display: none;
+  }
+
+  .check-email2{
+    display: inherit;
+  }
+
 `;
 
 const GroupBox = styled.div`
@@ -97,7 +103,7 @@ const RadioSelect = styled.div`
   }
 `;
 
-const IdCheck = styled.button`
+const Check = styled.button`
   @media (max-width: 768px) {
     right: 0;
   }
@@ -148,11 +154,10 @@ const SignupButton = styled.button`
 `;
 
 const TextBox = styled.p`
-  font-size: 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
   margin: 0;
-  h5{
-    color: darkgray;
-  }
+  padding-bottom: 15px;
 `;
 
 const Hint = styled.div`
@@ -167,6 +172,8 @@ const Hint = styled.div`
 
 const FormBox = styled.div`
   margin-top: 40px;
+  font-size: .8rem;
+  color: darkgray;
 `;
 
 const SignUpForm = () => {
@@ -183,6 +190,8 @@ const SignUpForm = () => {
   const [email, setEmail] = useState("");
   const [birthday, setBirthDay] = useState("");
   const [gender, setGender] = useState("MALE");
+  const [code, setCode] = useState("");
+  const [isEmailVerified, setIsEmailVerified] = useState(false);
 
   // 오류 메세지
   const [idMsg, setIdMsg] = useState("");
@@ -191,6 +200,7 @@ const SignUpForm = () => {
   const [emailMsg, setEmailMsg] = useState("");
   const [birthMsg, setBirthMsg] = useState("");
   const [phoneMsg, setPhoneMsg] = useState("");
+  const [codeMsg, setCodeMsg] = useState("");
 
   // 유효성 검사
   const [isID, setIsID] = useState(false);
@@ -199,6 +209,7 @@ const SignUpForm = () => {
   const [isEmail, setIsEmail] = useState(false);
   const [isBirth, setIsBirth] = useState(false);
   const [isPhone, setIsPhone] = useState(false);
+  const [isCode, setIsCode] = useState(false);
 
   // 약관 동의
   const [isChecked, setIsChecked] = useState(false);
@@ -210,6 +221,7 @@ const SignUpForm = () => {
   const [checkC, setCheckC] = useState(false);
   const [checkD, setCheckD] = useState(false);
   const [showPolicy, setShowPolicy] = useState(false);
+  const [showPrivacy, setShowPrivacy] = useState(false);
 
   const allBtn = () => {
     if(allCheck === false) {
@@ -265,8 +277,13 @@ const SignUpForm = () => {
     }
   };
 
-  const handleImageClick = () => {
-    setShowPolicy((prevShowPolicy) => !prevShowPolicy);
+  const handleImageClick = (index) => {
+    if(index === 1) {
+      setShowPolicy((prevShowPolicy) => !prevShowPolicy);
+    } else if(index === 2) {
+      setShowPrivacy((prevShowPrivacy) => !prevShowPrivacy)
+    }
+    
   };
 
   const handleCheckBox = () => {
@@ -307,6 +324,32 @@ const SignUpForm = () => {
     }else{
         setIdMsg("사용 가능한 아이디입니다.");
         setIsID(true);
+    }
+  }
+
+  // 이메일 인증
+  const onClickEmailCheck = async() => {
+    console.log(email);
+    const response = await AxiosApi.emailCheck(email);
+    console.log(response.data);
+    if(response.data === true) {
+      setIsEmailVerified(true);
+    }
+  }
+
+  const onChangeCode = (e) => {
+    setCode(e.target.value);
+  }
+
+  const onClickCodeCheck = async() => {
+    const response = await AxiosApi.codeCheck(email, code);
+    console.log(response.data);
+    if(response.data === true) {
+      setCodeMsg("인증번호 확인 완료")
+      setIsCode(true);
+    } else {
+      setCodeMsg("인증번호 확인 실패")
+      setIsCode(false);
     }
   }
 
@@ -387,12 +430,6 @@ const SignUpForm = () => {
 
 
   const handleSignup = async() => {
-    // const memberId = document.getElementById("memberId").value;
-    // const password = document.getElementById("password").value;
-    // const name = document.getElementById("name").value;
-    // const phone = document.getElementById("phone").value;
-    // const email = document.getElementById("email").value;
-    // const birth = document.getElementById("birth").value;
   
     try {
       let rsp;
@@ -416,20 +453,20 @@ const SignUpForm = () => {
     <Header />
     <Container>
     <Box>
-    <TextBox><h2>회원가입</h2></TextBox>
-    <Policy />
+    <TextBox>회원가입</TextBox>
+    {/* <Policy />
     <PolicyCheck>
     <label for="myCheckbox">Sweet Kingdom 회원 약관에 동의합니다</label>
     <input type="checkbox" id="myCheckbox" checked={isChecked} onChange={handleCheckBox}/>
-    </PolicyCheck>
-    <SignupBox>
+    </PolicyCheck> */}
+    <SignupBox isEmailVerified={isEmailVerified}>
         <GroupBox>
         <InputGroup>
           <InputLabel htmlFor="memberId">아이디</InputLabel>
           <Input id="memberId" type="text" value={userID} onChange={onChangeId} />
         </InputGroup>
         <Hint>{userID.length > 0 && (<span className={`message ${isID ? 'success' : 'error'}`}>{idMsg}</span>)}</Hint>
-        <IdCheck onClick={onClickIdCheck}>중복확인</IdCheck>
+        <Check onClick={onClickIdCheck}>중복확인</Check>
         </GroupBox>
         <GroupBox>
         <InputGroup>
@@ -458,12 +495,21 @@ const SignUpForm = () => {
         </InputGroup>
         <Hint>{phoneNum.length > 0 && (<span className={`message ${isPhone ? 'success' : 'error'}`}>{phoneMsg}</span>)}</Hint>
         </GroupBox>
-        <GroupBox>
+        <GroupBox >
         <InputGroup>
           <InputLabel htmlFor="email">이메일</InputLabel>
           <Input id="email" type="text" value={email} onChange={onChangeEmail}/>
         </InputGroup>
         <Hint>{email.length > 0 && (<span className={`message ${isEmail ? 'success' : 'error'}`}>{emailMsg}</span>)}</Hint>
+        <Check onClick={onClickEmailCheck}>이메일 인증</Check>
+        </GroupBox>
+        <GroupBox className={isEmailVerified ? "check-email2" : "check-email"}>
+        <InputGroup>
+          <InputLabel htmlFor="code">인증 번호</InputLabel>
+          <Input id="code" type="text" value={code} onChange={onChangeCode}/>
+        </InputGroup>
+        <Hint>{code.length > 0 && (<span className={`message ${isCode ? 'success' : 'error'}`}>{codeMsg}</span>)}</Hint>
+        <Check onClick={onClickCodeCheck}>확인</Check>
         </GroupBox>
         <GroupBox>
         <InputGroup>
@@ -507,13 +553,14 @@ const SignUpForm = () => {
               <div className="termItem">
                 <input type="checkbox" id="checkA" checked={checkA} onChange={BtnA}/>
                 <label for="checkA">(필수) 서비스 이용약관 동의</label>
-                <img src={view} alt="약관설명" style={{width: "14px", height: "14px"} } onClick={handleImageClick}/>
+                <img src={view} alt="약관설명" style={{width: "14px", height: "14px"} } onClick={() => handleImageClick(1)}/>
                 {showPolicy && <Policy />}
               </div>
               <div className="termItem">
                 <input type="checkbox" id="checkB" checked={checkB} onChange={BtnB}/>
                 <label for="checkB">(필수) 개인정보 수집 및 이용에 대한 동의</label>
-                {/* <img src={view} alt="약관설명" style={{width: "14px", height: "14px"}}/> */}
+                <img src={view} alt="약관설명" style={{width: "14px", height: "14px"}} onClick={() => handleImageClick(2)}/>
+                {showPrivacy && <PrivacyPolicy />}
               </div>
               <div className="termItem">
                 <input type="checkbox" id="checkC" checked={checkC} onChange={BtnC}/>
@@ -526,7 +573,7 @@ const SignUpForm = () => {
             </div>
             </form>
           </FormBox>
-        {(checkA && checkB && checkC && isChecked && isID && isPw && isConPw && isEmail && isBirth && isPhone && name && gender) ? 
+        {(checkA && checkB && checkC && isChecked && isID && isPw && isConPw && isEmail && isCode && isBirth && isPhone && name && gender) ? 
         (<SignupButton className="active" onClick={handleSignup}>회원가입</SignupButton>):
         (<SignupButton className="inactive">회원가입</SignupButton>)}
         </SignupBox>
