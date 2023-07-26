@@ -332,6 +332,22 @@ const AxiosApi = {
     return await axios.get(KH_DOMAIN + `/cafe/fourCafes?fourCafes=${fourCafes}`)
   },
 
+  // 룰렛 하루에 한번
+  rouletteSpin: async(memberNum) => {
+    const data = {
+      memberNum: memberNum
+    }
+    return await axios.post(KH_DOMAIN + "/roulette/spin", data);
+  },
+
+    // 룰렛 기록 조회
+    rouletteHistory: async(memberNum) => {
+    const data = {
+      memberNum: memberNum
+    } 
+    return await axios.post(KH_DOMAIN+ `/roulette/history`, data);
+  },
+
   // 랭킹정보 불러오기
     MainInfoGet: async(rankingcard) => {
         return await axios.get(KH_DOMAIN + `/main/rankingcard`)

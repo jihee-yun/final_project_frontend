@@ -116,47 +116,54 @@ const Roulette = () => {
   const { isLogin } = context;
   const [isSpinning, setIsSpinning] = useState(false);
   const [winning, setWinning] = useState(0);
-  const [hasSpunToday, setHasSpunToday] = useState(false);
+  const [canSpin, setCanSpin] = useState(true);
   const {userNum} = context;
   let amount = 0;
 
 
-  const handleStartClick = () => {
+  const handleStartClick = async() => {
     if (!isLogin) {
-      navigate('/memberlogin')
-    } else if (hasSpunToday) {
-      alert('룰렛은 하루에 한번만 돌릴 수 있어요. 내일 다시 도전해주세요!');
+      navigate('/memberlogin');
       return;
     }
-    setIsSpinning(true); // 회전 시작
-  
-    const stopTime = Math.floor(Math.random() * 4) + 3; // 3 ~ 6초 사이 정수값 랜덤으로 멈춤
-  
-    setTimeout(async() => {
-      setIsSpinning(false);
-      showWinning(stopTime); // 당첨 금액 보여줌
-      AxiosApi.pointGet(userNum, amount, "roulette");
 
-    }, stopTime * 1000); // 랜덤 멈추기
-  };
+    const rspHistory = await AxiosApi.rouletteHistory(userNum);
 
-  const checkSpin = () => {
-    const lastSpinTime = localStorage.getItem('rouletteLastSpinTime');
-    if (lastSpinTime) {
-      const today = new Date();
-      const lastSpinDate = new Date(parseInt(lastSpinTime, 10));
-      if (today.toDateString() === lastSpinDate.toDateString()) {
-        setHasSpunToday(true);
-      } else {
-        setHasSpunToday(false);
-      }
+    if (rspHistory.data === true) {
+      alert('룰렛은 하루에 한번만 돌릴 수 있어요!');
+      return;
+    } else {
+      const rspSpin = await AxiosApi.rouletteSpin(userNum);
+      console.log(rspSpin);
+      setIsSpinning(true); // 회전 시작
+      setCanSpin(false)
+    
+      const stopTime = Math.floor(Math.random() * 4) + 3; // 3 ~ 6초 사이 정수값 랜덤으로 멈춤
+    
+      setTimeout(async() => {
+        setIsSpinning(false);
+        showWinning(stopTime); // 당첨 금액 보여줌
+        AxiosApi.pointGet(userNum, amount, "roulette");
+      }, stopTime * 1000); // 랜덤 멈추기
     }
   };
 
-  useEffect(() => {
-    checkSpin();
-  }, []);
+  // useEffect(() => {
+  //   checkSpin();
+  // }, []);
 
+  // const checkSpin = async() => {
+  //   const rsp = await AxiosApi.rouletteSpin(userNum);
+  //   console.log(rsp.data);
+  //   setHasSpunToday(rsp.data.spunToday);
+
+  //   const rspHistory = await AxiosApi.rouletteHistory(userNum, hasSpunToday);
+  //   if(rspHistory.data.length === 0) {
+  //     setHasSpunToday(false);
+  //   } else {
+  //     setHasSpunToday(true);
+  //   }
+  // };
 
   const showWinning = (stopTime) => {
     if (stopTime === 3) {
@@ -169,11 +176,6 @@ const Roulette = () => {
       amount = 500;
     }
     setWinning(amount);
-
-    if (amount > 0) {
-      const currentTime = new Date().getTime();
-      localStorage.setItem('rouletteLastSpinTime', currentTime);
-    }
   };
    
   

@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import AxiosApi from "../api/AxiosApi";
 import { UserContext } from "../context/UserStore";
+import Header from "../component/Header";
+import Footer from "../component/Footer";
 
 // 포인트로 카페 쿠폰 결제하는 상점
 
@@ -200,6 +202,7 @@ const CouponStore = () => {
 
   return(
     <>
+    <Header/>
     <Container>
       <MyPoint>
           {pointInfo && pointInfo.map(item => (
@@ -242,6 +245,7 @@ const CouponStore = () => {
         </div>
       </Notice>
     </Container>
+    <Footer />
     </>
   );
 };
