@@ -259,7 +259,7 @@ const MyReview = () => {
       const rsp = await AxiosApi.reviewGetByDate(userNum, startDate, endDate, grantType, accessToken);
       if (rsp.status === 200) {
         setReviewInfo(rsp.data);
-        console.log(rsp.data[0]);
+        console.log("리뷰 정보 받아오기 성공 " + rsp.data[0]);
       }
     };
     getReviewInfo();

@@ -129,7 +129,7 @@ const SideMenu = () => {
       <NaviButton onClick={()=>navigate("/mypage/challenge")}>참여 챌린지</NaviButton>
       <NaviButton onClick={()=>navigate("/mypage/event")}>참여 이벤트</NaviButton>
       {/* <NaviButton onClick={()=>navigate("/mypage/calendar")}>캘린더</NaviButton> */}
-      <NaviButton onClick={()=>navigate("/mypage/point")}>포인트 내역 / 결제 내역</NaviButton>
+      <NaviButton onClick={()=>navigate("/mypage/point")}>포인트 / 결제 내역</NaviButton>
       {/* <NaviButton onClick={()=>navigate("/mypage/ranking")}>랭킹</NaviButton> */}
       <NaviButton onClick={()=>navigate("/mypage/information")}>회원 정보</NaviButton>
       <NaviButton onClick={()=>navigate("/mypage/report")}>문의 / 신고 내역</NaviButton>

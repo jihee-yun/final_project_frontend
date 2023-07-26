@@ -74,6 +74,7 @@ const ContentBox = styled.div`
   display: flex;
   flex-direction: column;
 `;
+// 번호, 이벤트 내용, 포인트, 날짜
 const ContentTop = styled.div`
   height: 50px;
   display: flex;
@@ -264,7 +265,7 @@ const MyEvent = () => {
       }
     };
     getEventInfo();
-  }, [startDate]);
+  }, [startDate, endDate]);
 
   // 최초 날짜 한 달로 설정
   useEffect(() => {
@@ -392,11 +393,11 @@ const MyEvent = () => {
             <ContentDetail>
               {getCurrentItems().map((item, index) => (
                 <ContentLists key={index}>
-                  <ListNum>{item.eventNum}</ListNum>
-                  <ListTitle>{item.eventContent}</ListTitle>
-                  <ListCafe>{item.eventPoint}</ListCafe>
+                  <ListNum>{item.id}</ListNum>
+                  <ListTitle>{item.pointType}</ListTitle>
+                  <ListCafe>{item.point}</ListCafe>
                   <ListDate>
-                    {new Date(item.writtenTime)
+                    {new Date(item.pointDate)
                       .toISOString()
                       .split("T")[0]}
                   </ListDate>

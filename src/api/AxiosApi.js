@@ -367,6 +367,32 @@ const AxiosApi = {
       }
     });
   },
+  // 회원 번호로 날짜 내의 포인트 충전, 사용 내역 조회
+  getPointByDate : async (userNum, startDate, endDate, grantType, accessToken) => {
+    const checkData = {
+      userNum : userNum,
+      startDate : startDate,
+      endDate : endDate
+    }
+    return await axios.post(`${KH_DOMAIN}/point/getbynumdate`, checkData, {
+      headers: {
+        Authorization: `${grantType} ${accessToken}`
+      }
+    });
+  },
+  // 회원 번호로 날짜 내의 문의, 신고 내역 조회
+  getReportByDate : async (userNum, startDate, endDate, grantType, accessToken) => {
+    const checkData = {
+      userNum : userNum,
+      startDate : startDate,
+      endDate : endDate
+    }
+    return await axios.post(`${KH_DOMAIN}/report/getbynumdate`, checkData, {
+      headers: {
+        Authorization: `${grantType} ${accessToken}`
+      }
+    });
+  },
   // 포인트 충전
   chargePoint: async (userNum, point, grantType, accessToken) => {
     const pointData = {

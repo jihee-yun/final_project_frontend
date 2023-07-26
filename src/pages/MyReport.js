@@ -254,15 +254,15 @@ const MyReport = () => {
 
   // 이벤트(포인트) 데이터 받기
   useEffect(() => {
-    const getEventInfo = async () => {
-      const rsp = await AxiosApi.getEventByDate(userNum, startDate, endDate, grantType, accessToken);
+    const getReportInfo = async () => {
+      const rsp = await AxiosApi.getReportByDate(userNum, startDate, endDate, grantType, accessToken);
       if (rsp.status === 200) {
         setEventInfo(rsp.data);
         console.log("문의, 신고 내역 받기 성공");
         console.log(rsp.data);
       }
     };
-    getEventInfo();
+    getReportInfo();
   }, [startDate]);
 
   // 최초 날짜 한 달로 설정

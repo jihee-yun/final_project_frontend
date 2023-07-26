@@ -53,6 +53,7 @@ const TextBox = styled.p`
 const ContentBox = styled.div`
   width: 90%;
   /* min-width: 500px; */
+  min-height: 600px;
   margin-top: 3%;
   border: 1px solid #F3E1E1;
   border-radius: 15px;

@@ -249,11 +249,11 @@ const MyPoint = () => {
   const {grantType, accessToken, refreshToken, userNum, userName, userAuthority} = useContext(UserContext);
   
   // 포인트, 결제 선택 버튼
-  const [selectedButton, setSelectedButton] = useState("point");
+  // const [selectedButton, setSelectedButton] = useState("point");
   // 포인트, 결제 차이
-  const handleTypeButtonClick = (buttonType) => {
-    setSelectedButton(buttonType);
-  };  
+  // const handleTypeButtonClick = (buttonType) => {
+  //   setSelectedButton(buttonType);
+  // };  
   // 날짜 선택 state
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [showDate, setShowDate] = useState(true);
@@ -285,10 +285,10 @@ const MyPoint = () => {
     setShowDate(!showDate);
   };
 
-  // 리뷰 데이터 받기
+  // 이벤트 데이터 받기
   useEffect(() => {
     const getEventInfo = async () => {
-      const rsp = await AxiosApi.getEventByDate(userNum, startDate, endDate, grantType, accessToken);
+      const rsp = await AxiosApi.getPointByDate(userNum, startDate, endDate, grantType, accessToken);
       if (rsp.status === 200) {
         setEventInfo(rsp.data);
         console.log("포인트/결제 내역 받기 성공");
@@ -296,7 +296,7 @@ const MyPoint = () => {
       }
     };
     getEventInfo();
-  }, [startDate]);
+  }, [startDate, endDate]);
 
   // 최초 날짜 한 달로 설정
   useEffect(() => {
@@ -389,7 +389,7 @@ const MyPoint = () => {
       <Container>
         <SideMenu />
         <Detail>
-          <RowBox>
+          {/* <RowBox>
             <TypeButton
               selected={selectedButton === "point"}
               onClick={() => handleTypeButtonClick("point")}
@@ -402,9 +402,9 @@ const MyPoint = () => {
               >
               결제 내역
             </TypeButton>
-          </RowBox>
-          {selectedButton === "point" ? (
-          <>
+          </RowBox> */}
+          {/* {selectedButton === "point" ? (
+          <> */}
             <SelectBox>
               <SelectButton onClick={handleDateAll}>전체</SelectButton>
               <SelectButton onClick={handleDateWeek}>일주일</SelectButton>
@@ -441,11 +441,11 @@ const MyPoint = () => {
               <ContentDetail>
                 {getCurrentItems().map((item, index) => (
                   <ContentLists key={index}>
-                    <ListNum>{item.eventNum}</ListNum>
-                    <ListTitle>{item.eventContent}</ListTitle>
-                    <ListCafe>{item.eventPoint}</ListCafe>
+                    <ListNum>{item.id}</ListNum>
+                    <ListTitle>{item.pointType}</ListTitle>
+                    <ListCafe>{item.point}</ListCafe>
                     <ListDate>
-                      {new Date(item.writtenTime)
+                      {new Date(item.pointDate)
                         .toISOString()
                         .split("T")[0]}
                     </ListDate>
@@ -489,7 +489,7 @@ const MyPoint = () => {
                 </SuperRightButton>
               </NumberSelectBox>
             </ContentBox>
-            </>
+            {/* </>
             ) : (
             <>
             <SelectBox>
@@ -577,7 +577,7 @@ const MyPoint = () => {
                 </NumberSelectBox>
               </ContentBox>
               </>
-            )}
+            )} */}
         </Detail>
       </Container>
       <Footer />
