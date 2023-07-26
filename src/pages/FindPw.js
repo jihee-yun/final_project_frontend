@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import AxiosApi from "../api/AxiosApi";
 import MessageModal from "../component/MessageModal";
@@ -98,7 +97,7 @@ const FindPw = () => {
 
   const generateRandomPassword = () => {
     const length = 10;
-    const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+"; // Characters to use
+    const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     let password = "";
     for (let i = 0; i < length; i++) {
       const randomIndex = Math.floor(Math.random() * charset.length);
@@ -114,7 +113,7 @@ const FindPw = () => {
         setFindPwSuccess(true);
         const temporaryPassword = generateRandomPassword();
         setFindPw(temporaryPassword); 
-        console.log("임시 비밀번호:", temporaryPassword);
+        console.log("임시 비밀번호 : ", temporaryPassword);
       } else {
         setFindPwFail(true);
         console.log("일치하는 회원정보가 없습니다.");
@@ -168,7 +167,6 @@ const FindPw = () => {
             <button className="loginButton" onClick={onClickFindPw}>
               비밀번호 찾기
             </button>
-            {findPwFail && <div className="error-message">일치하는 회원정보가 없습니다.</div>}
           </div>
         </div>
         {/* MessageModal 컴포넌트 등록 */}
