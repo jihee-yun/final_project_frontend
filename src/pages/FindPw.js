@@ -74,7 +74,7 @@ const FindPwBlock = styled.div`
 
 const FindPw = () => {
   const [email, setEmail] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [phone, setPhone] = useState("");
   const [name, setName] = useState("");
 
   const [findPwSuccess, setFindPwSuccess] = useState(false);
@@ -88,7 +88,7 @@ const FindPw = () => {
 
   const onChangePhoneNumber = (e) => {
     const phoneNumberNow = e.target.value;
-    setPhoneNumber(phoneNumberNow);
+    setPhone(phoneNumberNow);
   };
 
   const onChangeName = (e) => {
@@ -110,7 +110,7 @@ const FindPw = () => {
 
   const onClickFindPw = async () => {
     try {
-      const response = await AxiosApi.findPw(email, phoneNumber, name); 
+      const response = await AxiosApi.findPw(email, phone, name); 
       if (response.data.success) {
         setFindPwSuccess(true);
         const temporaryPassword = generateRandomPassword();
@@ -149,7 +149,7 @@ const FindPw = () => {
             <div className="loginSmallBox">
               <input
                 type="text"
-                value={phoneNumber}
+                value={phone}
                 className="loginInput"
                 placeholder="전화번호"
                 onChange={onChangePhoneNumber}

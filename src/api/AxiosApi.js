@@ -174,10 +174,10 @@ const AxiosApi = {
   },
 
   // 비밀번호 찾기
-  findPw: async(email, phoneNumber, name) => {
+  findPw: async(email, phone, name) => {
     const data = { 
         email : email,
-        phoneNumber : phoneNumber,
+        phone : phone,
         name : name
     };
     return await axios.post(KH_DOMAIN + "/member/findPw", data);
