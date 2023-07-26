@@ -12,7 +12,7 @@ const PrivateRoute = ({ element: Component }) => {
   // 로그인이 되어 있으면 해당 컴포넌트를 렌더링, 그렇지 않으면 로그인 페이지로 리다이렉트
   if (accessToken === null) {
     alert('접근할 수 없는 페이지입니다.');
-    return <Navigate to="/memberlogin" />;
+    return <Navigate to="/" />;
   }
   return Component;
 };

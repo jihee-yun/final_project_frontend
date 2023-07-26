@@ -80,42 +80,42 @@ function App() {
         <Route path='/findpw' element={<FindPw/>}/>
         <Route path='/admin' element={<Admin/>}/>
         <Route path='/adminInfo' element={<PrivateRoute element={<AdminInfo />}/>}/>
-        <Route path='/couponStore' element={<CouponStore/>}/>
-        <Route path='/pointStore' element={<PointStore/>}/>
+        <Route path='/couponStore' element={<PrivateRoute element={<CouponStore />}/>}/>
+        <Route path='/pointStore' element={<PrivateRoute element={<PointStore />}/>}/>
         <Route path='/findId' element={<FindID/>}/>
         <Route path='/admin/report' element={<PrivateRoute element={<AdminReport />}/>}/>
         <Route path='/admin/userManage' element={<PrivateRoute element={<UserManage />}/>}/>
         <Route path='/mypage' element={<PrivateRoute element={<MyPage />}/>}/>
-        <Route path='/mypage/review' element={<MyReview/>}/>
-        <Route path='/mypage/challenge' element={<MyChallenge/>}/>
-        <Route path='/mypage/guild' element={<MyGuild/>}/>
-        <Route path='/mypage/event' element={<MyEvent/>}/>
-        <Route path='/mypage/calendar' element={<MyCalendar/>}/>
-        <Route path='/mypage/point' element={<MyPoint/>}/>
-        <Route path='/mypage/ranking' element={<MyRanking/>}/>
-        <Route path='/mypage/information' element={<MyInformation/>}/>
-        <Route path='/mypage/report' element={<MyReport/>}/>
-        <Route path='/mypage/payment' element={<PaymentPage/>}/>
-        <Route path='/businesspage' element={<BusinessPage/>}/>
-        <Route path='/businesspage/cafe' element={<BusinessCafe/>}/>
-        <Route path='/businesspage/Challenge' element={<BusinessChallenge/>}/>
-        <Route path='/businesspage/event' element={<BusinessEvent/>}/>
-        <Route path='/businesspage/point' element={<BusinessPoint/>}/>
-        <Route path='/businesspage/report' element={<BusinessReport/>}/>
-        <Route path='/businesspage/review' element={<BusinessReview/>}/>
-        <Route path='/businesspage/information' element={<BusinessInformation/>}/>
-        <Route path='/blog' element={<MyBlog/>}/>
+        <Route path='/mypage/review' element={<PrivateRoute element={<MyReview />}/>}/>
+        <Route path='/mypage/challenge' element={<PrivateRoute element={<MyChallenge />}/>}/>
+        <Route path='/mypage/guild' element={<PrivateRoute element={<MyGuild />}/>}/>
+        <Route path='/mypage/event' element={<PrivateRoute element={<MyEvent />}/>}/>
+        <Route path='/mypage/calendar' element={<PrivateRoute element={<MyCalendar />}/>}/>
+        <Route path='/mypage/point' element={<PrivateRoute element={<MyPoint />}/>}/>
+        <Route path='/mypage/ranking' element={<PrivateRoute element={<MyRanking />}/>}/>
+        <Route path='/mypage/information' element={<PrivateRoute element={<MyInformation />}/>}/>
+        <Route path='/mypage/report' element={<PrivateRoute element={<MyReport />}/>}/>
+        <Route path='/mypage/payment' element={<PrivateRoute element={<PaymentPage />}/>}/>
+        <Route path='/businesspage' element={<PrivateRoute element={<BusinessPage />}/>}/>
+        <Route path='/businesspage/cafe' element={<PrivateRoute element={<BusinessCafe />}/>}/>
+        <Route path='/businesspage/Challenge' element={<PrivateRoute element={<BusinessChallenge />}/>}/>
+        <Route path='/businesspage/event' element={<PrivateRoute element={<BusinessEvent />}/>}/>
+        <Route path='/businesspage/point' element={<PrivateRoute element={<BusinessPoint />}/>}/>
+        <Route path='/businesspage/report' element={<PrivateRoute element={<BusinessReport />}/>}/>
+        <Route path='/businesspage/review' element={<PrivateRoute element={<BusinessReview />}/>}/>
+        <Route path='/businesspage/information' element={<PrivateRoute element={<BusinessInformation />}/>}/>
+        <Route path='/blog' element={<PrivateRoute element={<MyBlog />}/>}/>
         <Route path='/memberlogin' element={<MemberLoginPage/>}/>
         <Route path='/membersignup' element={<MemberSignUpPage/>}/>
         <Route path='/signupform' element={<SignUpForm/>}/>
         <Route path='/report' element={<Report/>}/>
         <Route path='/challengeMain' element={<ChallengeMain/>}/>
-        <Route path='/admin/manageReview' element={<ManageReview/>}/>
+        <Route path='/admin/manageReview' element={<PrivateRoute element={<ManageReview />}/>}/>
         <Route path='/quizMain' element={<QuizMain/>}/>
-        <Route path='/payComplete' element={<PayComplete/>}/>
-        <Route path='/couponPayment' element={<CouponPayment/>}/>
+        <Route path='/payComplete' element={<PrivateRoute element={<PayComplete />}/>}/>
+        <Route path='/couponPayment' element={<PrivateRoute element={<CouponPayment />}/>}/>
         <Route path='/servicecenter' element={<ServiceCenter/>}/>
-        <Route path='/admin/register' element={<AdminReg/>}/>
+        <Route path='/admin/register' element={<PrivateRoute element={<AdminReg />}/>}/>
       </Routes>
     </BrowserRouter>
     </UserStore>
