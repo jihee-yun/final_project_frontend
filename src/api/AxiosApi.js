@@ -178,10 +178,10 @@ const AxiosApi = {
       email : email,
       verificationCode : verificationCode
     }
-    return await axios.post(KH_DOMAIN + "/mail/confirm", data);
+    return await axios.post(KH_DOMAIN + "/mail/verify", data);
   },
 
-  
+
 
   // 비밀번호 찾기
   findPw: async(email, phone, name) => {
