@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../images/logo.png";
@@ -9,7 +9,8 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import AxiosApi from "../api/AxiosApi";
 import Modal from "../utils/Modal2";
 import CompleteModal from "../utils/CompleteModal";
-import { UserContext } from "../context/UserStore";
+// import Header from "../component/Header";
+// import Footer from "../component/Footer";
 
 const Container = styled.div`
   @media (max-width: 430px) {
@@ -127,16 +128,15 @@ const Input = styled.input`
 `;
 
 const NewGuildSecond = () => {
-  const context = useContext(UserContext);
-  const { grantType, accessToken, userNum } = context; 
+  // const context = useContext(UserContext);
+  // const { grantType, accessToken, userNum } = context; 
+  const grantType = localStorage.getItem("grantType");
+  const accessToken = localStorage.getItem("accessToken")
+  const userNum = localStorage.getItem("userNum");
   const navigate = useNavigate();
   const location = useLocation();
   const {region, guildName, guildIntro, guildDetailIntro, category} = location.state;
-
   const [isModalOpen, setModalOpen] = useState(false);
-
-  console.log(userNum, grantType, accessToken);
-
 
   // 인풋으로 값 입력받기
   const [meetDay, setMeetDay] = useState("");

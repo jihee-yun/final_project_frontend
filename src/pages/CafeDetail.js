@@ -12,8 +12,8 @@ import AxiosApi from "../api/AxiosApi";
 import KaKaoMap from "../utils/KaKaoMap";
 import AvgStar from "../component/AvgStar";
 import CafeLike from "../component/CafeLike";
-// import Header from "../now/component/Header";
-// import Footer from "../now/component/Footer";
+import Header from "../component/Header";
+import Footer from "../component/Footer";
 
 const Container = styled.div`
   @media (max-width: 768px) {
@@ -140,9 +140,9 @@ const Container = styled.div`
 
 const CafeDetail = () => {
   const navigate = useNavigate();
-  const context = useContext(UserContext);
-  const { userNum } = context; 
-
+  // const context = useContext(UserContext);
+  // const { userNum } = context; 
+  const userNum = localStorage.getItem("userNum");
   const cafeNum = localStorage.getItem("cafeNum");
 
   // 카페 디테일 정보 받아오기
@@ -162,10 +162,10 @@ const CafeDetail = () => {
 
   return(
     <>
-    {/* <Header /> */}
+    <Header />
     {detailInfo && detailInfo.map(cafe =>(
     <Container key={cafe.id}>
-    <Link to="/cafe/main" style={{ textDecoration: "none", color: "inherit"}}><img src={logo} alt="스위트킹덤로고" /></Link>
+    {/* <Link to="/cafe/main" style={{ textDecoration: "none", color: "inherit"}}><img src={logo} alt="스위트킹덤로고" /></Link> */}
     <div className="top">
       <div className="cafe-name">
         <h1>{cafe.cafeName}</h1>
@@ -204,7 +204,7 @@ const CafeDetail = () => {
     </div>
     </Container>
     ))}
-    {/* <Footer /> */}
+    <Footer />
     </>
   );
 };

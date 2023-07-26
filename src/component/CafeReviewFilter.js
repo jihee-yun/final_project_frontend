@@ -17,6 +17,7 @@ const Box = styled.div`
     text-align: center;
     width: 50px;
     height: 20px;
+    cursor: pointer;
   }
 
   .selected {

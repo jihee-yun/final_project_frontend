@@ -30,12 +30,16 @@ const Like = styled.div`
   }
 `;
 
-const CafeReviewLike = ({memNum, reviewId, likeCount}) => {
-  const context = useContext(UserContext);
-  const { grantType, accessToken } = context;
+const CafeReviewLike = ({reviewId, likeCount}) => {
+  // const context = useContext(UserContext);
+  // const { grantType, accessToken } = context;
   const navigate = useNavigate("");
-  const [currentLikeCount, setCurrentLikeCount] = useState(likeCount);
 
+  const grantType = localStorage.getItem("grantType");
+  const accessToken = localStorage.getItem("accessToken")
+  const memNum = localStorage.getItem("userNum");
+  
+  const [currentLikeCount, setCurrentLikeCount] = useState(likeCount);
   const [isModalOpen, setModalOpen] = useState(false);
 
   const changeLikeCount = async(memNum, id) => {

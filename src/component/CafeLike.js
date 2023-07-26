@@ -12,13 +12,15 @@ const LikeBox = styled.div`
   padding-top: 3px;
 `;
 
-const CafeLike = ({cafeNum, memNum}) => {
-  const context = useContext(UserContext);
-  const { grantType, accessToken } = context;
+const CafeLike = ({cafeNum}) => {
+  // const context = useContext(UserContext);
+  // const { grantType, accessToken } = context;
   const navigate = useNavigate("");
+  const grantType = localStorage.getItem("grantType");
+  const accessToken = localStorage.getItem("accessToken");
+  const memNum = localStorage.getItem("userNum");
 
   const [isModalOpen, setModalOpen] = useState(false);
-
   const [currentState, setCurrentState] = useState("false")
 
   const changeLike = async(cafeNum, memNum) => {

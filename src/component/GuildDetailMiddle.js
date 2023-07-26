@@ -155,11 +155,15 @@ const Middle = styled.div`
 `;
 
 const GuildDetailMiddle = ({guildNum, guildInfo}) => {
-  const context = useContext(UserContext);
-  const { userNum, grantType, accessToken } = context;
+  // const context = useContext(UserContext);
+  // const { userNum, grantType, accessToken } = context;
   const navigate = useNavigate("");
   const [modalOpen, setModalOpen] = useState(null);
   const [isTrue, setIsTrue] = useState("");
+
+  const grantType = localStorage.getItem("grantType");
+  const accessToken = localStorage.getItem("accessToken")
+  const userNum = localStorage.getItem("userNum");
 
   // 인원 마감 버튼
   const { limitMember, memberNumList } = guildInfo[0];

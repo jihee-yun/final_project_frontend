@@ -84,8 +84,12 @@ const Detail = styled.textarea`
 `;
 
 const CafeReviewWrite = () => {
-  const context = useContext(UserContext);
-  const { userNum, grantType, accessToken } = context;
+  // const context = useContext(UserContext);
+  // const { userNum, grantType, accessToken } = context;
+  const grantType = localStorage.getItem("grantType");
+  const accessToken = localStorage.getItem("accessToken")
+  const userNum = localStorage.getItem("userNum");
+  
   const navigate = useNavigate();
   const location = useLocation();
   const cafeNum = location.state && location.state.cafeNum;

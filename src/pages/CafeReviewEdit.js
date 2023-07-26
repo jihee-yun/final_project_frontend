@@ -83,15 +83,17 @@ const Detail = styled.textarea`
 `;
 
 const CafeReviewEdit = () => {
-  const context = useContext(UserContext);
-  const { grantType, accessToken } = context;
+  // const context = useContext(UserContext);
+  // const { grantType, accessToken } = context;
+  const grantType = localStorage.getItem("grantType");
+  const accessToken = localStorage.getItem("accessToken")
+
   const navigate = useNavigate();
   const location = useLocation();
   const selectInfo = location.state && location.state.selectInfo;
   const cafeNum = location.state && location.state.cafeNum;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const [score, setScore] = useState("");
   const [content, setContent] = useState(selectInfo?.[0]?.content);
 

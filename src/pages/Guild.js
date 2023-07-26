@@ -80,8 +80,9 @@ const GuildBox = styled.div`
 
 const Guild = () => {
   const navigate = useNavigate();
-  const context = useContext(UserContext);
-  const { userNum } = context;
+  // const context = useContext(UserContext);
+  // const { userNum } = context;
+  const userNum = localStorage.getItem("userNum");
 
   const [allGuildInfo, setAllGuildInfo] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);

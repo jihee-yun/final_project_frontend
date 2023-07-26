@@ -38,11 +38,14 @@ const Box = styled.div`
 `;
 
 const CafeReviewModal = ({id, reviewInfo, cafeNum, isModalOpen}) => {
-  const context = useContext(UserContext);
-  const { grantType, accessToken } = context;
+  // const context = useContext(UserContext);
+  // const { grantType, accessToken } = context;
   const navigate = useNavigate();
   const selectInfo = reviewInfo.filter(review => review.id === id);
   
+  const grantType = localStorage.getItem("grantType");
+  const accessToken = localStorage.getItem("accessToken")
+
   const editReview = async() => {
     navigate("/cafe/review/edit", {state: {cafeNum, selectInfo}});
   }

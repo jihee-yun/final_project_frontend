@@ -12,6 +12,8 @@ import CafeReviewLike from "../component/CafeReviewLike";
 import Modal from "../utils/Modal2";
 import CompleteModal from "../utils/CompleteModal";
 import { UserContext } from "../context/UserStore";
+import Header from "../component/Header";
+import Footer from "../component/Footer";
 
 const Container = styled.div`
   @media (max-width: 768px) {
@@ -148,12 +150,14 @@ const Bar = styled.div`
 `;
 
 const CafeReview = () => {
-  const context = useContext(UserContext);
-  const { userNum } = context;
+  // const context = useContext(UserContext);
+  // const { userNum } = context;
   const navigate = useNavigate();
   const location = useLocation();
   const info = location.state;
   const cafeNum = info[0].id;
+
+  const userNum = localStorage.getItem("userNum");
 
   // 특정 카페 리뷰 조회
   const [cafeReviewInfo, setCafeReviewInfo] = useState("");
@@ -164,16 +168,19 @@ const CafeReview = () => {
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
   const [category, setCategory] = useState("최신순");
 
+  localStorage.setItem("reviewCategory", category);
+  const selectCategory = localStorage.getItem("reviewCategory");
+
+  console.log(selectCategory);
   console.log(cafeReviewInfo);
-  console.log(userNum);
 
   useEffect(() => {
     const cafeReview = async() => {
-      const response = await AxiosApi.cafeReviewGet(cafeNum, category);
+      const response = await AxiosApi.cafeReviewGet(cafeNum, selectCategory);
       if(response.status === 200) setCafeReviewInfo(response.data);
     };
     cafeReview();
-  }, [cafeNum]);
+  }, [cafeNum, selectCategory]);
   
   // 평균 별점 점수 전달
   const star = cafeReviewInfo.length > 0 ? cafeReviewInfo[0].avgScore : 0;
@@ -218,9 +225,10 @@ const CafeReview = () => {
 
   return(
     <>
+    <Header />
     <Container>
     <Box>
-    <div className="back" onClick={prevPage}><ArrowBackIosIcon style={{width: "18px", height: "18px"}}/></div>
+    <div className="back" onClick={prevPage}><ArrowBackIosIcon style={{width: "18px", height: "18px", marginLeft:"5px"}}/></div>
     <br /><br />
     <div className="count-review"><p>총 {count}개의 후기</p></div>
     <div className="top">
@@ -258,6 +266,7 @@ const CafeReview = () => {
       <CompleteModal content={userNum !== 0 ? "리뷰가 삭제되었습니다" : "로그인이 필요합니다. 로그인 페이지로 이동할까요?"} maxCharacters={userNum !== 0 ? 0 : 11}/>
     </Modal>
     </Container>
+    <Footer />
     </>
   );
 };
