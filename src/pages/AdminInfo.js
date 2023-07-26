@@ -122,17 +122,17 @@ const AdminInfo = () => {
         </div>
       </div>
 
-      <div className="row">
+      {/* <div className="row">
         <div onClick={handleDelete} className="Delete">
           <img src={Delete} alt="Delete"/>
           <span>삭제</span>
-        </div>
+        </div> */}
 
         <div onClick={handleReport} className="report">
           <img src={report} alt="report"/>
           <span>신고 내역</span>
         </div>
-      </div>
+
     </InfoBlock>
   );
 };

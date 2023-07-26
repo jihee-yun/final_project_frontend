@@ -97,8 +97,7 @@ const FindPw = () => {
   };
 
   const generateRandomPassword = () => {
-    // Function to generate a random temporary password
-    const length = 10; // Length of the temporary password
+    const length = 10;
     const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+"; // Characters to use
     let password = "";
     for (let i = 0; i < length; i++) {

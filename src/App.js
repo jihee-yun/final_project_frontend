@@ -21,7 +21,6 @@ import AdminInfo from './pages/AdminInfo';
 import CouponStore from './pages/CouponStore';
 import PointStore from './pages/PointStore';
 import FindID from './pages/FindID';
-import AdminDelete from './pages/AdminDelete';
 import AdminReport from './pages/AdminReport';
 import UserManage from './pages/UserManage';
 import MyPage from './pages/MyPages';
@@ -84,7 +83,6 @@ function App() {
         <Route path='/couponStore' element={<CouponStore/>}/>
         <Route path='/pointStore' element={<PointStore/>}/>
         <Route path='/findId' element={<FindID/>}/>
-        <Route path='/admin/delete' element={<AdminDelete/>}/>
         <Route path='/admin/report' element={<AdminReport/>}/>
         <Route path='/admin/userManage' element={<UserManage/>}/>
         <Route path='/mypage' element={<MyPage/>}/>
