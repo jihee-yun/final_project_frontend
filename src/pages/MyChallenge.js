@@ -227,7 +227,7 @@ const MyChallenge = () => {
         </Detail>
       </Container>
       <Footer />
-      <ChatBot/>    
+      {/* <ChatBot/> */}
     </OutBox>
   );
 };

@@ -196,7 +196,7 @@ const MyGuild = () => {
         </Detail>
       </Container>
       <Footer />
-      <ChatBot/>    
+      {/* <ChatBot/> */}
     </OutBox>
   );
 };

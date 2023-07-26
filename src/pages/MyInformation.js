@@ -391,7 +391,7 @@ const MyInformation = () => {
         </Detail>
       </Container>
       <Footer />
-      <ChatBot/>    
+      {/* <ChatBot/> */}
     </OutBox>  
   );
 };

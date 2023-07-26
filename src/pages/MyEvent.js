@@ -444,7 +444,7 @@ const MyEvent = () => {
         </Detail>
       </Container>
       <Footer />
-      <ChatBot/>    
+      {/* <ChatBot/> */}
     </OutBox>
   );
 };

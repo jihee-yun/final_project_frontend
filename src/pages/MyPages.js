@@ -20,7 +20,7 @@ const Container = styled.div`
 `;
 // 세부 페이지
 const Detail = styled.div`
-  width: 100%;
+  width: 95%;
   max-width: 1000px;
   min-width: 400px;
   min-height: 600px;
@@ -47,8 +47,7 @@ const SquareBox = styled.div`
   min-width: 220px;
   height: 300px;
   margin-top: 2%;
-  margin-bottom: -2%;
-  border: 2px solid #F3E1E1;
+  border: 1px solid #AE7C7C;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
@@ -96,13 +95,17 @@ const More = styled.p`
 const BoxContent = styled.div`
   width: 90%;
   height: 75%;
-  border: 1px solid blue;
+  border: 1px solid #F1D1D1;
 `;
 // const BoxContentLong = styled.div`
 //   width: 90%;
 //   height: 75%;
 //   border: 1px solid blue;
 // `;
+// 6가지 박스 내부의 내역들 나열
+const ContrntList = styled.p`
+  margin-left: 5px;
+`;
 
 
 
@@ -118,7 +121,7 @@ const MyPage = () => {
   useEffect(() => {
     const fetchMemberInfo = async () => {
       try {
-        const rsp = await AxiosApi.getMemberInfo(userNum, grantType, accessToken);
+        const rsp = await AxiosApi.getMemberAllInfo(userNum, grantType, accessToken);
         if (rsp.status) {
           setMemberInfo(rsp.data[0]);
           console.log("마이페이지 유저 정보 가져오기 성공: ", rsp.data[0])
@@ -144,21 +147,39 @@ const MyPage = () => {
               <Title>작성 리뷰</Title>
               <More onClick={()=>navigate("/mypage/review")}>더 보기</More>
             </BoxTitle>
-            <BoxContent></BoxContent>
+            <BoxContent>
+            {
+              memberInfo?.reviewContents?.map((reviewContents, index) => (
+                <ContrntList key={index}>{reviewContents}</ContrntList>
+              ))
+            }
+            </BoxContent>
+          </SquareBox>
+          <SquareBox>
+            <BoxTitle>
+              <Title>참여 길드</Title>
+              <More onClick={()=>navigate("/mypage/guild")}>더 보기</More>
+            </BoxTitle>
+            <BoxContent>
+            {
+              memberInfo?.guildNames?.map((guildName, index) => (
+                <ContrntList key={index}>{guildName}</ContrntList>
+              ))
+            }
+            </BoxContent>
           </SquareBox>
           <SquareBox>
             <BoxTitle>
               <Title>참여 챌린지</Title>
               <More onClick={()=>navigate("/mypage/challenge")}>더 보기</More>
             </BoxTitle>
-            <BoxContent></BoxContent>
-          </SquareBox>
-          <SquareBox>
-            <BoxTitle>
-              <Title>참여 길드</Title>
-              <More onClick={()=>navigate("/mypage/somoim")}>더 보기</More>
-            </BoxTitle>
-            <BoxContent></BoxContent>
+            <BoxContent>
+            {
+              memberInfo?.challengeNames?.map((challengeNames, index) => (
+                <ContrntList key={index}>{challengeNames}</ContrntList>
+              ))
+            }
+            </BoxContent>
           </SquareBox>
         {/* </LineBox> */}
         {/* <LineBox> */}
@@ -167,21 +188,39 @@ const MyPage = () => {
               <Title>참여 이벤트</Title>
               <More onClick={()=>navigate("/mypage/event")}>더 보기</More>
             </BoxTitle>
-            <BoxContent></BoxContent>
+            <BoxContent>
+            {
+              memberInfo?.pointTypes?.map((pointTypes, index) => (
+                <ContrntList key={index}>{pointTypes}</ContrntList>
+              ))
+            }
+            </BoxContent>
           </SquareBox>
           <SquareBox>
             <BoxTitle>
-              <Title>결제/포인트</Title>
+              <Title>포인트 / 결제</Title>
               <More onClick={()=>navigate("/mypage/point")}>더 보기</More>
             </BoxTitle>
-            <BoxContent></BoxContent>
+            <BoxContent>
+            {
+              memberInfo?.paymentTypes?.map((paymentType, index) => (
+                <ContrntList key={index}>{paymentType}</ContrntList>
+              ))
+            }
+            </BoxContent>
           </SquareBox>
           <SquareBox>
             <BoxTitle>
-              <Title>문의/신고</Title>
+              <Title>문의 / 신고</Title>
               <More onClick={()=>navigate("/mypage/report")}>더 보기</More>
             </BoxTitle>
-            <BoxContent></BoxContent>
+            <BoxContent>
+            {
+              memberInfo?.reportTitles?.map((reportTitles, index) => (
+                <ContrntList key={index}>{reportTitles}</ContrntList>
+              ))
+            }
+            </BoxContent>
           </SquareBox>
         {/* </LineBox> */}
         {/* <LineBox>
@@ -203,7 +242,7 @@ const MyPage = () => {
       </Detail>
     </Container>
     <Footer />
-    <ChatBot />
+    {/* <ChatBot /> */}
     </OutBox>
   );
 };

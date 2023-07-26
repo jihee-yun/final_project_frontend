@@ -441,7 +441,7 @@ const MyReport = () => {
         </Detail>
       </Container>
       <Footer />
-      <ChatBot/>    
+      {/* <ChatBot/> */}
     </OutBox>
   );
 };
