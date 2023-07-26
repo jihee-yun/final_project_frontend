@@ -67,6 +67,7 @@ const TitleBox = styled.div`
 const InfoType = styled.p`
   width: 80%;
   min-width: 100px;
+  text-align: center;
 `;
 // 변경 불가능한 회원정보 표시하는 텍스트 박스
 const TextBox = styled.p`
@@ -76,7 +77,7 @@ const TextBox = styled.p`
   line-height: 30px;
   margin-top: -5px;
   margin-bottom: 10px;
-  padding-left: 10px;
+  text-align: center;
   border: 0;
   background-color: #eee;
 `;
@@ -107,7 +108,6 @@ const InfoChangeButton = styled.button`
   border: 0;
   cursor: pointer;
 `;
-
 // 회색 바탕의 수정 input
 const GrayInput = styled.input`
   width: 80%;
@@ -115,18 +115,29 @@ const GrayInput = styled.input`
   height: 30px;
   line-height: 30px;
   margin-bottom: 5px;
-  padding-left: 10px;
+  text-align: center;
   border: 0;
   background-color: #eee;
   &:focus {
     outline: none;
   }
 `;
+// 회원 탈퇴 문구
+const SmallInfo = styled.p`
+  margin-top: -5px;
+  margin-bottom: 5px;
+  font-size: .8em;
+  width: 80%;
+  min-width: 100px;
+  text-align: center;
+  `;
 
 
 const MyInformation = () => {
+  const navigate = useNavigate();
   // useContext 저장값 불러오기
-  const {grantType, accessToken, refreshToken, userNum, userName, userAuthority} = useContext(UserContext);
+  const {grantType, isLogin, setIsLogin, userNum, accessToken, refreshToken, setUserNum, userName, setUserName, 
+    setGrantType, setAccessToken,setRefreshToken, userAuthority, setUserAuthoruty} = useContext(UserContext);
 
   // 유저 정보 상태 관리
   const [memberInfo, setMemberInfo] = useState(null);
@@ -140,7 +151,7 @@ const MyInformation = () => {
   const [passwordValidationMessage, setPasswordValidationMessage] = useState("");
   const [newPasswordCheckMessage, setNewPasswordCheckMessage] = useState("");
 
-
+  const [withdrawAgreement, setSignoutAgreement] = useState("");
 
   // 유저 정보 가져오기
   useEffect(() => {
@@ -235,21 +246,58 @@ const MyInformation = () => {
   };
 
   // 이메일 변경 함수
-const handleEmailChange = async () => {
-  const email = document.getElementById("email").value;
-  try {
-    const rsp = await AxiosApi.emailUpdate(userNum, email, grantType, accessToken);
-    if (rsp.status) {
-      if(rsp.data = "true") {
-        console.log("이메일 업데이트 성공: ", rsp.data);
-      } else {
-        console.log("통신은 성공, 이메일 업데이트 실패", rsp.data);
+  const handleEmailChange = async () => {
+    const email = document.getElementById("email").value;
+    try {
+      const rsp = await AxiosApi.emailUpdate(userNum, email, grantType, accessToken);
+      if (rsp.status) {
+        if(rsp.data = "true") {
+          console.log("이메일 업데이트 성공: ", rsp.data);
+        } else {
+          console.log("통신은 성공, 이메일 업데이트 실패", rsp.data);
+        }
       }
+    } catch (error) {
+      console.log("이메일 업데이트 실패: ", error);
     }
-  } catch (error) {
-    console.log("이메일 업데이트 실패: ", error);
-  }
-};
+  };
+  // 회원 탈퇴 함수
+  const handleMemberExit = async () => {
+    if (withdrawAgreement !== "회원 탈퇴를 동의합니다") {
+      alert("정확한 문구를 입력해주세요!");
+      return;
+    }
+    try {
+      const rsp = await AxiosApi.memberWithdraw(userNum, grantType, accessToken);
+      if (rsp.status) {
+        if(rsp.data = "true") {
+          console.log("회원 탈퇴 성공: ", rsp.data);
+          setGrantType("");
+          setAccessToken("");
+          setRefreshToken("");
+          setUserNum(0);
+          setUserName("");
+          setUserAuthoruty("");
+          setIsLogin(false);
+      
+          // 로컬스토리지에서 제거
+          localStorage.removeItem("grantType");
+          localStorage.removeItem("accessToken");
+          localStorage.removeItem("refreshToken");
+          localStorage.removeItem("userNum");
+          localStorage.removeItem("userName");
+          localStorage.removeItem("userAuthority");
+          localStorage.removeItem("isLogin");
+          navigate("/");
+        } else {
+          console.log("통신은 성공, 회원 탈퇴 실패", rsp.data);
+        }
+      }
+    } catch (error) {
+      console.log("회원 탈퇴 실패: ", error);
+    }
+  };
+
 
   // memberInfo가 로딩 중일 때 표시할 로딩 스피너 등의 UI를 추가할 수 있음
   if (!memberInfo) {
@@ -330,6 +378,12 @@ const handleEmailChange = async () => {
               <InfoType>이메일 변경</InfoType>
               <GrayInput id="email" type="text" defaultValue={memberInfo ? memberInfo.email : ''} />
               <InfoChangeButton onClick={handleEmailChange}>변경하기</InfoChangeButton>
+            </SpecificBox>
+            <SpecificBox>
+              <InfoType>회원 탈퇴</InfoType>
+              <SmallInfo>아래 칸에 '회원 탈퇴를 동의합니다'를 정확히 입력해 주세요.</SmallInfo>
+              <GrayInput id="withdraw" type="text" placeholder="회원 탈퇴를 동의합니다" value={withdrawAgreement} onChange={e => setSignoutAgreement(e.target.value)}/>
+              <InfoChangeButton disabled={withdrawAgreement !== "회원 탈퇴를 동의합니다"} onClick={handleMemberExit}>탈퇴하기</InfoChangeButton>
             </SpecificBox>
           </ContentBox>
 

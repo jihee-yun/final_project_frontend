@@ -506,6 +506,15 @@ const AxiosApi = {
       }
     });
   },
+    // 회원 탈퇴
+  memberWithdraw : async(memberNum, grantType, accessToken) => {
+    return await axios.get(`${KH_DOMAIN}/info/memberwithdraw?membernum=${memberNum}`, {
+      headers: {
+        Authorization: `${grantType} ${accessToken}`
+      }
+    })
+  },
+
   weatherInfoGet: async(regionList) => {
     return await axios.get(KH_DOMAIN + `/weather/get?regionList=${regionList}`);
   },
