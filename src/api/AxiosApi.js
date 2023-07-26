@@ -474,6 +474,14 @@ const AxiosApi = {
     return await axios.post(`${KH_DOMAIN}/member/login`, loginData);
   },
 
+  // 마이페이지 대시보드용 회원 정보 조회
+  getMemberAllInfo : async (memberNum, grantType, accessToken) => {
+    return await axios.get(`${KH_DOMAIN}/info/allinfo?membernum=${memberNum}`, {
+      headers: {
+        Authorization: `${grantType} ${accessToken}`
+      }
+    });
+  },
   // 마이페이지 회원 번호로 길드 정보 조회
   getMemberGuildInfo: async (memberNum, grantType, accessToken) => {
     return await axios.get(`${KH_DOMAIN}/guild/guildinfo?membernum=${memberNum}`, {
