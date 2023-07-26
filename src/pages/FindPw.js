@@ -7,7 +7,6 @@ import Header from "../component/Header";
 import Footer from "../component/Footer";
 
 
-
 const FindPwBlock = styled.div`
   display: flex;
   flex-direction: column;

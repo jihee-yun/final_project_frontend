@@ -329,18 +329,16 @@ const SignUpForm = () => {
 
   // 이메일 인증
   const onClickEmailCheck = async() => {
-    console.log(email);
+    setIsEmailVerified(true);
     const response = await AxiosApi.emailCheck(email);
     console.log(response.data);
-    if(response.data === true) {
-      setIsEmailVerified(true);
-    }
   }
 
   const onChangeCode = (e) => {
     setCode(e.target.value);
   }
 
+  // 이메일에 발송된 인증 코드 검증
   const onClickCodeCheck = async() => {
     const response = await AxiosApi.codeCheck(email, code);
     console.log(response.data);
