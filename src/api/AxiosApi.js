@@ -193,6 +193,16 @@ const AxiosApi = {
     return await axios.post(KH_DOMAIN + "/member/findPw", data);
   },
 
+  // 인증번호 발송
+  sendConfirmationEmail : async(email, phone, name) => {
+    const data = {
+      email : email,
+      phone : phone,
+      name : name
+    };
+    return await axios.post(KH_DOMAIN + "/mail/confirm", data);
+  },
+
     // 아이디 찾기
     findId : async(name, email) => {
       const data = {

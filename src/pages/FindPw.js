@@ -91,10 +91,25 @@ const FindPw = () => {
     setName(e.target.value);
   };
 
+  // const onClickFindPw = async () => {
+  //   try {
+  //     const response = await AxiosApi.findPw(email, phone, name);
+  //     if (response.data.success) {
+  //       setFindPwSuccess(true);
+  //       console.log("인증메일 발송 성공!");
+  //     } else {
+  //       setFindPwFail(true);
+  //       console.log("일치하는 회원정보가 없습니다.");
+  //     }
+  //   } catch (e) {
+  //     console.log("비밀번호 찾기 오류:", e);
+  //   }
+  // };
+
   const onClickFindPw = async () => {
     try {
-      const response = await AxiosApi.findPw(email, phone, name);
-      if (response.data.success) {
+      const response = await AxiosApi.sendConfirmationEmail(email, phone, name);
+      if (response.success) {
         setFindPwSuccess(true);
         console.log("인증메일 발송 성공!");
       } else {
@@ -123,6 +138,7 @@ const FindPw = () => {
       console.log("인증코드 확인 오류:", e);
     }
   };
+
 
   const handleChangePassword = async () => {
     try {
