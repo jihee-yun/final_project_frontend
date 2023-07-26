@@ -181,6 +181,15 @@ const AxiosApi = {
     return await axios.post(KH_DOMAIN + "/mail/verify", data);
   },
 
+  // 새 비밀번호
+  changePassword : async(email, newPassword) => {
+    const data = {
+      email : email,
+      newPassword : newPassword
+    }
+    return await axios.post(KH_DOMAIN + "/member/changePw", data);
+  },
+
 
 
   // 비밀번호 찾기
@@ -191,16 +200,6 @@ const AxiosApi = {
         name : name
     };
     return await axios.post(KH_DOMAIN + "/member/findPw", data);
-  },
-
-  // 인증번호 발송
-  sendConfirmationEmail : async(email, phone, name) => {
-    const data = {
-      email : email,
-      phone : phone,
-      name : name
-    };
-    return await axios.post(KH_DOMAIN + "/mail/confirm", data);
   },
 
     // 아이디 찾기
