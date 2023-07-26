@@ -6,6 +6,7 @@ import Logo from "../images/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
+import NavBar from "./NavBar";
 
 const HeaderContainer = styled.header`
  @media (max-width: 768px) {
@@ -108,7 +109,8 @@ const NavContainer = styled.nav `
     
   a {
     text-decoration: none;
-    color: white;
+    color: #646b8c;
+    position: relative;
   }
   .Nav {
     display: flex;
@@ -118,7 +120,6 @@ const NavContainer = styled.nav `
     text-align: center;
     padding-right: 20px;
     height: 60px;
-    background-color: #FFD0E4;
   }
   .search {
     display: flex;
@@ -131,7 +132,7 @@ const NavContainer = styled.nav `
     width: 100%;
     height: 30px;
     border-radius: 40px;
-    border: solid white;
+    border: solid #646b8c;
     padding: 0 15px;
   }
 `;
@@ -244,26 +245,27 @@ const Header = () => {
           )}
         </HeaderContainer>
         {!isMobile && (
-        <NavContainer>
-          <ul className="Nav">
-            <Navlink to="/cafe">카페 찾기</Navlink>
-            <Navlink to="/guild">길드</Navlink>
-            <Navlink to="/event">이벤트</Navlink>
-            <Navlink to="/couponStore">상점</Navlink>
-            <div className="search">
-              <input
-                type="text"
-                className="search-bar"
-                value={keyword}
-                onChange={onChangeCafeName}
-              />
-              <SearchIcon
-                style={{ fontSize: 30, marginRight: 10, fill: "white" }}
-                onClick={swordPush}
-              />
-            </div>
-          </ul>
-        </NavContainer>
+          <NavBar />
+        // <NavContainer>
+        //   <ul className="Nav">
+        //     <Navlink to="/cafe">카페 찾기</Navlink>
+        //     <Navlink to="/guild">길드</Navlink>
+        //     <Navlink to="/event">이벤트</Navlink>
+        //     <Navlink to="/couponStore">상점</Navlink>
+        //     <div className="search">
+        //       <input
+        //         type="text"
+        //         className="search-bar"
+        //         value={keyword}
+        //         onChange={onChangeCafeName}
+        //       />
+        //       <SearchIcon
+        //         style={{ fontSize: 30, marginRight: 10, fill: "#646b8c" }}
+        //         onClick={swordPush}
+        //       />
+        //     </div>
+        //   </ul>
+        // </NavContainer>
       )}
     </>
   );

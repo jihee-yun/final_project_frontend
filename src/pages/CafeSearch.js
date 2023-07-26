@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../context/UserStore";
 import styled from "styled-components";
 import AxiosApi from "../api/AxiosApi";
-import { keyboard } from "@testing-library/user-event/dist/keyboard";
+import Header from "../component/Header";
 
 const Container = styled.div`
   width: 80%;
@@ -116,7 +116,7 @@ const StatusBox = styled.div`
   margin: 16px 0 16px 0;
   width: 98%;
   height: 80px;
-  background: rgb(193, 159, 138);
+  background: #FFD0E4;
   color: white;
   border-radius: 5px;
 `;
@@ -132,7 +132,7 @@ const FalseResult = styled.div`
 const CafeSearch = () => {
     const navigate = useNavigate();
     const { keyword } = useParams();
-    const [searchResult, setSearchResult] = useState([]);
+    const [searchResult, setSearchResult] = useState("");
     const [isSearchResult, setIsSearchResult] = useState(false);
     const context = useContext(UserContext);
     const { setCafeNum } = context; 
@@ -141,12 +141,12 @@ const CafeSearch = () => {
         const search = async () => {
             try{
                 const rsp = await AxiosApi.searchListLoad(keyword);
-                setSearchResult(rsp);
+                setSearchResult(rsp.data);
                 console.log(rsp);
-                if(rsp.length === 0){
-                    setIsSearchResult(false);
-                } else if (rsp.length > 0) {
+                if(rsp.data.length > 0){
                     setIsSearchResult(true);
+                } else if (rsp.data.length === 0) {
+                    setIsSearchResult(false);
                 }
             } catch (error) {
                 console.error("검색결과 받아오기 실패", error);
@@ -165,6 +165,7 @@ const CafeSearch = () => {
 
 return(
   <>
+  <Header />
   <Container>
     {isSearchResult ? (
       <>
@@ -172,10 +173,10 @@ return(
               <p>{searchResult.length} 개의 검색 결과가 있습니다.</p>
        </StatusBox>
        <Box>
-      {searchResult.map((e) => (
-         <CafeBox key={e.cafeName}
+      {searchResult.map(e => (
+         <CafeBox key={e.id}
          onClick={() => cardClick(e.id)}>
-         {/* <Thumb className="img" imageurl={e.thumbnail}/> */}
+         <Thumb className="img" imageurl={e.thumbnail}/>
          <div className="background"></div>
           <div className="content">
             <p>{e.region}</p>
