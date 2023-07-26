@@ -64,18 +64,18 @@ const CouponPayment = () => {
   const info = location.state && location.state.filterCoupon;
   const navigate = useNavigate();
   const context = useContext(UserContext);
-  const { userNum, isLogin } = context
+  const { userNum, isLogin, grantType, accessToken } = context
   const [pointInfo, setPointInfo] = useState([]);
 
   useEffect(() => {
     const getPointInfo = async () => {
       if (isLogin && userNum) {
-        const rsp = await AxiosApi.myInfoGet(userNum);
+        const rsp = await AxiosApi.myInfoGet(userNum, grantType, accessToken);
         if(rsp.status === 200) setPointInfo(rsp.data);
       }
     };
     getPointInfo();
-  }, [userNum, isLogin]);
+  }, [userNum, isLogin, grantType, accessToken]);
 
   if (!isLogin) {
     navigate('/memberlogin');
@@ -87,7 +87,7 @@ const CouponPayment = () => {
   const couponId = coupon.id;
 
   const handlePayClick = async () => {
-    const response = await AxiosApi.couponPayment(userNum, coupon.id);
+    const response = await AxiosApi.couponPayment(userNum, coupon.id, grantType, accessToken);
     console.log(response.data);
     if(response.data === true) {
       navigate('/payComplete'); // 결제 성공 시 payComplete 페이지로 이동

@@ -15,8 +15,12 @@ import Footer from "../component/Footer";
 const Box = styled.div`
   @media (max-width: 768px) {
     width: 100%;
-    
   }
+
+  @media (max-width: 430px) {
+    width: 100%;
+  }
+
   width: 80%;
   margin: 0 auto;
   margin-top: 80px;
@@ -42,10 +46,53 @@ const ChallengeContainer = styled.div`
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
   }
 `;
 
 const ChallengeBox = styled.div`
+  margin: 30px 30px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+  border-radius: 10px;
+  box-shadow: 0 3px 3px #A4A4A4;
+`;  
+
+const ChallengeTitle = styled.div`
+  width: 220px;
+  height: 300px;
+  border: none;
+  
+  .shadow {
+    width: 100%;
+    height: 50%;
+    position: absolute;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(0,0,0,.7) 50%, rgba(0,0,0,0) 100%);
+  }
+`;
+
+const Title = styled.div`
+  position: absolute;
+  bottom: 15px;
+  left: 0;
+  margin-left: 12px;
+  font-size: 1rem;
+  margin-top: 240px;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: bolder;
+`;
+
+const Thumb = styled.div`
+  width: 100%;
+  height: 100%;
+  object-fit: fit;
+  background-image: url(${props => props.imageurl});
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+  border: none;
 `;
 
 const EventFooter = styled.div` 
@@ -57,6 +104,14 @@ const EventFooter = styled.div`
   /* flex-wrap: wrap; */
 
   @media (max-width: 768px) {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  @media (max-width: 430px) {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -94,49 +149,6 @@ const MediaBox = styled.div`
     }
   }
 
-`;
-
-const ChallengeTitle = styled.div`
-  position: relative;
-  margin-top: 50px;
-  margin-bottom: 50px;
-  width: 220px;
-  height: 300px;
-  margin-right: 50px; 
-  border-radius: 20px;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-  cursor: pointer;
-
-  .shadow {
-    width: 100%;
-    height: 50%;
-    position: absolute;
-    bottom: 0;
-    border-radius: 20px;
-    background: linear-gradient(to top, rgba(0,0,0,.7) 23%, rgba(0,0,0,0) 100%);
-  }
-`;
-
-const Title = styled.div`
-  position: absolute;
-  bottom: 15px;
-  left: 0;
-  margin-left: 12px;
-  font-size: 1rem;
-  margin-top: 240px;
-  color: rgba(255, 255, 255, 0.9);
-  font-weight: bolder;
-`;
-
-const Thumb = styled.div`
-  width: 100%;
-  height: 100%;
-  object-fit: fit;
-  background-image: url(${props => props.imageurl});
-  background-size: cover;
-  background-position: center;
-  border-radius: 20px;
-  border: none;
 `;
 
 const Event = () => {
@@ -192,7 +204,7 @@ const Event = () => {
         {challengeInfo && challengeInfo.map(item => (
         <ChallengeBox key={item.id} onClick={() => navigateCh(item.id)}>
             <ChallengeTitle >
-              <Thumb  className="img" imageurl={item.thumbnail}></Thumb>
+              <Thumb className="img" imageurl={item.thumbnail}></Thumb>
               <div className="shadow"></div>
               <Title>{item.challengeName}</Title>
             </ChallengeTitle>

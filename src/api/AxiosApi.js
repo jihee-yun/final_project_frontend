@@ -278,7 +278,8 @@ const AxiosApi = {
 
       return await axios.post(KH_DOMAIN + `/admin/register`, admin);
     },
-    // 챌린지 조회
+
+  // 챌린지 조회
   challengeGet: async(chList) => {
     return await axios.get(KH_DOMAIN + `/challenge/chList?chList=${chList}`);
   },
@@ -289,41 +290,61 @@ const AxiosApi = {
   },
 
   // 이벤트 포인트 적립
-  pointGet: async(memberNum, winning, pointType) => {
+  pointGet: async(memberNum, winning, pointType, grantType, accessToken) => {
     const points = {
       memberNum: memberNum,
       point: winning,
       pointType: pointType
     };
-    return await axios.post(KH_DOMAIN + "/point/pointadd", points);
+    return await axios.post(KH_DOMAIN + "/point/pointadd", points, {
+      headers: {
+        Authorization: `${grantType} ${accessToken}`
+      }
+    });
   },
 
   // 내 정보 조회
-  myInfoGet: async(memberNum) => {
-    return await axios.get(KH_DOMAIN + `/member/myinfo?memberNum=${memberNum}`);
+  myInfoGet: async(memberNum, grantType, accessToken) => {
+    return await axios.get(KH_DOMAIN + `/member/myinfo?memberNum=${memberNum}`, {
+      headers: {
+        Authorization: `${grantType} ${accessToken}`
+      }
+    });
   },
 
   // 챌린지 신청
-  challengeApply: async(challengeId, memberId) => {
+  challengeApply: async(challengeId, memberId, grantType, accessToken) => {
     const data = {
       challengeId: challengeId,
       memberId: memberId
     };
-    return await axios.post(KH_DOMAIN + "/mychallenge/apply", data)
+    return await axios.post(KH_DOMAIN + "/mychallenge/apply", data, {
+      headers: {
+        Authorization: `${grantType} ${accessToken}`
+      }
+    });
   },
 
   // 마이챌린지 조회
-  mychallengeGet: async(userNum, challengeId) => {
-    return await axios.get(KH_DOMAIN + `/mychallenge/get?userNum=${userNum}&challengeId=${challengeId}`);
+  mychallengeGet: async(userNum, challengeId, grantType, accessToken) => {
+    return await axios.get(KH_DOMAIN + `/mychallenge/get?userNum=${userNum}&challengeId=${challengeId}`, {
+      headers: {
+        Authorization: `${grantType} ${accessToken}`
+      }
+    });
   },
 
   // 쿠폰 결제
-  couponPayment: async(memberNum, couponId) => {
+  couponPayment: async(memberNum, couponId, grantType, accessToken) => {
     const data = {
       memberNum: memberNum,
       couponId: couponId
     };
-    return await axios.post(KH_DOMAIN + "/couponstore/couponpay", data)
+    return await axios.post(KH_DOMAIN + "/couponstore/couponpay", data, {
+      headers: {
+        Authorization: `${grantType} ${accessToken}`
+      }
+    });
   },
 
   // 인기 카페 4곳 조회
@@ -332,20 +353,29 @@ const AxiosApi = {
   },
 
   // 룰렛 하루에 한번
-  rouletteSpin: async(memberNum) => {
+  rouletteSpin: async(memberNum, grantType, accessToken) => {
     const data = {
       memberNum: memberNum
     }
-    return await axios.post(KH_DOMAIN + "/roulette/spin", data);
+    return await axios.post(KH_DOMAIN + "/roulette/spin", data, {
+      headers: {
+        Authorization: `${grantType} ${accessToken}`
+      }
+    });
   },
 
-    // 룰렛 기록 조회
-    rouletteHistory: async(memberNum) => {
+  // 룰렛 기록 조회
+  rouletteHistory: async(memberNum, grantType, accessToken) => {
     const data = {
       memberNum: memberNum
     } 
-    return await axios.post(KH_DOMAIN+ `/roulette/history`, data);
+    return await axios.post(KH_DOMAIN+ `/roulette/history`, data, {
+      headers: {
+        Authorization: `${grantType} ${accessToken}`
+      }
+    });
   },
+
 
   // 랭킹정보 불러오기
     MainInfoGet: async(rankingcard) => {

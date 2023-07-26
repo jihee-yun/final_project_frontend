@@ -14,6 +14,14 @@ const Container = styled.h3`
   position: relative;
   margin-top: 40px;
   margin-bottom: 100px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+
+  @media (max-width: 430px) {
+    width: 100%;
+  }
 `;
 
 const rotateAnimation = keyframes`
@@ -33,6 +41,15 @@ const OuterBox = styled.div`
   height: 510px;
   margin-left: auto;
   margin-right: auto;
+
+  @media (max-width: 430px) {
+    .panImg {
+      img {
+        width: 380px;
+        height: 380px;
+      }
+    }
+  }
 
   img {
     z-index: 2;
@@ -58,6 +75,21 @@ const Pin = styled.div`
   top: 0;
   left: 48%;
   z-index: 1;
+
+  @media (max-width: 768px) {
+    position: absolute;
+    top: 0;
+    left: 47%;
+    z-index: 1;
+  }
+
+  @media (max-width: 430px) {
+    position: absolute;
+    top: 0;
+    left: 40%;
+    z-index: 1;
+  }
+
 `;
 
 const Start = styled.div`
@@ -71,6 +103,15 @@ const Start = styled.div`
     height: 100px;
   }
   cursor: pointer;
+
+  @media (max-width: 430px) {
+  top: 49%;
+  left: 78%;
+  /* img {
+    width: 70px;
+    height: 70px;
+  } */
+  }
 `;
 
 const Pan = styled.div`
@@ -113,11 +154,10 @@ const WinBox = styled.div`
 const Roulette = () => {
   const navigate = useNavigate();
   const context = useContext(UserContext);
-  const { isLogin } = context;
+  const {isLogin, userNum, grantType, accessToken} = context;
   const [isSpinning, setIsSpinning] = useState(false);
   const [winning, setWinning] = useState(0);
   const [canSpin, setCanSpin] = useState(true);
-  const {userNum} = context;
   let amount = 0;
 
 
@@ -127,13 +167,13 @@ const Roulette = () => {
       return;
     }
 
-    const rspHistory = await AxiosApi.rouletteHistory(userNum);
+    const rspHistory = await AxiosApi.rouletteHistory(userNum, grantType, accessToken);
 
     if (rspHistory.data === true) {
       alert('룰렛은 하루에 한번만 돌릴 수 있어요!');
       return;
     } else {
-      const rspSpin = await AxiosApi.rouletteSpin(userNum);
+      const rspSpin = await AxiosApi.rouletteSpin(userNum, grantType, accessToken);
       console.log(rspSpin);
       setIsSpinning(true); // 회전 시작
       setCanSpin(false)
@@ -143,27 +183,10 @@ const Roulette = () => {
       setTimeout(async() => {
         setIsSpinning(false);
         showWinning(stopTime); // 당첨 금액 보여줌
-        AxiosApi.pointGet(userNum, amount, "roulette");
+        AxiosApi.pointGet(userNum, amount, "roulette", grantType, accessToken);
       }, stopTime * 1000); // 랜덤 멈추기
     }
   };
-
-  // useEffect(() => {
-  //   checkSpin();
-  // }, []);
-
-  // const checkSpin = async() => {
-  //   const rsp = await AxiosApi.rouletteSpin(userNum);
-  //   console.log(rsp.data);
-  //   setHasSpunToday(rsp.data.spunToday);
-
-  //   const rspHistory = await AxiosApi.rouletteHistory(userNum, hasSpunToday);
-  //   if(rspHistory.data.length === 0) {
-  //     setHasSpunToday(false);
-  //   } else {
-  //     setHasSpunToday(true);
-  //   }
-  // };
 
   const showWinning = (stopTime) => {
     if (stopTime === 3) {
@@ -178,8 +201,6 @@ const Roulette = () => {
     setWinning(amount);
   };
    
-  
-
   return(
     <>
     <Container>
@@ -189,10 +210,10 @@ const Roulette = () => {
       <OuterBox isspinning={isSpinning}>
         <div className="roulette">
           <Start onClick={handleStartClick}>
-            <div><img src={start} alt="시작버튼" /></div>
+            <div className="startImg"><img src={start} alt="시작버튼" /></div>
           </Start>
           <Pan>
-            <div><img src={roulettePan} alt="룰렛판" /></div>
+            <div className="panImg"><img src={roulettePan} alt="룰렛판" /></div>
           </Pan>
         </div>
       </OuterBox>

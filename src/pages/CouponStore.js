@@ -42,6 +42,12 @@ const CouponBox = styled.div`
     justify-content: center;
     align-items: center;
   }
+
+  /* @media (max-width: 430px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  } */
 `;
 
 const CouponList = styled.div`
@@ -53,12 +59,26 @@ const CouponList = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  
+
+  @media (max-width: 430px) {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
+    width: 100%;
+    height: 180px; 
+  }
 `;
 
 const Name = styled.div`
   margin-right: 25px;
   font-size: 1.1rem;
   font-weight: bolder;
+  @media (max-width: 430px) {
+    margin: 40px 0 0 0;
+  }
 `;
 
 const Price = styled.div`
@@ -67,6 +87,12 @@ const Price = styled.div`
   padding: 10px;
   border-radius: 40px;
   cursor: pointer;
+
+  @media (max-width: 430px) {
+    width: 200px;
+    margin: 20px 0 10px 0;
+  }
+
 `;
 
 const CafeContainer = styled.div`
@@ -159,7 +185,7 @@ const CouponStore = () => {
   const [pointInfo, setPointInfo] = useState("");
   const [cafeInfo, setCafeInfo] = useState("");
   const context = useContext(UserContext);
-  const { userNum, isLogin } = context
+  const { userNum, isLogin, grantType, accessToken } = context
   const navigate = useNavigate();
 
   console.log(couponInfo);
@@ -175,12 +201,12 @@ const CouponStore = () => {
   useEffect(() => {
     const pointInfo = async() => {
       if(isLogin && userNum) {
-        const rsp = await AxiosApi.myInfoGet(userNum);
+        const rsp = await AxiosApi.myInfoGet(userNum, grantType, accessToken);
         if(rsp.status === 200) setPointInfo(rsp.data);
       }
     };
     pointInfo();
-  }, [isLogin, userNum]);
+  }, [isLogin, userNum, grantType, accessToken]);
 
   useEffect(() => {
     const cafeInfo = async() => {

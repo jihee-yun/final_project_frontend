@@ -146,8 +146,7 @@ const CafeIntro = styled.div`
 
 const ChallengeMain = () => {
   const context = useContext(UserContext);
-  const {userNum} = context;
-  const { isLogin } = context;
+  const {isLogin, userNum, grantType, accessToken} = context;
   const [modalOpen, setModalOpen] = useState(false);
   const location = useLocation();
   const info = location.state && location.state.editedInfo[0].id;
@@ -161,7 +160,7 @@ const ChallengeMain = () => {
       navigate('/memberlogin');
       return;
     }
-    const response = await AxiosApi.challengeApply(info, userNum);
+    const response = await AxiosApi.challengeApply(info, userNum, grantType, accessToken);
     if(response.status === 200 && response.data === true) {
       setModalOpen(true); 
     }
