@@ -596,7 +596,12 @@ const AxiosApi = {
       code: code
     }
     return await axios.post(KH_DOMAIN + `/mail/verify`, verifyData);
-  }
+  },
+
+  // 검색 기능
+  searchListLoad: async (keyword) => {
+    return await axios.get(KH_DOMAIN + `/cafe/searchList?keyword=${keyword}`)
+  },
 
 };
 

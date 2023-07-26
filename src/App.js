@@ -56,6 +56,7 @@ import ServiceCenter from './pages/ServiceCenter';
 import ScrollToTop from './utils/ScrollToTop';
 import AdminReg from './pages/AdminReg';
 import PrivateRoute from './utils/PrivateRoute';
+import CafeSearch from './pages/CafeSearch';
 
 function App() {
   return (
@@ -116,6 +117,7 @@ function App() {
         <Route path='/couponPayment' element={<PrivateRoute element={<CouponPayment />}/>}/>
         <Route path='/servicecenter' element={<ServiceCenter/>}/>
         <Route path='/admin/register' element={<PrivateRoute element={<AdminReg />}/>}/>
+        <Route path='/cafesearch' element={<PrivateRoute element={<CafeSearch />}/>}/>
       </Routes>
     </BrowserRouter>
     </UserStore>
