@@ -571,7 +571,7 @@ const SignUpForm = () => {
             </div>
             </form>
           </FormBox>
-        {(checkA && checkB && checkC && isChecked && isID && isPw && isConPw && isEmail && isCode && isBirth && isPhone && name && gender) ? 
+        {(checkA && checkB && checkC && isID && isPw && isConPw && isEmail && isCode && isBirth && isPhone && name && gender) ? 
         (<SignupButton className="active" onClick={handleSignup}>회원가입</SignupButton>):
         (<SignupButton className="inactive">회원가입</SignupButton>)}
         </SignupBox>
