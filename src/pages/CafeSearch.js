@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { UserContext } from "../context/UserStore";
 import styled from "styled-components";
 import AxiosApi from "../api/AxiosApi";
+import { keyboard } from "@testing-library/user-event/dist/keyboard";
 
 const Container = styled.div`
   width: 80%;
@@ -105,16 +107,40 @@ const Thumb = styled.div`
   background-position: center;
 `;
 
+const StatusBox = styled.div`
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  align-self: center;
+  padding-left: 32px;
+  margin: 16px 0 16px 0;
+  width: 98%;
+  height: 80px;
+  background: rgb(193, 159, 138);
+  color: white;
+  border-radius: 5px;
+`;
+
+const FalseResult = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 400px;
+`;
+
 const CafeSearch = () => {
     const navigate = useNavigate();
-    const { sword } = useParams();
+    const { keyword } = useParams();
     const [searchResult, setSearchResult] = useState([]);
     const [isSearchResult, setIsSearchResult] = useState(false);
+    const context = useContext(UserContext);
+    const { setCafeNum } = context; 
 
     useEffect(() => {
         const search = async () => {
             try{
-                const rsp = await AxiosApi.searchListLoad(sword);
+                const rsp = await AxiosApi.searchListLoad(keyword);
                 setSearchResult(rsp);
                 console.log(rsp);
                 if(rsp.length === 0){
@@ -127,27 +153,52 @@ const CafeSearch = () => {
             }
         };
         search();
-    }, [sword]);
+    }, [keyword]);
+
+    const cardClick = (cafeNum) => {
+      setCafeNum(cafeNum);
+    localStorage.setItem("cafeNum", cafeNum);
+    navigate('/cafe/detail');
+    };
 
 
 
 return(
-    <>
-    <Container> 
-    <Box>
-    <CafeBox >
-      <Thumb className="img"/>
-      <div className="background"></div>
-      <div className="content">
-        <p></p>
-        <p></p>
-        <p className="intro"></p> 
-      </div>
-    </CafeBox>
-   
+  <>
+  <Container>
+    {isSearchResult ? (
+      <>
+       <StatusBox>
+              <p>{searchResult.length} 개의 검색 결과가 있습니다.</p>
+       </StatusBox>
+       <Box>
+      {searchResult.map((e) => (
+         <CafeBox key={e.cafeName}
+         onClick={() => cardClick(e.id)}>
+         {/* <Thumb className="img" imageurl={e.thumbnail}/> */}
+         <div className="background"></div>
+          <div className="content">
+            <p>{e.region}</p>
+            <p>{e.cafeName}</p>
+            <p className="intro">{e.intro}</p> 
+         </div>
+        </CafeBox>
+      ))}
     </Box>
-    </Container>
+      </>
+    ) : (
+      <>
+      <StatusBox>
+        <p>{searchResult.length} 개의 검색 결과가 있습니다.</p>
+      </StatusBox>
+      <FalseResult>
+        <span>검색 결과가 존재하지 않습니다.</span>
+      </FalseResult>
     </>
+    )}
+  </Container>
+  </>
+   
     );
 };
 export default CafeSearch;

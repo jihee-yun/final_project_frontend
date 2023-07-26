@@ -157,6 +157,7 @@ const Header = () => {
     setGrantType, setAccessToken,setRefreshToken, setUserNum, userAuthority, setUserAuthoruty}  = useContext(UserContext);
   const navigate = useNavigate();
   const [isMobile, setIsMobile] = useState(false);
+  const [keyword, setKeyword] = useState(""); // 검색어 입력을 위한 useState
 
   // 반응형 UI 적용
   useEffect(() => {
@@ -171,6 +172,14 @@ const Header = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  const onChangeCafeName = (e) => {
+    setKeyword(e.target.value);
+  };
+
+  const swordPush = () => {
+    navigate(`/cafesearch/${keyword}`);
+  };
 
 
   // 로그아웃 버튼 누르면 함수 실행
@@ -243,15 +252,14 @@ const Header = () => {
             <Navlink to="/couponStore">상점</Navlink>
             <div className="search">
               <input
-                type="search"
+                type="text"
                 className="search-bar"
-              //   value={searchInput}
-              //   onChange={handleSearchInputChange}
-              //   onKeyDown={handleKeyDown}
+                value={keyword}
+                onChange={onChangeCafeName}
               />
               <SearchIcon
                 style={{ fontSize: 30, marginRight: 10, fill: "white" }}
-              //   onClick={handleSearchInconClick}
+                onClick={swordPush}
               />
             </div>
           </ul>
