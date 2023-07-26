@@ -173,10 +173,10 @@ const AxiosApi = {
     return await axios.post(KH_DOMAIN + "/user/login", loginData)
   },
 
-  verifyCode : async(email, verificationCode) => {
+  verifyCode : async(email, code) => {
     const data = {
-      email : email,
-      verificationCode : verificationCode
+      email :email,
+      code : code
     }
     return await axios.post(KH_DOMAIN + "/mail/verify", data);
   },

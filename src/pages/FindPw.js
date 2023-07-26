@@ -76,14 +76,14 @@ const FindPw = () => {
   const [findPwSuccess, setFindPwSuccess] = useState(false);
   const [findPwFail, setFindPwFail] = useState(false);
   const [isCodeVerified, setIsCodeVerified] = useState(false);
-  const [verificationCode, setVerificationCode] = useState("");
+  const [code, setCode] = useState("");
   const [newPassword, setNewPassword] = useState("");
 
   const onChangeEmail = (e) => {
     setEmail(e.target.value);
   };
 
-  const onChangePhoneNumber = (e) => {
+  const onChangePhone = (e) => {
     setPhone(e.target.value);
   };
 
@@ -94,6 +94,9 @@ const FindPw = () => {
   const onClickFindPw = async () => {
     try {
       const response = await AxiosApi.findPw(email, phone, name);
+      console.log(email);
+      console.log(phone);
+      console.log(name);
       if (response.data.success) {
         setFindPwSuccess(true);
         setFindPwFail(false);
@@ -110,7 +113,7 @@ const FindPw = () => {
 
   const handleVerifyCode = async () => {
     try {
-      const response = await AxiosApi.verifyCode(email, verificationCode); // 서버로 인증코드 확인 요청
+      const response = await AxiosApi.verifyCode(email, code); // 서버로 인증코드 확인 요청
 
       if (response.data.success) {
         // 인증코드 확인 성공
@@ -147,7 +150,7 @@ const FindPw = () => {
     setFindPwSuccess(false);
     setFindPwFail(false);
     setIsCodeVerified(false);
-    setVerificationCode("");
+    setCode("");
     setNewPassword("");
   };
 
@@ -174,7 +177,7 @@ const FindPw = () => {
                 value={phone}
                 className="loginInput"
                 placeholder="전화번호"
-                onChange={onChangePhoneNumber}
+                onChange={onChangePhone}
               />
             </div>
 
@@ -198,8 +201,8 @@ const FindPw = () => {
               <div>
                 <input
                   type="text"
-                  value={verificationCode}
-                  onChange={(e) => setVerificationCode(e.target.value)}
+                  value={code}
+                  onChange={(e) => setCode(e.target.value)}
                   placeholder="인증코드를 입력하세요"
                 />
                 <button onClick={handleVerifyCode}>인증코드 확인</button>
