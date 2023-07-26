@@ -44,6 +44,7 @@ import BusinessEvent from './pages/BusinessEvent';
 import BusinessPoint from './pages/BusinessPoint';
 import BusinessReport from './pages/BusinessReport';
 import BusinessReview from './pages/BusinessReview';
+import BusinessInformation from './pages/BusinessInformation';
 import Report from './pages/Report';
 import ChallengeMain from './pages/ChallengeMain';
 import ManageReview from './pages/ManageReview';
@@ -101,6 +102,7 @@ function App() {
         <Route path='/businesspage/point' element={<BusinessPoint/>}/>
         <Route path='/businesspage/report' element={<BusinessReport/>}/>
         <Route path='/businesspage/review' element={<BusinessReview/>}/>
+        <Route path='/businesspage/information' element={<BusinessInformation/>}/>
         <Route path='/blog' element={<MyBlog/>}/>
         <Route path='/memberlogin' element={<MemberLoginPage/>}/>
         <Route path='/membersignup' element={<MemberSignUpPage/>}/>
