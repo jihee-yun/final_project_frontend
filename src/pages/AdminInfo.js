@@ -4,7 +4,7 @@ import styled from "styled-components";
 import logo from "../images/logo.png";
 import report from "../images/report.png";
 import review from "../images/review.png";
-import Delete from "../images/Delete.png";
+import challengeImg from "../images/challengeImg.png";
 import userManage from "../images/userManage.png";
 
 
@@ -56,13 +56,13 @@ const InfoBlock = styled.div`
     font-weight: bolder;
   }
 
-  .Delete {
+  .challengeImg {
     justify-content: center; /* 가로 중앙 정렬 */
     margin-top: 10px; /* 삭제 요소와 상위 요소 사이의 간격을 조정 */
   }
 
-  .Delete span {
-    margin-left: 30px;
+  .challengeImg span {
+    margin-left: 10px;
   }
 
   .report {
@@ -95,8 +95,8 @@ const AdminInfo = () => {
   }
 
   // 삭제
-  const handleDelete = () => {
-    navigate('/admin/delete');
+  const handleChallenge = () => {
+    navigate('/admin/challenge');
   }
 
   // 리뷰 
@@ -122,15 +122,16 @@ const AdminInfo = () => {
         </div>
       </div>
 
-      {/* <div className="row">
-        <div onClick={handleDelete} className="Delete">
-          <img src={Delete} alt="Delete"/>
-          <span>삭제</span>
-        </div> */}
+      <div className="row">
+        <div onClick={handleChallenge} className="challengeImg">
+          <img src={challengeImg} alt="challengeImg"/>
+          <span>챌린지</span>
+        </div>
 
         <div onClick={handleReport} className="report">
           <img src={report} alt="report"/>
           <span>신고 내역</span>
+        </div>
         </div>
 
     </InfoBlock>
