@@ -73,18 +73,12 @@ const FindPwBlock = styled.div`
 `;
 
 const FindPw = () => {
-  const navigate = useNavigate();
-
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [name, setName] = useState("");
 
-  const [isCodeSent, setIsCodeSent] = useState(false);
-  const [isCodeVerified, setIsCodeVerified] = useState(false);
   const [findPwSuccess, setFindPwSuccess] = useState(false);
   const [findPwFail, setFindPwFail] = useState(false);
-  const [verificationCode, setVerificationCode] = useState("");
-
   const [findPw, setFindPw] = useState("");
 
   const onChangeEmail = (e) => {
@@ -102,44 +96,32 @@ const FindPw = () => {
     setName(nameNow);
   };
 
-  const onClickSendCode = async () => {
-    try {
-      const response = await AxiosApi.sendVerificationCode(email, phoneNumber, name);
-      if (response.data.success) {
-        setIsCodeSent(true);
-        console.log("서버로부터 인증 성공");
-      } else {
-        console.log("서버로부터 인증 실패");
-      }
-    } catch (error) {
-      console.error("인증 요청 오류:", error);
+  const generateRandomPassword = () => {
+    // Function to generate a random temporary password
+    const length = 10; // Length of the temporary password
+    const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+"; // Characters to use
+    let password = "";
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * charset.length);
+      password += charset[randomIndex];
     }
+    return password;
   };
 
   const onClickFindPw = async () => {
     try {
-      const response = await AxiosApi.findPw(email, phoneNumber, name);
+      const response = await AxiosApi.findPw(email, phoneNumber, name); 
       if (response.data.success) {
         setFindPwSuccess(true);
-        setFindPw(response.data.password); // 서버에서 받아온 비밀번호를 저장 (비밀번호 찾기 성공 시에만)
-        console.log("비밀번호 찾기 성공:", response.data.password);
+        const temporaryPassword = generateRandomPassword();
+        setFindPw(temporaryPassword); 
+        console.log("임시 비밀번호:", temporaryPassword);
       } else {
         setFindPwFail(true);
         console.log("일치하는 회원정보가 없습니다.");
       }
     } catch (e) {
       console.log("비밀번호 찾기 오류:", e);
-    }
-  };
-
-  const onChangeVerifyCode = (e) => {
-    const codeNow = e.target.value;
-    setVerificationCode(codeNow);
-  };
-
-  const handleOnKeyPress = (e) => {
-    if (e.key === "Enter") {
-      onClickFindPw();
     }
   };
 
@@ -152,7 +134,6 @@ const FindPw = () => {
       <>
         <Header />
         <FindPwBlock>
-        <h2>비밀번호 찾기</h2>
         <div className="loginWrapper">
           <div className="loginMain">
             <div className="loginSmallBox">
@@ -162,7 +143,6 @@ const FindPw = () => {
                 className="loginInput"
                 placeholder="이메일"
                 onChange={onChangeEmail}
-                onKeyUp={handleOnKeyPress}
               />
             </div>
 
@@ -173,7 +153,6 @@ const FindPw = () => {
                 className="loginInput"
                 placeholder="전화번호"
                 onChange={onChangePhoneNumber}
-                onKeyUp={handleOnKeyPress}
               />
             </div>
 
@@ -184,30 +163,12 @@ const FindPw = () => {
                 className="loginInput"
                 placeholder="이름"
                 onChange={onChangeName}
-                onKeyUp={handleOnKeyPress}
               />
             </div>
 
-            {isCodeSent ? (
-              <>
-                <div className="loginSmallBox">
-                  <input
-                    type="text"
-                    className="loginInput"
-                    placeholder="인증번호 입력"
-                    onChange={onChangeVerifyCode}
-                    onKeyUp={handleOnKeyPress}
-                  />
-                </div>
-                <button className="loginButton" onClick={onClickFindPw}>
-                  인증번호 확인
-                </button>
-              </>
-            ) : (
-              <button className="loginButton" onClick={onClickSendCode}>
-                비밀번호 찾기
-              </button>
-            )}
+            <button className="loginButton" onClick={onClickFindPw}>
+              비밀번호 찾기
+            </button>
             {findPwFail && <div className="error-message">일치하는 회원정보가 없습니다.</div>}
           </div>
         </div>

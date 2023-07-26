@@ -174,23 +174,13 @@ const AxiosApi = {
   },
 
   // 비밀번호 찾기
-  findPw: async(email, phone, name) => {
+  findPw: async(email, phoneNumber, name) => {
     const data = { 
         email : email,
-        phone : phone,
+        phoneNumber : phoneNumber,
         name : name
     };
     return await axios.post(KH_DOMAIN + "/member/findPw", data);
-  },
-
-  // 인증 코드
-  sendVerificationCode : async(email, phone, name) => {
-    const data = {
-      email : email,
-      phone : phone,
-      name : name
-    };
-    return await axios.post(KH_DOMAIN + "/member/sendCode", data);
   },
 
     // 아이디 찾기
