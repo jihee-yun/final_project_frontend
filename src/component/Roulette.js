@@ -116,37 +116,19 @@ const Roulette = () => {
   const { isLogin } = context;
   const [isSpinning, setIsSpinning] = useState(false);
   const [winning, setWinning] = useState(0);
-  const [canSpin, setCanSpin] = useState(true);
+  const [hasSpunToday, setHasSpunToday] = useState(false);
   const {userNum} = context;
   let amount = 0;
 
 
-  useEffect(() => {
-    // 이전에 저장된 룰렛 돌린 시간을 확인하고 조건에 따라 룰렛 돌릴 수 있도록 설정
-    const lastSpinTime = localStorage.getItem('lastSpinTime');
-    if (lastSpinTime) {
-      const now = new Date();
-      const lastSpinTimeInMillis = Number(lastSpinTime);
-
-      if (now.getTime() < lastSpinTimeInMillis) {
-        setCanSpin(false);
-        const timeUntilNextSpin = lastSpinTimeInMillis - now.getTime();
-        setTimeout(() => {
-          setCanSpin(true);
-        }, timeUntilNextSpin);
-      }
-    }
-  }, []);
-
   const handleStartClick = () => {
     if (!isLogin) {
       navigate('/memberlogin')
-    } else if (!canSpin) {
+    } else if (hasSpunToday) {
       alert('룰렛은 하루에 한번만 돌릴 수 있어요. 내일 다시 도전해주세요!');
       return;
     }
     setIsSpinning(true); // 회전 시작
-    setCanSpin(false);
   
     const stopTime = Math.floor(Math.random() * 4) + 3; // 3 ~ 6초 사이 정수값 랜덤으로 멈춤
   
@@ -155,19 +137,25 @@ const Roulette = () => {
       showWinning(stopTime); // 당첨 금액 보여줌
       AxiosApi.pointGet(userNum, amount, "roulette");
 
-      const now = new Date();
-      const tomorrow = new Date(now);
-      tomorrow.setDate(now.getDate() + 1);
-      tomorrow.setHours(0, 0, 0, 0);
-      localStorage.setItem('lastSpinTime', tomorrow.getTime().toString());
-
-      const timeUntilTomorrow = tomorrow.getTime() - now.getTime(); // 다음 날 자정부터 다시 룰렛 돌릴 수 있음
-      setTimeout(() => {
-        setCanSpin(true);
-      }, timeUntilTomorrow);
-
     }, stopTime * 1000); // 랜덤 멈추기
   };
+
+  const checkSpin = () => {
+    const lastSpinTime = localStorage.getItem('rouletteLastSpinTime');
+    if (lastSpinTime) {
+      const today = new Date();
+      const lastSpinDate = new Date(parseInt(lastSpinTime, 10));
+      if (today.toDateString() === lastSpinDate.toDateString()) {
+        setHasSpunToday(true);
+      } else {
+        setHasSpunToday(false);
+      }
+    }
+  };
+
+  useEffect(() => {
+    checkSpin();
+  }, []);
 
 
   const showWinning = (stopTime) => {
@@ -181,6 +169,11 @@ const Roulette = () => {
       amount = 500;
     }
     setWinning(amount);
+
+    if (amount > 0) {
+      const currentTime = new Date().getTime();
+      localStorage.setItem('rouletteLastSpinTime', currentTime);
+    }
   };
    
   

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
-import Roulette from "./Roulette";
+import Roulette from "../component/Roulette";
 import quiz from "../images/quiz.png";
 import shopping from "../images/shopping.png";
 import { useNavigate } from "react-router-dom";

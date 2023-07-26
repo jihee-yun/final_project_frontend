@@ -14,7 +14,6 @@ import GuildDetail from './pages/GuildDetail';
 import NewGuild from './pages/NewGuild';
 import NewGuildSecond from './pages/NewGuildSecond';
 import Event from './pages/Event';
-import Roulette from './pages/Roulette';
 import FindPw from './pages/FindPw';
 import Admin from './pages/Admin';
 import AdminInfo from './pages/AdminInfo';
@@ -76,7 +75,6 @@ function App() {
         <Route path="/createguild" element={<NewGuild/>}/>
         <Route path="/createguild/second" element={<NewGuildSecond/>}/>
         <Route path='/event' element={<Event/>} />
-        <Route path='/roulette' element={<Roulette/>} />
         <Route path='/findpw' element={<FindPw/>}/>
         <Route path='/admin' element={<Admin/>}/>
         <Route path='/adminInfo' element={<AdminInfo/>}/>
