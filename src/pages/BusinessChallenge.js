@@ -5,7 +5,7 @@ import AxiosApi from "../api/AxiosApi";
 import { UserContext } from "../context/UserStore";
 import Header from "../component/Header";
 import Footer from "../component/Footer";
-import SideMenuForBusiness from "../component/SideMenuForBusiness";
+import SideMenu from "../component/SideMenu";
 import ChatBot from "../component/ChatBot";
 
 const OutBox = styled.div`
@@ -70,7 +70,7 @@ const BusinessChallenge = () => {
     <OutBox>
       <Header />
       <Container>
-        <SideMenuForBusiness />
+        <SideMenu />
         <Detail>
           <SelectBox>
             <TextBox>카페 챌린지 생성</TextBox>

@@ -17,13 +17,16 @@ const OutBox = styled.div`
 `;
 
 const Container = styled.div`
-  width: 80%;
+  width: 95%;
+  margin-top: 30px;
   display: flex;
   justify-content: center;
 `;
 const Detail = styled.div`
   width: 100%;
-  min-height: 1000px;
+  min-width: 350px;
+  max-width: 1000px;
+  min-height: 1100px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -33,7 +36,7 @@ const Detail = styled.div`
 
 const SelectBox = styled.div`
   width: 90%;
-  min-width: 400px;
+  min-width: 330px;
   height: 80px;
   margin-top: 3%;
   border: 1px solid #f3e1e1;
@@ -52,7 +55,7 @@ const SelectButton = styled.button`
   cursor: pointer;
 `;
 const DatePick = styled.div`
-  min-width: 100px;
+  min-width: 60px;
   margin-left: auto;
   margin-right: 1%;
   padding-left: 1%;
@@ -66,7 +69,7 @@ const DateSelected = styled.p`
 
 const ContentBox = styled.div`
   width: 90%;
-  min-width: 600px;
+  min-width: 330px;
   height: 780px;
   margin-top: 3%;
   border: 1px solid #f3e1e1;
@@ -84,24 +87,25 @@ const ContentTop = styled.div`
 `;
 const ContentNum = styled.p`
   width: 10%;
-  min-width: 70px;
+  min-width: 50px;
   margin-left: 1%;
   text-align: center;
 `;
 const ContentTitle = styled.p`
   width: 60%;
-  min-width: 300px;
+  min-width: 80px;
   margin-left: 2%;
   text-align: center;
 `;
-const ContentCafe = styled.p`
+const ContentEvent = styled.p`
   width: 10%;
-  min-width: 100px;
+  min-width: 50px;
   margin-left: 2%;
   text-align: center;
 `;
 const ContentDate = styled.p`
   width: 10%;
+  min-width: 50px;
   margin-left: 2%;
   text-align: center;
 `;
@@ -119,25 +123,26 @@ const ContentLists = styled.p`
 `;
 const ListNum = styled.p`
   width: 10%;
-  min-width: 70px;
+  min-width: 50px;
   margin-left: 1%;
   text-align: center;
 `;
 const ListTitle = styled.p`
   width: 60%;
-  min-width: 300px;
+  min-width: 80px;
   margin-left: 2%;
   text-align: center;
   cursor: pointer;
 `;
-const ListCafe = styled.p`
+const ListEvent = styled.p`
   width: 10%;
-  min-width: 100px;
+  min-width: 50px;
   margin-left: 2%;
   text-align: center;
 `;
 const ListDate = styled.p`
   width: 10%;
+  min-width: 50px;
   margin-left: 2%;
   text-align: center;
 `;
@@ -386,7 +391,7 @@ const MyEvent = () => {
           <ContentTop>
               <ContentNum>번호</ContentNum>
               <ContentTitle>이벤트 내용</ContentTitle>
-              <ContentCafe>포인트</ContentCafe>
+              <ContentEvent>포인트</ContentEvent>
               <ContentDate>날짜</ContentDate>
             </ContentTop>
             <hr style={{ margin: "1%" }} />
@@ -395,7 +400,7 @@ const MyEvent = () => {
                 <ContentLists key={index}>
                   <ListNum>{item.id}</ListNum>
                   <ListTitle>{item.pointType}</ListTitle>
-                  <ListCafe>{item.point}</ListCafe>
+                  <ListEvent>{item.point}</ListEvent>
                   <ListDate>
                     {new Date(item.pointDate)
                       .toISOString()

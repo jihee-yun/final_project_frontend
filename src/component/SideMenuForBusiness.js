@@ -127,10 +127,10 @@ const SideMenuForBusiness = () => {
       </ProfileBox>
       <NaviButton onClick={()=>navigate("/businesspage/cafe")}>카페 등록 / 관리</NaviButton>
       <NaviButton onClick={()=>navigate("/businesspage/review")}>리뷰 관리</NaviButton>
-      <NaviButton onClick={()=>navigate("/businesspage/challenge")}>카페 챌린지</NaviButton>
-      <NaviButton onClick={()=>navigate("/businesspage/event")}>카페 이벤트</NaviButton>
+      {/* <NaviButton onClick={()=>navigate("/businesspage/challenge")}>카페 챌린지</NaviButton> */}
+      {/* <NaviButton onClick={()=>navigate("/businesspage/event")}>카페 이벤트</NaviButton> */}
       {/* <NaviButton onClick={()=>navigate("/businesspage/calendar")}>캘린더</NaviButton> */}
-      <NaviButton onClick={()=>navigate("/businesspage/point")}>포인트 / 결제 내역</NaviButton>
+      {/* <NaviButton onClick={()=>navigate("/businesspage/point")}>포인트 / 결제 내역</NaviButton> */}
       {/* <NaviButton onClick={()=>navigate("/businesspage/ranking")}>랭킹</NaviButton> */}
       <NaviButton onClick={()=>navigate("/businesspage/information")}>회원 정보</NaviButton>
       <NaviButton onClick={()=>navigate("/businesspage/report")}>문의 / 신고 내역</NaviButton>

@@ -124,17 +124,27 @@ const SideMenu = () => {
         <MyName onClick={()=>navigate("/blog")}>{userName}님 블로그 이동</MyName>
         <MyPoint onClick={()=>navigate("/mypage/point")}>{memberInfo.totalPoint} point</MyPoint>
       </ProfileBox>
-      <NaviButton onClick={()=>navigate("/mypage/review")}>작성 리뷰</NaviButton>
-      <NaviButton onClick={()=>navigate("/mypage/guild")}>참여 길드</NaviButton>
-      <NaviButton onClick={()=>navigate("/mypage/challenge")}>참여 챌린지</NaviButton>
-      <NaviButton onClick={()=>navigate("/mypage/event")}>참여 이벤트</NaviButton>
-      {/* <NaviButton onClick={()=>navigate("/mypage/calendar")}>캘린더</NaviButton> */}
-      <NaviButton onClick={()=>navigate("/mypage/point")}>포인트 / 결제 내역</NaviButton>
-      {/* <NaviButton onClick={()=>navigate("/mypage/ranking")}>랭킹</NaviButton> */}
-      <NaviButton onClick={()=>navigate("/mypage/information")}>회원 정보</NaviButton>
-      <NaviButton onClick={()=>navigate("/mypage/report")}>문의 / 신고 내역</NaviButton>
-      <NaviButton onClick={()=>navigate("/mypage/payment")}>포인트 충전</NaviButton>
-      
+      {userAuthority === 'ROLE_MEMBER' ? (
+        <>
+        <NaviButton onClick={()=>navigate("/businesspage/cafe")}>카페 등록 / 관리</NaviButton>
+        <NaviButton onClick={()=>navigate("/businesspage/review")}>리뷰 관리</NaviButton>
+        <NaviButton onClick={()=>navigate("/businesspage/information")}>회원 정보</NaviButton>
+        <NaviButton onClick={()=>navigate("/businesspage/report")}>문의 / 신고 내역</NaviButton>
+        </>
+      ) : (
+        <>
+        <NaviButton onClick={()=>navigate("/mypage/review")}>작성 리뷰</NaviButton>
+        <NaviButton onClick={()=>navigate("/mypage/guild")}>참여 길드</NaviButton>
+        <NaviButton onClick={()=>navigate("/mypage/challenge")}>참여 챌린지</NaviButton>
+        <NaviButton onClick={()=>navigate("/mypage/event")}>참여 이벤트</NaviButton>
+        {/* <NaviButton onClick={()=>navigate("/mypage/calendar")}>캘린더</NaviButton> */}
+        <NaviButton onClick={()=>navigate("/mypage/point")}>포인트 / 결제 내역</NaviButton>
+        {/* <NaviButton onClick={()=>navigate("/mypage/ranking")}>랭킹</NaviButton> */}
+        <NaviButton onClick={()=>navigate("/mypage/information")}>회원 정보</NaviButton>
+        <NaviButton onClick={()=>navigate("/mypage/report")}>문의 / 신고 내역</NaviButton>
+        <NaviButton onClick={()=>navigate("/mypage/payment")}>포인트 충전</NaviButton>
+        </>
+      )}
     </Side>
   );
 };

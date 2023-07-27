@@ -18,8 +18,8 @@ const OutBox = styled.div`
 
 // 사이드 메뉴 + 세부 페이지
 const Container = styled.div`
-  width: 80%;
-  
+  width: 95%;
+  margin-top: 30px;
   display: flex;
   justify-content: center;
 `;
@@ -55,7 +55,7 @@ const TextBox = styled.p`
 // 세부 페이지 중앙 부분
 const ContentBox = styled.div`
   width: 90%;
-  min-width: 500px;
+  min-width: 350px;
   margin-top: 3%;
   border: 1px solid #F3E1E1;
   border-radius: 15px;
@@ -73,7 +73,7 @@ const ContentRowbox = styled.div`
 const SpecificBox = styled.div`
   margin: 20px;
   width: 40%;
-  min-width: 200px;
+  min-width: 300px;
   border: 1px solid #F3E1E1;
   display: flex;
   flex-direction: column;

@@ -17,13 +17,14 @@ const OutBox = styled.div`
 `;
 
 const Container = styled.div`
-  width: 80%;
+  width: 95%;
+  margin-top: 30px;
   display: flex;
   justify-content: center;
 `;
 const Detail = styled.div`
   width: 100%;
-  min-width: 400px;
+  min-width: 350px;
   max-width: 1000px;
   min-height: 1100px;
   display: flex;
@@ -60,7 +61,7 @@ const TypeButton = styled.button`
 // 세부 내역 박스
 const SelectBox = styled.div`
   width: 90%;
-  min-width: 400px;
+  min-width: 330px;
   height: 80px;
   margin-top: 3%;
   border: 1px solid #f3e1e1;
@@ -93,7 +94,7 @@ const DateSelected = styled.p`
 
 const ContentBox = styled.div`
   width: 90%;
-  min-width: 600px;
+  min-width: 330px;
   height: 780px;
   margin-top: 3%;
   border: 1px solid #f3e1e1;
@@ -110,24 +111,25 @@ const ContentTop = styled.div`
 `;
 const ContentNum = styled.p`
   width: 10%;
-  min-width: 70px;
+  min-width: 50px;
   margin-left: 1%;
   text-align: center;
 `;
 const ContentTitle = styled.p`
   width: 60%;
-  min-width: 300px;
+  min-width: 80px;
   margin-left: 2%;
   text-align: center;
 `;
-const ContentCafe = styled.p`
+const ContentPoint = styled.p`
   width: 10%;
-  min-width: 100px;
+  min-width: 50px;
   margin-left: 2%;
   text-align: center;
 `;
 const ContentDate = styled.p`
   width: 10%;
+  min-width: 50px;
   margin-left: 2%;
   text-align: center;
 `;
@@ -145,25 +147,26 @@ const ContentLists = styled.p`
 `;
 const ListNum = styled.p`
   width: 10%;
-  min-width: 70px;
+  min-width: 50px;
   margin-left: 1%;
   text-align: center;
 `;
 const ListTitle = styled.p`
   width: 60%;
-  min-width: 300px;
+  min-width: 80px;
   margin-left: 2%;
   text-align: center;
   cursor: pointer;
 `;
-const ListCafe = styled.p`
+const ListPoint = styled.p`
   width: 10%;
-  min-width: 100px;
+  min-width: 50px;
   margin-left: 2%;
   text-align: center;
 `;
 const ListDate = styled.p`
   width: 10%;
+  min-width: 50px;
   margin-left: 2%;
   text-align: center;
 `;
@@ -434,7 +437,7 @@ const MyPoint = () => {
               <ContentTop>
                 <ContentNum>번호</ContentNum>
                 <ContentTitle>포인트 상세 내역</ContentTitle>
-                <ContentCafe>포인트</ContentCafe>
+                <ContentPoint>포인트</ContentPoint>
                 <ContentDate>날짜</ContentDate>
               </ContentTop>
               <hr style={{ margin: "1%" }} />
@@ -443,7 +446,7 @@ const MyPoint = () => {
                   <ContentLists key={index}>
                     <ListNum>{item.id}</ListNum>
                     <ListTitle>{item.pointType}</ListTitle>
-                    <ListCafe>{item.point}</ListCafe>
+                    <ListPoint>{item.point}</ListPoint>
                     <ListDate>
                       {new Date(item.pointDate)
                         .toISOString()

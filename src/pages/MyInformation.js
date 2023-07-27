@@ -15,13 +15,14 @@ const OutBox = styled.div`
 `;
 
 const Container = styled.div`
-  width: 80%;
-  
+  width: 95%;
+  margin-top: 30px;
   display: flex;
   justify-content: center;
 `;
 const Detail = styled.div`
   width: 100%;
+  max-width: 1000px;
   display: flex;
   flex-direction: column;
   align-items: center;

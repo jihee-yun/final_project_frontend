@@ -15,8 +15,10 @@ const OutBox = styled.div`
 `;
 
 const Container = styled.div`
+  margin-top: 30px;
   width: 90%;
   display: flex;
+  justify-content: center;
 `;
 // 세부 페이지
 const Detail = styled.div`
