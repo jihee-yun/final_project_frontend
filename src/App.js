@@ -57,6 +57,7 @@ import ScrollToTop from './utils/ScrollToTop';
 import AdminReg from './pages/AdminReg';
 import PrivateRoute from './utils/PrivateRoute';
 import CafeSearch from './pages/CafeSearch';
+import ChangePw from './pages/ChangePw';
 
 function App() {
   return (
@@ -118,6 +119,7 @@ function App() {
         <Route path='/servicecenter' element={<ServiceCenter/>}/>
         <Route path='/admin/register' element={<PrivateRoute element={<AdminReg />}/>}/>
         <Route path='/cafesearch/:keyword' element={<CafeSearch />}/>
+        <Route path='/changepw' element={<ChangePw/>}/>
       </Routes>
     </BrowserRouter>
     </UserStore>
