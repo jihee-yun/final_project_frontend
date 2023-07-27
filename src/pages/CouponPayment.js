@@ -88,13 +88,15 @@ const CouponPayment = () => {
   const couponPrice = coupon.price;
   const couponId = coupon.id;
 
+  console.log(couponPrice);
+
   const handlePayClick = async () => {
     const response = await AxiosApi.couponPayment(userNum, coupon.id, grantType, accessToken);
     console.log(response.data);
     if(response.data === true) {
-      navigate('/payComplete'); // 결제 성공 시 payComplete 페이지로 이동
+      navigate('/payComplete');
     } else {
-      alert('쿠폰 결제에 실패했습니다.'); // 실패 시 알림 창 띄우기
+      alert('보유하신 포인트가 부족합니다.');
     }
   };
 

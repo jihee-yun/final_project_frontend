@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import start from "../images/start.png"
 import pin from "../images/pin.png"

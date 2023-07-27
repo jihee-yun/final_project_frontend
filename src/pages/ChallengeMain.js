@@ -3,7 +3,6 @@ import styled from "styled-components";
 import challengePin from "../images/challengePin.png"
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import ChallnegeModal from "../component/ChallengeModal";
-// import AxiosApi from "../images/yeabin/Api/AxiosApi";
 import AxiosApi from "../api/AxiosApi";
 import { UserContext } from "../context/UserStore";
 import Header from "../component/Header";
@@ -33,8 +32,6 @@ const Box = styled.div`
       font-size: 1.3rem;
     }
   }
-
-  
 `;
 
 const ChHeader = styled.div`
@@ -110,10 +107,13 @@ const Btn = styled.div`
     background-color: #FFCFDA;
     margin-top: 100px;
     margin-bottom: 10px;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: bolder;
-    color: white;
     cursor: pointer;
+
+    @media (max-width: 430px) {
+      width: 300px;
+    }
   }
 `;
 
@@ -133,7 +133,6 @@ const Confirm = styled.div`
     height: 100px;
     font-size: 1.1rem;
     font-weight: bolder;
-    /* background-color: #FFCFDA; */
     border: 3px solid #FFCFDA;
     border-radius: 20px;
     margin: 0 auto;
@@ -148,7 +147,7 @@ const Confirm = styled.div`
       p {
         font-size: 1rem;
       }
-  }
+    }
   }
 `;
 
@@ -220,7 +219,7 @@ const ChallengeMain = () => {
             <div className="ch-box2">
               <p className="title">퀘스트 인증 방법</p>
               <div className="content">
-                <p>카페 직원에게 신청한 챌린지 인증 페이지를 보여주세요</p>
+                <p>카페 직원에게 신청한 퀘스트 인증 페이지를 보여주세요</p>
                 <p>직원이 확인해주면 완료!</p>
               </div>
             </div>

@@ -27,6 +27,12 @@ const MyPoint = styled.div`
   }
 `;
 
+const Name = styled.div`
+  margin-right: 25px;
+  font-size: 1.1rem;
+  font-weight: bolder;
+`;
+
 const CouponBox = styled.div`
   margin-bottom: 80px;
   display: flex;
@@ -66,12 +72,12 @@ const CouponList = styled.div`
   }
 `;
 
-const Name = styled.div`
+const CouponName = styled.div`
   margin-right: 25px;
   font-size: 1.1rem;
   font-weight: bolder;
   @media (max-width: 430px) {
-    margin: 40px 0 0 0;
+    margin: 20px;
   }
 `;
 
@@ -90,17 +96,16 @@ const Price = styled.div`
 `;
 
 const CafeContainer = styled.div`
-   @media (max-width: 768px) {
+  @media (max-width: 768px) {
     justify-content: center;
   }
   position: relative;
   width: 100%;
   display: grid; 
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* 열 크기를 자동으로 조정하되 최소 250px 크기를 유지합니다. */
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-gap: 25px;
   align-items: center;
   padding-top: 20px;
-  /* margin-top: 100px; */
 `;
 
 const CafeBox = styled.div`
@@ -238,7 +243,7 @@ const CouponStore = () => {
       <CouponBox>
           {couponInfo && couponInfo.map(item => (
             <CouponList key={item.couponNum}>
-              <Name>{item.couponName}</Name>
+              <CouponName>{item.couponName}</CouponName>
               <Price onClick={() => navigatePay(item.id)}>{item.price} 포인트</Price>
             </CouponList>
           ))}

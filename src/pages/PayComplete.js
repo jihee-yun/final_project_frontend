@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from "styled-components";
 import credit from "../images/credit.png";
+import Header from '../component/Header';
+import Footer from '../component/Footer';
 
 
 const Container = styled.div`
@@ -23,12 +25,16 @@ const Container = styled.div`
 
 const PayComplete = () => {
   return(
+    <>
+    <Header />
     <Container>
       <div className='pay'>
         <img src={credit} alt="결제" />
         <p>결제가 완료되었습니다.</p>
       </div>
     </Container>
+    <Footer />
+    </>
   );
 };
 
