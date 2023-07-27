@@ -4,6 +4,7 @@ import AxiosApi from "../api/AxiosApi";
 import { styled } from "styled-components";
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Header from "./Header"
 
 const Box = styled.div`
 margin-top: 2rem;
@@ -102,6 +103,7 @@ const QnaSearchList = () => {
 
     return(
     <>
+    <Header/>
      {qnaList.map((user, index) => (
     <div key={user.id}>
       <Box >
