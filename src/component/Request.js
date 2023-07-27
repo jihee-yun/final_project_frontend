@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "styled-components";
+import AxiosApi from "../api/AxiosApi";
+import Modal from "../utils/Modal2";
+import CompleteModal from "../utils/CompleteModal";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
-    width: 65.625rem;
-    margin: 2.5rem auto 6.25rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 100px;
 
     p {
     font-size: .75rem;
@@ -20,29 +26,64 @@ const Container = styled.div`
     *{
         box-sizing: border-box;
     }
-
-
 `;
 
 const Form = styled.div`
-display: block;
-margin-top: 0em;
+    @media (max-width: 768px) {
+    width: 100%;
+   }
+    width: 70%;
+    margin-top: 0em;
 
 `;
 
 const EmailBox = styled.div`
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
 
 .email {
-    font-size: 1.125rem;
+    width: 100px;
+    margin-right: 20px;
+    font-weight: bold;
+    font-size: 1rem;
     line-height: 3.125rem;
     color: #202225;
 }
 `
+
+const CategoryBox = styled.div`
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    /* justify-content: center; */
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 1rem;
+
+    .box {
+        gap: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .category {
+        width: 100px;
+        margin-right: 10px;
+    }
+
+    button {
+        cursor: pointer;
+        font-weight: bold;
+        margin-right: 10px;
+        height: 30px;
+        width: 80px;
+        border-radius: 20px;
+        border: 1px solid lightgray;
+    }
+`;
+
 const InputBox = styled.div`
-    width: 45.75rem;
+    width: 100%;
 
     .requestemail{
     width: 100%;
@@ -52,19 +93,21 @@ const InputBox = styled.div`
     color: #202225;
     font-size: 1rem;
     line-height: 1.5;
-
 }
 
 `;
 
 const ContentBox = styled.div`
+    width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     margin-top: 0.75rem;
 
     .content{
-    font-size: 1.125rem;
+    width: 100px;
+    margin-right: 20px;
+    font-weight: bold;
+    font-size: 1rem;
     line-height: 3.125rem;
     color: #202225;
     }
@@ -73,7 +116,7 @@ const ContentBox = styled.div`
 `;
 
 const InputBox2 = styled.div`
-width: 45.75rem;
+width: 100%;
 
 .contentbox{
     width: 100%;
@@ -92,53 +135,111 @@ width: 45.75rem;
     border-radius: 0.25rem;
     padding: 0.5rem 0.75rem;
     font-size: .875rem;
-    
     }
-
-
 `
 
 const BUTTON = styled.div`
     margin-top: 3.125rem;
     display: flex;
     justify-content: center;
+    
 
     button {
-    padding-right: 3.75rem;
-    padding-left: 3.75rem;
-    border-color: #0067ff;
-    background-color: #0067ff;
-    color: #ffffff;
+    @media (max-width: 768px) {
+    width: 100px;
+   }
+    width: 200px;
+    height: 30px;
+    border-radius: 15px;
+    border: none;
+    font-weight: bold;
+    background-color: #FFCFDA;
+    color: #585858;
+    &:hover {
+        color: white;
     }
-
+    }
 `
 
 const Request = () => {
+    const navigate = useNavigate();
+    const [category, setCategory] = useState("");
+    const [questionType, setQuestionType] = useState("");
+    const [title, setTitle] = useState("");
+    const [content, setContent] = useState("");
+    const [isModalOpen, setModalOpen] = useState(false);
+
+    const userNum = localStorage.getItem("userNum");
+    const grantType = localStorage.getItem("grantType");
+    const accessToken = localStorage.getItem("accessToken");
+
+    const changeTitle = (e) => {
+        setTitle(e.target.value);
+    }
+
+    const changeContent = (e) => {
+        setContent(e.target.value);
+    }
+
+    // const summit = async() => {
+    //     const response = await AxiosApi.summitReport(userNum, grantType, accessToken, category, questionType, title, content);
+    //     if(response.data === true) {
+    //         setModalOpen(true);
+    //     }
+    // }
+
+    const complete = () => {
+        navigate("/servicecenter");
+      }
+    
+
+    const closeModal = () => {
+    setModalOpen(false);
+    };
+
+
+    console.log(questionType);
+    console.log(category);
+    console.log(title);
+    console.log(content);
 
     return(
         <Container>
             <Form>
+        
+            <CategoryBox>
+                <div className="category">유형 선택</div>
+                <div className="box">
+                <div className="type">
+                    <button onClick={() => setQuestionType("REQUEST")} style={{ boxShadow: questionType === "REQUEST" ? "inset 1px 1px 1px lightgray" : "none", backgroundColor: questionType === "REQUEST" ? "#FFCFDA" : "white" }}>문의</button>
+                    <button onClick={() => setQuestionType("REPORT")} style={{ boxShadow: questionType === "REPORT" ? "inset 1px 1px 1px lightgray" : "none", backgroundColor: questionType === "REPORT" ? "#FFCFDA" : "white" }}>신고</button>
+                </div>
+                <div className="type">
+                    <button onClick={() => setCategory("USER")} style={{ boxShadow: category === "USER" ? "inset 1px 1px 1px lightgray" : "none", backgroundColor: category === "USER" ? "#FFCFDA" : "white" }}>일반 회원</button>
+                    <button onClick={() => setCategory("BUSINESS")} style={{ boxShadow: category === "BUSINESS" ? "inset 1px 1px 1px lightgray" : "none", backgroundColor: category === "BUSINESS" ? "#FFCFDA" : "white" }}>사업자 회원</button>
+                </div>
+                </div>
+            </CategoryBox>   
             <EmailBox>
-                <div className="email">이메일</div>
+                <div className="email">문의 제목</div>
                 <InputBox>
-                <input type="text" className="requestemail"></input>
-                <p>입력하신 이메일로 답변이 발송됩니다.</p>
+                <input type="text" className="requestemail" onChange={changeTitle}></input>
+                {/* <p>입력하신 이메일로 답변이 발송됩니다.</p> */}
                 </InputBox>
             </EmailBox>
-        
-        
-        <ContentBox>
+            <ContentBox>
                 <div className="content">문의 내용</div>
                 <InputBox2>
-                <textarea type="text" placeholder="문의 내용을 입력해 주세요." className="contentbox"></textarea>
+                <textarea type="text" placeholder="문의 내용을 입력해 주세요." className="contentbox" onChange={changeContent}></textarea>
                 </InputBox2>
-                </ContentBox>
-
-                <BUTTON>
-                    <button className="button">등록</button>
-                </BUTTON>
+            </ContentBox>
+            <BUTTON>
+                <button className="button" >등록</button>
+            </BUTTON>
             </Form>
-
+            <Modal move={true} header="완료" open={isModalOpen} confirm={complete} close={closeModal}>
+                <CompleteModal content={userNum ? "문의가 등록되었습니다" : "로그인이 필요합니다. 로그인 페이지로 이동할까요?"} maxCharacters={userNum ? 0 : 11}/>
+            </Modal>
         </Container>
     );
 };

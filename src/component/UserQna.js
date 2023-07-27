@@ -50,7 +50,7 @@ const Answer = styled.ul`
 `;
 
 const UserQna = () => {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState({});
     const [qnaList, setQnaList] = useState([]);
 
     useEffect(() => {
@@ -68,20 +68,26 @@ const UserQna = () => {
         console.log(qnaList);
       }, []);
       
+    const questionOpen = (index) => {
+      setIsOpen((prev) => ({
+        ...prev,
+        [index]: !prev[index],
+      }));
+    };
+
     return(
     <>
-    {qnaList.map(user => (
+    {qnaList.map((user, index) => (
     <div key={user.id}>
       <Box >
         <Question > {user.question}
-          <Button onClick={() => {
-            setIsOpen((e) => !e);}}>
-          {isOpen ? <ExpandMoreIcon style={{fill: "gray"}}/> : <ExpandLessIcon style={{fill: "gray"}}/>}
+          <Button onClick={() => questionOpen(index)}>
+          {isOpen[index] ? <ExpandMoreIcon style={{fill: "gray"}}/> : <ExpandLessIcon style={{fill: "gray"}}/>}
         </Button> </Question>
       </Box>
       
       <Box2>
-      <Answer style={{ display: isOpen ? "block" : "none" }}>
+      <Answer style={{ display: isOpen[index] ? "block" : "none" }}>
         <div className="answer">{user.answer}</div>
       </Answer>
       </Box2>
