@@ -55,7 +55,6 @@ const TextBox = styled.p`
 const ContentBox = styled.div`
   width: 90%;
   min-width: 330px;
-
   /* min-width: 500px; */
   min-height: 600px;
   margin-top: 3%;
@@ -149,7 +148,6 @@ const MyGuild = () => {
   const {grantType, accessToken, refreshToken, userNum, userName, userAuthority} = useContext(UserContext);
   // 유저 정보 상태 관리
   const [memberInfo, setMemberInfo] = useState(null);
-  const [imageUrls, setImageUrls] = useState([]);
 
   const categoryNames = {
     1: "친목",
@@ -171,7 +169,6 @@ const MyGuild = () => {
     };
     fetchMemberInfo();
   }, [userNum]);
-
 
 
   return (

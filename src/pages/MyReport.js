@@ -70,7 +70,7 @@ const DateSelected = styled.p`
 const ContentBox = styled.div`
   width: 90%;
   min-width: 330px;
-  height: 400px;
+  min-height: 400px;
   margin-top: 3%;
   border: 1px solid #f3e1e1;
   border-radius: 15px;

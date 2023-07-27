@@ -26,7 +26,7 @@ const Detail = styled.div`
   width: 100%;
   min-width: 350px;
   max-width: 1000px;
-  min-height: 1100px;
+  min-height: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -95,7 +95,7 @@ const DateSelected = styled.p`
 const ContentBox = styled.div`
   width: 90%;
   min-width: 330px;
-  min-height: 780px;
+  min-height: 400px;
   margin-top: 3%;
   border: 1px solid #f3e1e1;
   border-radius: 15px;
@@ -134,7 +134,7 @@ const ContentDate = styled.p`
   text-align: center;
 `;
 const ContentDetail = styled.div`
-  min-height: 600px;
+  min-height: 400px;
 //  border: 1px solid blue;
 `;
 const ContentLists = styled.p`
@@ -175,6 +175,7 @@ const ListDate = styled.p`
 const NumberSelectBox = styled.div`
   height: 30px;
   margin-top: 3%;
+  margin-bottom: 3%;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -24,7 +24,9 @@ const Container = styled.div`
 // 세부 페이지
 const Detail = styled.div`
   width: 100%;
+  min-width: 350px;
   max-width: 1000px;
+  min-height: 600px;
   /* height: 1000px; */
   display: flex;
   flex-direction: column;
@@ -36,7 +38,7 @@ const Detail = styled.div`
 // 세부 페이지 윗쪽 부분
 const SelectBox = styled.div`
   width: 90%;
-  min-width: 300px;
+  min-width: 330px;
   height: 80px;
   margin-top: 3%;
   border: 1px solid #F3E1E1;
@@ -54,12 +56,14 @@ const TextBox = styled.p`
 // 세부 페이지 중앙 부분
 const ContentBox = styled.div`
   width: 90%;
-  min-width: 300px;
+  min-width: 330px;
+  min-height: 600px;
   margin-top: 3%;
   border: 1px solid #F3E1E1;
   border-radius: 15px;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-around;
 `;
 // 세부 페이지 가로 박스
 const ContentRowbox = styled.div`
@@ -70,18 +74,16 @@ const ContentRowbox = styled.div`
 `;
 // 세부 정보들 나열해주는 박스
 const SpecificBox = styled.div`
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin: 20px;
   width: 40%;
-  min-width: 200px;
-  max-width: 300px;
+  min-width: 300px;
   border: 1px solid #F3E1E1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   border-radius: 15px;
-  @media (max-width: 500px) {
+  @media (max-width: 670px) {
     width: calc(80% - 20px); // 1개를 한 줄에 배치
   }
 `;
@@ -91,6 +93,13 @@ const RowBox = styled.div`
   height: 30px;
   display: flex;
   flex-direction: row;
+`;
+// 챌린지 이미지(썸네일)
+const ChallengeImg = styled.img`
+  width: 100%;
+  height: 200px;
+  border-radius: 15px 15px 0 0;
+  overflow: hidden;
 `;
 // 챌린지 이름
 const ChallengeName = styled.p`
@@ -148,12 +157,6 @@ const MyChallenge = () => {
   }, [userNum]);
 
 
-
-
-
-
-
-
   return (
     <OutBox>
       <Header />
@@ -164,66 +167,18 @@ const MyChallenge = () => {
             <TextBox>참여중인 챌린지 조회</TextBox>
           </SelectBox>
           <ContentBox>
-            <ContentRowbox>
-              <SpecificBox>
+            {memberInfo && memberInfo.map((challenge, index) => (
+              <SpecificBox key={index}>
+                <ChallengeImg src={challenge.thumbnail} alt="ChallengeImg"></ChallengeImg>
                 <RowBox>
-                  <ChallengeName>챌린지 이름1</ChallengeName>
-                  <More onClick={()=>navigate("/mypage/challenge")}>더 보기</More>
+                  <ChallengeName>{challenge.challengeName}</ChallengeName>
+                  <More onClick={()=>navigate("/mypage/challenge")}>자세히 보기</More>
                 </RowBox>
-                <CahllengeCount>카운트: 5</CahllengeCount>
-                <ChallengeDetail>내용: 1식1케이크 도전</ChallengeDetail>
-                <ChallengeExpired>만료날짜: 2023-07</ChallengeExpired>
+                <CahllengeCount>카운트: {challenge.count}</CahllengeCount>
+                <ChallengeDetail>내용: {challenge.detail}</ChallengeDetail>
+                <ChallengeExpired>만료날짜: {challenge.date}</ChallengeExpired>  
               </SpecificBox>
-              <SpecificBox>
-                <RowBox>
-                  <ChallengeName>챌린지 이름1</ChallengeName>
-                  <More onClick={()=>navigate("/mypage/challenge")}>더 보기</More>
-                </RowBox>
-                <CahllengeCount>카운트: 5</CahllengeCount>
-                <ChallengeDetail>내용: 1식1케이크 도전</ChallengeDetail>
-                <ChallengeExpired>만료날짜: 2023-07</ChallengeExpired>
-              </SpecificBox>
-            </ContentRowbox>
-            <ContentRowbox>
-              <SpecificBox>
-                <RowBox>
-                  <ChallengeName>챌린지 이름1</ChallengeName>
-                  <More onClick={()=>navigate("/mypage/challenge")}>더 보기</More>
-                </RowBox>
-                <CahllengeCount>카운트: 5</CahllengeCount>
-                <ChallengeDetail>내용: 1식1케이크 도전</ChallengeDetail>
-                <ChallengeExpired>만료날짜: 2023-07</ChallengeExpired>
-              </SpecificBox>
-              <SpecificBox>
-                <RowBox>
-                  <ChallengeName>챌린지 이름1</ChallengeName>
-                  <More onClick={()=>navigate("/mypage/challenge")}>더 보기</More>
-                </RowBox>
-                <CahllengeCount>카운트: 5</CahllengeCount>
-                <ChallengeDetail>내용: 1식1케이크 도전</ChallengeDetail>
-                <ChallengeExpired>만료날짜: 2023-07</ChallengeExpired>
-              </SpecificBox>
-            </ContentRowbox>
-            <ContentRowbox>
-              <SpecificBox>
-                <RowBox>
-                  <ChallengeName>챌린지 이름1</ChallengeName>
-                  <More onClick={()=>navigate("/mypage/challenge")}>더 보기</More>
-                </RowBox>
-                <CahllengeCount>카운트: 5</CahllengeCount>
-                <ChallengeDetail>내용: 1식1케이크 도전</ChallengeDetail>
-                <ChallengeExpired>만료날짜: 2023-07</ChallengeExpired>
-              </SpecificBox>
-              <SpecificBox>
-                <RowBox>
-                  <ChallengeName>챌린지 이름1</ChallengeName>
-                  <More onClick={()=>navigate("/mypage/challenge")}>더 보기</More>
-                </RowBox>
-                <CahllengeCount>카운트: 5</CahllengeCount>
-                <ChallengeDetail>내용: 1식1케이크 도전</ChallengeDetail>
-                <ChallengeExpired>만료날짜: 2023-07</ChallengeExpired>
-              </SpecificBox>
-            </ContentRowbox>
+            ))}
           </ContentBox>
         </Detail>
       </Container>

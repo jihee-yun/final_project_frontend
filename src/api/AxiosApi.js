@@ -405,7 +405,7 @@ const AxiosApi = {
 
   // 유저 번호로 챌린지 관련 정보 전체 조회
   getMemberChallengeInfo: async (userNum, grantType, accessToken) => {
-    return await axios.get(`${KH_DOMAIN}/event/getbynum?usernum=${userNum}`, {
+    return await axios.get(`${KH_DOMAIN}/challenge/getbynum?usernum=${userNum}`, {
       headers: {
         Authorization: `${grantType} ${accessToken}`
       }
