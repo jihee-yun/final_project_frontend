@@ -1,7 +1,7 @@
-import React from "react";
+import {useState, navigate} from "react";
 import { styled } from "styled-components";
 import SearchIcon from '@mui/icons-material/Search';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Container = styled.div`
     display: flex;
@@ -165,6 +165,15 @@ const ViewLink = styled(Link)`
 
 
 const ServiceHome = () => {
+    const [keyword, setKeyword] = useState(""); // 검색어 입력을 위한 useState
+
+    const onChangeSearch = (e) => {
+        setKeyword(e.target.value);
+      };
+
+    const swordPush = () => {
+        navigate(`/cafesearch/${keyword}`);
+      };
 
     return(
     <Container>
@@ -186,11 +195,10 @@ const ServiceHome = () => {
     <Search>
     <SearchBar>
         <input type="text" className="search-bar" placeholder="궁금하신 내용을 검색해 보세요."
-              //   value={searchInput}
-              //   onChange={handleSearchInputChange}
-              //   onKeyDown={handleKeyDown} 
+               value={keyword}
+               onChange={onChangeSearch}
               /> <SearchIcon style={{ fontSize: 30, marginRight: 10 }}
-              //   onClick={handleSearchInconClick}
+                            onClick={swordPush}
               />
     </SearchBar>
     </Search>        

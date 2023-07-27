@@ -20,7 +20,7 @@ const SidebarContainer = styled.div`
   border-radius: 10px;
   background: #F2F2F2;
   z-index: 100;
-  background-color: #F2F2F2;
+  background-color: #F8E0E6;
 
   /* &.active {
     right: 0px;
@@ -52,9 +52,25 @@ const ProfileBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 60px;
   .userName {
     align-self: center;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+  .member {
+    align-self: center;
+    padding-top: 30px;
+    margin-bottom: 10px;
+    font-weight: bold;
+  
+    display: flex;
+    a {
+      text-decoration: none;
+      color: #6e6e6e;
+    }
   }
 
 `
@@ -64,7 +80,7 @@ const Profile = styled.img`
   height: 200px;
   margin: 16px 16px 16px 16px;
   background: white;
-  border-radius: 10px;
+  border-radius: 50%;
   cursor: pointer;
   align-self: center;
 
@@ -81,17 +97,21 @@ const Menu = styled.div`
 const NavLink = styled(Link) `
   text-decoration: none;
   margin-bottom: 30px;
-  font-size: 30px;
+  font-size: 18px;
   font-weight: bold;
   color: inherit;
   align-self: center;
-  color: #2E2E2E;
+  color: #585858;
+  &:hover {
+    color: white;
+  }
 `
 
 const Sidebar = () => {
   const { isSidebar, setIsSidebar, isLogin, setIsLogin,  userName, setUserName, 
     setGrantType, setAccessToken,setRefreshToken, userNum, setUserNum, userAuthority, setUserAuthoruty}  = useContext(UserContext);
     const [sideBarInfo, setSideBarInfo] = useState([]);
+    const navigate = useNavigate();
 
   // 로그아웃 버튼 누르면 함수 실행
   const handleLogout = () => {
@@ -115,18 +135,22 @@ const Sidebar = () => {
     navigate("/");
   }
 
-  // useEffect(() => {
-  //   const getSidebarInfo = async (memberNum) => {
-  //     if(isSidebar && isLogin) {
-  //       const memInfo = await AxiosApi.getMemberInfo(memberNum);
-  //       setSideBarInfo(memInfo.data);
-  //       console.log(memInfo);
-  //     } else {
-  //       setSideBarInfo([]);
-  //     }
-  //   };
-  //   getSidebarInfo(userNum)
-  // })
+  useEffect(() => {
+    const getSidebarInfo = async (memberNum) => {
+      if(isSidebar && isLogin) {
+        const memInfo = await AxiosApi.getMemberInfo(memberNum);
+        setSideBarInfo(memInfo.data);
+        console.log(memInfo);
+      } else {
+        setSideBarInfo([]);
+      }
+    };
+    getSidebarInfo(userNum)
+
+    console.log(sideBarInfo);
+    
+  }, [isSidebar, isLogin]);
+
 
   return (
 
@@ -137,22 +161,45 @@ const Sidebar = () => {
         </button>
       </SidebarTop>
       {isLogin ? (
+        <>
       <ProfileBox>
-      <Profile src={profile}/>
-      <div className='userName'>{userName}</div>
+      {userAuthority === 'ROLE_MEMBER' ? (
+                <div className="profile" onClick={() => navigate("/businesspage")}> <Profile src={profile}/></div>
+              ) : (
+                <div className="profile" onClick={() => navigate("/mypage")}> <Profile src={profile}/></div>
+              )}
+      {userAuthority === 'ROLE_MEMBER' ? (
+                <div className="userName" onClick={() => navigate("/businesspage")}>{userName}님</div>
+              ) : (
+                <div className="userName" onClick={() => navigate("/mypage")}>{userName}님</div>
+              )}
       </ProfileBox>
+            <Menu>
+            <NavLink to="/cafe">카페 찾기</NavLink>
+            <NavLink to="/guild">길드</NavLink>
+            <NavLink to="/event">이벤트</NavLink>
+            <NavLink to="/couponStore">상점</NavLink>
+          </Menu> 
+          <button className="mypage" onClick={handleLogout}>로그아웃</button>   
+          </> 
       ) : (
+        <>
         <ProfileBox>
         <Profile src={profile}/>
-        <div className='userName'>로그인</div>
+        <div className="member">
+              <Link to="/memberlogin" style={{ marginRight: "10px" }}>로그인</Link>
+              <Link to="/membersignup">회원가입</Link>
+        </div>
         </ProfileBox>
+                    <Menu>
+                    <NavLink to="/cafe">카페 찾기</NavLink>
+                    <NavLink to="/guild">길드</NavLink>
+                    <NavLink to="/event">이벤트</NavLink>
+                    <NavLink to="/couponStore">상점</NavLink>
+                  </Menu> 
+       </>
+        
       )}
-      <Menu>
-        <NavLink to="/cafe">카페 찾기</NavLink>
-        <NavLink to="/guild">길드</NavLink>
-        <NavLink to="/event">이벤트</NavLink>
-        <NavLink to="/couponStore">상점</NavLink>
-      </Menu>
       </SidebarContainer>
      
 
