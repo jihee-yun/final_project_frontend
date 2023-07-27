@@ -92,13 +92,12 @@ const Pin = styled.div`
     z-index: 1;
   }
 
-  @media (max-width: 430px) {
+  /* @media (max-width: 430px) {
     position: absolute;
     top: 0%;
     left: 43%;
     z-index: 1;
-  }
-
+  } */
 `;
 
 const Start = styled.div`

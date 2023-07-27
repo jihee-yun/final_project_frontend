@@ -100,24 +100,12 @@ const Thumb = styled.div`
 `;
 
 const EventFooter = styled.div` 
-
  .event-box{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  /* flex-wrap: wrap; */
 
   @media (max-width: 768px) {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  @media (max-width: 430px) {
-    display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
@@ -129,7 +117,6 @@ const AdBox = styled.div`
   .adImg {
     width: 260px;
     height: 330px;
-    /* border: 1px solid black; */
     margin: 50px;
   }
   @media (max-width: 768px) {
@@ -163,11 +150,6 @@ const MediaBox = styled.div`
 const Event = () => {
   const navigate = useNavigate();
   const [challengeInfo, setChallengeInfo] = useState("");
-  // const context = useContext(UserContext);
-  // const { isLogin } = context;
-  // const isClicked = localStorage.getItem("isClicked");
-
-  // console.log(isClicked);
 
   const cafeOpen = () => {
     navigate('/cafe');
@@ -222,7 +204,7 @@ const Event = () => {
               <div>
                 <img src={menu} alt="카페메뉴" />
                 <h3>카페 확인하기</h3>
-                <p>포인트를 사용할 카페를 찾아보세요</p>
+                <p>포인트를 사용할 카페를 찾아보세요!</p>
                 <div className="menuButton">
                   <button onClick={cafeOpen}>둘러보기</button>
                 </div>
