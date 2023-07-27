@@ -51,8 +51,8 @@ const FindPwBlock = styled.div`
     margin-left: 90px;
     background-color: #FFCFDA;
     font-size: .9rem;
-    font-weight: bold;
-    color: #585858;
+    font-weight: bolder;
+    color: black;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -66,95 +66,123 @@ const FindPwBlock = styled.div`
     color: red;
     margin-top: 5px;
   }
+
+  .auth-button {
+    background-color: #FFCFDA;
+    color: black;
+    padding: 10px 20px;
+    margin-top: 30px;
+    margin-left: 125px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bolder;
+    transition: background-color 0.2s ease;
+
+  /* 마우스 호버 시 배경색 변경 */
+  &:hover {
+    background-color: greenyellow;
+  }
+}
 `;
 
 const FindPw = () => {
   const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
   const [name, setName] = useState("");
+  const [memberId, setMemberId] = useState("");
+
+  const [findPw, setFindPw] = useState("");
 
   const [findPwSuccess, setFindPwSuccess] = useState(false);
   const [findPwFail, setFindPwFail] = useState(false);
+
   const [isCodeVerified, setIsCodeVerified] = useState(false);
   const [code, setCode] = useState("");
-  const [newPassword, setNewPassword] = useState("");
+
+  const [isModalOpen, setIsModalOpen] = useState("");
+
+  const onClickClose = () => {
+    setFindPwSuccess(false);
+    setFindPwFail(false);
+  };
 
   const onChangeEmail = (e) => {
-    setEmail(e.target.value);
+    const emailNow = e.target.value;
+    setEmail(emailNow);
   };
 
-  const onChangePhone = (e) => {
-    setPhone(e.target.value);
-  };
+
+  const onChangeMemberId = (e) => {
+    const memberIdNow = e.target.value;
+    setMemberId(memberIdNow);
+  }
 
   const onChangeName = (e) => {
-    setName(e.target.value);
+    const nameNow = e.target.value;
+    setName(nameNow);
   };
 
-  const onClickFindPw = async () => {
-    try {
-      const response = await AxiosApi.findPw(email, phone, name);
-      if (response.data.success) {
-        setFindPwSuccess(true);  // 인증 코드 입력란 표시를 위해 상태 변경
-        setFindPwFail(false);
-        console.log("인증메일 발송 성공!");
-        mailConfirm();
-      } else {
-        setFindPwSuccess(false);
-        setFindPwFail(true);
-        console.log("일치하는 회원정보가 없습니다.");
-      }
-    } catch (e) {
-      console.log("비밀번호 찾기 오류:", e);
+  // 인증메일 모달이 열릴 때 호출되는 함수
+  const handleOnOpenModal = () => {
+    setIsCodeVerified(false);
+    setIsModalOpen(true); // 모달이 열릴 때 인증번호 입력란과 버튼이 나타나도록
+  };
+
+  // 인증메일 모달이 닫힐 때 호출되는 함수
+  const handleOnCloseModal = () => {
+    if (isCodeVerified) {
+      setIsModalOpen(false); // 인증코드가 확인된 경우에만 모달을 닫습니다.
     }
   };
 
-  const mailConfirm = async () => {
+
+  const onClickFindPw = async () => {
     try {
-      const response = await AxiosApi.emailCheck(email);
-      if (response.data.success) {
-        console.log("인증 메일이 성공적으로 발송되었습니다!");
-        // 인증 메일 발송 후, 인증코드 입력란을 표시하도록 상태를 변경할 수 있습니다.
-        setIsCodeVerified(true); // 예시로 인증코드 입력란 표시를 위해 setIsCodeVerified(true)로 설정
+      const response = await AxiosApi.findPw(email, memberId, name);
+      if (response.data) {
+        setFindPwSuccess(true); 
+        setFindPw(response.data);
+        console.log(response.data);
       } else {
-        console.log("인증 메일 발송에 실패했습니다.");
-        // 오류 메시지를 사용자에게 보여줄 수도 있습니다.
+        setFindPwFail(true);
+        console.log(response.data);
       }
-    } catch (error) {
-      console.log("인증 메일 발송 오류:", error);
+    } catch (e) {
+      console.log("일치하는 회원정보가 없습니다.");
+      console.log(e);
     }
   };
 
   const handleVerifyCode = async () => {
     try {
       const response = await AxiosApi.codeCheck(email, code);
-      if (response.data.success) {
+      if (response.data === true) {
         console.log("인증코드 확인 성공!");
-        // 인증 코드 확인 후, 비밀번호 변경 API 호출
-        await AxiosApi.changePassword(email, newPassword);
-        console.log("새로운 비밀번호로 변경되었습니다!");
+        setIsCodeVerified(true);
       } else {
-        console.log("인증코드 확인 실패!");
+        console.log("인증코드 확인 실패!", response.data);
+        setIsCodeVerified(false);
       }
     } catch (error) {
       console.log("인증코드 확인 오류:", error);
+      setIsCodeVerified(false);
     }
   };
 
-  const onClickClose = () => {
-    setFindPwSuccess(false);
-    setFindPwFail(false);
-    setIsCodeVerified(false);
-    setCode("");
-    setNewPassword("");
-  };
+  const handleOnKeyPress = (e) => {
+    if(e.key === 'Enter') {
+      onClickFindPw();
+    }
+  }
+
 
     return (
       <>
         <Header />
         <FindPwBlock>
-          <h2>비밀번호 찾기</h2>
-          <div className="loginWrapper">
+        <h2>비밀번호 찾기</h2>
+        <div className="loginWrapper">
           <div className="loginMain">
             <div className="loginSmallBox">
               <input
@@ -163,16 +191,18 @@ const FindPw = () => {
                 className="loginInput"
                 placeholder="이메일"
                 onChange={onChangeEmail}
+                onKeyUp={handleOnKeyPress}
               />
             </div>
 
             <div className="loginSmallBox">
               <input
                 type="text"
-                value={phone}
+                value={memberId}
                 className="loginInput"
-                placeholder="전화번호"
-                onChange={onChangePhone}
+                placeholder="아이디"
+                onChange={onChangeMemberId}
+                onKeyUp={handleOnKeyPress}
               />
             </div>
 
@@ -183,6 +213,7 @@ const FindPw = () => {
                 className="loginInput"
                 placeholder="이름"
                 onChange={onChangeName}
+                onKeyUp={handleOnKeyPress}
               />
             </div>
 
@@ -191,58 +222,52 @@ const FindPw = () => {
               비밀번호 찾기
             </button>
 
-            {/* 인증메일 발송 성공 후, 인증코드 입력란 */}
-            {findPwSuccess && !isCodeVerified && (
+            {/* 인증메일 발송 성공 후, 인증메일 확인 버튼 */}
+            {findPwSuccess && (
               <div>
-                <input
-                  type="text"
-                  value={code}
-                  onChange={(e) => setCode(e.target.value)}
-                  placeholder="인증코드를 입력하세요"
-                />
-                <button onClick={handleVerifyCode}>인증코드 확인</button>
+                {/* 모달 열기 버튼을 누르면 인증메일 확인 모달이 열리도록 */}
+                <button onClick={handleOnOpenModal} className="auth-button">인증메일 확인</button>
               </div>
             )}
 
-            {/* 인증코드 확인 성공 후, 새로운 비밀번호 입력란 */}
-            {findPwSuccess && isCodeVerified && (
-              <div>
-                <input
-                  type="password"
-                  value={newPassword}
-                  onChange={(e) => setNewPassword(e.target.value)}
-                  placeholder="새로운 비밀번호를 입력하세요"
-                />
-                <button onClick={handleVerifyCode}>비밀번호 변경</button>
+            <MessageModal
+              open={isModalOpen}
+              confirm={handleOnCloseModal}
+              close={handleOnCloseModal}
+              type="modalType"
+              header="SweetKingdom"
+            >
+              {/* 모달 내용 */}
+              <div className="modal-content">
+                인증번호가 이메일로 발송되었습니다.
+                {/* 인증코드 입력란과 버튼 */}
+                <div className="input-container">
+                  <input
+                    type="text"
+                    value={code}
+                    onChange={(e) => setCode(e.target.value)}
+                    placeholder="인증코드를 입력하세요"
+                  />
+                  <button onClick={handleVerifyCode} className="modal-button">
+                    인증코드 확인
+                  </button>
+                </div>
               </div>
-            )}
+            </MessageModal>
           </div>
         </div>
 
-      {/* MessageModal 컴포넌트 등록 */}
-      {findPwSuccess && (
-        <MessageModal
-          open={findPwSuccess}
-          confirm={onClickClose}
-          close={onClickClose}
-          type="modalType"
-          header="SweetKingdom"
-        >
-          인증번호가 이메일로 발송되었습니다.
-        </MessageModal>
-      )}
-
-      {findPwFail && (
-        <MessageModal
-          open={findPwFail} 
-          confirm={onClickClose}
-          close={onClickClose}
-          type="modalType"
-          header="SweetKingdom"
-        >
-          일치하는 회원정보가 없습니다.
-        </MessageModal>
-      )}
+        {findPwFail && (
+          <MessageModal
+            open={findPwFail}
+            confirm={onClickClose}
+            close={onClickClose}
+            type="modalType"
+            header="SweetKingdom"
+          >
+            일치하는 회원정보가 없습니다.
+          </MessageModal>
+        )}
       </FindPwBlock>
         <Footer />
       </>

@@ -13,6 +13,74 @@ const ModalStyle = styled.div`
         background-color: rgba(0, 0, 0, 0.6);
     }
 
+    .modal-wrapper {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    /* 모달 컨테이너 */
+    .modal-container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        max-width: 400px;
+        width: 100%;
+    }
+
+    /* 모달 헤더 스타일 */
+    .modal-header {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    /* 모달 내용 스타일 */
+    .modal-content {
+        font-size: 16px;
+        margin-top: 20px;
+    }
+
+    /* 인증코드 입력란 스타일 */
+    .input-container {
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+    }
+
+    .input-container input {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-right: 10px;
+    }
+
+    /* 버튼 스타일 */
+    .modal-button {
+        background-color: #FFCFDA;
+        color: black;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bolder;
+        transition: background-color 0.2s ease;
+
+    /* 마우스 호버 시 배경색 변경 */
+    &:hover {
+        background-color: greenyellow;
+    }
+    }
+
     .openModal {
         display: flex;
         align-items: center;
