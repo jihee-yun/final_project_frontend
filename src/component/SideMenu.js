@@ -121,7 +121,7 @@ const SideMenu = () => {
     <Side>
       <ProfileBox>
         <img className="profileImg" src={imageUrls[0]} alt="프로필 이미지" onClick={()=>navigate("/mypage")}/>
-        <MyName onClick={()=>navigate("/blog")}>{userName}님 블로그 이동</MyName>
+        <MyName>{userName}님</MyName>
         <MyPoint onClick={()=>navigate("/mypage/point")}>{memberInfo.totalPoint} point</MyPoint>
       </ProfileBox>
       {userAuthority === 'ROLE_MEMBER' ? (

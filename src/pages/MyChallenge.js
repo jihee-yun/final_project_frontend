@@ -146,11 +146,11 @@ const MyChallenge = () => {
       try {
         const rsp = await AxiosApi.getMemberChallengeInfo(userNum, grantType, accessToken);
         if (rsp.status) {
-          setMemberInfo(rsp.data[0]);
-          console.log("유저 정보 가져오기 성공: ", rsp.data[0])
+          setMemberInfo(rsp.data);
+          console.log("챌린지 정보 가져오기 성공: ", rsp.data)
         }
       } catch (error) {
-        console.log("유저 정보 가져오기 실패: ", error);
+        console.log("챌린지 정보 가져오기 실패: ", error);
       }
     };
     fetchMemberInfo();
@@ -176,7 +176,7 @@ const MyChallenge = () => {
                 </RowBox>
                 <CahllengeCount>카운트: {challenge.count}</CahllengeCount>
                 <ChallengeDetail>내용: {challenge.detail}</ChallengeDetail>
-                <ChallengeExpired>만료날짜: {challenge.date}</ChallengeExpired>  
+                <ChallengeExpired>만료날짜: {challenge.endTime}</ChallengeExpired>  
               </SpecificBox>
             ))}
           </ContentBox>
