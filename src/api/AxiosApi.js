@@ -173,13 +173,6 @@ const AxiosApi = {
     return await axios.post(KH_DOMAIN + "/user/login", loginData)
   },
 
-  verifyCode : async(email, code) => {
-    const data = {
-      email :email,
-      code : code
-    }
-    return await axios.post(KH_DOMAIN + "/mail/verify", data);
-  },
 
   // 새 비밀번호
   changePassword : async(email, newPassword) => {

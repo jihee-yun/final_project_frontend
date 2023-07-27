@@ -94,13 +94,11 @@ const FindPw = () => {
   const onClickFindPw = async () => {
     try {
       const response = await AxiosApi.findPw(email, phone, name);
-      console.log(email);
-      console.log(phone);
-      console.log(name);
       if (response.data.success) {
-        setFindPwSuccess(true);
+        setFindPwSuccess(true);  // 인증 코드 입력란 표시를 위해 상태 변경
         setFindPwFail(false);
         console.log("인증메일 발송 성공!");
+        mailConfirm();
       } else {
         setFindPwSuccess(false);
         setFindPwFail(true);
@@ -111,38 +109,35 @@ const FindPw = () => {
     }
   };
 
-  const handleVerifyCode = async () => {
+  const mailConfirm = async () => {
     try {
-      const response = await AxiosApi.verifyCode(email, code); // 서버로 인증코드 확인 요청
-
+      const response = await AxiosApi.emailCheck(email);
       if (response.data.success) {
-        // 인증코드 확인 성공
-        setIsCodeVerified(true);
-        console.log("인증코드 확인 성공!");
+        console.log("인증 메일이 성공적으로 발송되었습니다!");
+        // 인증 메일 발송 후, 인증코드 입력란을 표시하도록 상태를 변경할 수 있습니다.
+        setIsCodeVerified(true); // 예시로 인증코드 입력란 표시를 위해 setIsCodeVerified(true)로 설정
       } else {
-        // 인증코드 확인 실패
-        setIsCodeVerified(false);
-        console.log("인증코드 확인 실패!");
+        console.log("인증 메일 발송에 실패했습니다.");
+        // 오류 메시지를 사용자에게 보여줄 수도 있습니다.
       }
-    } catch (e) {
-      console.log("인증코드 확인 오류:", e);
+    } catch (error) {
+      console.log("인증 메일 발송 오류:", error);
     }
   };
 
-  const handleChangePassword = async () => {
+  const handleVerifyCode = async () => {
     try {
-      const response = await AxiosApi.changePassword(email, newPassword); // 서버로 새로운 비밀번호 전송 요청
-
+      const response = await AxiosApi.codeCheck(email, code);
       if (response.data.success) {
-        // 비밀번호 변경 성공
+        console.log("인증코드 확인 성공!");
+        // 인증 코드 확인 후, 비밀번호 변경 API 호출
+        await AxiosApi.changePassword(email, newPassword);
         console.log("새로운 비밀번호로 변경되었습니다!");
-        // ... (추가적인 처리 혹은 화면 전환 등)
       } else {
-        // 비밀번호 변경 실패
-        console.log("비밀번호 변경 실패!");
+        console.log("인증코드 확인 실패!");
       }
-    } catch (e) {
-      console.log("비밀번호 변경 오류:", e);
+    } catch (error) {
+      console.log("인증코드 확인 오류:", error);
     }
   };
 
@@ -218,7 +213,7 @@ const FindPw = () => {
                   onChange={(e) => setNewPassword(e.target.value)}
                   placeholder="새로운 비밀번호를 입력하세요"
                 />
-                <button onClick={handleChangePassword}>비밀번호 변경</button>
+                <button onClick={handleVerifyCode}>비밀번호 변경</button>
               </div>
             )}
           </div>
