@@ -166,13 +166,14 @@ const ViewLink = styled(Link)`
 
 const ServiceHome = () => {
     const [keyword, setKeyword] = useState(""); // 검색어 입력을 위한 useState
+    const navigate = useNavigate();
 
     const onChangeSearch = (e) => {
         setKeyword(e.target.value);
       };
 
     const swordPush = () => {
-        navigate(`/cafesearch/${keyword}`);
+        navigate(`/qnasearch/${keyword}`);
       };
 
     return(

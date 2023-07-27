@@ -58,6 +58,7 @@ import AdminReg from './pages/AdminReg';
 import PrivateRoute from './utils/PrivateRoute';
 import CafeSearch from './pages/CafeSearch';
 import ChangePw from './pages/ChangePw';
+import QnaSearchList from './component/QnaSearchList';
 
 function App() {
   return (
@@ -120,6 +121,7 @@ function App() {
         <Route path='/admin/register' element={<PrivateRoute element={<AdminReg />}/>}/>
         <Route path='/cafesearch/:keyword' element={<CafeSearch />}/>
         <Route path='/changepw' element={<ChangePw/>}/>
+        <Route path='/qnasearch/:keyword' element={<QnaSearchList />}/>
       </Routes>
     </BrowserRouter>
     </UserStore>
