@@ -16,11 +16,11 @@ const Container = styled.h3`
   margin-bottom: 100px;
 
   @media (max-width: 768px) {
-    width: 100%;
+    width: 760px;
   }
 
   @media (max-width: 430px) {
-    width: 100%;
+    width: 370px;
   }
 `;
 
@@ -42,11 +42,18 @@ const OuterBox = styled.div`
   margin-left: auto;
   margin-right: auto;
 
+  @media (max-width: 768px) {
+    margin: 80px -40px 20px 90px;
+  }
+
   @media (max-width: 430px) {
+    width: 370px;
+    height: 370px;
+    margin: 80px -40px 20px 2px;
     .panImg {
       img {
-        width: 380px;
-        height: 380px;
+        width: 350px;
+        height: 350px;
       }
     }
   }
@@ -61,8 +68,10 @@ const OuterBox = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    /* border-radius: 50%;
-    border: 3px solid black; */
+
+    @media (max-width: 430px) {
+      top: -75px;
+    }
   }
 
   animation: ${rotateAnimation} 1.5s infinite linear;
@@ -79,14 +88,14 @@ const Pin = styled.div`
   @media (max-width: 768px) {
     position: absolute;
     top: 0;
-    left: 47%;
+    left: 43%;
     z-index: 1;
   }
 
   @media (max-width: 430px) {
     position: absolute;
-    top: 0;
-    left: 40%;
+    top: 0%;
+    left: 43%;
     z-index: 1;
   }
 
@@ -105,12 +114,12 @@ const Start = styled.div`
   cursor: pointer;
 
   @media (max-width: 430px) {
-  top: 49%;
-  left: 78%;
-  /* img {
-    width: 70px;
-    height: 70px;
-  } */
+  top: 54%;
+  left: 84%;
+  .startImg {
+      width: 70px;
+      height: 70px;
+    }
   }
 `;
 
@@ -146,6 +155,21 @@ const WinBox = styled.div`
     top: 10px;
     width: 50px;
     height: 50px;
+  }
+
+  @media (max-width: 768px) {
+    margin-left: 140px;
+  }
+
+  @media (max-width: 430px) {
+    border: 4px solid #FFCFDA;
+    border-radius: 40px;
+    width: 300px;
+    margin-left: 30px;
+
+    .celebrate1 {
+      left: 20px;
+    }
   }
   
 `;

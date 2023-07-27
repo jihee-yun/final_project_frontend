@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import Roulette from "../component/Roulette";
-import quiz from "../images/quiz.png";
+import menu from "../images/menu.png";
 import shopping from "../images/shopping.png";
 import { useNavigate } from "react-router-dom";
 import AxiosApi from "../api/AxiosApi";
@@ -31,6 +31,10 @@ const Box = styled.div`
 
   .r-title {
     margin-top: 100px;
+
+    @media (max-width: 768px) {
+      margin-bottom: 80px;
+  }
   }
 `;
 
@@ -148,28 +152,29 @@ const MediaBox = styled.div`
       height: 220px;
     }
   }
+  @media (max-width: 430px) {
+    width: 100%;
+    margin-bottom: 50px;
+    .ad {
+      display: block;
+      width: 100%;
+      height: 150px;
+    }
+  }
 
 `;
 
 const Event = () => {
   const navigate = useNavigate();
   const [challengeInfo, setChallengeInfo] = useState("");
-  const [quizClick, setQuizClick] = useState(0);
-  const context = useContext(UserContext);
-  const { isLogin } = context;
-  const isClicked = localStorage.getItem("isClicked");
+  // const context = useContext(UserContext);
+  // const { isLogin } = context;
+  // const isClicked = localStorage.getItem("isClicked");
 
-  console.log(isClicked);
+  // console.log(isClicked);
 
-  const quizOpen = () => {
-    if (!isLogin) {
-      navigate('/memberlogin')
-    } else if (isLogin && isClicked !== 0) {
-      alert('퀴즈는 하루에 한번만 가능해요. 내일 다시 도전해주세요!');
-      
-    } else {
-      navigate('/quizMain');
-    }
+  const cafeOpen = () => {
+    navigate('/cafe');
   };
 
   useEffect(() => {
@@ -189,11 +194,6 @@ const Event = () => {
   const navigatePoint = () => {
     navigate('/couponStore');
   };
-
-  // if (!isLogin) {
-  //   navigate('/memberlogin');
-  //   return null;
-  // }
 
   return(
     <>
@@ -224,11 +224,11 @@ const Event = () => {
             </MediaBox>
             <MenuBox>
               <div>
-                <img src={quiz} alt="퀴즈" />
-                <h3 className="quizTitle">깜짝 퀴즈</h3>
-                <p>퀴즈 풀고 포인트 받기</p>
+                <img src={menu} alt="카페메뉴" />
+                <h3>카페 확인하기</h3>
+                <p>포인트 사용 가능 카페를 구경하세요!</p>
                 <div className="menuButton">
-                  <button onClick={quizOpen}>퀴즈 풀기</button>
+                  <button onClick={cafeOpen}>둘러보기</button>
                 </div>
               </div>
             </MenuBox>
@@ -241,8 +241,8 @@ const Event = () => {
             </AdBox>
             <MenuBox>
               <div>
-              <img src={shopping} alt="퀴즈" />
-                <h3 className="shoppingTitle">포인트샵</h3>
+              <img src={shopping} alt="쇼핑" />
+                <h3>포인트샵</h3>
                 <p>쌓인 포인트로 구매하세요!</p>
                 <div className="menuButton">
                 <button onClick={navigatePoint}>바로 가기</button>

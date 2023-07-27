@@ -15,12 +15,19 @@ const MenuBox = styled.div`
   h3 {
     margin-left: 20px;
     line-height: 10%;
+    @media (max-width: 430px) {
+      margin-left: 15px;
+    }
+
   }
 
   p {
     margin-left: 20px;
     color: gray;
     font-size: 1rem;
+    @media (max-width: 430px) {
+      margin-left: 15px;
+    }
   }
 
   .menuButton{

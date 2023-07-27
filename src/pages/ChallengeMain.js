@@ -6,13 +6,10 @@ import ChallnegeModal from "../component/ChallengeModal";
 // import AxiosApi from "../images/yeabin/Api/AxiosApi";
 import AxiosApi from "../api/AxiosApi";
 import { UserContext } from "../context/UserStore";
+import Header from "../component/Header";
+import Footer from "../component/Footer";
 
 const Container = styled.div`
-  width: 80%;
-  margin: 0 auto;
-`;
-
-const Box = styled.div`
   width: 80%;
   margin: 0 auto;
 
@@ -20,9 +17,24 @@ const Box = styled.div`
     width: 80%;
   }
 
+  @media (max-width: 430px) {
+    width: 100%;
+  }
+`;
+
+const Box = styled.div`
+  width: 80%;
+  margin: 0 auto;
+
   h2 {
     font-weight: bolder;
+
+    @media (max-width: 430px) {
+      font-size: 1.3rem;
+    }
   }
+
+  
 `;
 
 const ChHeader = styled.div`
@@ -67,7 +79,7 @@ const ChBox = styled.div`
       font-size: 1.1rem;
       font-weight: bolder;
       border: 3px solid #FFCFDA;
-      width: 400px;
+      width: 70%;
       height: 70px;
       border-radius: 40px;
       margin: 0 auto;
@@ -76,8 +88,11 @@ const ChBox = styled.div`
       align-items: center;
       justify-content: center;
       text-align: center;
+
+      @media (max-width: 430px) {
+        font-size: 1rem;
+      }
     }
-    
   }
 `;
 
@@ -114,7 +129,7 @@ const Confirm = styled.div`
   }
 
   .content {
-    width: 400px;
+    width: 80%;
     height: 100px;
     font-size: 1.1rem;
     font-weight: bolder;
@@ -128,6 +143,12 @@ const Confirm = styled.div`
       justify-content: center;
       text-align: center;
     }
+
+    @media (max-width: 430px) {
+      p {
+        font-size: 1rem;
+      }
+  }
   }
 `;
 
@@ -172,6 +193,7 @@ const ChallengeMain = () => {
 
   return(
     <>
+    <Header />
     <Container>
       <Box>
         <div>
@@ -187,7 +209,7 @@ const ChallengeMain = () => {
             <p className="step">STEP 1</p>
             <p className="content">퀘스트를 신청하세요.</p>
             <p className="step">STEP 2</p>
-            <p className="content">스위트킹덤 제휴 카페를 확인하세요.</p>
+            <p className="content">제휴 카페를 확인하세요.</p>
             <p className="step">STEP 3</p>
             <p className="content">해당하는 카페에 방문하세요.</p>
             <p className="step">STEP 4</p>
@@ -198,8 +220,8 @@ const ChallengeMain = () => {
             <div className="ch-box2">
               <p className="title">퀘스트 인증 방법</p>
               <div className="content">
-                <p>카페 직원에게 아이디를 알려주세요.</p>
-                <p>마이페이지에서 스탬프가 찍혔는지 확인하면 완료!</p>
+                <p>카페 직원에게 마이 챌린지 인증 페이지를 보여주세요</p>
+                <p>직원이 확인해주면 완료!</p>
               </div>
             </div>
           </Confirm>
@@ -215,8 +237,8 @@ const ChallengeMain = () => {
             <Link to='/cafe' className="link_style">제휴 카페 알아보기</Link></div>
         </CafeIntro>
       </Box>
-      
     </Container>
+    <Footer />
     </>
   );
 };

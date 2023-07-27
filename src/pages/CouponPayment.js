@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { useLocation, useNavigate } from "react-router-dom";
 import AxiosApi from "../api/AxiosApi";
 import { UserContext } from "../context/UserStore";
+import Header from "../component/Header";
+import Footer from "../component/Footer";
 
 const Box = styled.div`
   margin-top: 100px;
@@ -101,6 +103,7 @@ const CouponPayment = () => {
 
   return(
     <>
+    <Header />
     <Box>
     <Container>
       <h2>쿠폰 결제</h2>
@@ -116,6 +119,7 @@ const CouponPayment = () => {
       </CouponBox>
     </Container>
     </Box>
+    <Footer />
     </>
   );
 };
