@@ -5,6 +5,7 @@ import AxiosApi from "../api/AxiosApi";
 import MessageModal from "../component/MessageModal";
 import Header from "../component/Header";
 import Footer from "../component/Footer";
+import { useNavigate } from "react-router-dom";
 
 
 const FindPwBlock = styled.div`
@@ -88,11 +89,11 @@ const FindPwBlock = styled.div`
 `;
 
 const FindPw = () => {
+  const navigate = useNavigate("");
+
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [memberId, setMemberId] = useState("");
-
-  const [findPw, setFindPw] = useState("");
 
   const [findPwSuccess, setFindPwSuccess] = useState(false);
   const [findPwFail, setFindPwFail] = useState(false);
@@ -123,6 +124,10 @@ const FindPw = () => {
     setName(nameNow);
   };
 
+  const handleChangePw = () => {
+    navigate("/changepw");
+  }
+
   // 인증메일 모달이 열릴 때 호출되는 함수
   const handleOnOpenModal = () => {
     setIsCodeVerified(false);
@@ -142,7 +147,6 @@ const FindPw = () => {
       const response = await AxiosApi.findPw(email, memberId, name);
       if (response.data) {
         setFindPwSuccess(true); 
-        setFindPw(response.data);
         console.log(response.data);
       } else {
         setFindPwFail(true);
@@ -160,6 +164,7 @@ const FindPw = () => {
       if (response.data === true) {
         console.log("인증코드 확인 성공!");
         setIsCodeVerified(true);
+        handleChangePw();
       } else {
         console.log("인증코드 확인 실패!", response.data);
         setIsCodeVerified(false);
@@ -185,6 +190,7 @@ const FindPw = () => {
         <div className="loginWrapper">
           <div className="loginMain">
             <div className="loginSmallBox">
+              {/* 이메일 입력란 */}
               <input
                 type="text"
                 value={email}
@@ -196,6 +202,7 @@ const FindPw = () => {
             </div>
 
             <div className="loginSmallBox">
+              {/* 아이디 입력란 */}
               <input
                 type="text"
                 value={memberId}
@@ -207,6 +214,7 @@ const FindPw = () => {
             </div>
 
             <div className="loginSmallBox">
+              {/* 이름 입력란 */}
               <input
                 type="text"
                 value={name}
@@ -224,15 +232,39 @@ const FindPw = () => {
 
             {/* 인증메일 발송 성공 후, 인증메일 확인 버튼 */}
             {findPwSuccess && (
-              <div>
-                {/* 모달 열기 버튼을 누르면 인증메일 확인 모달이 열리도록 */}
-                <button onClick={handleOnOpenModal} className="auth-button">인증메일 확인</button>
-              </div>
+              <>
+                {/* "인증메일로 전송되었습니다"라는 모달 */}
+                <MessageModal
+                  open={findPwSuccess}
+                  confirm={() => {
+                    setIsModalOpen(true); // 모달 확인 버튼을 누르면 인증메일 확인 모달이 열리도록
+                    setFindPwSuccess(false); // 모달을 다시 열기 위해 findPwSuccess 상태를 false로 설정
+                  }}
+                  type="modalType"
+                  header="SweetKingdom"
+                >
+                  인증메일로 전송되었습니다.
+                </MessageModal>
+
+                {/* 인증메일 확인 버튼 */}
+                <div>
+                  <button onClick={handleOnOpenModal} className="auth-button">
+                    인증메일 확인
+                  </button>
+                </div>
+              </>
             )}
 
+            {/* 모달 창 */}
             <MessageModal
               open={isModalOpen}
-              confirm={handleOnCloseModal}
+              confirm={() => {
+                // 인증코드가 확인되었을 때 /changepw 페이지로 이동합니다.
+                if (isCodeVerified) {
+                  setIsModalOpen(false);
+                  handleChangePw(); // /changepw 페이지로 이동
+                }
+              }}
               close={handleOnCloseModal}
               type="modalType"
               header="SweetKingdom"
