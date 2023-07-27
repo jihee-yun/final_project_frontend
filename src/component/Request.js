@@ -155,6 +155,8 @@ const BUTTON = styled.div`
     font-weight: bold;
     background-color: #FFCFDA;
     color: #585858;
+    cursor: pointer;
+
     &:hover {
         color: white;
     }
@@ -167,7 +169,7 @@ const Request = () => {
     const [questionType, setQuestionType] = useState("");
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
-    const [isModalOpen, setModalOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const userNum = localStorage.getItem("userNum");
     const grantType = localStorage.getItem("grantType");
@@ -181,20 +183,28 @@ const Request = () => {
         setContent(e.target.value);
     }
 
-    // const summit = async() => {
-    //     const response = await AxiosApi.summitReport(userNum, grantType, accessToken, category, questionType, title, content);
-    //     if(response.data === true) {
-    //         setModalOpen(true);
-    //     }
-    // }
+    console.log(userNum);
 
-    const complete = () => {
-        navigate("/servicecenter");
+    const summit = async() => {
+        if(!userNum) {
+            setIsModalOpen(true);
+        } else {
+             const response = await AxiosApi.summitReport(userNum, grantType, accessToken, category, questionType, title, content);
+            if(response.data === true) {
+                setIsModalOpen(true);
+            }
+        }
+    }
+
+    const complete = (index) => {
+        if(index === 1) {
+            navigate('/');
+        } else navigate('/memberlogin')
       }
     
 
     const closeModal = () => {
-    setModalOpen(false);
+        setIsModalOpen(false);
     };
 
 
@@ -234,10 +244,10 @@ const Request = () => {
                 </InputBox2>
             </ContentBox>
             <BUTTON>
-                <button className="button" >등록</button>
+                <button className="button" onClick={summit}>등록</button>
             </BUTTON>
             </Form>
-            <Modal move={true} header="완료" open={isModalOpen} confirm={complete} close={closeModal}>
+            <Modal move={true} header="완료" open={isModalOpen} confirm={userNum ? () => complete(1) : () => complete(2)} close={closeModal}>
                 <CompleteModal content={userNum ? "문의가 등록되었습니다" : "로그인이 필요합니다. 로그인 페이지로 이동할까요?"} maxCharacters={userNum ? 0 : 11}/>
             </Modal>
         </Container>

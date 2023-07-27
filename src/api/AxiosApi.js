@@ -640,12 +640,21 @@ const AxiosApi = {
   searchListLoad: async (keyword) => {
     return await axios.get(KH_DOMAIN + `/cafe/searchList?keyword=${keyword}`)
   },
-
-  // 고객센터 검색 기능
-  qnaSearchListLoad: async (keyword) => {
-    return await axios.get(KH_DOMAIN + `/auth/qnalist/searchList?keyword=${keyword}`)
-  },
-
+  // 문의사항 등록
+  summitReport: async(userNum, grantType, accessToken, category, questionType, title, content) => {
+    const requestData = {
+      userNum: userNum,
+      title: title,
+      content: content,
+      userType: category,
+      category: questionType
+    }
+    return await axios.post(KH_DOMAIN + `/report/newQuestion`, requestData, {
+      headers: {
+        Authorization: `${grantType} ${accessToken}`
+      }
+    });
+  }
 };
 
 export default AxiosApi;
