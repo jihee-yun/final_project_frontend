@@ -115,18 +115,18 @@ const Sidebar = () => {
     navigate("/");
   }
 
-  useEffect(() => {
-    const getSidebarInfo = async (memberNum) => {
-      if(isSidebar && isLogin) {
-        const memInfo = await AxiosApi.getMemberInfo(memberNum);
-        setSideBarInfo(memInfo.data);
-        console.log(memInfo);
-      } else {
-        setSideBarInfo([]);
-      }
-    };
-    getSidebarInfo(userNum)
-  })
+  // useEffect(() => {
+  //   const getSidebarInfo = async (memberNum) => {
+  //     if(isSidebar && isLogin) {
+  //       const memInfo = await AxiosApi.getMemberInfo(memberNum);
+  //       setSideBarInfo(memInfo.data);
+  //       console.log(memInfo);
+  //     } else {
+  //       setSideBarInfo([]);
+  //     }
+  //   };
+  //   getSidebarInfo(userNum)
+  // })
 
   return (
 
