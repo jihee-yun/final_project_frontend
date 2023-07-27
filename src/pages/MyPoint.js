@@ -95,7 +95,7 @@ const DateSelected = styled.p`
 const ContentBox = styled.div`
   width: 90%;
   min-width: 330px;
-  height: 780px;
+  min-height: 780px;
   margin-top: 3%;
   border: 1px solid #f3e1e1;
   border-radius: 15px;
@@ -116,7 +116,7 @@ const ContentNum = styled.p`
   text-align: center;
 `;
 const ContentTitle = styled.p`
-  width: 60%;
+  width: 55%;
   min-width: 80px;
   margin-left: 2%;
   text-align: center;
@@ -128,7 +128,7 @@ const ContentPoint = styled.p`
   text-align: center;
 `;
 const ContentDate = styled.p`
-  width: 10%;
+  width: 15%;
   min-width: 50px;
   margin-left: 2%;
   text-align: center;
@@ -152,7 +152,7 @@ const ListNum = styled.p`
   text-align: center;
 `;
 const ListTitle = styled.p`
-  width: 60%;
+  width: 55%;
   min-width: 80px;
   margin-left: 2%;
   text-align: center;
@@ -165,7 +165,7 @@ const ListPoint = styled.p`
   text-align: center;
 `;
 const ListDate = styled.p`
-  width: 10%;
+  width: 15%;
   min-width: 50px;
   margin-left: 2%;
   text-align: center;

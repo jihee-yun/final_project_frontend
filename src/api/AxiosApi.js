@@ -441,11 +441,11 @@ const AxiosApi = {
   // 회원 번호로 날짜 내의 문의, 신고 내역 조회
   getReportByDate : async (userNum, startDate, endDate, grantType, accessToken) => {
     const checkData = {
-      userNum : userNum,
+      memberNum : userNum,
       startDate : startDate,
       endDate : endDate
     }
-    return await axios.post(`${KH_DOMAIN}/report/getbynumdate`, checkData, {
+    return await axios.post(`${KH_DOMAIN}/info/reportgetbynumdate`, checkData, {
       headers: {
         Authorization: `${grantType} ${accessToken}`
       }

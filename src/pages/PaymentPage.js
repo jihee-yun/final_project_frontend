@@ -38,6 +38,7 @@ const Detail = styled.div`
 // 세부 페이지 윗쪽 부분
 const SelectBox = styled.div`
   width: 90%;
+  min-width: 330px;
   height: 80px;
   margin-top: 3%;
   border: 1px solid #F3E1E1;
@@ -55,7 +56,7 @@ const TextBox = styled.p`
 // 세부 페이지 중앙 부분
 const ContentBox = styled.div`
   width: 90%;
-  min-width: 350px;
+  min-width: 330px;
   margin-top: 3%;
   border: 1px solid #F3E1E1;
   border-radius: 15px;
@@ -183,7 +184,7 @@ const PaymentPage = () => {
         </Detail>
       </Container>
       <Footer />
-      <ChatBot/>    
+      {/* <ChatBot/>     */}
     </OutBox>
   );
 };
