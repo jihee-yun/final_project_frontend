@@ -157,7 +157,8 @@ const CafeReview = () => {
   const info = location.state;
   const cafeNum = info[0].id;
 
-  const userNum = localStorage.getItem("userNum");
+  const userNumStr = localStorage.getItem("userNum");
+  const userNum = parseInt(userNumStr);
 
   // 특정 카페 리뷰 조회
   const [cafeReviewInfo, setCafeReviewInfo] = useState("");
@@ -171,8 +172,10 @@ const CafeReview = () => {
   localStorage.setItem("reviewCategory", category);
   const selectCategory = localStorage.getItem("reviewCategory");
 
+
   console.log(selectCategory);
   console.log(cafeReviewInfo);
+  console.log(typeof userNum);
 
   useEffect(() => {
     const cafeReview = async() => {

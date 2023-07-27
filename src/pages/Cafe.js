@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { UserContext } from "../context/UserStore";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -6,6 +6,7 @@ import { StyleSheetManager } from "styled-components";
 import seoul from "../images/seoul.jpeg";
 import Header from "../component/Header"
 import Footer from "../component/Footer";
+import Sidebar from "../component/Sidebar";
 
 const Container = styled.div`
   @media (max-width: 768px) {
@@ -63,7 +64,7 @@ const CategoryBox = styled.div`
 const Cafe = () => {
   const navigate = useNavigate();
   const context = useContext(UserContext);
-  const { setRegion } = context;
+  const { setRegion , isSidebar, setIsSidebar } = context;
 
   const selectCategory = (category) => {
     setRegion(category);
@@ -71,9 +72,15 @@ const Cafe = () => {
     navigate('/cafe/main')
   }
 
+  useEffect(() => {
+    setIsSidebar('-380px');
+  }, [])
+
+
   return(
     <>
     <Header />
+    {isSidebar && <Sidebar/>}
     <StyleSheetManager shouldForwardProp={(prop) => prop !== 'imageurl'}>
     <Container>
       <Box>

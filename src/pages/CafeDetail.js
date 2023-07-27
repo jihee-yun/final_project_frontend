@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserStore";
-import logo from "../images/logo.png";
 import address from "../images/location.png";
 import time from "../images/clock.png";
 import phone from "../images/mobile-phone.png";
@@ -14,6 +13,7 @@ import AvgStar from "../component/AvgStar";
 import CafeLike from "../component/CafeLike";
 import Header from "../component/Header";
 import Footer from "../component/Footer";
+import Sidebar from "../component/Sidebar";
 
 const Container = styled.div`
   @media (max-width: 768px) {
@@ -140,8 +140,8 @@ const Container = styled.div`
 
 const CafeDetail = () => {
   const navigate = useNavigate();
-  // const context = useContext(UserContext);
-  // const { userNum } = context; 
+  const context = useContext(UserContext);
+  const { isSidebar } = context; 
   const userNum = localStorage.getItem("userNum");
   const cafeNum = localStorage.getItem("cafeNum");
 
@@ -163,6 +163,7 @@ const CafeDetail = () => {
   return(
     <>
     <Header />
+    {isSidebar && <Sidebar />}
     {detailInfo && detailInfo.map(cafe =>(
     <Container key={cafe.id}>
     {/* <Link to="/cafe/main" style={{ textDecoration: "none", color: "inherit"}}><img src={logo} alt="스위트킹덤로고" /></Link> */}
