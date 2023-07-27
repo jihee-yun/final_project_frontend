@@ -1,7 +1,7 @@
 import {useState, navigate} from "react";
 import styled from "styled-components";
 import SearchIcon from '@mui/icons-material/Search';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 
 const NavContainer = styled.nav`
@@ -130,7 +130,7 @@ const NavBar = () => {
             onMouseEnter={(e) => mouseenterFunc(index, e)}
             style={{marginRight:"40px"}}
           >
-        <a href={link.url}>{link.text}</a>
+          <Link to={link.url}>{link.text}</Link>
           </div>
         ))}
         <div className="search">
