@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const ModalStyle = styled.div`
@@ -103,6 +104,7 @@ const ModalStyle = styled.div`
 
 const ChallnegeModal = (props) => {
   const {open, confirm, close, type, header, children} = props;
+  const navigate = useNavigate();
 
   // &times; 는 X표 문자를 의미
   return (
@@ -112,7 +114,10 @@ const ChallnegeModal = (props) => {
           <section>
             <header>
               <p>{header}</p>
-              <button onClick={close}>
+              <button onClick={() => {
+                close();
+                navigate('/event');
+              }}>
                 &times;  
               </button>
             </header>

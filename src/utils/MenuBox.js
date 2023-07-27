@@ -13,16 +13,16 @@ const MenuBox = styled.div`
   }
   
   h3 {
-    margin-left: 20px;
+    margin-left: 15px;
     line-height: 10%;
     @media (max-width: 430px) {
+      width: 150px;
       margin-left: 15px;
     }
-
   }
 
   p {
-    margin-left: 20px;
+    margin-left: 15px;
     color: gray;
     font-size: 1rem;
     @media (max-width: 430px) {

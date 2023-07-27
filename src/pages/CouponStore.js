@@ -42,12 +42,6 @@ const CouponBox = styled.div`
     justify-content: center;
     align-items: center;
   }
-
-  /* @media (max-width: 430px) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  } */
 `;
 
 const CouponList = styled.div`

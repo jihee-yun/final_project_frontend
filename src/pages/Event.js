@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Roulette from "../component/Roulette";
 import menu from "../images/menu.png";
@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import AxiosApi from "../api/AxiosApi";
 import ad from "../images/event-ad.png";
 import ad2 from "../images/ad-media.png";
-import { UserContext } from "../context/UserStore";
 import MenuBox from "../utils/MenuBox";
 import Header from "../component/Header";
 import Footer from "../component/Footer";
@@ -34,7 +33,7 @@ const Box = styled.div`
 
     @media (max-width: 768px) {
       margin-bottom: 80px;
-  }
+    }
   }
 `;
 
@@ -61,6 +60,7 @@ const ChallengeBox = styled.div`
   transition: all 0.3s;
   border-radius: 10px;
   box-shadow: 0 3px 3px #A4A4A4;
+  cursor: pointer;
 `;  
 
 const ChallengeTitle = styled.div`
@@ -153,12 +153,8 @@ const MediaBox = styled.div`
     }
   }
   @media (max-width: 430px) {
-    width: 100%;
-    margin-bottom: 50px;
     .ad {
-      display: block;
-      width: 100%;
-      height: 150px;
+      height: 130px;
     }
   }
 
@@ -226,7 +222,7 @@ const Event = () => {
               <div>
                 <img src={menu} alt="카페메뉴" />
                 <h3>카페 확인하기</h3>
-                <p>포인트 사용 가능 카페를 구경하세요!</p>
+                <p>포인트를 사용할 카페를 찾아보세요</p>
                 <div className="menuButton">
                   <button onClick={cafeOpen}>둘러보기</button>
                 </div>

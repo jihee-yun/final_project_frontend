@@ -79,7 +79,7 @@ const ChBox = styled.div`
       font-size: 1.1rem;
       font-weight: bolder;
       border: 3px solid #FFCFDA;
-      width: 70%;
+      width: 80%;
       height: 70px;
       border-radius: 40px;
       margin: 0 auto;
@@ -171,7 +171,7 @@ const ChallengeMain = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const location = useLocation();
   const info = location.state && location.state.editedInfo[0].id;
-  const navigate = useNavigate;
+  const navigate = useNavigate();
 
   console.log(info);
   console.log(userNum);
@@ -220,14 +220,14 @@ const ChallengeMain = () => {
             <div className="ch-box2">
               <p className="title">퀘스트 인증 방법</p>
               <div className="content">
-                <p>카페 직원에게 마이 챌린지 인증 페이지를 보여주세요</p>
+                <p>카페 직원에게 신청한 챌린지 인증 페이지를 보여주세요</p>
                 <p>직원이 확인해주면 완료!</p>
               </div>
             </div>
           </Confirm>
           <Btn>
             <div>
-              <button onClick={applyChallenge}>오늘부터 시작하기</button>
+             <button onClick={applyChallenge}>오늘부터 시작하기</button>
               <ChallnegeModal type={true} open={modalOpen} close={closeModal}>퀘스트 신청이 완료되었습니다.</ChallnegeModal>
             </div>
           </Btn>
