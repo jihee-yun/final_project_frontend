@@ -35,7 +35,8 @@ const Detail = styled.div`
 
 // 세부 페이지 윗쪽 부분
 const SelectBox = styled.div`
-  width: 90%;
+  width: 100%;
+  min-width: 330px;
   height: 80px;
   margin-top: 3%;
   border: 1px solid #F3E1E1;
@@ -52,7 +53,9 @@ const TextBox = styled.p`
 `;
 // 세부 페이지 중앙 부분
 const ContentBox = styled.div`
-  width: 90%;
+  width: 100%;
+  min-width: 330px;
+
   /* min-width: 500px; */
   min-height: 600px;
   margin-top: 3%;
@@ -74,7 +77,7 @@ const ContentBox = styled.div`
 const SpecificBox = styled.div`
   margin: 20px;
   width: 40%;
-  min-width: 200px;
+  min-width: 300px;
   border: 1px solid #F3E1E1;
   display: flex;
   flex-direction: column;

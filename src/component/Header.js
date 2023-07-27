@@ -7,6 +7,10 @@ import { Link, useNavigate } from "react-router-dom";
 import MenuIcon from '@mui/icons-material/Menu';
 import NavBar from "./NavBar";
 
+const OutBox = styled.div`
+  width: 100%;
+`;
+
 const HeaderContainer = styled.header`
  @media (max-width: 768px) {
   padding: 0;
@@ -205,7 +209,7 @@ const Header = () => {
   }
   
   return(
-    <>
+    <OutBox>
     {/* <MobileBox /> */}
       <HeaderContainer>
         <div className="logo">
@@ -244,7 +248,7 @@ const Header = () => {
           )}
         </HeaderContainer>
         {!isMobile && (
-          <NavBar />
+        <NavBar />
         // <NavContainer>
         //   <ul className="Nav">
         //     <Navlink to="/cafe">카페 찾기</Navlink>
@@ -266,7 +270,7 @@ const Header = () => {
         //   </ul>
         // </NavContainer>
       )}
-    </>
+    </OutBox>
   );
 };
 

@@ -4,6 +4,61 @@ import SearchIcon from '@mui/icons-material/Search';
 import { useNavigate } from "react-router-dom";
 
 
+const NavContainer = styled.nav`
+    display: flex;
+    justify-content: center;
+
+  ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-wrap: wrap;
+    list-style-type: none;
+    padding: 0;
+    box-shadow: 0 10px 10px rgba(159, 162, 177, .8);
+    border-radius: 40px;
+    height: 60px;
+    width: 100%;
+    max-width: 1000px;
+  }
+
+  li:not(:last-child) {
+    margin-right: 20px;
+  }
+
+  a {
+    display: block;
+    font-size: 20px;
+    font-weight: bold;
+    color: #848484;
+    text-decoration: none;
+    padding: 7px 15px;
+    transition: all .35s ease-in-out;
+  }
+  .search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 200px;
+  }
+  .search-bar {
+    width: 100%;
+    height: 30px;
+    border-radius: 40px;
+    border: solid #646b8c;
+    padding: 0 15px;
+  }
+`;
+
+const StyledTarget = styled.div`
+  position: absolute;
+  border-bottom: 4px solid transparent;
+  z-index: -1;
+  transform: translateX(-60px);
+  transition: transform var(--line-transition-duration) var(--line-easing);
+`;
 
 const NavBar = () => {
   const [activeIndex, setActiveIndex] = useState(null);
@@ -78,79 +133,22 @@ const NavBar = () => {
         <a href={link.url}>{link.text}</a>
           </div>
         ))}
-          <div className="search">
-              <input
-                type="text"
-                className="search-bar"
-                value={keyword}
-                onChange={onChangeCafeName}
-              />
-              <SearchIcon
-                style={{ fontSize: 30, marginRight: 10, fill: "#646b8c" }}
-                onClick={swordPush}
-              />
-            </div>
+        <div className="search">
+          <input
+            type="text"
+            className="search-bar"
+            value={keyword}
+            onChange={onChangeCafeName}
+          />
+          <SearchIcon
+            style={{ fontSize: 30, marginRight: 10, fill: "#646b8c" }}
+            onClick={swordPush}
+          />
+        </div>
       </ul>
       <StyledTarget style={targetStyle} />
     </NavContainer>
   );
 };
-
-const NavContainer = styled.nav`
-    display: flex;
-    justify-content: center;
-
-  ul {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    flex-wrap: wrap;
-    list-style-type: none;
-    padding: 0;
-    box-shadow: 0 10px 10px rgba(159, 162, 177, .8);
-    border-radius: 40px;
-    height: 60px;
-    width: 1000px;
-  }
-
-  li:not(:last-child) {
-    margin-right: 20px;
-  }
-
-  a {
-    display: block;
-    font-size: 20px;
-    font-weight: bold;
-    color: #848484;
-    text-decoration: none;
-    padding: 7px 15px;
-    transition: all .35s ease-in-out;
-  }
-  .search {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    width: 200px;
-  }
-  .search-bar {
-    width: 100%;
-    height: 30px;
-    border-radius: 40px;
-    border: solid #646b8c;
-    padding: 0 15px;
-  }
-`;
-
-const StyledTarget = styled.div`
-  position: absolute;
-  border-bottom: 4px solid transparent;
-  z-index: -1;
-  transform: translateX(-60px);
-  transition: transform var(--line-transition-duration) var(--line-easing);
-`;
-
-
 
 export default NavBar;
