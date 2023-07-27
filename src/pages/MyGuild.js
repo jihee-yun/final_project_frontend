@@ -35,7 +35,7 @@ const Detail = styled.div`
 
 // 세부 페이지 윗쪽 부분
 const SelectBox = styled.div`
-  width: 100%;
+  width: 90%;
   min-width: 330px;
   height: 80px;
   margin-top: 3%;
@@ -53,7 +53,7 @@ const TextBox = styled.p`
 `;
 // 세부 페이지 중앙 부분
 const ContentBox = styled.div`
-  width: 100%;
+  width: 90%;
   min-width: 330px;
 
   /* min-width: 500px; */

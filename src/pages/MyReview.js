@@ -24,7 +24,9 @@ const Container = styled.div`
 `;
 const Detail = styled.div`
   width: 100%;
-  height: 1000px;
+  min-width: 350px;
+  max-width: 1000px;
+  min-height: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -34,7 +36,7 @@ const Detail = styled.div`
 
 const SelectBox = styled.div`
   width: 90%;
-  min-width: 400px;
+  min-width: 330px;
   height: 80px;
   margin-top: 3%;
   border: 1px solid #f3e1e1;
@@ -53,7 +55,7 @@ const SelectButton = styled.button`
   cursor: pointer;
 `;
 const DatePick = styled.div`
-  min-width: 100px;
+  min-width: 60px;
   margin-left: auto;
   margin-right: 1%;
   padding-left: 1%;
@@ -67,8 +69,8 @@ const DateSelected = styled.p`
 
 const ContentBox = styled.div`
   width: 90%;
-  min-width: 600px;
-  height: 780px;
+  min-width: 330px;
+  min-height: 400px;
   margin-top: 3%;
   border: 1px solid #f3e1e1;
   border-radius: 15px;
@@ -84,29 +86,29 @@ const ContentTop = styled.div`
 `;
 const ContentNum = styled.p`
   width: 10%;
-  min-width: 70px;
+  min-width: 50px;
   margin-left: 1%;
   text-align: center;
 `;
 const ContentTitle = styled.p`
-  width: 60%;
-  min-width: 300px;
+  width: 55%;
+  min-width: 80px;
   margin-left: 2%;
   text-align: center;
 `;
 const ContentCafe = styled.p`
   width: 10%;
-  min-width: 100px;
+  min-width: 50px;
   margin-left: 2%;
   text-align: center;
 `;
 const ContentDate = styled.p`
-  width: 10%;
+  width: 15%;
   margin-left: 2%;
   text-align: center;
 `;
 const ContentDetail = styled.div`
-  min-height: 600px;
+  min-height: 400px;
 //  border: 1px solid blue;
 `;
 const ContentLists = styled.p`
@@ -119,25 +121,26 @@ const ContentLists = styled.p`
 `;
 const ListNum = styled.p`
   width: 10%;
-  min-width: 70px;
+  min-width: 50px;
   margin-left: 1%;
   text-align: center;
 `;
 const ListTitle = styled.p`
-  width: 60%;
-  min-width: 300px;
+  width: 55%;
+  min-width: 80px;
   margin-left: 2%;
   text-align: center;
   cursor: pointer;
 `;
 const ListCafe = styled.p`
   width: 10%;
-  min-width: 100px;
+  min-width: 50px;
   margin-left: 2%;
   text-align: center;
 `;
 const ListDate = styled.p`
-  width: 10%;
+  width: 15%;
+  min-width: 50px;
   margin-left: 2%;
   text-align: center;
 `;
@@ -146,6 +149,7 @@ const ListDate = styled.p`
 const NumberSelectBox = styled.div`
   height: 30px;
   margin-top: 3%;
+  margin-bottom: 3%;
   display: flex;
   align-items: center;
   justify-content: center;
