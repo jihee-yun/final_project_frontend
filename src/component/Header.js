@@ -4,7 +4,6 @@ import styled from "styled-components";
 import Logo from "../images/logo.png";
 // import mobileLogo from "../images/.PNG";
 import { Link, useNavigate } from "react-router-dom";
-import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
 import NavBar from "./NavBar";
 
@@ -104,53 +103,53 @@ const HamburgerBtn = styled.button`
   border:none;
 `;
 
-const NavContainer = styled.nav `
-  width: 100%;
+// const NavContainer = styled.nav `
+//   width: 100%;
     
-  a {
-    text-decoration: none;
-    color: #646b8c;
-    position: relative;
-  }
-  .Nav {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    text-align: center;
-    padding-right: 20px;
-    height: 60px;
-  }
-  .search {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    width: 200px;
-  }
-  .search-bar {
-    width: 100%;
-    height: 30px;
-    border-radius: 40px;
-    border: solid #646b8c;
-    padding: 0 15px;
-  }
-`;
-const Navlink = styled(Link) `
-  width: 150px;
-  height: 40px;
-  line-height: 40px;
-  font-size: 1rem;
-  font-weight: bold;
-  color: white;
+//   a {
+//     text-decoration: none;
+//     color: #646b8c;
+//     position: relative;
+//   }
+//   .Nav {
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     gap: 10px;
+//     text-align: center;
+//     padding-right: 20px;
+//     height: 60px;
+//   }
+//   .search {
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     gap: 10px;
+//     width: 200px;
+//   }
+//   .search-bar {
+//     width: 100%;
+//     height: 30px;
+//     border-radius: 40px;
+//     border: solid #646b8c;
+//     padding: 0 15px;
+//   }
+// `;
+// const Navlink = styled(Link) `
+//   width: 150px;
+//   height: 40px;
+//   line-height: 40px;
+//   font-size: 1rem;
+//   font-weight: bold;
+//   color: white;
 
-  &:hover {
-    color: #000;    
-  }
-  .MyPage {
-    font-size: 2.5rem;
-  }
-`;
+//   &:hover {
+//     color: #000;    
+//   }
+//   .MyPage {
+//     font-size: 2.5rem;
+//   }
+// `;
 
 
 const Header = () => {
@@ -158,7 +157,7 @@ const Header = () => {
     setGrantType, setAccessToken,setRefreshToken, setUserNum, userAuthority, setUserAuthoruty}  = useContext(UserContext);
   const navigate = useNavigate();
   const [isMobile, setIsMobile] = useState(false);
-  const [keyword, setKeyword] = useState(""); // 검색어 입력을 위한 useState
+  // const [keyword, setKeyword] = useState(""); // 검색어 입력을 위한 useState
 
   // 반응형 UI 적용
   useEffect(() => {
@@ -174,13 +173,13 @@ const Header = () => {
     };
   }, []);
 
-  const onChangeCafeName = (e) => {
-    setKeyword(e.target.value);
-  };
+  // const onChangeCafeName = (e) => {
+  //   setKeyword(e.target.value);
+  // };
 
-  const swordPush = () => {
-    navigate(`/cafesearch/${keyword}`);
-  };
+  // const swordPush = () => {
+  //   navigate(`/cafesearch/${keyword}`);
+  // };
 
 
   // 로그아웃 버튼 누르면 함수 실행

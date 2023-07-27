@@ -1,6 +1,7 @@
 import {useState, navigate} from "react";
 import styled from "styled-components";
 import SearchIcon from '@mui/icons-material/Search';
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -8,6 +9,7 @@ const NavBar = () => {
   const [activeIndex, setActiveIndex] = useState(null);
   const [targetStyle, setTargetStyle] = useState({});
   const [keyword, setKeyword] = useState(""); // 검색어 입력을 위한 useState
+  const navigate = useNavigate();
   const fixedColor = "#FFD0E4";
 
   const links = [
@@ -45,18 +47,6 @@ const NavBar = () => {
     }
   }
 
-  // function resizeFunc() {
-  //   if (activeIndex !== null) {
-  //     const activeLink = document.querySelector(`.mynav li:nth-child(${activeIndex + 1}) a`);
-  //     const { left, top } = activeLink.getBoundingClientRect();
-
-  //     setTargetStyle(prevStyle => ({
-  //       ...prevStyle,
-  //       left: `${left + window.pageXOffset}px`,
-  //       top: `${top + window.pageYOffset}px`
-  //     }));
-  //   }
-  // }
 
   function resizeFunc() {
     if (activeIndex !== null) {
@@ -118,7 +108,7 @@ const NavContainer = styled.nav`
     flex-wrap: wrap;
     list-style-type: none;
     padding: 0;
-    box-shadow: 0 10px 40px rgba(159, 162, 177, .8);
+    box-shadow: 0 10px 10px rgba(159, 162, 177, .8);
     border-radius: 40px;
     height: 60px;
     width: 1000px;
