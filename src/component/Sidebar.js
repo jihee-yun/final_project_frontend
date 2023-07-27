@@ -151,6 +151,9 @@ const Sidebar = () => {
     
   }, [isSidebar, isLogin]);
 
+  const closeSideBar = () => {
+    setIsSidebar('-380px');
+  }
 
   return (
 
@@ -175,10 +178,10 @@ const Sidebar = () => {
               )}
       </ProfileBox>
             <Menu>
-            <NavLink to="/cafe">카페 찾기</NavLink>
-            <NavLink to="/guild">길드</NavLink>
-            <NavLink to="/event">이벤트</NavLink>
-            <NavLink to="/couponStore">상점</NavLink>
+            <NavLink to="/cafe" onClick={closeSideBar}>카페 찾기</NavLink>
+            <NavLink to="/guild" onClick={closeSideBar}>길드</NavLink>
+            <NavLink to="/event" onClick={closeSideBar}>이벤트</NavLink>
+            <NavLink to="/couponStore" onClick={closeSideBar}>상점</NavLink>
           </Menu> 
           <button className="mypage" onClick={handleLogout}>로그아웃</button>   
           </> 
@@ -192,10 +195,10 @@ const Sidebar = () => {
         </div>
         </ProfileBox>
                     <Menu>
-                    <NavLink to="/cafe">카페 찾기</NavLink>
-                    <NavLink to="/guild">길드</NavLink>
-                    <NavLink to="/event">이벤트</NavLink>
-                    <NavLink to="/couponStore">상점</NavLink>
+                    <NavLink to="/cafe" onClick={closeSideBar}>카페 찾기</NavLink>
+                    <NavLink to="/guild" onClick={closeSideBar}>길드</NavLink>
+                    <NavLink to="/event" onClick={closeSideBar}>이벤트</NavLink>
+                    <NavLink to="/couponStore" onClick={closeSideBar}>상점</NavLink>
                   </Menu> 
        </>
         
