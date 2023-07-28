@@ -86,8 +86,8 @@ function App() {
         <Route path='/couponStore' element={<PrivateRoute element={<CouponStore />}/>}/>
         <Route path='/pointStore' element={<PrivateRoute element={<PointStore />}/>}/>
         <Route path='/findId' element={<FindID/>}/>
-        <Route path='/admin/report' element={<PrivateRoute element={<AdminReport />}/>}/>
-        <Route path='/admin/userManage' element={<PrivateRoute element={<UserManage />}/>}/>
+        <Route path='/admin/report' element={<AdminReport />}/>
+        <Route path='/admin/userManage' element={<UserManage />}/>
         <Route path='/mypage' element={<PrivateRoute element={<MyPage />}/>}/>
         <Route path='/mypage/review' element={<PrivateRoute element={<MyReview />}/>}/>
         <Route path='/mypage/challenge' element={<PrivateRoute element={<MyChallenge />}/>}/>
@@ -113,12 +113,12 @@ function App() {
         <Route path='/signupform' element={<SignUpForm/>}/>
         <Route path='/report' element={<Report/>}/>
         <Route path='/challengeMain' element={<ChallengeMain/>}/>
-        <Route path='/admin/manageReview' element={<PrivateRoute element={<ManageReview />}/>}/>
+        <Route path='/admin/manageReview' element={<ManageReview />}/>
         <Route path='/quizMain' element={<QuizMain/>}/>
         <Route path='/payComplete' element={<PrivateRoute element={<PayComplete />}/>}/>
         <Route path='/couponPayment' element={<PrivateRoute element={<CouponPayment />}/>}/>
         <Route path='/servicecenter' element={<ServiceCenter/>}/>
-        <Route path='/admin/register' element={<PrivateRoute element={<AdminReg />}/>}/>
+        <Route path='/admin/register' element={<AdminReg />}/>
         <Route path='/cafesearch/:keyword' element={<CafeSearch />}/>
         <Route path='/changepw' element={<ChangePw/>}/>
         <Route path='/qnasearch/:keyword' element={<QnaSearchList />}/>
