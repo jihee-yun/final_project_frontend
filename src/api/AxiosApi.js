@@ -654,7 +654,12 @@ const AxiosApi = {
         Authorization: `${grantType} ${accessToken}`
       }
     });
-  }
+  },
+   // 고객센터 검색 기능
+   qnaSearchListLoad: async (keyword) => {
+    return await axios.get(KH_DOMAIN + `/auth/qnalist/searchList?keyword=${keyword}`)
+  },
 };
+
 
 export default AxiosApi;

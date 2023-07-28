@@ -77,20 +77,20 @@ const QnaSearchList = () => {
     }, [keyword]);
 
 
-    useEffect(() => {
-        const qna = async () => {
-            const rsp = await AxiosApi.QnaGet("USER")
-            .then((rsp) => {
-              setQnaList(rsp.data);
-              console.log("qna 정보 가져오기 성공: ", rsp.data)
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        };
-        qna();
-        console.log(qnaList);
-      }, []);
+    // useEffect(() => {
+    //     const qna = async () => {
+    //         const rsp = await AxiosApi.QnaGet("USER")
+    //         .then((rsp) => {
+    //           setQnaList(rsp.data);
+    //           console.log("qna 정보 가져오기 성공: ", rsp.data)
+    //         })
+    //         .catch((error) => {
+    //           console.log(error);
+    //         });
+    //     };
+    //     qna();
+    //     console.log(qnaList);
+    //   }, []);
       
     const questionOpen = (index) => {
       setIsOpen((prev) => ({
@@ -104,10 +104,10 @@ const QnaSearchList = () => {
     return(
     <>
     <Header/>
-     {qnaList.map((user, index) => (
-    <div key={user.id}>
+     {searchResult.map((keyword, index) => (
+    <div key={keyword.id}>
       <Box >
-        <Question > {user.question}
+        <Question > {keyword.question}
           <Button onClick={() => questionOpen(index)}>
           {isOpen[index] ? <ExpandMoreIcon style={{fill: "gray"}}/> : <ExpandLessIcon style={{fill: "gray"}}/>}
         </Button> </Question>
@@ -115,7 +115,7 @@ const QnaSearchList = () => {
       
       <Box2>
       <Answer style={{ display: isOpen[index] ? "block" : "none" }}>
-        <div className="answer">{user.answer}</div>
+        <div className="answer">{keyword.answer}</div>
       </Answer>
       </Box2>
       
