@@ -12,6 +12,7 @@ import PopUp from "../utils/PopUp";
 import TestSwiper from "../component/TestSwiper";
 
 const Container = styled.div`
+max-width: 1000px;
 width: 100%;
 display: flex;
 flex-direction: column;

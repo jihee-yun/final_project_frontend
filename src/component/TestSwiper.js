@@ -27,7 +27,6 @@ const SwiperContainer = styled.div`
 const SwiperWrapper = styled.div`
   width: 73.8%;
   will-change: transform;
-
   @media (min-width: 630px) {
     width: 100%;
   }
@@ -35,7 +34,6 @@ const SwiperWrapper = styled.div`
 
 const SwiperSlide = styled.div`
   width: 100%;
-  background-color: white;
   overflow: hidden;
 
   &.swiper-slide-active,
@@ -136,14 +134,6 @@ const SlideContent = styled.div`
     flex-grow: 1;
   }
 
-  .footer {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    padding-bottom: 2.8rem;
-    font-size: 14px;
-    color: #c2c0e0;
-
     a {
     color: tomato;
     font-size: 12px;
@@ -152,9 +142,16 @@ const SlideContent = styled.div`
     border-bottom: 3px solid currentColor;
     padding-bottom: 3px;
   }
-  }
 
+`;
 
+const Footer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: 2.8rem;
+    font-size: 14px;
+    color: #c2c0e0;
 `;
 
 const TestSwiper = () => {
@@ -162,7 +159,7 @@ const TestSwiper = () => {
     useEffect(() => {
         SwiperCore.use([Autoplay, Pagination]);
         new SwiperCore('.swiper-container', {
-          slidesPerView: 'auto',
+          slidesPerView: 0,
           initialSlide: 0,
           speed: 1000,
           spaceBetween: 32,
@@ -206,18 +203,18 @@ const TestSwiper = () => {
 
         <SwiperSlide className="swiper-slide">
         <SlideContent>
-            <h4>로흐</h4>
+            <h4>프롤라</h4>
             <p>
-              로흐 매장은 역삼동에 위치한 구움과자 테이크아웃 전문점입니다.
+              프롤라 매장은 역삼동에 위치한 구움과자 테이크아웃 전문점입니다.
               시그니처 메뉴는 휘낭시에입니다.
               로흐 구움과자에 어울리는 커피와 포트넘 앤 메인슨 차가 페어링 하실 수 있도록 준비되어 있습니다.
               오셔서 편안히 즐겨주세요.
             </p>
+            <Footer>
+              <div>01/02</div>
+              <a href="#">READ MORE</a>
+           </Footer>
         </SlideContent>
-        <div className='footer'>
-            <div>01/02</div>
-            <a href="#">READ MORE</a>
-       </div>
         </SwiperSlide>
 
         <SwiperSlide className="swiper-slide">
@@ -236,12 +233,18 @@ const TestSwiper = () => {
 
         <SwiperSlide className="swiper-slide">
         <SlideContent>
-            <p>웅냥냥</p>
+          <h4>Cafe168</h4>
+            <p>단국대학교 용인캠퍼스 앞에 자리한 cafe 168입니다
+              카페 내부는 깔끔한 화이트톤으로 인테리어 되어 있어 아늑한 분위기와 
+              외부 테라스에 앉아 여유로움도 함께 즐기실 수 있습니다
+              커피뿐만 아니라 수제청으로 만든 에이드와 티를 즐기실 수 있으시며, cafe 168만의 
+              수제 쿠키도 함께 준비되어 있습니다.
+            </p>
+            <Footer>
+              <div>02/02</div>
+              <a href="#">READ MORE</a>
+           </Footer>
         </SlideContent>
-        <div className='footer'>
-            <div>01/02</div>
-            <a href="#">READ MORE</a>
-       </div>
         </SwiperSlide>
       
       </SwiperWrapper>
