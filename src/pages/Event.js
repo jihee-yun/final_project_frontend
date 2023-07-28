@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import Roulette from "../component/Roulette";
 import menu from "../images/menu.png";
@@ -10,6 +10,8 @@ import ad2 from "../images/ad-media.png";
 import MenuBox from "../utils/MenuBox";
 import Header from "../component/Header";
 import Footer from "../component/Footer";
+import Sidebar from "../component/Sidebar";
+import { UserContext } from "../context/UserStore";
 
 const Box = styled.div`
   @media (max-width: 768px) {
@@ -150,6 +152,8 @@ const MediaBox = styled.div`
 const Event = () => {
   const navigate = useNavigate();
   const [challengeInfo, setChallengeInfo] = useState("");
+  const context = useContext(UserContext);
+  const { isSidebar } = context;
 
   const cafeOpen = () => {
     navigate('/cafe');
@@ -176,6 +180,7 @@ const Event = () => {
   return(
     <>
     <Header />
+    {isSidebar && <Sidebar />}
       <Box>
         <h3>이 달의 퀘스트</h3>
         <ChallengeContainer>

@@ -7,6 +7,7 @@ import AxiosApi from "../api/AxiosApi";
 import { UserContext } from "../context/UserStore";
 import Header from "../component/Header";
 import Footer from "../component/Footer";
+import Sidebar from "../component/Sidebar";
 
 const Container = styled.div`
   width: 80%;
@@ -166,7 +167,7 @@ const CafeIntro = styled.div`
 
 const ChallengeMain = () => {
   const context = useContext(UserContext);
-  const {isLogin, userNum, grantType, accessToken} = context;
+  const {isLogin, userNum, grantType, accessToken, isSidebar} = context;
   const [modalOpen, setModalOpen] = useState(false);
   const location = useLocation();
   const info = location.state && location.state.editedInfo[0].id;
@@ -193,6 +194,7 @@ const ChallengeMain = () => {
   return(
     <>
     <Header />
+    {isSidebar && <Sidebar />}
     <Container>
       <Box>
         <div>

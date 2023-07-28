@@ -5,6 +5,7 @@ import AxiosApi from "../api/AxiosApi";
 import { UserContext } from "../context/UserStore";
 import Header from "../component/Header";
 import Footer from "../component/Footer";
+import Sidebar from "../component/Sidebar";
 
 // 포인트로 카페 쿠폰 결제하는 상점
 
@@ -184,7 +185,7 @@ const CouponStore = () => {
   const [pointInfo, setPointInfo] = useState("");
   const [cafeInfo, setCafeInfo] = useState("");
   const context = useContext(UserContext);
-  const { userNum, isLogin, grantType, accessToken } = context
+  const { userNum, isLogin, grantType, accessToken, isSidebar } = context
   const navigate = useNavigate();
 
   console.log(couponInfo);
@@ -228,6 +229,7 @@ const CouponStore = () => {
   return(
     <>
     <Header/>
+    {isSidebar && <Sidebar />}
     <Container>
       <MyPoint>
           {pointInfo && pointInfo.map(item => (

@@ -5,6 +5,7 @@ import AxiosApi from "../api/AxiosApi";
 import { UserContext } from "../context/UserStore";
 import Header from "../component/Header";
 import Footer from "../component/Footer";
+import Sidebar from "../component/Sidebar";
 
 const Box = styled.div`
   margin-top: 100px;
@@ -66,7 +67,7 @@ const CouponPayment = () => {
   const info = location.state && location.state.filterCoupon;
   const navigate = useNavigate();
   const context = useContext(UserContext);
-  const { userNum, isLogin, grantType, accessToken } = context
+  const { userNum, isLogin, grantType, accessToken, isSidebar } = context
   const [pointInfo, setPointInfo] = useState([]);
 
   useEffect(() => {
@@ -106,6 +107,7 @@ const CouponPayment = () => {
   return(
     <>
     <Header />
+    {isSidebar && <Sidebar />}
     <Box>
     <Container>
       <h2>쿠폰 결제</h2>
