@@ -157,6 +157,7 @@ const BusinessCafe = () => {
   const [cafeDetail, setCafeDetail] = useState("");
   // 라디오 버튼 상태
   const [selectedRegion, setSelectedRegion] = useState('서울특별시');
+  const [isButtonActive, setIsButtonActive] = useState(false);
   // 이미지 업로드용 상태
   const [image, setImage] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
@@ -211,6 +212,16 @@ const BusinessCafe = () => {
       console.log("카페 생성 실패: ", error);
     }
   };
+
+  // 모든 입력 필드가 비어 있지 않고, 이미지가 null이 아닌지 확인합니다.
+  useEffect(() => {
+    if (cafeName && cafeAddress && cafeTime && cafePhone && cafeIntro && cafeDetail && image) {
+      setIsButtonActive(true);
+    } else {
+      setIsButtonActive(false);
+    }
+  }, [cafeName, cafeAddress, cafeTime, cafePhone, cafeIntro, cafeDetail, image]);
+
   // db에 카페 등록 통신
   const handleApiRequest = async (url) => {
     try {
@@ -325,9 +336,7 @@ const BusinessCafe = () => {
                 <InfoType>카페 썸네일</InfoType>
                 <input type="file" onChange={handleImageChange} />
               </SpecificBox>
-              <InfoChangeButton onClick={handleCafeRegister}>등록하기</InfoChangeButton>
-
-
+              <InfoChangeButton onClick={handleCafeRegister} disabled={!isButtonActive}>등록하기</InfoChangeButton>
             </ContentBox>
             </>
           ) : (

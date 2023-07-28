@@ -7,6 +7,8 @@ import Header from "../component/Header";
 import Footer from "../component/Footer";
 import SideMenu from "../component/SideMenu";
 import ChatBot from "../component/ChatBot";
+import firebase from "firebase/app";
+import { storage } from "../context/Firebase";
 
 const OutBox = styled.div`
   display: flex;
@@ -154,6 +156,15 @@ const MyInformation = () => {
 
   const [withdrawAgreement, setSignoutAgreement] = useState("");
 
+  // 이미지 업로드용 상태
+  const [image, setImage] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
+  const handleImageChange = (e) => {
+    if (e.target.files[0]) {
+      setImage(e.target.files[0]);
+    }
+  };
+
   // 유저 정보 가져오기
   useEffect(() => {
     const fetchMemberInfo = async () => {
@@ -169,6 +180,57 @@ const MyInformation = () => {
     };
     fetchMemberInfo();
   }, [userNum]);
+
+
+  // 파이어베이스 스토리지에 이미지 업로드 함수
+  const handleImageUpdate = async () => {
+    try {
+      // 이미지를 Firebase Storage에 업로드
+      const uploadTask = storage.ref(`images/${image.name}`).put(image);
+  
+      // 업로드 상태를 모니터링
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          // 진행 상태를 표시하는 로직이 들어갈 수 있습니다.
+        },
+        (error) => {
+          // 에러 핸들링
+          console.log(error);
+        },
+        () => {
+          // 업로드가 완료되면 이미지 URL을 가져옵니다.
+          storage
+            .ref("images")
+            .child(image.name)
+            .getDownloadURL()
+            .then((url) => {
+              setImageUrl(url);
+              // API에 요청을 보냅니다.
+              handleApiRequest(url);
+            });
+        }
+      );
+    } catch (error) {
+      console.log("카페 생성 실패: ", error);
+    }
+  };
+
+  // 프로필 이미지 변경
+  const handleApiRequest = async (url) => {
+    try {
+      const rsp = await AxiosApi.profileImgUpdate(userNum, url, grantType, accessToken);
+      if (rsp.status) {
+        if (rsp.data === "true") {
+          console.log("프로필 이미지 업데이트 성공: ", rsp.data);
+        } else {
+          console.log("통신은 성공, 프로필 이미지 업데이트 실패", rsp.data);
+        }
+      }
+    } catch(error) {
+      console.log("프로필 이미지 업데이트 실패");
+    }
+  };
 
   // 비밀 번호 조합 확인
   const validatePassword = (password) => {
@@ -246,7 +308,7 @@ const MyInformation = () => {
     }
   };
 
-  // 이메일 변경 함수
+  // 이메일 변경
   const handleEmailChange = async () => {
     const email = document.getElementById("email").value;
     try {
@@ -262,7 +324,7 @@ const MyInformation = () => {
       console.log("이메일 업데이트 실패: ", error);
     }
   };
-  // 회원 탈퇴 함수
+  // 회원 탈퇴
   const handleMemberExit = async () => {
     if (withdrawAgreement !== "회원 탈퇴를 동의합니다") {
       alert("정확한 문구를 입력해주세요!");
@@ -318,8 +380,8 @@ const MyInformation = () => {
           {/* <TitleBox>회원 정보 수정</TitleBox> */}
             <SpecificBox>
               <InfoType>프로필 이미지 수정</InfoType>
-
-              {/* <InfoChangeButton onClick={handleImageChange}>변경하기</InfoChangeButton> */}
+              <input type="file" onChange={handleImageChange} />
+              <InfoChangeButton onClick={handleImageUpdate}>변경하기</InfoChangeButton>
             </SpecificBox>
             <SpecificBox>
               <InfoType>회원 아이디</InfoType>

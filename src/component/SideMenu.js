@@ -9,7 +9,8 @@ import { ref, getDownloadURL } from "firebase/storage";
 const Side = styled.div`
   width: 250px;
   min-width: 200px;
-  height: 700px;
+  height: 0%;
+  min-height: 480px;
   display: flex;
   flex-direction: column;
   align-items: center;

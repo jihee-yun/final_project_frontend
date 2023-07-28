@@ -538,6 +538,19 @@ const AxiosApi = {
     });
   },
 
+  // 프로필 이미지 변경
+  profileImgUpdate: async (memberNum, url, grantType, accessToken) => {
+    const passwordData = {
+      memberNum : memberNum,
+      url : url,
+    }
+    return await axios.post(`${KH_DOMAIN}/info/profileimgupdate`, passwordData, {
+      headers: {
+        Authorization: `${grantType} ${accessToken}`
+      }
+    });
+  },
+
   // 비밀번호 업데이트
   passwordUpdate: async (memberNum, password, newPassword, grantType, accessToken) => {
     const passwordData = {
