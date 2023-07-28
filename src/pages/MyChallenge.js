@@ -107,7 +107,7 @@ const ChallengeName = styled.p`
 `;
 // 더보기 버튼
 const More = styled.p`
-  font-size: .6em;
+  font-size: .6rem;
   height: 10px;
   letter-spacing: -1px;
   margin-left: auto;

@@ -62,6 +62,24 @@ const SquareBox = styled.div`
     width: calc(90% - 20px); // 1개를 한 줄에 배치
   }
 `;
+const ShortBox = styled.div`
+  width: 30%;
+  min-width: 220px;
+  height: 50px;
+  margin-top: 2%;
+  border: 1px solid #AE7C7C;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @media (max-width: 1000px) {
+    width: calc(45% - 20px); // 2개를 한 줄에 배치
+  }
+
+  @media (max-width: 768px) {
+    width: calc(90% - 20px); // 1개를 한 줄에 배치
+  }
+`;
 // 캘린더용 외부 박스
 // const LongBox = styled.div`
 //   width: 55%;
@@ -225,22 +243,20 @@ const MyPage = () => {
             </BoxContent>
           </SquareBox>
         {/* </LineBox> */}
-        {/* <LineBox>
-          <LongBox>
+        {/* <LineBox> */}
+          <ShortBox>
             <BoxTitle>
-              <Title>캘린더</Title>
-              <More onClick={()=>navigate("/mypage/calendar")}>더 보기</More>
+              <Title>회원 정보</Title>
+              <More onClick={()=>navigate("/mypage/information")}>더 보기</More>
             </BoxTitle>
-            <BoxContentLong></BoxContentLong>
-          </LongBox>
-          <SquareBox>
+          </ShortBox>
+          <ShortBox>
             <BoxTitle>
-              <Title>랭킹</Title>
-              <More onClick={()=>navigate("/mypage/ranking")}>더 보기</More>
+              <Title>포인트 충전</Title>
+              <More onClick={()=>navigate("/mypage/payment")}>더 보기</More>
             </BoxTitle>
-            <BoxContent></BoxContent>
-          </SquareBox>
-        </LineBox> */}
+          </ShortBox>
+        {/* </LineBox> */}
       </Detail>
     </Container>
     <Footer />

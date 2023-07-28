@@ -129,7 +129,7 @@ const GrayInput = styled.input`
 const SmallInfo = styled.p`
   margin-top: -5px;
   margin-bottom: 5px;
-  font-size: .8em;
+  font-size: .8rem;
   width: 80%;
   min-width: 100px;
   text-align: center;
@@ -212,7 +212,7 @@ const MyInformation = () => {
         }
       );
     } catch (error) {
-      console.log("카페 생성 실패: ", error);
+      console.log("이미지 업데이트 실패: ", error);
     }
   };
 

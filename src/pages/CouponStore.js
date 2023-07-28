@@ -214,7 +214,7 @@ const CouponStore = () => {
       if(rsp.status === 200) setCafeInfo(rsp.data);
     };
     cafeInfo();
-  })
+  }, [])
 
   const navigatePay = (id) => {
     const filterCoupon = couponInfo.filter(coupon => coupon.id === id);

@@ -187,7 +187,7 @@ const PageNumber = styled.p`
   ${({ active }) =>
     active &&
     `
-    font-size: 20px;
+    font-size: 1.2rem;
     font-weight: bold;
   `}
   ${({ disabled }) =>

@@ -56,7 +56,7 @@ const MyPoint = styled.p`
 const NaviButton = styled.button`
   width: 100%;
   height: 60px;
-  font-size: 1em;
+  font-size: 1rem;
   font-weight: bold;
   background-color: white;
   cursor: pointer;

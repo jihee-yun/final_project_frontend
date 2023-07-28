@@ -15,12 +15,14 @@ const OutBox = styled.div`
 `;
 
 const Container = styled.div`
+  margin-top: 30px;
   width: 90%;
   display: flex;
+  justify-content: center;
 `;
 // 세부 페이지
 const Detail = styled.div`
-  width: 100%;
+  width: 95%;
   max-width: 1000px;
   min-width: 400px;
   min-height: 600px;
@@ -32,12 +34,30 @@ const Detail = styled.div`
 
 // 각 메뉴별 외부 박스
 const SquareBox = styled.div`
-  width: 30%;
-  min-width: 220px;
+  width: 40%;
+  min-width: 350px;
   height: 300px;
   margin-top: 2%;
-  margin-bottom: -2%;
-  border: 2px solid #F3E1E1;
+  margin-bottom: 2%;
+  border: 1px solid #AE7C7C;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @media (max-width: 1000px) {
+    width: calc(40% - 20px); // 2개를 한 줄에 배치
+  }
+
+  @media (max-width: 768px) {
+    width: calc(90% - 20px); // 1개를 한 줄에 배치
+  }
+`;
+const ShortBox = styled.div`
+  width: 40%;
+  min-width: 350px;
+  height: 50px;
+  margin-top: 2%;
+  border: 1px solid #AE7C7C;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
@@ -74,7 +94,7 @@ const More = styled.p`
 const BoxContent = styled.div`
   width: 90%;
   height: 75%;
-  border: 1px solid blue;
+  border: 1px solid #F1D1D1;
 `;
 
 
@@ -134,18 +154,17 @@ const BusinessPage = () => {
         </SquareBox>
         <SquareBox>
           <BoxTitle>
-            <Title>결제/포인트</Title>
-            <More onClick={()=>navigate("/businesspage/point")}>더 보기</More>
-          </BoxTitle>
-          <BoxContent></BoxContent>
-        </SquareBox>
-        <SquareBox>
-          <BoxTitle>
             <Title>문의/신고</Title>
             <More onClick={()=>navigate("/businesspage/report")}>더 보기</More>
           </BoxTitle>
           <BoxContent></BoxContent>
         </SquareBox>
+        <ShortBox>
+            <BoxTitle>
+              <Title>회원 정보</Title>
+              <More onClick={()=>navigate("/mypage/information")}>더 보기</More>
+            </BoxTitle>
+          </ShortBox>
       </Detail>
     </Container>
     <Footer />

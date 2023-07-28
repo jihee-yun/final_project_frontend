@@ -540,11 +540,11 @@ const AxiosApi = {
 
   // 프로필 이미지 변경
   profileImgUpdate: async (memberNum, url, grantType, accessToken) => {
-    const passwordData = {
+    const profileUrlData = {
       memberNum : memberNum,
       url : url,
     }
-    return await axios.post(`${KH_DOMAIN}/info/profileimgupdate`, passwordData, {
+    return await axios.post(`${KH_DOMAIN}/info/profileimgupdate`, profileUrlData, {
       headers: {
         Authorization: `${grantType} ${accessToken}`
       }
