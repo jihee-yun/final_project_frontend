@@ -36,6 +36,10 @@ const Box = styled.div`
     @media (max-width: 768px) {
       margin-bottom: 80px;
     }
+
+    @media (max-width: 430px) {
+      width: 300px;
+    }
   }
 `;
 
@@ -143,7 +147,7 @@ const MediaBox = styled.div`
   }
   @media (max-width: 430px) {
     .ad {
-      height: 130px;
+      height: 110px;
     }
   }
 

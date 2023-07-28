@@ -68,7 +68,7 @@ const CouponList = styled.div`
     flex-direction: column;
     align-items: center; 
     justify-content: center; 
-    width: 100%;
+    width: 80%;
     height: 180px; 
   }
 `;
@@ -90,10 +90,9 @@ const Price = styled.div`
   cursor: pointer;
 
   @media (max-width: 430px) {
-    width: 200px;
+    width: 60%;
     margin: 20px 0 10px 0;
   }
-
 `;
 
 const CafeContainer = styled.div`
@@ -234,7 +233,7 @@ const CouponStore = () => {
       <MyPoint>
           {pointInfo && pointInfo.map(item => (
             <InfoList key={item.memberNum}>
-              <Name>{item.name}님 현재 보유 포인트 : {item.totalPoint} 포인트</Name> 
+              <Name>{item.name}님 포인트 : {item.totalPoint} 포인트</Name> 
             </InfoList>
           ))}
         <div className="goEvent">
@@ -267,7 +266,6 @@ const CouponStore = () => {
       <Notice>
         <div>
           <p><b>포인트 유의사항</b></p>
-          <p>SWEET KINGDOM 포인트는 100원 단위로 사용이 가능합니다.</p>
           <p>포인트는 타인에게 양도하거나 판매할 수 없습니다.</p>
         </div>
       </Notice>

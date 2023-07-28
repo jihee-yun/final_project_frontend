@@ -9,14 +9,11 @@ import Sidebar from "../component/Sidebar";
 
 const Box = styled.div`
   margin-top: 100px;
-  @media (max-width: 768px) {
-    width: 100%;
-  }
+  width: 100%;
 
 `;
 
 const Container = styled.div`
-  /* border: 1px solid lightgray; */
   width: 40%;
   margin: 0 auto;
 
@@ -34,6 +31,10 @@ const Container = styled.div`
     font-weight: bolder;
     margin: 80px 0  80px 0;
     cursor: pointer;
+
+    @media (max-width: 430px) {
+      width: 290px;
+    }
   }
 `;
 

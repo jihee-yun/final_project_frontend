@@ -41,11 +41,20 @@ const ChHeader = styled.div`
   .ch-header{
     display: flex;
     flex-direction: row;
+
+    @media (max-width: 430px) {
+      flex-direction: column;
+      align-items: center;
+    }
   }
 
   img {
     width: 50px;
     height: 50px;
+
+    @media (max-width: 430px) {
+      display: none;
+    }
   }
 `;
 
@@ -113,7 +122,7 @@ const Btn = styled.div`
     cursor: pointer;
 
     @media (max-width: 430px) {
-      width: 300px;
+      width: 290px;
     }
   }
 `;
@@ -201,7 +210,7 @@ const ChallengeMain = () => {
           <ChHeader>
             <div className="ch-header">
               <img src={challengePin} alt="핀" />
-              <h2>제휴 카페 "5곳" 방문하기 퀘스트</h2>
+              <h2>제휴 카페 방문하기 퀘스트</h2>
             </div>
           </ChHeader>        
           <ChBox>

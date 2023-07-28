@@ -17,7 +17,7 @@ const Container = styled.h3`
 
   @media (max-width: 768px) {
     width: 760px;
-  }
+  } 
 
   @media (max-width: 430px) {
     width: 370px;
@@ -70,6 +70,7 @@ const OuterBox = styled.div`
     bottom: 0;
 
     @media (max-width: 430px) {
+      width: 300px;
       top: -75px;
     }
   }
@@ -92,12 +93,12 @@ const Pin = styled.div`
     z-index: 1;
   }
 
-  /* @media (max-width: 430px) {
+  @media (max-width: 430px) {
     position: absolute;
     top: 0%;
-    left: 43%;
+    left: 37%;
     z-index: 1;
-  } */
+  }
 `;
 
 const Start = styled.div`
@@ -113,17 +114,28 @@ const Start = styled.div`
   cursor: pointer;
 
   @media (max-width: 430px) {
-  top: 54%;
-  left: 84%;
+  top: 52%;
+  left: 88%;
   .startImg {
+    img {
       width: 70px;
       height: 70px;
+    }
     }
   }
 `;
 
 const Pan = styled.div`
   position: absolute;
+
+  @media (max-width: 430px) {
+    .panImg {
+        img {
+        width: 300px;
+        height: 300px;
+      }
+    }
+  }  
 `;
 
 const WinBox = styled.div`
