@@ -48,7 +48,7 @@ const ChangePwBlock = styled.div`
     justify-content: center;
     align-items: center;
     font-size: 12px;
-    margin-top: 5px;
+    margin-top: -5px;
     margin-bottom: 5px;
   }
 
@@ -114,6 +114,9 @@ const ChangePw = () => {
         const memberIdNow = e.target.value;
         setMemberId(memberIdNow);
       }
+
+    // 아이디와 새 비밀번호가 모두 비어있지 않은지 확인하는 조건 추가
+    const isFormValid = memberId.trim() !== "" && newPassword.trim() !== "";
     
 
 
@@ -133,7 +136,6 @@ const ChangePw = () => {
 
    // 새 비밀번호 변경 요청 보내기
    const handleChangePw = async () => {
-    console.log("새 비밀번호:", newPassword);
     const response = await AxiosApi.changePassword(memberId, newPassword);
     console.log("응답 데이터:", response.data);
     if (response) {
@@ -201,7 +203,7 @@ const ChangePw = () => {
 
 
             {/* 비밀번호 찾기 버튼 */}
-            <button className="loginButton" onClick={handleChangePw}>
+            <button className="loginButton" onClick={handleChangePw} disabled={!isFormValid}>
               비밀번호 변경
             </button>
 
