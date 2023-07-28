@@ -72,9 +72,9 @@ const Cafe = () => {
     navigate(`/cafe/main/${category}`)
   }
 
-  useEffect(() => {
-    setIsSidebar('-380px');
-  }, [])
+  // useEffect(() => {
+  //   setIsSidebar('-380px');
+  // }, [])
 
 
   return(

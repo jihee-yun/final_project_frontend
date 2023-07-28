@@ -8,6 +8,7 @@ import Header from "../component/Header";
 import Modal from "../utils/Modal2";
 import CafeFilterModal from "../component/CafeFilterModal";
 import Footer from "../component/Footer";
+import Sidebar from "../component/Sidebar";
 
 const Container = styled.div`
   width: 80%;
@@ -114,7 +115,7 @@ const Thumb = styled.div`
 const CafeMain = () => {
   const navigate = useNavigate();
   const context = useContext(UserContext);
-  const { setRegion, setCafeNum } = context; // cafeNum 유저스토어에 저장하기
+  const { isSidebar, setRegion, setCafeNum } = context; // cafeNum 유저스토어에 저장하기
   const { category } = useParams();
 
   const getRegion = localStorage.getItem("region");
@@ -197,6 +198,7 @@ const CafeMain = () => {
   return(
     <>
     <Header />
+    {isSidebar && <Sidebar />}
     <Container> 
     <Box>
     <button className="filter" onClick={filterModal}><img src={filterimg} alt="필터이미지" /><p>필터</p></button>

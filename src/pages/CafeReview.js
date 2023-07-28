@@ -14,6 +14,7 @@ import CompleteModal from "../utils/CompleteModal";
 import { UserContext } from "../context/UserStore";
 import Header from "../component/Header";
 import Footer from "../component/Footer";
+import Sidebar from "../component/Sidebar";
 
 const Container = styled.div`
   @media (max-width: 768px) {
@@ -150,8 +151,8 @@ const Bar = styled.div`
 `;
 
 const CafeReview = () => {
-  // const context = useContext(UserContext);
-  // const { userNum } = context;
+  const context = useContext(UserContext);
+  const { isSidebar } = context;
   const navigate = useNavigate();
   const location = useLocation();
   const info = location.state;
@@ -225,6 +226,7 @@ const CafeReview = () => {
   return(
     <>
     <Header />
+    {isSidebar && <Sidebar />}
     <Container>
     <Box>
     <div className="back" onClick={prevPage}><ArrowBackIosIcon style={{width: "18px", height: "18px", marginLeft:"5px"}}/></div>
