@@ -175,9 +175,9 @@ const AxiosApi = {
 
 
   // 새 비밀번호
-  changePassword : async(email, newPassword) => {
+  changePassword : async(memberId, newPassword) => {
     const data = {
-      email : email,
+      memberId : memberId,
       newPassword : newPassword
     }
     return await axios.post(KH_DOMAIN + "/member/changePw", data);
