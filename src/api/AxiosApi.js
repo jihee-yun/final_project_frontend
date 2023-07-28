@@ -539,9 +539,9 @@ const AxiosApi = {
   },
 
   // 프로필 이미지 변경
-  profileImgUpdate: async (memberNum, url, grantType, accessToken) => {
+  profileImgUpdate: async (userNum, url, grantType, accessToken) => {
     const profileUrlData = {
-      memberNum : memberNum,
+      memberNum : userNum,
       url : url,
     }
     return await axios.post(`${KH_DOMAIN}/info/profileimgupdate`, profileUrlData, {

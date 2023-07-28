@@ -121,7 +121,7 @@ const SideMenu = () => {
   return (
     <Side>
       <ProfileBox>
-        <img className="profileImg" src={imageUrls[0]} alt="프로필 이미지" onClick={()=>navigate("/mypage")}/>
+        <img className="profileImg" src={memberInfo.profileImgUrl} alt="프로필 이미지" onClick={()=>navigate("/mypage/information")}/>
         <MyName>{userName}님</MyName>
         <MyPoint onClick={()=>navigate("/mypage/point")}>{memberInfo.totalPoint} point</MyPoint>
       </ProfileBox>

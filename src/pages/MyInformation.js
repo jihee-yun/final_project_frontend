@@ -7,9 +7,21 @@ import Header from "../component/Header";
 import Footer from "../component/Footer";
 import SideMenu from "../component/SideMenu";
 import ChatBot from "../component/ChatBot";
-import firebase from "firebase/app";
-import { storage } from "../context/Firebase";
 import Sidebar from "../component/Sidebar";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { initializeApp } from "firebase/app";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDHiymTV-avTvGv5Oxj3Bghiqw327h8Ac8",
+  authDomain: "sweetkingdom-703fb.firebaseapp.com",
+  projectId: "sweetkingdom-703fb",
+  storageBucket: "sweetkingdom-703fb.appspot.com",
+  messagingSenderId: "40592815779",
+  appId: "1:40592815779:web:24a07fee4b751465687116"
+};
+
+initializeApp(firebaseConfig);
+const storage = getStorage();
 
 const OutBox = styled.div`
   display: flex;
@@ -137,6 +149,7 @@ const SmallInfo = styled.p`
   `;
 
 
+
 const MyInformation = () => {
   const navigate = useNavigate();
   // useContext 저장값 불러오기
@@ -158,11 +171,10 @@ const MyInformation = () => {
   const [withdrawAgreement, setSignoutAgreement] = useState("");
 
   // 이미지 업로드용 상태
-  const [image, setImage] = useState(null);
-  const [imageUrl, setImageUrl] = useState(null);
+  const [file, setFile] = useState(null);
   const handleImageChange = (e) => {
     if (e.target.files[0]) {
-      setImage(e.target.files[0]);
+      setFile(e.target.files[0]);
     }
   };
 
@@ -186,32 +198,17 @@ const MyInformation = () => {
   // 파이어베이스 스토리지에 이미지 업로드 함수
   const handleImageUpdate = async () => {
     try {
-      // 이미지를 Firebase Storage에 업로드
-      const uploadTask = storage.ref(`images/${image.name}`).put(image);
+      const storageRef = ref(storage, "ProfileImage");
+      const fileRef = ref(storageRef, file.name);
   
-      // 업로드 상태를 모니터링
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          // 진행 상태를 표시하는 로직이 들어갈 수 있습니다.
-        },
-        (error) => {
-          // 에러 핸들링
-          console.log(error);
-        },
-        () => {
-          // 업로드가 완료되면 이미지 URL을 가져옵니다.
-          storage
-            .ref("images")
-            .child(image.name)
-            .getDownloadURL()
-            .then((url) => {
-              setImageUrl(url);
-              // API에 요청을 보냅니다.
-              handleApiRequest(url);
-            });
-        }
-      );
+      await uploadBytes(fileRef, file);
+      console.log('파일 업로드 성공');
+      const downloadURL = await getDownloadURL(fileRef);
+      console.log("저장경로 확인: " + downloadURL);
+    // "&token="를 기준으로 문자열을 나누고 첫 번째 부분을 사용
+    const URL = downloadURL.split("&token=")[0];
+    console.log("토큰 제거된 저장경로 확인: " + URL);
+      handleApiRequest(URL);
     } catch (error) {
       console.log("이미지 업데이트 실패: ", error);
     }
@@ -222,10 +219,10 @@ const MyInformation = () => {
     try {
       const rsp = await AxiosApi.profileImgUpdate(userNum, url, grantType, accessToken);
       if (rsp.status) {
-        if (rsp.data === "true") {
-          console.log("프로필 이미지 업데이트 성공: ", rsp.data);
+        if (rsp.data === true) {
+          console.log("프로필 이미지 업데이트 성공: ", rsp.data, rsp.status);
         } else {
-          console.log("통신은 성공, 프로필 이미지 업데이트 실패", rsp.data);
+          console.log("통신은 성공, 프로필 이미지 업데이트 실패", rsp.data, rsp.status);
         }
       }
     } catch(error) {
@@ -264,7 +261,7 @@ const MyInformation = () => {
     try {
       const rsp = await AxiosApi.passwordUpdate(userNum, password, newPassword, grantType, accessToken);
       if(rsp.status) {
-        if(rsp.data = "true") {
+        if(rsp.data === true) {
           console.log("비밀번호 업데이트 성공: ", rsp.data);
         } else {
           console.log("통신은 성공, 비밀번호 업데이트 실패", rsp.data);
@@ -281,7 +278,7 @@ const MyInformation = () => {
     try {
       const rsp = await AxiosApi.introUpdate(userNum, intro, grantType, accessToken);
       if(rsp.status) {
-        if(rsp.data = "true") {
+        if(rsp.data === true) {
           console.log("한 줄 소개 업데이트 성공: ", rsp.data);
         } else {
           console.log("통신은 성공, 한 줄 소개 업데이트 실패", rsp.data);
@@ -298,7 +295,7 @@ const MyInformation = () => {
     try {
       const rsp = await AxiosApi.phoneUpdate(userNum, phone, grantType, accessToken);
       if (rsp.status) {
-        if(rsp.data = "true") {
+        if(rsp.data === true) {
           console.log("전화번호 업데이트 성공: ", rsp.data);
         } else {
           console.log("통신은 성공, 전화번호 업데이트 실패", rsp.data);
@@ -315,7 +312,7 @@ const MyInformation = () => {
     try {
       const rsp = await AxiosApi.emailUpdate(userNum, email, grantType, accessToken);
       if (rsp.status) {
-        if(rsp.data = "true") {
+        if(rsp.data === true) {
           console.log("이메일 업데이트 성공: ", rsp.data);
         } else {
           console.log("통신은 성공, 이메일 업데이트 실패", rsp.data);
@@ -334,7 +331,7 @@ const MyInformation = () => {
     try {
       const rsp = await AxiosApi.memberWithdraw(userNum, grantType, accessToken);
       if (rsp.status) {
-        if(rsp.data = "true") {
+        if(rsp.data === true) {
           console.log("회원 탈퇴 성공: ", rsp.data);
           setGrantType("");
           setAccessToken("");
