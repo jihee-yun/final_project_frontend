@@ -9,6 +9,7 @@ import NavBar from "./NavBar";
 import SearchIcon from '@mui/icons-material/Search';
 
 const OutBox = styled.div`
+max-width: 1440px;
   width: 100%;
 `;
 

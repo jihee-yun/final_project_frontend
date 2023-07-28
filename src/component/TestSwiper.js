@@ -22,6 +22,7 @@ const SwiperContainer = styled.div`
   height: 400px;
   width: 100%;
   padding-bottom: 85px;
+  overflow-x: hidden;
 `;
 
 const SwiperWrapper = styled.div`
@@ -64,38 +65,6 @@ const SwiperSlide = styled.div`
     width: 25%;
   }
 `;
-
-// const SwiperPagination = styled.div`
-//   position: relative;
-//   width: 100%;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   height: 85px;
-//   bottom: 0;
-
-//   .swiper-pagination-bullet {
-//      width: 12px; 
-//      height: 12px; 
-//      background: transparent; 
-//      border: 1px solid #FFD0E4; 
-//      opacity: 1; 
-//     }
-
-    
-//   .swiper-pagination-bullet-active { 
-//     width: 40px; 
-//     transition: 
-//     width .5s; 
-//     border-radius: 5px; 
-//     background-color: #FFD0E4; 
-//     border: 1px solid transparent; 
-// }
-
-//   @media (min-width: 768px) {
-//     width: 40px;
-//   }
-// `;
 
 
 const SlideImage = styled.div`
@@ -159,7 +128,7 @@ const TestSwiper = () => {
     useEffect(() => {
         SwiperCore.use([Autoplay, Pagination]);
         new SwiperCore('.swiper-container', {
-          slidesPerView: 0,
+          slidesPerView: 'auto',
           initialSlide: 0,
           speed: 1000,
           spaceBetween: 32,
@@ -248,9 +217,6 @@ const TestSwiper = () => {
         </SwiperSlide>
       
       </SwiperWrapper>
-      {/* <SwiperPagination className="swiper-pagination">
-        <div className="swiper-pagination-bullet" />
-      </SwiperPagination> */}
     </SwiperContainer>
     </Container>
     </>
