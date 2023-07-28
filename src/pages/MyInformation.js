@@ -9,6 +9,7 @@ import SideMenu from "../component/SideMenu";
 import ChatBot from "../component/ChatBot";
 import firebase from "firebase/app";
 import { storage } from "../context/Firebase";
+import Sidebar from "../component/Sidebar";
 
 const OutBox = styled.div`
   display: flex;
@@ -140,7 +141,7 @@ const MyInformation = () => {
   const navigate = useNavigate();
   // useContext 저장값 불러오기
   const {grantType, isLogin, setIsLogin, userNum, accessToken, refreshToken, setUserNum, userName, setUserName, 
-    setGrantType, setAccessToken,setRefreshToken, userAuthority, setUserAuthoruty} = useContext(UserContext);
+    setGrantType, setAccessToken,setRefreshToken, userAuthority, setUserAuthoruty, isSidebar, setIsSidebar} = useContext(UserContext);
 
   // 유저 정보 상태 관리
   const [memberInfo, setMemberInfo] = useState(null);
@@ -367,9 +368,16 @@ const MyInformation = () => {
     return <div>회원 정보 로딩중...</div>;
   }
 
+  // useEffect(() => {
+  //   return (
+  //     setIsSidebar("-300px")
+  //   )
+  // }, []);
+
   return (
     <OutBox>
       <Header />
+      {isSidebar && <Sidebar/>}
       <Container>
         <SideMenu />
         <Detail>

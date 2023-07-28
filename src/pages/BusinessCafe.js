@@ -9,6 +9,7 @@ import SideMenu from "../component/SideMenu";
 import ChatBot from "../component/ChatBot";
 import firebase from "firebase/app";
 import { storage } from "../context/Firebase";
+import Sidebar from "../component/Sidebar";
 
 const OutBox = styled.div`
   display: flex;
@@ -140,7 +141,7 @@ const InfoChangeButton = styled.button`
 
 const BusinessCafe = () => {
   // useContext 저장값 불러오기
-  const {grantType, accessToken, refreshToken, userNum, userName, userAuthority} = useContext(UserContext);
+  const {grantType, accessToken, refreshToken, userNum, userName, userAuthority, isSidebar, setIsSidebar} = useContext(UserContext);
   
   // 포인트, 결제 선택 버튼
   const [selectedButton, setSelectedButton] = useState("register");
@@ -251,11 +252,16 @@ const BusinessCafe = () => {
     }
   };
   
-
+  useEffect(() => {
+    return (
+      setIsSidebar("-300px")
+    )
+  }, []);
 
   return(
     <OutBox>
       <Header />
+      {isSidebar && <Sidebar/>}
       <Container>
         <SideMenu />
         <Detail>

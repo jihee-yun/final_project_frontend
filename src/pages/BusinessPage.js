@@ -7,6 +7,7 @@ import Header from "../component/Header";
 import Footer from "../component/Footer";
 import SideMenu from "../component/SideMenu";
 import ChatBot from "../component/ChatBot";
+import Sidebar from "../component/Sidebar";
 
 const OutBox = styled.div`
   display: flex;
@@ -62,12 +63,11 @@ const ShortBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  @media (max-width: 1000px) {
-    width: calc(45% - 20px); // 2개를 한 줄에 배치
-  }
+  display: none;
 
   @media (max-width: 768px) {
     width: calc(90% - 20px); // 1개를 한 줄에 배치
+    display: flex;
   }
 `;
 // 세부 메뉴 이름 + 더보기 버튼
@@ -105,7 +105,7 @@ const BusinessPage = () => {
   const [memberInfo, setMemberInfo] = useState([]);
 
   // useContext 저장값 불러오기
-  const {grantType, accessToken, refreshToken, userNum, userName, userAuthority} = useContext(UserContext);
+  const {grantType, accessToken, refreshToken, userNum, userName, userAuthority, isSidebar, setIsSidebar} = useContext(UserContext);
 
   // 유저 정보 가져오기
   useEffect(() => {
@@ -123,11 +123,16 @@ const BusinessPage = () => {
     fetchMemberInfo();
   }, [userNum]);
 
-
+  useEffect(() => {
+    return (
+      setIsSidebar("-300px")
+    )
+  }, []);
 
   return(
     <OutBox>
     <Header />
+    {isSidebar && <Sidebar/>}
     <Container>
       <SideMenu />
       <Detail>
@@ -168,7 +173,7 @@ const BusinessPage = () => {
       </Detail>
     </Container>
     <Footer />
-    <ChatBot />
+    {/* <ChatBot /> */}
     </OutBox>
   );
 };

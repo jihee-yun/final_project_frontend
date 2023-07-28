@@ -7,6 +7,7 @@ import Header from "../component/Header";
 import Footer from "../component/Footer";
 import SideMenu from "../component/SideMenu";
 import ChatBot from "../component/ChatBot";
+import Sidebar from "../component/Sidebar";
 
 const OutBox = styled.div`
   display: flex;
@@ -72,12 +73,10 @@ const ShortBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  @media (max-width: 1000px) {
-    width: calc(45% - 20px); // 2개를 한 줄에 배치
-  }
-
+  display: none;
   @media (max-width: 768px) {
     width: calc(90% - 20px); // 1개를 한 줄에 배치
+    display: flex;
   }
 `;
 // 캘린더용 외부 박스
@@ -135,7 +134,7 @@ const MyPage = () => {
   const [memberInfo, setMemberInfo] = useState([]);
 
   // useContext 저장값 불러오기
-  const {grantType, accessToken, refreshToken, userNum, userName, userAuthority} = useContext(UserContext);
+  const {grantType, accessToken, refreshToken, userNum, userName, userAuthority, isSidebar, setIsSidebar} = useContext(UserContext);
 
   // 유저 정보 가져오기
   useEffect(() => {
@@ -153,114 +152,119 @@ const MyPage = () => {
     fetchMemberInfo();
   }, [userNum]);
 
-
+  useEffect(() => {
+    return (
+      setIsSidebar("-300px")
+    )
+  }, []);
 
   return(
     <OutBox>
-    <Header />
-    <Container>
-      <SideMenu />
-      <Detail>
-        {/* <LineBox> */}
-          <SquareBox>
-            <BoxTitle>
-              <Title>작성 리뷰</Title>
-              <More onClick={()=>navigate("/mypage/review")}>더 보기</More>
-            </BoxTitle>
-            <BoxContent>
-            {
-              memberInfo?.reviewContents?.map((reviewContents, index) => (
-                <ContrntList key={index}>{reviewContents}</ContrntList>
-              ))
-            }
-            </BoxContent>
-          </SquareBox>
-          <SquareBox>
-            <BoxTitle>
-              <Title>참여 길드</Title>
-              <More onClick={()=>navigate("/mypage/guild")}>더 보기</More>
-            </BoxTitle>
-            <BoxContent>
-            {
-              memberInfo?.guildNames?.map((guildName, index) => (
-                <ContrntList key={index}>{guildName}</ContrntList>
-              ))
-            }
-            </BoxContent>
-          </SquareBox>
-          <SquareBox>
-            <BoxTitle>
-              <Title>참여 챌린지</Title>
-              <More onClick={()=>navigate("/mypage/challenge")}>더 보기</More>
-            </BoxTitle>
-            <BoxContent>
-            {
-              memberInfo?.challengeNames?.map((challengeNames, index) => (
-                <ContrntList key={index}>{challengeNames}</ContrntList>
-              ))
-            }
-            </BoxContent>
-          </SquareBox>
-        {/* </LineBox> */}
-        {/* <LineBox> */}
-          <SquareBox>
-            <BoxTitle>
-              <Title>참여 이벤트</Title>
-              <More onClick={()=>navigate("/mypage/event")}>더 보기</More>
-            </BoxTitle>
-            <BoxContent>
-            {
-              memberInfo?.pointTypes?.map((pointTypes, index) => (
-                <ContrntList key={index}>{pointTypes}</ContrntList>
-              ))
-            }
-            </BoxContent>
-          </SquareBox>
-          <SquareBox>
-            <BoxTitle>
-              <Title>포인트 / 결제</Title>
-              <More onClick={()=>navigate("/mypage/point")}>더 보기</More>
-            </BoxTitle>
-            <BoxContent>
-            {
-              memberInfo?.paymentTypes?.map((paymentType, index) => (
-                <ContrntList key={index}>{paymentType}</ContrntList>
-              ))
-            }
-            </BoxContent>
-          </SquareBox>
-          <SquareBox>
-            <BoxTitle>
-              <Title>문의 / 신고</Title>
-              <More onClick={()=>navigate("/mypage/report")}>더 보기</More>
-            </BoxTitle>
-            <BoxContent>
-            {
-              memberInfo?.reportTitles?.map((reportTitles, index) => (
-                <ContrntList key={index}>{reportTitles}</ContrntList>
-              ))
-            }
-            </BoxContent>
-          </SquareBox>
-        {/* </LineBox> */}
-        {/* <LineBox> */}
-          <ShortBox>
-            <BoxTitle>
-              <Title>회원 정보</Title>
-              <More onClick={()=>navigate("/mypage/information")}>더 보기</More>
-            </BoxTitle>
-          </ShortBox>
-          <ShortBox>
-            <BoxTitle>
-              <Title>포인트 충전</Title>
-              <More onClick={()=>navigate("/mypage/payment")}>더 보기</More>
-            </BoxTitle>
-          </ShortBox>
-        {/* </LineBox> */}
-      </Detail>
-    </Container>
-    <Footer />
-    {/* <ChatBot /> */}
+      <Header />
+      {isSidebar && <Sidebar/>}
+      <Container>
+        <SideMenu />
+        <Detail>
+          {/* <LineBox> */}
+            <SquareBox>
+              <BoxTitle>
+                <Title>작성 리뷰</Title>
+                <More onClick={()=>navigate("/mypage/review")}>더 보기</More>
+              </BoxTitle>
+              <BoxContent>
+              {
+                memberInfo?.reviewContents?.map((reviewContents, index) => (
+                  <ContrntList key={index}>{reviewContents}</ContrntList>
+                ))
+              }
+              </BoxContent>
+            </SquareBox>
+            <SquareBox>
+              <BoxTitle>
+                <Title>참여 길드</Title>
+                <More onClick={()=>navigate("/mypage/guild")}>더 보기</More>
+              </BoxTitle>
+              <BoxContent>
+              {
+                memberInfo?.guildNames?.map((guildName, index) => (
+                  <ContrntList key={index}>{guildName}</ContrntList>
+                ))
+              }
+              </BoxContent>
+            </SquareBox>
+            <SquareBox>
+              <BoxTitle>
+                <Title>참여 챌린지</Title>
+                <More onClick={()=>navigate("/mypage/challenge")}>더 보기</More>
+              </BoxTitle>
+              <BoxContent>
+              {
+                memberInfo?.challengeNames?.map((challengeNames, index) => (
+                  <ContrntList key={index}>{challengeNames}</ContrntList>
+                ))
+              }
+              </BoxContent>
+            </SquareBox>
+          {/* </LineBox> */}
+          {/* <LineBox> */}
+            <SquareBox>
+              <BoxTitle>
+                <Title>참여 이벤트</Title>
+                <More onClick={()=>navigate("/mypage/event")}>더 보기</More>
+              </BoxTitle>
+              <BoxContent>
+              {
+                memberInfo?.pointTypes?.map((pointTypes, index) => (
+                  <ContrntList key={index}>{pointTypes}</ContrntList>
+                ))
+              }
+              </BoxContent>
+            </SquareBox>
+            <SquareBox>
+              <BoxTitle>
+                <Title>포인트 / 결제</Title>
+                <More onClick={()=>navigate("/mypage/point")}>더 보기</More>
+              </BoxTitle>
+              <BoxContent>
+              {
+                memberInfo?.paymentTypes?.map((paymentType, index) => (
+                  <ContrntList key={index}>{paymentType}</ContrntList>
+                ))
+              }
+              </BoxContent>
+            </SquareBox>
+            <SquareBox>
+              <BoxTitle>
+                <Title>문의 / 신고</Title>
+                <More onClick={()=>navigate("/mypage/report")}>더 보기</More>
+              </BoxTitle>
+              <BoxContent>
+              {
+                memberInfo?.reportTitles?.map((reportTitles, index) => (
+                  <ContrntList key={index}>{reportTitles}</ContrntList>
+                ))
+              }
+              </BoxContent>
+            </SquareBox>
+          {/* </LineBox> */}
+          {/* <LineBox> */}
+            <ShortBox>
+              <BoxTitle>
+                <Title>회원 정보</Title>
+                <More onClick={()=>navigate("/mypage/information")}>더 보기</More>
+              </BoxTitle>
+            </ShortBox>
+            <ShortBox>
+              <BoxTitle>
+                <Title>포인트 충전</Title>
+                <More onClick={()=>navigate("/mypage/payment")}>더 보기</More>
+              </BoxTitle>
+            </ShortBox>
+          {/* </LineBox> */}
+        </Detail>
+      </Container>
+      <Footer />
+      {/* <ChatBot /> */}
     </OutBox>
   );
 };
