@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 // import { UserContext } from "../context/UserStore";
 import GuildDetailMiddle from "../component/GuildDetailMiddle";
@@ -90,17 +90,19 @@ const HostProfile = styled.div`
 `;
 
 const GuildDetail = () => {
-  const guildNum = localStorage.getItem("guildNum");
+  // const guildNum = localStorage.getItem("guildNum");
+  const { guildNum } = useParams();
+  const guildNumAsNumber = parseInt(guildNum);
 
   const [detailInfo, setDetailInfo] = useState("");
 
   useEffect(() => {
     const detailInfo = async() => {
-      const response = await AxiosApi.guildDeInfoGet(guildNum);
+      const response = await AxiosApi.guildDeInfoGet(guildNumAsNumber);
       if(response.status === 200) setDetailInfo(response.data);
     };
     detailInfo();
-  },[]);
+  },[guildNumAsNumber]);
 
   console.log(guildNum);
   console.log(detailInfo);
@@ -122,7 +124,7 @@ const GuildDetail = () => {
         </div>
         <HostProfile className="host-profile" imageurl2={guild.leaderProfileList}></HostProfile>
       </Box>
-      <GuildDetailMiddle guildNum={guildNum} guildInfo={detailInfo}></GuildDetailMiddle>
+      <GuildDetailMiddle guildNum={guildNumAsNumber} guildInfo={detailInfo}></GuildDetailMiddle>
     </Container>
     ))}
     </>

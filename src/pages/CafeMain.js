@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { UserContext } from "../context/UserStore";
 import filterimg from "../images/filter.png";
@@ -115,6 +115,7 @@ const CafeMain = () => {
   const navigate = useNavigate();
   const context = useContext(UserContext);
   const { setRegion, setCafeNum } = context; // cafeNum 유저스토어에 저장하기
+  const { category } = useParams();
 
   const getRegion = localStorage.getItem("region");
   const getOption = localStorage.getItem("option");
@@ -134,15 +135,15 @@ const CafeMain = () => {
   useEffect(() => {
     const cafeInfo = async() => {
       let response;
-      if(getOption === "인기순") {
+      if(getRegion && (getOption === "인기순")) {
         response = await AxiosApi.cafeInfoGet(getRegion, "인기순");
-      } else if(getOption === "별점순") {
+      } else if(getRegion && (getOption === "별점순")) {
         response = await AxiosApi.cafeInfoGet(getRegion, "별점순");
-      } else response = await AxiosApi.cafeInfoGet(getRegion);
+      } else response = await AxiosApi.cafeInfoGet(category);
       if(response.status === 200) setAllCafeInfo(response.data);
     };
     cafeInfo();
-  }, [getRegion, getOption]);
+  }, [category, getRegion, getOption]);
 
   // 무한 스크롤 이벤트 처리
   const handleScroll = () => {
@@ -190,7 +191,7 @@ const CafeMain = () => {
   const selectCafe = (cafeNum) => {
     setCafeNum(cafeNum);
     localStorage.setItem("cafeNum", cafeNum);
-    navigate('/cafe/detail');
+    navigate(`/cafe/detail/${cafeNum}`);
   }
 
   return(

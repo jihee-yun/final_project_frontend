@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../context/UserStore";
 import address from "../images/location.png";
 import time from "../images/clock.png";
@@ -142,8 +142,9 @@ const CafeDetail = () => {
   const navigate = useNavigate();
   const context = useContext(UserContext);
   const { isSidebar } = context; 
+  const {cafeNum} = useParams();
   const userNum = localStorage.getItem("userNum");
-  const cafeNum = localStorage.getItem("cafeNum");
+  // const cafeNum = localStorage.getItem("cafeNum");
 
   // 카페 디테일 정보 받아오기
   const [detailInfo, setDetailInfo] = useState("");

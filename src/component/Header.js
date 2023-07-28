@@ -6,6 +6,7 @@ import Logo from "../images/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import MenuIcon from '@mui/icons-material/Menu';
 import NavBar from "./NavBar";
+import SearchIcon from '@mui/icons-material/Search';
 
 const OutBox = styled.div`
   width: 100%;
@@ -107,6 +108,32 @@ const HamburgerBtn = styled.button`
   border:none;
 `;
 
+const SearchContainer = styled.div`
+  width: 80%;
+  margin: 0 auto;
+  padding-top: 20px;
+  padding-bottom: 50px;
+`;
+
+const SearchBar = styled.div`
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+
+  input {
+    font-size: .7rem;
+    padding-left: 10px;
+    width: 100%;
+    height: 25px;
+    border-radius: 20px;
+    border: 1px solid lightgray;
+    box-shadow: 1px 1px 3px lightgray;
+    box-sizing: border-box;
+    outline: none;
+  }
+`;
+
 // const NavContainer = styled.nav `
 //   width: 100%;
     
@@ -161,7 +188,7 @@ const Header = () => {
     setGrantType, setAccessToken,setRefreshToken, setUserNum, userAuthority, setUserAuthoruty}  = useContext(UserContext);
   const navigate = useNavigate();
   const [isMobile, setIsMobile] = useState(false);
-  // const [keyword, setKeyword] = useState(""); // 검색어 입력을 위한 useState
+  const [keyword, setKeyword] = useState(""); // 검색어 입력을 위한 useState
 
   // 반응형 UI 적용
   useEffect(() => {
@@ -177,13 +204,13 @@ const Header = () => {
     };
   }, []);
 
-  // const onChangeCafeName = (e) => {
-  //   setKeyword(e.target.value);
-  // };
+  const onChangeCafeName = (e) => {
+    setKeyword(e.target.value);
+  };
 
-  // const swordPush = () => {
-  //   navigate(`/cafesearch/${keyword}`);
-  // };
+  const swordPush = () => {
+    navigate(`/cafesearch/${keyword}`);
+  };
 
 
   // 로그아웃 버튼 누르면 함수 실행
@@ -244,9 +271,26 @@ const Header = () => {
         {isMobile && (
             <HamburgerBtn className="HamburgerBtn" onClick={() => setIsSidebar("0")}>
               <MenuIcon style={{ fontSize: 30, marginRight: 10 }} />
-            </HamburgerBtn>
+            </HamburgerBtn> 
           )}
         </HeaderContainer>
+        <SearchContainer>
+        {isMobile && (
+        <SearchBar>
+           <input
+           type="text"
+           className="search-bar"
+           value={keyword}
+           onChange={onChangeCafeName}
+           placeholder="카페 이름 또는 메뉴를 검색해보세요"
+          />
+          <SearchIcon
+            style={{ fontSize: 30, fill: "#FFCFDA" }}
+            onClick={swordPush}
+          />
+        </SearchBar>
+        )}
+        </SearchContainer>  
         {!isMobile && (
         <NavBar />
         // <NavContainer>

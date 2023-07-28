@@ -156,9 +156,8 @@ const CafeReview = () => {
   const location = useLocation();
   const info = location.state;
   const cafeNum = info[0].id;
-
-  const userNumStr = localStorage.getItem("userNum");
-  const userNum = parseInt(userNumStr);
+  const userNum = localStorage.getItem("userNum");
+  // const userNum = parseInt(userNumStr);
 
   // 특정 카페 리뷰 조회
   const [cafeReviewInfo, setCafeReviewInfo] = useState("");
@@ -172,10 +171,7 @@ const CafeReview = () => {
   localStorage.setItem("reviewCategory", category);
   const selectCategory = localStorage.getItem("reviewCategory");
 
-
-  console.log(selectCategory);
-  console.log(cafeReviewInfo);
-  console.log(typeof userNum);
+  console.log(userNum);
 
   useEffect(() => {
     const cafeReview = async() => {
@@ -194,7 +190,7 @@ const CafeReview = () => {
   };
 
   const sendCafeNum = () => {
-    if(userNum !== 0) {
+    if(userNum) {
       navigate('/cafe/review/write', {state : {cafeNum}});
     } else {
       completeModal(true);
@@ -265,8 +261,8 @@ const CafeReview = () => {
     </ReviewBox>
      ))}
     </Box>
-    <Modal move={true} header="완료" open={isDeleteModalOpen} confirm={userNum !== 0 ? () => complete(1) : () => complete(2)} close={closeModal}>
-      <CompleteModal content={userNum !== 0 ? "리뷰가 삭제되었습니다" : "로그인이 필요합니다. 로그인 페이지로 이동할까요?"} maxCharacters={userNum !== 0 ? 0 : 11}/>
+    <Modal move={true} header="완료" open={isDeleteModalOpen} confirm={userNum ? () => complete(1) : () => complete(2)} close={closeModal}>
+      <CompleteModal content={userNum ? "리뷰가 삭제되었습니다" : "로그인이 필요합니다. 로그인 페이지로 이동할까요?"} maxCharacters={userNum ? 0 : 11}/>
     </Modal>
     </Container>
     <Footer />

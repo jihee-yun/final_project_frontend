@@ -159,7 +159,7 @@ const CafeSearch = () => {
     const cardClick = (cafeNum) => {
       setCafeNum(cafeNum);
     localStorage.setItem("cafeNum", cafeNum);
-    navigate('/cafe/detail');
+    navigate(`/cafe/detail/${cafeNum}`);
     };
 
 
