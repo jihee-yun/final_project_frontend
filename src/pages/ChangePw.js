@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import styled from "styled-components";
 import MessageModal from "../component/MessageModal";
 import Header from "../component/Header";
 import Footer from "../component/Footer";
 import AxiosApi from "../api/AxiosApi";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../context/UserStore";
+import Sidebar from "../component/Sidebar";
 
 const ChangePwBlock = styled.div`
     display: flex;
@@ -95,6 +97,15 @@ const ChangePw = () => {
 
     const [isConPw, setIsConPw] = useState(false);
     const [isPw, setIsPw] = useState(false);
+
+    const { isSidebar, setIsSidebar } = useContext(UserContext);
+
+    useEffect(() => {
+        
+        return (
+            setIsSidebar("-300px")
+        )
+    }, []);
 
     const onChangeNewPassword = (e) => {
         const passwordRex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{7,15}$/;
@@ -221,6 +232,7 @@ const ChangePw = () => {
         </div>
       </ChangePwBlock>
       <Footer />
+      {isSidebar && <Sidebar/>}
     </>
   );
 };
