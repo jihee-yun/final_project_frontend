@@ -82,7 +82,7 @@ function App() {
         <Route path='/event' element={<Event/>} />
         <Route path='/findpw' element={<FindPw/>}/>
         <Route path='/admin' element={<Admin/>}/>
-        <Route path='/adminInfo' element={<PrivateRoute element={<AdminInfo />}/>}/>
+        <Route path='/adminInfo' element={<AdminInfo />}/>
         <Route path='/couponStore' element={<PrivateRoute element={<CouponStore />}/>}/>
         <Route path='/pointStore' element={<PrivateRoute element={<PointStore />}/>}/>
         <Route path='/findId' element={<FindID/>}/>
