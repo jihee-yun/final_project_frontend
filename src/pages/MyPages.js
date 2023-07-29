@@ -167,6 +167,12 @@ const MyPage = () => {
     )
   }, []);
 
+  useEffect(() => {
+    if (!accessToken) {
+      navigate("/");
+    }
+  }, [accessToken, navigate]);
+  
   return(
     <OutBox>
       <Header />
