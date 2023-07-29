@@ -542,7 +542,7 @@ const AxiosApi = {
   profileImgUpdate: async (userNum, url, grantType, accessToken) => {
     const profileUrlData = {
       memberNum : userNum,
-      url : url,
+      profileImgUrl : url,
     }
     return await axios.post(`${KH_DOMAIN}/info/profileimgupdate`, profileUrlData, {
       headers: {
