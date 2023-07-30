@@ -226,7 +226,7 @@ const CouponStore = () => {
     navigate('/couponPayment', {state : {filterCoupon}});
   };
 
-  if (!isLogin) {
+  if (!accessToken) {
     navigate('/memberlogin');
     return null;
   }
