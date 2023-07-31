@@ -47,7 +47,7 @@ const CafeLike = ({cafeNum, memNum}) => {
     }
     likeState();
   }
-  }, [cafeNum, memNum, grantType, accessToken])
+  }, [cafeNum, memNum, grantType, accessToken, userAuthority])
 
   const complete = () => {
     navigate('/memberlogin');
