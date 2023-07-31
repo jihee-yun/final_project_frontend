@@ -450,7 +450,7 @@ const BusinessCafe = () => {
                 <CafeImg src={cafe.thumbnail} alt="CafeImg"></CafeImg>
                 <CafeRowBox>
                   <CafeName>{cafe.cafeName}</CafeName>
-                  <More onClick={()=>navigate("/businesspage/cafe")}>자세히 보기</More>
+                  <More onClick={()=>navigate(`/cafe/detail/${cafe.id}`)}>자세히 보기</More>
                 </CafeRowBox>
                 <CafeRegion>지역: {cafe.region}</CafeRegion>
                 <CafeIntro>소개: {cafe.intro}</CafeIntro>  
