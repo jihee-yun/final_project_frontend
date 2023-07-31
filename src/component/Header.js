@@ -2,7 +2,6 @@ import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../context/UserStore";
 import styled from "styled-components";
 import Logo from "../images/logo.png";
-// import mobileLogo from "../images/.PNG";
 import { Link, useNavigate } from "react-router-dom";
 import MenuIcon from '@mui/icons-material/Menu';
 import NavBar from "./NavBar";
@@ -249,26 +248,6 @@ const Header = () => {
         </SearchContainer>  
         {!isMobile && (
         <NavBar />
-        // <NavContainer>
-        //   <ul className="Nav">
-        //     <Navlink to="/cafe">카페 찾기</Navlink>
-        //     <Navlink to="/guild">길드</Navlink>
-        //     <Navlink to="/event">이벤트</Navlink>
-        //     <Navlink to="/couponStore">상점</Navlink>
-        //     <div className="search">
-        //       <input
-        //         type="text"
-        //         className="search-bar"
-        //         value={keyword}
-        //         onChange={onChangeCafeName}
-        //       />
-        //       <SearchIcon
-        //         style={{ fontSize: 30, marginRight: 10, fill: "#646b8c" }}
-        //         onClick={swordPush}
-        //       />
-        //     </div>
-        //   </ul>
-        // </NavContainer>
       )}
     </OutBox>
   );

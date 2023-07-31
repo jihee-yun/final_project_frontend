@@ -5,6 +5,7 @@ import slideImg from "../images/slideImg.jpg";
 import slideImg2 from "../images/slideImg2.jpg";
 import slideImg3 from "../images/slideImg3.jpg";
 import slideImg4 from "../images/slideImg4.jpg";
+import mainimg3 from "../images/mainimg3.png"
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -12,11 +13,18 @@ import { Link } from 'react-router-dom';
 
 const Container = styled.div`
 width: 90%;
-height: 500px;
+height: auto;
 margin-top: 20px;
 display: flex;
 align-items: center;
 flex-direction: column;
+
+h1 {
+    font-family: 'Pretendard-Regular';
+    font-weight: 800; 
+    font-size: 3rem;
+    color: #424242;
+}
 `;
 
 const SwiperContainer = styled.div`
@@ -124,6 +132,31 @@ const Footer = styled.div`
     color: #c2c0e0;
 `;
 
+const TopContainer = styled.div`
+display: flex;
+`
+
+
+const Title = styled.div`
+margin-top: -30px;
+margin-left: 15px;
+
+h1 {
+    font-family: 'Pretendard-Regular';
+    font-weight: 800; 
+    font-size: 3rem;
+    color: #424242;
+}
+
+`;
+
+const SideImg =styled.div`
+ .img {
+    width: 60px;
+    height: 60px;
+}
+`;
+
 const TestSwiper = () => {
 
     useEffect(() => {
@@ -153,7 +186,14 @@ const TestSwiper = () => {
   return (
     <>
     <Container>
-    <h2 className="title">추천 리스트</h2>
+    <TopContainer>
+        <SideImg>
+        <img src={mainimg3} className="img" />
+        </SideImg>
+        <Title>
+            <h1>추천 리스트</h1>
+        </Title>
+        </TopContainer>
     <SwiperContainer className="swiper-container">
       <SwiperWrapper className="swiper-wrapper">
      

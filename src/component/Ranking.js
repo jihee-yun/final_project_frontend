@@ -3,13 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserStore";
 import { styled } from "styled-components";
 import AxiosApi from "../api/AxiosApi";
+import mainimg2 from "../images/mainimg2.png"
 
 const Container = styled.div`
     width: 100%;
-    margin-top: 20px;
+    margin-top: 40px;
     display: flex;
-    align-items: center;
     flex-direction: column;
+    align-items: center;
+    height: auto;
 
     .RankingContainer {
         @media (max-width: 768px) {
@@ -17,7 +19,6 @@ const Container = styled.div`
         }
         display: flex;
         width: 95%;
-
         gap: 10px 1%;
         flex-wrap: wrap;
         justify-content: center;
@@ -34,6 +35,31 @@ const Container = styled.div`
         overflow: hidden;
         box-shadow: 0px 1px 3px black;
     }
+`;
+
+const TopContainer = styled.div`
+display: flex;
+justify-content: flex-start;
+`;
+
+const Title = styled.div`
+margin-top: -30px;
+margin-left: 15px;
+
+h1 {
+    font-family: 'Pretendard-Regular';
+    font-weight: 800; 
+    font-size: 3rem;
+    color: #424242;
+}
+
+`;
+
+const SideImg =styled.div`
+ .img {
+    width: 70px;
+    height: 70px;
+}
 `;
 
 const ImgContainer = styled.div`
@@ -122,10 +148,15 @@ const Ranking = () => {
       
     return(
         <>
-        <Container >
-        <div className="title">
-            <h2 >실시간 인기 카페 확인하기</h2>
-            </div>
+        <Container>
+        <TopContainer>
+        <SideImg>
+        <img src={mainimg2} className="img" />
+        </SideImg>
+        <Title>
+            <h1>실시간 인기 카페 확인하기</h1>
+        </Title>
+        </TopContainer>
             <div className="RankingContainer">
             {cafeRankingInfo.map(ranking => (
                 <div className="RankingItem" key={ranking.id}
