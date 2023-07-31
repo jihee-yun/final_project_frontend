@@ -162,6 +162,7 @@ const InfoChangeButton = styled.button`
 
 
 const BusinessCafe = () => {
+  const navigate = useNavigate();
   // useContext 저장값 불러오기
   const {isSidebar, setIsSidebar} = useContext(UserContext);
   // 로컬 스토리지 저장값 불러오기
@@ -257,6 +258,7 @@ const BusinessCafe = () => {
       if (rsp.status) {
         if (rsp.data === true) {
           console.log("카페 생성 성공: ", rsp.data);
+          navigate("/businesspage");
         } else {
           console.log("통신은 성공, 카페 생성 실패", rsp.data);
         }

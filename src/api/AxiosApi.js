@@ -619,13 +619,13 @@ const AxiosApi = {
     const cafeData = {
       memberNum : userNum,
       cafeName : cafeName,
-      selectedRegion : selectedRegion,
-      cafeAddress : cafeAddress,
-      cafeTime : cafeTime,
-      cafePhone : cafePhone,
-      cafeIntro : cafeIntro,
-      cafeDetail : cafeDetail,
-      url : url
+      region : selectedRegion,
+      address : cafeAddress,
+      operatingTime : cafeTime,
+      tel : cafePhone,
+      intro : cafeIntro,
+      detailIntro : cafeDetail,
+      thumbnail : url
     }
     return await axios.post(`${KH_DOMAIN}/cafe/cafecreate`, cafeData, {
       headers: {
