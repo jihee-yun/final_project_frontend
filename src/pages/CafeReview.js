@@ -236,7 +236,7 @@ const CafeReview = () => {
     <div className="count-review"><p>총 {count}개의 후기</p></div>
     <div className="top">
     <AvgStar avgStar={star}/>
-    {userAuthority === 'ROLE_USER' ?  
+    {userAuthority === 'ROLE_USER' || !userAuthority ?  
     <button className="write" onClick={sendCafeNum}>후기 작성</button> :
     <button className="write" style={{ backgroundColor: "darkgray", cursor: "none"}} >후기 작성</button>} 
     </div>
