@@ -84,23 +84,19 @@ const SelectBox = styled.div`
   justify-content: center;
 `;
 const TextBox = styled.p`
-  margin-left: 20px;
   text-align: center;
-  @media (max-width: 768px) {
-    text-align: center;
-    margin: 0;
-  }
 `;
 // 세부 페이지 중앙 부분
 const ContentBox = styled.div`
   width: 90%;
   min-width: 330px;
+  /* min-height: 600px; */
   margin-top: 3%;
   border: 1px solid #F3E1E1;
   border-radius: 15px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-around;
 `;
 
 // 세부 입력 박스
@@ -176,14 +172,14 @@ const SpecificBox = styled.div`
   }
 `;
 // 길드 이미지(썸네일)
-const GuildImg = styled.img`
+const CafeImg = styled.img`
   width: 100%;
   height: 200px;
   border-radius: 15px 15px 0 0;
   overflow: hidden;
 `;
 // 그냥 가로 박스
-const GuildRowBox = styled.div`
+const CafeRowBox = styled.div`
   width: 90%;
   height: 30px;
   display: flex;
@@ -194,7 +190,7 @@ const GuildRowBox = styled.div`
   margin-bottom: -10px;
 `;
 // 길드 이름
-const GuildName = styled.p`
+const CafeName = styled.p`
 
 `;
 // 더보기 버튼
@@ -206,26 +202,14 @@ const More = styled.p`
   margin-right: 1%;
   cursor: pointer;
 `;
-// 길드 카테고리
-const GuildCategory = styled.p`
-  margin-right: auto; 
-  margin-bottom: -5px;
-  margin-left: 5%;
-`;
 // 길드 지역
-const GuildRegion = styled.p`
-  margin-right: auto;
-  margin-bottom: -5px;
-  margin-left: 5%;
-`;
-// 길드 인원수
-const GuildMemberNum = styled.p`
+const CafeRegion = styled.p`
   margin-right: auto;
   margin-bottom: -5px;
   margin-left: 5%;
 `;
 // 길드 소개
-const GuildIntro = styled.p`
+const CafeIntro = styled.p`
   margin-right: auto;
   margin-left: 5%;
 `;
@@ -463,13 +447,13 @@ const BusinessCafe = () => {
           <ContentBox>
             {memberInfo && memberInfo.map((cafe, index) => (
               <SpecificBox key={index}>
-                <GuildImg src={cafe.thumbnail} alt="CafeImg"></GuildImg>
-                <GuildRowBox>
-                  <GuildName>{cafe.cafeName}</GuildName>
+                <CafeImg src={cafe.thumbnail} alt="CafeImg"></CafeImg>
+                <CafeRowBox>
+                  <CafeName>{cafe.cafeName}</CafeName>
                   <More onClick={()=>navigate("/businesspage/cafe")}>자세히 보기</More>
-                </GuildRowBox>
-                <GuildRegion>지역: {cafe.region}</GuildRegion>
-                <GuildIntro>소개: {cafe.intro}</GuildIntro>  
+                </CafeRowBox>
+                <CafeRegion>지역: {cafe.region}</CafeRegion>
+                <CafeIntro>소개: {cafe.intro}</CafeIntro>  
               </SpecificBox>
             ))}
           </ContentBox>
