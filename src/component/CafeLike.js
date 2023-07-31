@@ -19,12 +19,13 @@ const CafeLike = ({cafeNum}) => {
   const grantType = localStorage.getItem("grantType");
   const accessToken = localStorage.getItem("accessToken");
   const memNum = localStorage.getItem("userNum");
+  const userAuthority = localStorage.getItem("userAuthority");
 
   const [isModalOpen, setModalOpen] = useState(false);
   const [currentState, setCurrentState] = useState("false")
 
   const changeLike = async(cafeNum, memNum) => {
-    if(memNum){
+    if(memNum && userAuthority === 'ROLE_USER'){
       const response = await AxiosApi.cafeLike(cafeNum, memNum, grantType, accessToken);
       console.log(response.data);
       if(response.data === true) {
@@ -37,7 +38,7 @@ const CafeLike = ({cafeNum}) => {
 
   useEffect(() => {
     const likeState = async() => {
-      if(memNum) {
+      if(memNum && userAuthority === 'ROLE_USER') {
         const response = await AxiosApi.getLikeState(cafeNum, memNum, grantType, accessToken)
         if(response.data === true) {
           setCurrentState("true");
