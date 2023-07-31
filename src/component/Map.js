@@ -23,13 +23,14 @@ display: flex;
 
 
 const Title = styled.div`
-margin-top: -30px;
+margin-top: -20px;
 margin-left: 15px;
+margin-bottom: 15px;
 
 h1 {
     font-family: 'Pretendard-Regular';
     font-weight: 800; 
-    font-size: 3rem;
+    font-size: 2rem;
     color: #424242;
 }
 
@@ -37,8 +38,8 @@ h1 {
 
 const SideImg =styled.div`
  .img {
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
 }
 `;
 

@@ -14,17 +14,10 @@ import { Link } from 'react-router-dom';
 const Container = styled.div`
 width: 90%;
 height: auto;
-margin-top: 20px;
+margin-top: 100px;
 display: flex;
 align-items: center;
 flex-direction: column;
-
-h1 {
-    font-family: 'Pretendard-Regular';
-    font-weight: 800; 
-    font-size: 3rem;
-    color: #424242;
-}
 `;
 
 const SwiperContainer = styled.div`
@@ -138,24 +131,17 @@ display: flex;
 
 
 const Title = styled.div`
-margin-top: -30px;
-margin-left: 15px;
+margin-bottom: 15px;
 
 h1 {
     font-family: 'Pretendard-Regular';
     font-weight: 800; 
-    font-size: 3rem;
+    font-size: 2rem;
     color: #424242;
 }
 
 `;
 
-const SideImg =styled.div`
- .img {
-    width: 60px;
-    height: 60px;
-}
-`;
 
 const TestSwiper = () => {
 
@@ -187,9 +173,6 @@ const TestSwiper = () => {
     <>
     <Container>
     <TopContainer>
-        <SideImg>
-        <img src={mainimg3} className="img" />
-        </SideImg>
         <Title>
             <h1>추천 리스트</h1>
         </Title>

@@ -7,7 +7,7 @@ import mainimg2 from "../images/mainimg2.png"
 
 const Container = styled.div`
     width: 100%;
-    margin-top: 40px;
+    margin-top: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -43,23 +43,15 @@ justify-content: flex-start;
 `;
 
 const Title = styled.div`
-margin-top: -30px;
-margin-left: 15px;
+margin-bottom: 15px;
 
 h1 {
     font-family: 'Pretendard-Regular';
     font-weight: 800; 
-    font-size: 3rem;
+    font-size: 2rem;
     color: #424242;
 }
 
-`;
-
-const SideImg =styled.div`
- .img {
-    width: 70px;
-    height: 70px;
-}
 `;
 
 const ImgContainer = styled.div`
@@ -150,9 +142,6 @@ const Ranking = () => {
         <>
         <Container>
         <TopContainer>
-        <SideImg>
-        <img src={mainimg2} className="img" />
-        </SideImg>
         <Title>
             <h1>실시간 인기 카페 확인하기</h1>
         </Title>
