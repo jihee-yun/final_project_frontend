@@ -7,13 +7,14 @@ import mainimg from "../images/mainimg.png"
 const Container = styled.div`
 width: 90%;
 height: auto;
-margin-top: 20px;
+margin-top: 60px;
 border-radius: 10px;
 box-sizing: border-box;
 display: flex;
 flex-direction: column;
 overflow: hidden;
 align-items: center;
+
 
 `;
 
