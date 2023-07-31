@@ -138,12 +138,13 @@ const SearchBar = styled.div`
 
 const Header = () => {
   const { isSidebar, setIsSidebar, setIsLogin, setUserName, 
-    setGrantType, setAccessToken,setRefreshToken, setUserNum, userAuthority, setUserAuthoruty}  = useContext(UserContext);
+    setGrantType, setAccessToken,setRefreshToken, setUserNum, setUserAuthoruty}  = useContext(UserContext);
   const navigate = useNavigate();
   const [isMobile, setIsMobile] = useState(false);
   const [keyword, setKeyword] = useState(""); // 검색어 입력을 위한 useState
   const isLogin = localStorage.getItem("isLogin");
   const userName = localStorage.getItem("userName");
+  const userAuthority = localStorage.getItem("userAuthority");
 
   // 반응형 UI 적용
   useEffect(() => {

@@ -633,6 +633,15 @@ const AxiosApi = {
       }
     });
   },
+  // 카페 정보 불러오기
+  getMemberCafeInfo: async (memberNum, grantType, accessToken) => {
+    return await axios.get(`${KH_DOMAIN}/cafe/memberinfo?membernum=${memberNum}`, {
+      headers: {
+        Authorization: `${grantType} ${accessToken}`
+      }
+    });
+  },
+
   // 이메일 인증
   emailCheck: async(email) => {
     const mailData = {
