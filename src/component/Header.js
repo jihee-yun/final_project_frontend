@@ -137,55 +137,6 @@ const SearchBar = styled.div`
   }
 `;
 
-// const NavContainer = styled.nav `
-//   width: 100%;
-    
-//   a {
-//     text-decoration: none;
-//     color: #646b8c;
-//     position: relative;
-//   }
-//   .Nav {
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//     gap: 10px;
-//     text-align: center;
-//     padding-right: 20px;
-//     height: 60px;
-//   }
-//   .search {
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//     gap: 10px;
-//     width: 200px;
-//   }
-//   .search-bar {
-//     width: 100%;
-//     height: 30px;
-//     border-radius: 40px;
-//     border: solid #646b8c;
-//     padding: 0 15px;
-//   }
-// `;
-// const Navlink = styled(Link) `
-//   width: 150px;
-//   height: 40px;
-//   line-height: 40px;
-//   font-size: 1rem;
-//   font-weight: bold;
-//   color: white;
-
-//   &:hover {
-//     color: #000;    
-//   }
-//   .MyPage {
-//     font-size: 2.5rem;
-//   }
-// `;
-
-
 const Header = () => {
   const { isSidebar, setIsSidebar, setIsLogin, setUserName, 
     setGrantType, setAccessToken,setRefreshToken, setUserNum, userAuthority, setUserAuthoruty}  = useContext(UserContext);
@@ -290,7 +241,7 @@ const Header = () => {
            placeholder="카페 이름 또는 메뉴를 검색해보세요"
           />
           <SearchIcon
-            style={{ fontSize: 30, fill: "#FFCFDA" }}
+            style={{ fontSize: 30, fill: "#FFCFDA", marginLeft: '10px' }}
             onClick={swordPush}
           />
         </SearchBar>
