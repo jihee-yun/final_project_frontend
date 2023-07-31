@@ -8,6 +8,7 @@ import slideImg4 from "../images/slideImg4.jpg";
 
 import "swiper/css";
 import "swiper/css/pagination";
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
 width: 90%;
@@ -181,7 +182,7 @@ const TestSwiper = () => {
             </p>
             <Footer>
               <div>01/02</div>
-              <a href="http://localhost:3000/cafe/detail/4">READ MORE</a>
+              <Link to="/cafe/detail/4">READ MORE</Link>
            </Footer>
         </SlideContent>
         </SwiperSlide>
@@ -211,7 +212,7 @@ const TestSwiper = () => {
             </p>
             <Footer>
               <div>02/02</div>
-              <a href="http://localhost:3000/cafe/detail/5">READ MORE</a>
+              <Link to="/cafe/detail/5">READ MORE</Link>
            </Footer>
         </SlideContent>
         </SwiperSlide>
