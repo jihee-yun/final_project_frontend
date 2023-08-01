@@ -1,10 +1,10 @@
 import axios from "axios";
-const KH_DOMAIN = "http://localhost:8111";
+const DOMAIN = "http://localhost:8111";
 
 const AxiosApi = {
   // 지역별 카페 정보 조회
   cafeInfoGet: async(region, sortingOption) => {
-    let url = KH_DOMAIN + `/cafe/region?region=${region}`;
+    let url = DOMAIN + `/cafe/region?region=${region}`;
     if(sortingOption) {
       url += `&sortingOption=${sortingOption}`;
     }
@@ -12,19 +12,19 @@ const AxiosApi = {
   },
   // 카페 디테일 정보 조회
   detailInfoGet: async(cafeNum) => {
-    return await axios.get(KH_DOMAIN + `/cafe/detail?cafeNum=${cafeNum}`);
+    return await axios.get(DOMAIN + `/cafe/detail?cafeNum=${cafeNum}`);
   },
   // 카페 이미지 리스트 조회
   imgListGet: async(cafeNum) => {
-    return await axios.get(KH_DOMAIN + `/cafe/img?cafeNum=${cafeNum}`);
+    return await axios.get(DOMAIN + `/cafe/img?cafeNum=${cafeNum}`);
   },
   // 길드 전체 리스트 조회
   guildInfoGet: async(guildList) => {
-    return await axios.get(KH_DOMAIN + `/guild/all?guildList=${guildList}`)
+    return await axios.get(DOMAIN + `/guild/all?guildList=${guildList}`)
   },
   // 특정 길드 디테일 정보 조회
   guildDeInfoGet: async(guildNum) => {
-    return await axios.get(KH_DOMAIN + `/guild/detail?guildNum=${guildNum}`)
+    return await axios.get(DOMAIN + `/guild/detail?guildNum=${guildNum}`)
   },
   // 새로운 길드 생성
   createNewGuild: async(grantType, accessToken, memNum, guildName, guildIntro, guildDetailIntro, meetDay, category, member, region, url) => {
@@ -39,7 +39,7 @@ const AxiosApi = {
       region : region,
       thumbnail : url
     };
-    return await axios.post(KH_DOMAIN + "/guild/newGuild", guildData, {
+    return await axios.post(DOMAIN + "/guild/newGuild", guildData, {
       headers: {
         Authorization: `${grantType} ${accessToken}`
       }
@@ -47,7 +47,7 @@ const AxiosApi = {
   },
   // 길드 가입 회원 확인하기
   isMemberGet: async(guildNum, userNum) => {
-    return await axios.get(KH_DOMAIN + `/guild/isMember?guildNum=${guildNum}&userNum=${userNum}`)
+    return await axios.get(DOMAIN + `/guild/isMember?guildNum=${guildNum}&userNum=${userNum}`)
   },
   //길드 가입하기
   joinGuild: async(guildNum, userNum, grantType, accessToken) => {
@@ -55,7 +55,7 @@ const AxiosApi = {
       guildNum: guildNum,
       userNum: userNum
     }
-    return await axios.post(KH_DOMAIN + `/guild/join`, data, {
+    return await axios.post(DOMAIN + `/guild/join`, data, {
       headers: {
         Authorization: `${grantType} ${accessToken}`
       }
@@ -71,7 +71,7 @@ const AxiosApi = {
       url1: url1,
       url2: url2
     }
-    return await axios.post(KH_DOMAIN + `/review/newReview`, reviewData, {
+    return await axios.post(DOMAIN + `/review/newReview`, reviewData, {
       headers: {
         Authorization: `${grantType} ${accessToken}`
       }
@@ -79,7 +79,7 @@ const AxiosApi = {
   },
   // 특정 카페 리뷰 조회
   cafeReviewGet: async(cafeNum, category) => {
-    return await axios.get(KH_DOMAIN  + `/review/cafeReview?cafeNum=${cafeNum}&category=${category}`);
+    return await axios.get(DOMAIN  + `/review/cafeReview?cafeNum=${cafeNum}&category=${category}`);
   },
   // 리뷰 수정
   editReview: async(cafeNum, reviewNum, content, editScore, url1, url2, grantType, accessToken) => {
@@ -91,7 +91,7 @@ const AxiosApi = {
       url1: url1,
       url2: url2 
     }
-    return await axios.post(KH_DOMAIN + `/review/edit`, data, {
+    return await axios.post(DOMAIN + `/review/edit`, data, {
       headers: {
         Authorization: `${grantType} ${accessToken}`
       }
@@ -103,7 +103,7 @@ const AxiosApi = {
       reviewId: id,
       cafeNum: cafeNum
     }
-    return await axios.post(KH_DOMAIN + `/review/delete`, data, {
+    return await axios.post(DOMAIN + `/review/delete`, data, {
       headers: {
         Authorization: `${grantType} ${accessToken}`
       }
@@ -115,7 +115,7 @@ const AxiosApi = {
       memNum: memNum,
       reviewId: id
     }
-    return await axios.post(KH_DOMAIN + `/review/like`, data, {
+    return await axios.post(DOMAIN + `/review/like`, data, {
       headers: {
         Authorization: `${grantType} ${accessToken}`
       }
@@ -127,7 +127,7 @@ const AxiosApi = {
       cafeNum: cafeNum,
       memNum: memNum
     }
-    return await axios.post(KH_DOMAIN + `/cafe/like`, data, {
+    return await axios.post(DOMAIN + `/cafe/like`, data, {
       headers: {
         Authorization: `${grantType} ${accessToken}`
       }
@@ -135,7 +135,7 @@ const AxiosApi = {
   },
   // 카페 좋아요 상태값 관리
   getLikeState: async(cafeNum, memNum, grantType, accessToken) => {
-    return await axios.get(KH_DOMAIN + `/cafe/getLike?cafeNum=${cafeNum}&memNum=${memNum}`, {
+    return await axios.get(DOMAIN + `/cafe/getLike?cafeNum=${cafeNum}&memNum=${memNum}`, {
       headers: {
         Authorization: `${grantType} ${accessToken}`
       }
@@ -144,7 +144,7 @@ const AxiosApi = {
 
   // 회원가입 여부 
   checkId : async(userId) => {
-    return await axios.get(KH_DOMAIN + `/user/check?userId=${userId}`);
+    return await axios.get(DOMAIN + `/user/check?userId=${userId}`);
   },
   
     // 회원가입
@@ -160,7 +160,7 @@ const AxiosApi = {
             gender : gender,
             authority : authority
     };
-        return await axios.post(KH_DOMAIN + "/user/new", member);
+        return await axios.post(DOMAIN + "/user/new", member);
     },
 
     // 로그인
@@ -170,7 +170,7 @@ const AxiosApi = {
         password: password
       };
 
-    return await axios.post(KH_DOMAIN + "/user/login", loginData)
+    return await axios.post(DOMAIN + "/user/login", loginData)
   },
 
 
@@ -180,7 +180,7 @@ const AxiosApi = {
       memberId : memberId,
       newPassword : newPassword
     }
-    return await axios.post(KH_DOMAIN + "/member/changePw", data);
+    return await axios.post(DOMAIN + "/member/changePw", data);
   },
 
 
@@ -192,7 +192,7 @@ const AxiosApi = {
         memberId : memberId,
         name : name
     };
-    return await axios.post(KH_DOMAIN + "/member/findPw", data);
+    return await axios.post(DOMAIN + "/member/findPw", data);
   },
 
     // 아이디 찾기
@@ -201,29 +201,29 @@ const AxiosApi = {
         name : name,
         email : email
       };
-      return await axios.post(KH_DOMAIN + "/member/findId", data);
+      return await axios.post(DOMAIN + "/member/findId", data);
     },
 
     // 사용자 삭제
     deleteUsers : async(memberNum) => {
-        return await axios.delete(KH_DOMAIN + `/admin/usermanage/delete/${memberNum}`);
+        return await axios.delete(DOMAIN + `/admin/usermanage/delete/${memberNum}`);
     },
 
     // 리뷰 삭제
     deleteReviews : async(reviewNum) => {
-        return await axios.delete(KH_DOMAIN + `/admin/review/delete/${reviewNum}`);
+        return await axios.delete(DOMAIN + `/admin/review/delete/${reviewNum}`);
     },
 
     // 신고 삭제
     deleteReports : async(reportNum) => {
-      return await axios.delete(KH_DOMAIN + `/admin/report/delete/${reportNum}`);
+      return await axios.delete(DOMAIN + `/admin/report/delete/${reportNum}`);
     },
 
     // 사용자 정보 수정
     saveUserInfo : async(userInfoToSave) => {
       const {memberNum} = userInfoToSave;
       try {
-        return await axios.put(KH_DOMAIN + `/admin/usermanage/modify/${memberNum}`, userInfoToSave);
+        return await axios.put(DOMAIN + `/admin/usermanage/modify/${memberNum}`, userInfoToSave);
       } catch(error) {
         throw error;
       }
@@ -231,22 +231,22 @@ const AxiosApi = {
     
     // 신고 전체 조회
     reportGetAll: async () => {
-      return await axios.get(KH_DOMAIN + '/admin/report/all');
+      return await axios.get(DOMAIN + '/admin/report/all');
     },
 
     // 신고 내용 조회
     reportGetContents : async(reportNum) => {
-      return await axios.get(KH_DOMAIN + `/admin/report/getContents?reportNum=${reportNum}`)
+      return await axios.get(DOMAIN + `/admin/report/getContents?reportNum=${reportNum}`)
     },
 
     // 리뷰 전체 조회
     reviewGetAll : async() => {
-      return await axios.get(KH_DOMAIN + `/admin/review/all`);
+      return await axios.get(DOMAIN + `/admin/review/all`);
     },
 
     // 사용자 조회
     userGetAll : async() => {
-      return await axios.get(KH_DOMAIN + `/admin/usermanage`);
+      return await axios.get(DOMAIN + `/admin/usermanage`);
     },
 
     // 관리자 로그인
@@ -255,7 +255,7 @@ const AxiosApi = {
         adminId : adminId,
         password : password
       }
-      return await axios.post(KH_DOMAIN + `/admin/login`, adminData);
+      return await axios.post(DOMAIN + `/admin/login`, adminData);
     },
 
     // 관리자 등록
@@ -269,17 +269,17 @@ const AxiosApi = {
           gender : gender
       };
 
-      return await axios.post(KH_DOMAIN + `/admin/register`, admin);
+      return await axios.post(DOMAIN + `/admin/register`, admin);
     },
 
   // 챌린지 조회
   challengeGet: async(chList) => {
-    return await axios.get(KH_DOMAIN + `/challenge/chList?chList=${chList}`);
+    return await axios.get(DOMAIN + `/challenge/chList?chList=${chList}`);
   },
 
   // 쿠폰 조회
   getCoupon: async(couponget) => {
-    return await axios.get(KH_DOMAIN + `/couponstore/couponget?couponget=${couponget}`);
+    return await axios.get(DOMAIN + `/couponstore/couponget?couponget=${couponget}`);
   },
 
   // 이벤트 포인트 적립
@@ -289,7 +289,7 @@ const AxiosApi = {
       point: winning,
       pointType: pointType
     };
-    return await axios.post(KH_DOMAIN + "/point/pointadd", points, {
+    return await axios.post(DOMAIN + "/point/pointadd", points, {
       headers: {
         Authorization: `${grantType} ${accessToken}`
       }
@@ -298,7 +298,7 @@ const AxiosApi = {
 
   // 내 정보 조회
   myInfoGet: async(memberNum, grantType, accessToken) => {
-    return await axios.get(KH_DOMAIN + `/member/myinfo?memberNum=${memberNum}`, {
+    return await axios.get(DOMAIN + `/member/myinfo?memberNum=${memberNum}`, {
       headers: {
         Authorization: `${grantType} ${accessToken}`
       }
@@ -311,7 +311,7 @@ const AxiosApi = {
       challengeId: challengeId,
       memberId: memberId
     };
-    return await axios.post(KH_DOMAIN + "/mychallenge/apply", data, {
+    return await axios.post(DOMAIN + "/mychallenge/apply", data, {
       headers: {
         Authorization: `${grantType} ${accessToken}`
       }
@@ -320,7 +320,7 @@ const AxiosApi = {
 
   // 마이챌린지 조회
   mychallengeGet: async(userNum, challengeId, grantType, accessToken) => {
-    return await axios.get(KH_DOMAIN + `/mychallenge/get?userNum=${userNum}&challengeId=${challengeId}`, {
+    return await axios.get(DOMAIN + `/mychallenge/get?userNum=${userNum}&challengeId=${challengeId}`, {
       headers: {
         Authorization: `${grantType} ${accessToken}`
       }
@@ -333,7 +333,7 @@ const AxiosApi = {
       memberNum: memberNum,
       couponId: couponId
     };
-    return await axios.post(KH_DOMAIN + "/couponstore/couponpay", data, {
+    return await axios.post(DOMAIN + "/couponstore/couponpay", data, {
       headers: {
         Authorization: `${grantType} ${accessToken}`
       }
@@ -342,7 +342,7 @@ const AxiosApi = {
 
   // 인기 카페 4곳 조회
   fourCafeGet: async(fourCafes) => {
-    return await axios.get(KH_DOMAIN + `/cafe/fourCafes?fourCafes=${fourCafes}`)
+    return await axios.get(DOMAIN + `/cafe/fourCafes?fourCafes=${fourCafes}`)
   },
 
   // 룰렛 하루에 한번
@@ -350,7 +350,7 @@ const AxiosApi = {
     const data = {
       memberNum: memberNum
     }
-    return await axios.post(KH_DOMAIN + "/roulette/spin", data, {
+    return await axios.post(DOMAIN + "/roulette/spin", data, {
       headers: {
         Authorization: `${grantType} ${accessToken}`
       }
@@ -362,7 +362,7 @@ const AxiosApi = {
     const data = {
       memberNum: memberNum
     } 
-    return await axios.post(KH_DOMAIN+ `/roulette/history`, data, {
+    return await axios.post(DOMAIN+ `/roulette/history`, data, {
       headers: {
         Authorization: `${grantType} ${accessToken}`
       }
@@ -372,17 +372,17 @@ const AxiosApi = {
 
   // 랭킹정보 불러오기
     MainInfoGet: async(rankingcard) => {
-        return await axios.get(KH_DOMAIN + `/main/rankingcard`)
+        return await axios.get(DOMAIN + `/main/rankingcard`)
     },
 
     // 자주묻는 질문 불러오기
     QnaGet: async(category) => {
-      return await axios.get(KH_DOMAIN + `/auth/qnalist/get-qna?category=${category}`)
+      return await axios.get(DOMAIN + `/auth/qnalist/get-qna?category=${category}`)
   },
 
   // 리뷰 전체 다 불러오기(테스트용)
   reviewGet: async (userNum, grantType, accessToken) => {
-    return await axios.get(`http://localhost:8111/review/getbynum?usernum=${userNum}`, {
+    return await axios.get(DOMAIN + `/review/getbynum?usernum=${userNum}`, {
       headers: {
         Authorization: `${grantType} ${accessToken}`
       }
@@ -396,7 +396,7 @@ const AxiosApi = {
       startDate : startDate,
       endDate : endDate
     }
-    return await axios.post(`${KH_DOMAIN}/review/getbynumdate`, checkData, {
+    return await axios.post(DOMAIN + `/review/getbynumdate`, checkData, {
       headers: {
         Authorization: `${grantType} ${accessToken}`
       }
@@ -405,7 +405,7 @@ const AxiosApi = {
 
   // 유저 번호로 챌린지 관련 정보 전체 조회
   getMemberChallengeInfo: async (userNum, grantType, accessToken) => {
-    return await axios.get(`${KH_DOMAIN}/challenge/getbynum?usernum=${userNum}`, {
+    return await axios.get(DOMAIN + `/challenge/getbynum?usernum=${userNum}`, {
       headers: {
         Authorization: `${grantType} ${accessToken}`
       }
@@ -419,7 +419,7 @@ const AxiosApi = {
       startDate : startDate,
       endDate : endDate
     }
-    return await axios.post(`${KH_DOMAIN}/event/getbynumdate`, checkData, {
+    return await axios.post(DOMAIN + `/event/getbynumdate`, checkData, {
       headers: {
         Authorization: `${grantType} ${accessToken}`
       }
@@ -432,7 +432,7 @@ const AxiosApi = {
       startDate : startDate,
       endDate : endDate
     }
-    return await axios.post(`${KH_DOMAIN}/point/getbynumdate`, checkData, {
+    return await axios.post(DOMAIN + `/point/getbynumdate`, checkData, {
       headers: {
         Authorization: `${grantType} ${accessToken}`
       }
@@ -445,7 +445,7 @@ const AxiosApi = {
       startDate : startDate,
       endDate : endDate
     }
-    return await axios.post(`${KH_DOMAIN}/info/reportgetbynumdate`, checkData, {
+    return await axios.post(DOMAIN + `/info/reportgetbynumdate`, checkData, {
       headers: {
         Authorization: `${grantType} ${accessToken}`
       }
@@ -457,7 +457,7 @@ const AxiosApi = {
       userNum : userNum,
       point : point
     }
-    return await axios.post(`${KH_DOMAIN}/point/chargepoint`, pointData, {
+    return await axios.post(DOMAIN + `/point/chargepoint`, pointData, {
       headers: {
         Authorization: `${grantType} ${accessToken}`
       }
@@ -477,7 +477,7 @@ const AxiosApi = {
       gender : gender,
       authority : authority
     }
-    return await axios.post(`${KH_DOMAIN}/user/signup`, signupData);
+    return await axios.post(DOMAIN + `/user/signup`, signupData);
   },
 
   // 사업자 회원 가입
@@ -492,7 +492,7 @@ const AxiosApi = {
       gender : gender,
       authority : authority
     }
-    return await axios.post(`${KH_DOMAIN}/member/signup`, signupData);
+    return await axios.post(DOMAIN + `/member/signup`, signupData);
   },
 
   // 일반 회원 로그인
@@ -501,7 +501,7 @@ const AxiosApi = {
       userId : userId,
       password : password
     }
-    return await axios.post(`${KH_DOMAIN}/user/login`, loginData);
+    return await axios.post(DOMAIN + `/user/login`, loginData);
   },
   // 사업자 회원 로그인
   memberLogin : async (memberId, password) => {
@@ -509,12 +509,12 @@ const AxiosApi = {
       memberId : memberId,
       password : password
     }
-    return await axios.post(`${KH_DOMAIN}/member/login`, loginData);
+    return await axios.post(DOMAIN + `/member/login`, loginData);
   },
 
   // 마이페이지 대시보드용 회원 정보 조회
   getMemberAllInfo : async (memberNum, grantType, accessToken) => {
-    return await axios.get(`${KH_DOMAIN}/info/allinfo?membernum=${memberNum}`, {
+    return await axios.get(DOMAIN + `/info/allinfo?membernum=${memberNum}`, {
       headers: {
         Authorization: `${grantType} ${accessToken}`
       }
@@ -522,7 +522,7 @@ const AxiosApi = {
   },
   // 마이페이지 회원 번호로 길드 정보 조회
   getMemberGuildInfo: async (memberNum, grantType, accessToken) => {
-    return await axios.get(`${KH_DOMAIN}/guild/guildinfo?membernum=${memberNum}`, {
+    return await axios.get(DOMAIN + `/guild/guildinfo?membernum=${memberNum}`, {
       headers: {
         Authorization: `${grantType} ${accessToken}`
       }
@@ -531,7 +531,7 @@ const AxiosApi = {
 
   // 마이페이지 정보수정을 위한 회원 정보 조회
   getMemberInfo: async (memberNum, grantType, accessToken) => {
-    return await axios.get(`${KH_DOMAIN}/info/memberinfo?membernum=${memberNum}`, {
+    return await axios.get(DOMAIN + `/info/memberinfo?membernum=${memberNum}`, {
       headers: {
         Authorization: `${grantType} ${accessToken}`
       }
@@ -544,7 +544,7 @@ const AxiosApi = {
       memberNum : userNum,
       profileImgUrl : url,
     }
-    return await axios.post(`${KH_DOMAIN}/info/profileimgupdate`, profileUrlData, {
+    return await axios.post(DOMAIN + `/info/profileimgupdate`, profileUrlData, {
       headers: {
         Authorization: `${grantType} ${accessToken}`
       }
@@ -558,7 +558,7 @@ const AxiosApi = {
       password : password,
       newPassword : newPassword
     }
-    return await axios.post(`${KH_DOMAIN}/info/passwordchange`, passwordData, {
+    return await axios.post(DOMAIN + `/info/passwordchange`, passwordData, {
       headers: {
         Authorization: `${grantType} ${accessToken}`
       }
@@ -571,7 +571,7 @@ const AxiosApi = {
       memberNum : memberNum,
       intro : intro
     }
-    return await axios.post(`${KH_DOMAIN}/info/introchange`, introData, {
+    return await axios.post(DOMAIN + `/info/introchange`, introData, {
       headers: {
         Authorization: `${grantType} ${accessToken}`
       }
@@ -583,7 +583,7 @@ const AxiosApi = {
       memberNum : memberNum,
       phone : phone
     }
-    return await axios.post(`${KH_DOMAIN}/info/phonechange`, phoneData, {
+    return await axios.post(DOMAIN + `/info/phonechange`, phoneData, {
       headers: {
         Authorization: `${grantType} ${accessToken}`
       }
@@ -595,7 +595,7 @@ const AxiosApi = {
       memberNum : memberNum,
       email : email
     }
-    return await axios.post(`${KH_DOMAIN}/info/emailchange`, emailData, {
+    return await axios.post(DOMAIN + `/info/emailchange`, emailData, {
       headers: {
         Authorization: `${grantType} ${accessToken}`
       }
@@ -603,7 +603,7 @@ const AxiosApi = {
   },
     // 회원 탈퇴
   memberWithdraw : async(memberNum, grantType, accessToken) => {
-    return await axios.get(`${KH_DOMAIN}/info/memberwithdraw?membernum=${memberNum}`, {
+    return await axios.get(DOMAIN + `/info/memberwithdraw?membernum=${memberNum}`, {
       headers: {
         Authorization: `${grantType} ${accessToken}`
       }
@@ -611,7 +611,7 @@ const AxiosApi = {
   },
 
   weatherInfoGet: async(regionList) => {
-    return await axios.get(KH_DOMAIN + `/weather/get?regionList=${regionList}`);
+    return await axios.get(DOMAIN + `/weather/get?regionList=${regionList}`);
   },
 
   // 카페 등록
@@ -627,7 +627,7 @@ const AxiosApi = {
       detailIntro : cafeDetail,
       thumbnail : url
     }
-    return await axios.post(`${KH_DOMAIN}/cafe/cafecreate`, cafeData, {
+    return await axios.post(DOMAIN + `/cafe/cafecreate`, cafeData, {
       headers: {
         Authorization: `${grantType} ${accessToken}`
       }
@@ -635,7 +635,7 @@ const AxiosApi = {
   },
   // 카페 정보 불러오기
   getMemberCafeInfo: async (memberNum, grantType, accessToken) => {
-    return await axios.get(`${KH_DOMAIN}/cafe/memberinfo?membernum=${memberNum}`, {
+    return await axios.get(DOMAIN + `/cafe/memberinfo?membernum=${memberNum}`, {
       headers: {
         Authorization: `${grantType} ${accessToken}`
       }
@@ -647,7 +647,7 @@ const AxiosApi = {
     const mailData = {
       mail: email
     }
-    return await axios.post(KH_DOMAIN + `/mail/confirm`, mailData);
+    return await axios.post(DOMAIN + `/mail/confirm`, mailData);
   },
   // 인증번호 확인
   codeCheck: async(email, code) => {
@@ -655,12 +655,12 @@ const AxiosApi = {
       mail: email,
       code: code
     }
-    return await axios.post(KH_DOMAIN + `/mail/verify`, verifyData);
+    return await axios.post(DOMAIN + `/mail/verify`, verifyData);
   },
 
   // 카페 검색 기능
   searchListLoad: async (keyword) => {
-    return await axios.get(KH_DOMAIN + `/cafe/searchList?keyword=${keyword}`)
+    return await axios.get(DOMAIN + `/cafe/searchList?keyword=${keyword}`)
   },
   // 문의사항 등록
   summitReport: async(userNum, grantType, accessToken, category, questionType, title, content) => {
@@ -671,15 +671,15 @@ const AxiosApi = {
       userType: category,
       category: questionType
     }
-    return await axios.post(KH_DOMAIN + `/report/newQuestion`, requestData, {
+    return await axios.post(DOMAIN + `/report/newQuestion`, requestData, {
       headers: {
         Authorization: `${grantType} ${accessToken}`
       }
     });
   },
    // 고객센터 검색 기능
-   qnaSearchListLoad: async (keyword) => {
-    return await axios.get(KH_DOMAIN + `/auth/qnalist/searchList?keyword=${keyword}`)
+  qnaSearchListLoad: async (keyword) => {
+    return await axios.get(DOMAIN + `/auth/qnalist/searchList?keyword=${keyword}`)
   },
 };
 
