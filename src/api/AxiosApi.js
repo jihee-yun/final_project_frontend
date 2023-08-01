@@ -163,17 +163,6 @@ const AxiosApi = {
         return await axios.post(DOMAIN + "/user/new", member);
     },
 
-    // 로그인
-    userLogin: async (userId, password, grantType, accessToken) => {
-      const loginData = {
-        userId: userId,
-        password: password
-      };
-
-    return await axios.post(DOMAIN + "/user/login", loginData)
-  },
-
-
   // 새 비밀번호
   changePassword : async(memberId, newPassword) => {
     const data = {
@@ -182,8 +171,6 @@ const AxiosApi = {
     }
     return await axios.post(DOMAIN + "/member/changePw", data);
   },
-
-
 
   // 비밀번호 찾기
   findPw: async(email, memberId, name) => {
@@ -195,82 +182,82 @@ const AxiosApi = {
     return await axios.post(DOMAIN + "/member/findPw", data);
   },
 
-    // 아이디 찾기
-    findId : async(name, email) => {
-      const data = {
-        name : name,
-        email : email
-      };
-      return await axios.post(DOMAIN + "/member/findId", data);
-    },
+  // 아이디 찾기
+  findId : async(name, email) => {
+    const data = {
+      name : name,
+      email : email
+    };
+    return await axios.post(DOMAIN + "/member/findId", data);
+  },
 
-    // 사용자 삭제
-    deleteUsers : async(memberNum) => {
-        return await axios.delete(DOMAIN + `/admin/usermanage/delete/${memberNum}`);
-    },
+  // 사용자 삭제
+  deleteUsers : async(memberNum) => {
+      return await axios.delete(DOMAIN + `/admin/usermanage/delete/${memberNum}`);
+  },
 
-    // 리뷰 삭제
-    deleteReviews : async(reviewNum) => {
-        return await axios.delete(DOMAIN + `/admin/review/delete/${reviewNum}`);
-    },
+  // 리뷰 삭제
+  deleteReviews : async(reviewNum) => {
+      return await axios.delete(DOMAIN + `/admin/review/delete/${reviewNum}`);
+  },
 
-    // 신고 삭제
-    deleteReports : async(reportNum) => {
-      return await axios.delete(DOMAIN + `/admin/report/delete/${reportNum}`);
-    },
+  // 신고 삭제
+  deleteReports : async(reportNum) => {
+    return await axios.delete(DOMAIN + `/admin/report/delete/${reportNum}`);
+  },
 
-    // 사용자 정보 수정
-    saveUserInfo : async(userInfoToSave) => {
-      const {memberNum} = userInfoToSave;
-      try {
-        return await axios.put(DOMAIN + `/admin/usermanage/modify/${memberNum}`, userInfoToSave);
-      } catch(error) {
-        throw error;
-      }
-    },
-    
-    // 신고 전체 조회
-    reportGetAll: async () => {
-      return await axios.get(DOMAIN + '/admin/report/all');
-    },
+  // 사용자 정보 수정
+  saveUserInfo : async(userInfoToSave) => {
+    const {memberNum} = userInfoToSave;
+    try {
+      return await axios.put(DOMAIN + `/admin/usermanage/modify/${memberNum}`, userInfoToSave);
+    } catch(error) {
+      throw error;
+    }
+  },
+  
+  // 신고 전체 조회
+  reportGetAll: async () => {
+    return await axios.get(DOMAIN + '/admin/report/all');
+  },
 
-    // 신고 내용 조회
-    reportGetContents : async(reportNum) => {
-      return await axios.get(DOMAIN + `/admin/report/getContents?reportNum=${reportNum}`)
-    },
+  // 신고 내용 조회
+  reportGetContents : async(reportNum) => {
+    return await axios.get(DOMAIN + `/admin/report/getContents?reportNum=${reportNum}`)
+  },
 
-    // 리뷰 전체 조회
-    reviewGetAll : async() => {
-      return await axios.get(DOMAIN + `/admin/review/all`);
-    },
+  // 리뷰 전체 조회
+  reviewGetAll : async() => {
+    return await axios.get(DOMAIN + `/admin/review/all`);
+  },
 
-    // 사용자 조회
-    userGetAll : async() => {
-      return await axios.get(DOMAIN + `/admin/usermanage`);
-    },
+  // 사용자 조회
+  userGetAll : async() => {
+    return await axios.get(DOMAIN + `/admin/usermanage`);
+  },
 
-    // 관리자 로그인
-    adminLogin : async(adminId, password) => {
-      const adminData = {
+  // 관리자 로그인
+  adminLogin : async(adminId, password) => {
+    const adminData = {
+      adminId : adminId,
+      password : password
+    }
+    return await axios.post(DOMAIN + `/admin/login`, adminData);
+  },
+
+  // 관리자 등록
+  adminReg : async(adminId, password, name, birthday, phone, gender) => {
+    const admin = {
         adminId : adminId,
-        password : password
-      }
-      return await axios.post(DOMAIN + `/admin/login`, adminData);
-    },
+        password : password,
+        name : name,
+        birthday : birthday,
+        phone : phone,
+        gender : gender
+    };
 
-    // 관리자 등록
-    adminReg : async(adminId, password, name, birthday, phone, gender) => {
-      const admin = {
-          adminId : adminId,
-          password : password,
-          name : name,
-          birthday : birthday,
-          phone : phone,
-          gender : gender
-      };
-
-      return await axios.post(DOMAIN + `/admin/register`, admin);
-    },
+    return await axios.post(DOMAIN + `/admin/register`, admin);
+  },
 
   // 챌린지 조회
   challengeGet: async(chList) => {
@@ -371,16 +358,16 @@ const AxiosApi = {
 
 
   // 랭킹정보 불러오기
-    MainInfoGet: async(rankingcard) => {
-        return await axios.get(DOMAIN + `/main/rankingcard`)
-    },
-
-    // 자주묻는 질문 불러오기
-    QnaGet: async(category) => {
-      return await axios.get(DOMAIN + `/auth/qnalist/get-qna?category=${category}`)
+  MainInfoGet: async(rankingcard) => {
+    return await axios.get(DOMAIN + `/main/rankingcard`)
   },
 
-  // 리뷰 전체 다 불러오기(테스트용)
+  // 자주묻는 질문 불러오기
+  QnaGet: async(category) => {
+    return await axios.get(DOMAIN + `/auth/qnalist/get-qna?category=${category}`)
+  },
+
+  // 리뷰 전체 다 불러오기
   reviewGet: async (userNum, grantType, accessToken) => {
     return await axios.get(DOMAIN + `/review/getbynum?usernum=${userNum}`, {
       headers: {
@@ -397,6 +384,20 @@ const AxiosApi = {
       endDate : endDate
     }
     return await axios.post(DOMAIN + `/review/getbynumdate`, checkData, {
+      headers: {
+        Authorization: `${grantType} ${accessToken}`
+      }
+    });
+  },
+
+  // 사업자 회원 번로 등록한 카페 검색 후 해당 카페에 등록된 리뷰 검색
+  reviewGetByCafe: async (userNum, startDate, endDate, grantType, accessToken) => {
+    const checkData = {
+      userNum : userNum,
+      startDate : startDate,
+      endDate : endDate
+    }
+    return await axios.post(DOMAIN + `/review/getbymembercafe`, checkData, {
       headers: {
         Authorization: `${grantType} ${accessToken}`
       }
@@ -515,6 +516,14 @@ const AxiosApi = {
   // 마이페이지 대시보드용 회원 정보 조회
   getMemberAllInfo : async (memberNum, grantType, accessToken) => {
     return await axios.get(DOMAIN + `/info/allinfo?membernum=${memberNum}`, {
+      headers: {
+        Authorization: `${grantType} ${accessToken}`
+      }
+    });
+  },
+  // 사업자 마이페이지 대시보드용 회원 정보 조회
+  getBusinessMemberAllInfo : async (memberNum, grantType, accessToken) => {
+    return await axios.get(DOMAIN + `/info/businessallinfo?membernum=${memberNum}`, {
       headers: {
         Authorization: `${grantType} ${accessToken}`
       }

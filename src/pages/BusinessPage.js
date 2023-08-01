@@ -120,7 +120,7 @@ const BusinessPage = () => {
     if(accessToken) {
     const fetchMemberInfo = async () => {
       try {
-        const rsp = await AxiosApi.getMemberAllInfo(userNum, grantType, accessToken);
+        const rsp = await AxiosApi.getBusinessMemberAllInfo(userNum, grantType, accessToken);
         if (rsp.status) {
           setMemberInfo(rsp.data[0]);
           console.log("마이페이지 유저 정보 가져오기 성공: ", rsp.data[0])
