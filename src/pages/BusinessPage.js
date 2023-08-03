@@ -6,7 +6,6 @@ import { UserContext } from "../context/UserStore";
 import Header from "../component/Header";
 import Footer from "../component/Footer";
 import SideMenu from "../component/SideMenu";
-import ChatBot from "../component/ChatBot";
 import Sidebar from "../component/Sidebar";
 
 const OutBox = styled.div`
@@ -160,7 +159,7 @@ const BusinessPage = () => {
         </SquareBox>
         <SquareBox>
           <BoxTitle>
-            <Title>?카페 챌린지?</Title>
+            <Title>카페 챌린지</Title>
             <More onClick={()=>navigate("/businesspage/event")}>더 보기</More>
           </BoxTitle>
           <BoxContent></BoxContent>

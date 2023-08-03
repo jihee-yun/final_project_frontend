@@ -407,7 +407,7 @@ const MyReview = () => {
           <ContentBox>
             <ContentTop>
               <ContentNum>번호</ContentNum>
-              <ContentTitle>제목</ContentTitle>
+              <ContentTitle>리뷰 내용</ContentTitle>
               <ContentCafe>카페</ContentCafe>
               <ContentDate>날짜</ContentDate>
             </ContentTop>
